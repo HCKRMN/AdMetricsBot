@@ -1,24 +1,48 @@
 package com.kuzmichev.AdMetricsBot.service;
 
 import com.kuzmichev.AdMetricsBot.config.BotConfig;
+import com.kuzmichev.AdMetricsBot.model.User;
+import com.kuzmichev.AdMetricsBot.model.UserRepository;
+import com.vdurmont.emoji.EmojiParser;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
+import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
 
+    @Autowired
+    private UserRepository userRepository;
+    final BotConfig config;
     YandexDirectExample yandexDirectExample = new YandexDirectExample();
 
     static final String ERROR_TEXT = "Error occurred: ";
-    final BotConfig config;
 
-    public TelegramBot(BotConfig config) {
+
+    public TelegramBot(BotConfig config){
         this.config = config;
+        List<BotCommand> listOfCommands = new ArrayList<>();
+        listOfCommands.add(new BotCommand("/start","Запуск"));
+        listOfCommands.add(new BotCommand("/test","Тест"));
+
+        try {
+            this.execute(new SetMyCommands(listOfCommands, new BotCommandScopeDefault(),null));
+        } catch (TelegramApiException e) {
+            log.error("Error setting bot's list:" + e.getMessage());
+        }
     }
 
     @Override
@@ -34,20 +58,31 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()){
-            long chatId = update.getMessage().getChatId();
             String messageText = update.getMessage().getText();
+            long chatId = update.getMessage().getChatId();
 
-
-            switch (messageText) {
-                case "/start" -> sendMessage(chatId, "Привет! Этот бот собирает расходы по рекламным источникам за прошлый день, а также берет информацию по лидам из срм и выдаёт раз в сутки сообщение с этими данными. \n Благодаря чему, ты можешь держать руку на пульсе своего бизнеса! Нажмите /test чтобы протестировать");
-                case "/test" -> {
-                                try {
-                                    sendMessage(chatId,"Затраты на рекламу в Яндекс директ: " +yandexDirectExample.ya());
-                                } catch (Exception e) {
-                                    throw new RuntimeException(e);
-                                }
+            if(messageText.contains("/send") && config.getOwnerId() == chatId) {
+                var textToSend = EmojiParser.parseToUnicode(messageText.substring(messageText.indexOf(" ")));
+                var users = userRepository.findAll();
+                for (User user : users) {
+                    sendMessage(user.getChatId(), textToSend);
                 }
-                default -> sendMessage(chatId, "Хмм, похоже произошла ошибка.");
+            }
+            else {
+                switch (messageText) {
+                        case "/start" -> {
+                            registerUser(update.getMessage());
+                            startCommandReceived(chatId, update.getMessage().getChat().getFirstName());
+                        }
+                        case "/test" -> {
+                            try {
+                                sendMessage(chatId, "Затраты на рекламу в Яндекс директ: " + yandexDirectExample.ya());
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        default -> sendMessage(chatId, "Хмм, похоже произошла ошибка.");
+                }
             }
         }
 //        else if (update.hasCallbackQuery()) {
@@ -64,7 +99,26 @@ public class TelegramBot extends TelegramLongPollingBot {
 //        }
     }
 
+    private void startCommandReceived(long chatId, String name) {
+        String answer = EmojiParser.parseToUnicode("Привет! " +name +" Этот бот собирает расходы по рекламным источникам за прошлый день, " +
+                "а также берет информацию по лидам из срм и выдаёт раз в сутки сообщение с этими данными. " +
+                "Благодаря чему, ты можешь держать руку на пульсе своего бизнеса! Нажмите /test чтобы протестировать");
+        log.info("Replied to user " + name);
+        sendMessage(chatId, answer);
+    }
 
+    private void registerUser(Message msg) {
+        if(userRepository.findById(msg.getChatId()).isEmpty()){
+            var chatId = msg.getChatId();
+            var chat = msg.getChat();
+            User user = new User();
+            user.setChatId(chatId);
+            user.setUserName(chat.getUserName());
+            user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
+            userRepository.save(user);
+            log.info("user saved: " + user);
+        }
+    }
 
     private void sendMessage(long chatId, String textToSend) {
         SendMessage message = new SendMessage();

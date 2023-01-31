@@ -1,6 +1,5 @@
 package com.kuzmichev.AdMetricsBot.config;
 
-
 import com.kuzmichev.AdMetricsBot.service.TelegramBot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +13,11 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @Slf4j
 @Component
 public class BotInitializer {
-
     @Autowired
     TelegramBot bot;
-
     @EventListener({ContextRefreshedEvent.class})
     public void init() throws TelegramApiException {
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
-
         try {
             telegramBotsApi.registerBot(bot);
         }
