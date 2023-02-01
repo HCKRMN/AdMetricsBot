@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class YandexDirectExample {
+class YandexDirectRequest {
     public String ya() throws IOException {
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost("https://api-sandbox.direct.yandex.com/json/v5/reports");

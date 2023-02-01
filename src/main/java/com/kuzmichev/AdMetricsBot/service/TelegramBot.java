@@ -27,7 +27,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Autowired
     private UserRepository userRepository;
     final BotConfig config;
-    YandexDirectExample yandexDirectExample = new YandexDirectExample();
+    YandexDirectRequest yandexDirectRequest = new YandexDirectRequest();
 
     static final String ERROR_TEXT = "Error occurred: ";
 
@@ -76,7 +76,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                         }
                         case "/test" -> {
                             try {
-                                sendMessage(chatId, "Затраты на рекламу в Яндекс директ: " + yandexDirectExample.ya());
+                                sendMessage(chatId, "Затраты на рекламу в Яндекс директ: " + yandexDirectRequest.ya());
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
