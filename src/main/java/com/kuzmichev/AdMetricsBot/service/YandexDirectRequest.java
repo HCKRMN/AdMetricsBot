@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class YandexDirectRequest {
-    public String ya() throws IOException {
+    public static String ya() throws IOException {
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost("https://api-sandbox.direct.yandex.com/json/v5/reports");
         request.addHeader("Authorization", "Bearer y0_AgAAAAACVylaAAkJwAAAAADagRgL11wIBrVJR2GH2HzqFP0uzDEDKPI");

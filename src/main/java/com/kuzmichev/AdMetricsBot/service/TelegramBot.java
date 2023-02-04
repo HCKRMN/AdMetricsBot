@@ -23,28 +23,21 @@ import java.util.List;
 @Slf4j
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
-
     @Autowired
     private UserRepository userRepository;
     final BotConfig config;
-    YandexDirectRequest yandexDirectRequest = new YandexDirectRequest();
-
     static final String ERROR_TEXT = "Error occurred: ";
-
-
     public TelegramBot(BotConfig config){
         this.config = config;
         List<BotCommand> listOfCommands = new ArrayList<>();
         listOfCommands.add(new BotCommand("/start","Запуск"));
         listOfCommands.add(new BotCommand("/test","Тест"));
-
         try {
             this.execute(new SetMyCommands(listOfCommands, new BotCommandScopeDefault(),null));
         } catch (TelegramApiException e) {
             log.error("Error setting bot's list:" + e.getMessage());
         }
     }
-
     @Override
     public String getBotUsername() {
         return config.getBotName();
@@ -76,10 +69,12 @@ public class TelegramBot extends TelegramLongPollingBot {
                         }
                         case "/test" -> {
                             try {
-                                sendMessage(chatId, "Затраты на рекламу в Яндекс директ: " + yandexDirectRequest.ya());
+                                sendMessage(chatId, "Затраты на рекламу в Яндекс директ: " + YandexDirectRequest.ya());
+                                sendMessage(chatId, "Лидов в срм Bitrix24: " + BitrixRequest.bi());
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
+
                         }
                         default -> sendMessage(chatId, "Хмм, похоже произошла ошибка.");
                 }
