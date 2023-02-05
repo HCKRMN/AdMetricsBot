@@ -14,6 +14,8 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.sql.Timestamp;
@@ -27,11 +29,19 @@ public class TelegramBot extends TelegramLongPollingBot {
     private UserRepository userRepository;
     final BotConfig config;
     static final String ERROR_TEXT = "Error occurred: ";
+    private static final String ADD_YA_BUTTON = "ADD_YA_BUTTON";
+    private static final String ADD_BI_BUTTON = "ADD_BI_BUTTON";
+
     public TelegramBot(BotConfig config){
         this.config = config;
         List<BotCommand> listOfCommands = new ArrayList<>();
         listOfCommands.add(new BotCommand("/start","Запуск"));
-        listOfCommands.add(new BotCommand("/test","Тест"));
+        listOfCommands.add(new BotCommand("/help","Помощь"));
+        listOfCommands.add(new BotCommand("/register","Регистрация"));
+        listOfCommands.add(new BotCommand("/test","Тестовый запуск"));
+        listOfCommands.add(new BotCommand("/settings","Настройки"));
+        listOfCommands.add(new BotCommand("/launch","Запуск"));
+        listOfCommands.add(new BotCommand("/delete","Удаление данных"));
         try {
             this.execute(new SetMyCommands(listOfCommands, new BotCommandScopeDefault(),null));
         } catch (TelegramApiException e) {
@@ -64,13 +74,17 @@ public class TelegramBot extends TelegramLongPollingBot {
             else {
                 switch (messageText) {
                         case "/start" -> {
-                            registerUser(update.getMessage());
                             startCommandReceived(chatId, update.getMessage().getChat().getFirstName());
+                    }
+                        case "/register" -> {
+                            sendMessage(chatId, "Начинаем регистрацию..");
+                            registerUser(update.getMessage());
+                            addTokens(chatId);
                         }
                         case "/test" -> {
                             try {
-                                sendMessage(chatId, "Затраты на рекламу в Яндекс директ: " + YandexDirectRequest.ya());
-                                sendMessage(chatId, "Лидов в срм Bitrix24: " + BitrixRequest.bi());
+                                sendMessage(chatId, "Затраты на рекламу в Яндекс директ логин (вставить сюда логин): " + YandexDirectRequest.ya());
+                                sendMessage(chatId, "Количество лидов (вставить сюда домен битрикса):\n " + BitrixRequest.bi());
                             } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
@@ -79,30 +93,36 @@ public class TelegramBot extends TelegramLongPollingBot {
                         default -> sendMessage(chatId, "Хмм, похоже произошла ошибка.");
                 }
             }
+        }   else if (update.hasCallbackQuery()) {
+            String callbackData = update.getCallbackQuery().getData();
+            long messageId = update.getCallbackQuery().getMessage().getMessageId();
+            long chatId = update.getCallbackQuery().getMessage().getChatId();
+
+            switch (callbackData) {
+                case ADD_YA_BUTTON: {
+                    sendMessage(chatId,"Начинаем подключать Яндекс директ..");
+                    addYaData();
+                    break;
+                }
+                case ADD_BI_BUTTON: {
+                    sendMessage(chatId,"Начинаем подключать Bitrix24..");
+                    addBiData();
+                    break;
+                }
+            }
         }
-//        else if (update.hasCallbackQuery()) {
-//            String callbackData = update.getCallbackQuery().getData();
-//            long messageId = update.getCallbackQuery().getMessage().getMessageId();
-//            long chatId = update.getCallbackQuery().getMessage().getChatId();
-//
-//            switch (callbackData) {
-//                case YES_BUTTON: {
-//                    sendMessage(chatId,"?");
-//                    break;
-//                }
-//            }
-//        }
     }
 
     private void startCommandReceived(long chatId, String name) {
         String answer = EmojiParser.parseToUnicode("Привет! " +name +" Этот бот собирает расходы по рекламным источникам за прошлый день, " +
                 "а также берет информацию по лидам из срм и выдаёт раз в сутки сообщение с этими данными. " +
-                "Благодаря чему, ты можешь держать руку на пульсе своего бизнеса! Нажмите /test чтобы протестировать");
+                "Благодаря чему, ты можешь держать руку на пульсе своего бизнеса!");
         log.info("Replied to user " + name);
         sendMessage(chatId, answer);
     }
 
     private void registerUser(Message msg) {
+        sendMessage(msg.getChatId(), "Регистрируем нового пользователя..");
         if(userRepository.findById(msg.getChatId()).isEmpty()){
             var chatId = msg.getChatId();
             var chat = msg.getChat();
@@ -113,6 +133,36 @@ public class TelegramBot extends TelegramLongPollingBot {
             userRepository.save(user);
             log.info("user saved: " + user);
         }
+    }
+    private void addTokens(long chatId) {
+        SendMessage message = new SendMessage();
+        message.setChatId(String.valueOf(chatId));
+        message.setText("Подключение каналов");
+
+        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLine = new ArrayList<>();
+
+        var addYa = new InlineKeyboardButton();
+        addYa.setText("Добавить аккаунт Яндекс Директ");
+        var addBi = new InlineKeyboardButton();
+        addBi.setText("Добавить аккаунт Bitrix24");
+
+        rowInLine.add(addYa);
+        addYa.setCallbackData(ADD_YA_BUTTON);
+        rowInLine.add(addBi);
+        addBi.setCallbackData(ADD_BI_BUTTON);
+        rowsInLine.add(rowInLine);
+        markupInLine.setKeyboard(rowsInLine);
+        message.setReplyMarkup(markupInLine);
+        executeMessage(message);
+    }
+
+    private void addYaData(){
+
+    }
+    private void addBiData(){
+
     }
 
     private void sendMessage(long chatId, String textToSend) {

@@ -1,7 +1,5 @@
 package com.kuzmichev.AdMetricsBot.service;
 
-import com.javastream.Client;
-import com.javastream.entity.Lead;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
