@@ -1,9 +1,12 @@
 package com.kuzmichev.AdMetricsBot.service;
 
 import com.kuzmichev.AdMetricsBot.config.BotConfig;
+import com.kuzmichev.AdMetricsBot.model.BiRepository;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
+import com.kuzmichev.AdMetricsBot.model.YaRepository;
 import com.vdurmont.emoji.EmojiParser;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,12 +25,18 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Slf4j
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BiRepository biRepository;
+    @Autowired
+    private YaRepository yaRepository;
     final BotConfig config;
+
     static final String ERROR_TEXT = "Error occurred: ";
     private static final String ADD_YA_BUTTON = "ADD_YA_BUTTON";
     private static final String ADD_BI_BUTTON = "ADD_BI_BUTTON";
@@ -101,7 +110,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             switch (callbackData) {
                 case ADD_YA_BUTTON: {
                     sendMessage(chatId,"Начинаем подключать Яндекс директ..");
-                    addYaData();
+                    addYaData(chatId);
                     break;
                 }
                 case ADD_BI_BUTTON: {
@@ -158,7 +167,34 @@ public class TelegramBot extends TelegramLongPollingBot {
         executeMessage(message);
     }
 
-    private void addYaData(){
+    private void addYaData(long chatId){
+        String clientId = "7e39208ce43e4a2aab9d4901f120ee39";
+        String redirectUri = "https://admetricsbot.ru/ya-redirect";
+        String state = String.valueOf(chatId);
+
+        String yaAuthorizationUrl = "https://oauth.yandex.ru/authorize" +
+                "?response_type=token" +
+                "&client_id=" + clientId +
+                "&redirect_uri=" + redirectUri +
+                "&state=" + state;
+
+        SendMessage message = new SendMessage();
+        message.setChatId(String.valueOf(chatId));
+        message.setText("Нажмите на ссылку");
+
+        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLine = new ArrayList<>();
+
+        var button = new InlineKeyboardButton();
+        button.setText("ССЫЛКА");
+        button.setUrl(yaAuthorizationUrl);
+
+        rowInLine.add(button);
+        rowsInLine.add(rowInLine);
+        markupInLine.setKeyboard(rowsInLine);
+        message.setReplyMarkup(markupInLine);
+        executeMessage(message);
 
     }
     private void addBiData(){

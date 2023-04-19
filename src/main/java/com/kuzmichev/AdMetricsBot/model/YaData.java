@@ -4,12 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity(name = "yaDataTable")
 @Getter
 @Setter
-public class yaData {
+public class YaData {
     @Id
     private Long chatId;
     private String yaToken;

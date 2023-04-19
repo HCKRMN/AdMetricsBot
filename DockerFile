@@ -1,0 +1,11 @@
+FROM openjdk:17-alpine
+
+WORKDIR /app
+
+#COPY ./AdMetricsBot-1.jar ./
+COPY ./target/AdMetricsBot-1.jar ./
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "AdMetricsBot-1.jar"]
+
