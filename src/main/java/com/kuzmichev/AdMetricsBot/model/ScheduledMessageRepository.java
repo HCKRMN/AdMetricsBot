@@ -4,11 +4,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.CrudRepository;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
 
 @EnableJpaRepositories
-public interface UserRepository extends CrudRepository<User,Long> {
+public interface ScheduledMessageRepository extends CrudRepository<ScheduledMessage,Long> {
 
-    Optional<User> findByChatId(long chatId);
+    @Query("SELECT s FROM scheduledMessageTable s WHERE s.timerMessage = ?1")
+    List<ScheduledMessage> findByTime(String time);
+
 }

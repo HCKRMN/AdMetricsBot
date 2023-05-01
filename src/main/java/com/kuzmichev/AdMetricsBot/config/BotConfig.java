@@ -18,4 +18,11 @@ public class BotConfig {
 
     @Value("${bot.owner}")
     Long ownerId;
+
+    @Value("${yaClientID}")
+    String ClientID;
+
+    @Value("${yaRedirectURI}")
+    String RedirectURI;
+
 }

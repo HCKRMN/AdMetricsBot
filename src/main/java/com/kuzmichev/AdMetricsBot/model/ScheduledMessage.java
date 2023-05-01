@@ -5,15 +5,16 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity(name = "yaDataTable")
+import java.time.LocalTime;
+
+@Entity(name = "scheduledMessageTable")
 @Getter
 @Setter
-public class YaData {
+public class ScheduledMessage {
     @Id
     private Long chatId;
-    private String yaToken;
-    private String yaLogin;
-
+    private String timerMessage;
+    private boolean enableSendingMessages;
 
 
 }

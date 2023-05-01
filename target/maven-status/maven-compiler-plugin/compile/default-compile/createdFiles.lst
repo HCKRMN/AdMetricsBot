@@ -1,4 +1,4 @@
-com\kuzmichev\AdMetricsBot\controllers\YaRedirect.class
+com\kuzmichev\AdMetricsBot\controllers\UserIPController.class
 com\kuzmichev\AdMetricsBot\model\User.class
 com\kuzmichev\AdMetricsBot\model\YaData.class
 com\kuzmichev\AdMetricsBot\model\UserRepository.class
@@ -7,9 +7,14 @@ com\kuzmichev\AdMetricsBot\controllers\YaController.class
 com\kuzmichev\AdMetricsBot\model\YaRepository.class
 com\kuzmichev\AdMetricsBot\config\BotConfig.class
 com\kuzmichev\AdMetricsBot\service\TelegramBot.class
+com\kuzmichev\AdMetricsBot\model\ScheduledMessage.class
+com\kuzmichev\AdMetricsBot\service\IpToTimeZone.class
 com\kuzmichev\AdMetricsBot\model\BiRepository.class
 com\kuzmichev\AdMetricsBot\model\BiData.class
+com\kuzmichev\AdMetricsBot\model\ScheduledMessageRepository.class
 com\kuzmichev\AdMetricsBot\controllers\TestController.class
 com\kuzmichev\AdMetricsBot\service\BitrixRequest.class
 com\kuzmichev\AdMetricsBot\config\BotInitializer.class
 com\kuzmichev\AdMetricsBot\AdMetricsBotApplication.class
+com\kuzmichev\AdMetricsBot\service\MessageSender.class
+com\kuzmichev\AdMetricsBot\controllers\YaController2.class
