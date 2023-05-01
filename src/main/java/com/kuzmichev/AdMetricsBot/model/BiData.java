@@ -14,4 +14,5 @@ public class BiData {
     private String biToken;
     private String biUserNum;
     private String biDomen;
+
 }

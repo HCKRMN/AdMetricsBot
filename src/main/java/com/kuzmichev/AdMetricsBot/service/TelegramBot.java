@@ -1,12 +1,8 @@
 package com.kuzmichev.AdMetricsBot.service;
 
 import com.kuzmichev.AdMetricsBot.config.BotConfig;
-import com.kuzmichev.AdMetricsBot.model.BiRepository;
-import com.kuzmichev.AdMetricsBot.model.User;
-import com.kuzmichev.AdMetricsBot.model.UserRepository;
-import com.kuzmichev.AdMetricsBot.model.YaRepository;
+import com.kuzmichev.AdMetricsBot.model.*;
 import com.vdurmont.emoji.EmojiParser;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,6 +18,11 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +31,11 @@ import java.util.List;
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private BiRepository biRepository;
+    @Autowired
+    private ScheduledMessageRepository scheduledMessageRepository;
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private YaRepository yaRepository;
     final BotConfig config;
@@ -40,6 +43,9 @@ public class TelegramBot extends TelegramLongPollingBot {
     static final String ERROR_TEXT = "Error occurred: ";
     private static final String ADD_YA_BUTTON = "ADD_YA_BUTTON";
     private static final String ADD_BI_BUTTON = "ADD_BI_BUTTON";
+    private static final String YES_ADD = "YES_ADD";
+    private static final String NO_CONTINUE = "NO_CONTINUE";
+    private static final String TEST_YA = "TEST_YA";
 
     public TelegramBot(BotConfig config){
         this.config = config;
@@ -58,14 +64,11 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
     @Override
-    public String getBotUsername() {
-        return config.getBotName();
-    }
-
+    public String getBotUsername() {return config.getBotName();}
     @Override
-    public String getBotToken() {
-        return config.getToken();
-    }
+    public String getBotToken() {return config.getToken();}
+    public String getYaClientID() {return config.getClientID();}
+    public String getYaRedirectURI() {return config.getRedirectURI();}
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -79,26 +82,19 @@ public class TelegramBot extends TelegramLongPollingBot {
                 for (User user : users) {
                     sendMessage(user.getChatId(), textToSend);
                 }
-            }
-            else {
+            } else if (messageText.matches("\\d{2} \\d{2}")) {
+                setTimerAndStart(chatId, messageText);
+            } else{
                 switch (messageText) {
-                        case "/start" -> {
+                        case "/start" ->
                             startCommandReceived(chatId, update.getMessage().getChat().getFirstName());
-                    }
                         case "/register" -> {
                             sendMessage(chatId, "Начинаем регистрацию..");
                             registerUser(update.getMessage());
                             addTokens(chatId);
                         }
-                        case "/test" -> {
-                            try {
-                                sendMessage(chatId, "Затраты на рекламу в Яндекс директ логин (вставить сюда логин): " + YandexDirectRequest.ya());
-                                sendMessage(chatId, "Количество лидов (вставить сюда домен битрикса):\n " + BitrixRequest.bi());
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
-
-                        }
+                        case "/test" ->
+                            TestYaData(chatId);
                         default -> sendMessage(chatId, "Хмм, похоже произошла ошибка.");
                 }
             }
@@ -108,18 +104,125 @@ public class TelegramBot extends TelegramLongPollingBot {
             long chatId = update.getCallbackQuery().getMessage().getChatId();
 
             switch (callbackData) {
-                case ADD_YA_BUTTON: {
-                    sendMessage(chatId,"Начинаем подключать Яндекс директ..");
-                    addYaData(chatId);
-                    break;
-                }
-                case ADD_BI_BUTTON: {
-                    sendMessage(chatId,"Начинаем подключать Bitrix24..");
-                    addBiData();
-                    break;
-                }
+                case ADD_YA_BUTTON ->
+                    findYaData(chatId);
+                case ADD_BI_BUTTON -> {
+                    sendMessage(chatId, "Начинаем подключать Bitrix24..");
+                    addBiData();}
+                case YES_ADD ->
+                    addTokens(chatId);
+                case NO_CONTINUE ->
+                    askTime(chatId);
+                case TEST_YA ->
+                    TestYaData(chatId);
             }
         }
+    }
+    private void setTimerAndStart(long chatId, String messageText) {
+        LocalTime timerMessage = LocalTime.
+                parse(messageText.replace(" ", ":")).
+                plusHours(userRepository.findById(chatId).get().getTimeZone());
+        System.out.println("Время для заноса в базу" + timerMessage);
+//        String timerMessage = messageText.replace(" ", ":");
+        YaData yaData = yaRepository.findById(chatId).orElse(null);
+        System.out.println(yaData);
+        if (yaData != null && yaData.getYaToken() != null) {
+
+
+            ScheduledMessage scheduledMessage = new ScheduledMessage();
+            scheduledMessage.setChatId(chatId);
+            scheduledMessage.setTimerMessage(String.valueOf(timerMessage));
+            scheduledMessage.setEnableSendingMessages(true);
+            scheduledMessageRepository.save(scheduledMessage);
+
+
+
+//            scheduledMessageRepository
+//                    .findById(chatId)
+//                    .ifPresent(scheduledMessage -> {
+//                        scheduledMessage.setChatId(chatId);
+//                        scheduledMessage.setTimerMessage(String.valueOf(timerMessage));
+//                        scheduledMessage.setEnableSendingMessages(true);
+//                        scheduledMessageRepository.save(scheduledMessage);
+//                });
+        sendMessage(chatId, "Таймер установлен на " + timerMessage + ". Текущее время: " + LocalTime.now());
+        log.info("User set timer at " + timerMessage);
+
+        } else {
+            sendMessage(chatId, "Добавьте хотя-бы один сервис");
+        }
+    }
+
+    private void TestYaData(long chatId) {
+        SendMessage message = new SendMessage();
+        message.setChatId(String.valueOf(chatId));
+        try {
+            message.setText("Затраты на рекламу в Яндекс директ: " + YandexDirectRequest.ya(yaRepository, chatId));
+            executeMessage(message);
+        } catch (Exception e) {
+            message.setText("Вы не зарегистрированы");
+            executeMessage(message);
+            log.error("Error setting bot's list:" + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void askTime(long chatId) {
+        SendMessage message = new SendMessage();
+        message.setChatId(String.valueOf(chatId));
+        message.setText("Укажите время отправки уведомления в формате «23 59»");
+        executeMessage(message);
+    }
+
+    private void findYaData(long chatId) {
+        SendMessage message = new SendMessage();
+        message.setChatId(String.valueOf(chatId));
+        YaData yaData = yaRepository.findById(chatId).orElse(null);
+        if (yaData != null && yaData.getYaToken() != null) {
+            message.setText("Аккаунт Яндекс уже добавлен, хотите подключить другие сервисы?");
+
+            InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
+            List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+            List<InlineKeyboardButton> rowInLine = new ArrayList<>();
+
+            var yesAdd = new InlineKeyboardButton();
+            yesAdd.setText("Да, добавить");
+            var noCon = new InlineKeyboardButton();
+            noCon.setText("Нет, продолжить");
+
+            rowInLine.add(yesAdd);
+            yesAdd.setCallbackData(YES_ADD);
+            rowInLine.add(noCon);
+            noCon.setCallbackData(NO_CONTINUE);
+            rowsInLine.add(rowInLine);
+            markupInLine.setKeyboard(rowsInLine);
+            message.setReplyMarkup(markupInLine);
+            executeMessage(message);
+        } else {
+            addYaData(chatId);
+            preTestYaData(chatId);
+        }
+    }
+
+    private void preTestYaData(long chatId) {
+
+        SendMessage message = new SendMessage();
+        message.setChatId(String.valueOf(chatId));
+        message.setText("Протестируйте получение данных с Яндекса");
+
+        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+        List<InlineKeyboardButton> rowInLine = new ArrayList<>();
+
+        var testYa = new InlineKeyboardButton();
+        testYa.setText("Тест");
+
+        rowInLine.add(testYa);
+        testYa.setCallbackData(TEST_YA);
+        rowsInLine.add(rowInLine);
+        markupInLine.setKeyboard(rowsInLine);
+        message.setReplyMarkup(markupInLine);
+        executeMessage(message);
     }
 
     private void startCommandReceived(long chatId, String name) {
@@ -132,14 +235,31 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private void registerUser(Message msg) {
         sendMessage(msg.getChatId(), "Регистрируем нового пользователя..");
+
+
+
         if(userRepository.findById(msg.getChatId()).isEmpty()){
             var chatId = msg.getChatId();
             var chat = msg.getChat();
+
+            long unixTimeMessage = msg.getDate();
+            Instant instant = Instant.ofEpochSecond(unixTimeMessage);
+            LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+            int userHours = Integer.parseInt(localDateTime.format(DateTimeFormatter.ofPattern("HH")));
+            LocalTime now = LocalTime.now();
+            int serverHours = Integer.parseInt(now.format(DateTimeFormatter.ofPattern("HH")));
+            int userTimeZone = serverHours - userHours;
+
             User user = new User();
+            ScheduledMessage scheduledMessage = new ScheduledMessage();
             user.setChatId(chatId);
             user.setUserName(chat.getUserName());
+            scheduledMessage.setChatId(chatId);
+            scheduledMessage.setEnableSendingMessages(false);
             user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
+            user.setTimeZone(userTimeZone);
             userRepository.save(user);
+            scheduledMessageRepository.save(scheduledMessage);
             log.info("user saved: " + user);
         }
     }
@@ -153,9 +273,9 @@ public class TelegramBot extends TelegramLongPollingBot {
         List<InlineKeyboardButton> rowInLine = new ArrayList<>();
 
         var addYa = new InlineKeyboardButton();
-        addYa.setText("Добавить аккаунт Яндекс Директ");
+        addYa.setText("Яндекс Директ");
         var addBi = new InlineKeyboardButton();
-        addBi.setText("Добавить аккаунт Bitrix24");
+        addBi.setText("Bitrix24");
 
         rowInLine.add(addYa);
         addYa.setCallbackData(ADD_YA_BUTTON);
@@ -168,8 +288,8 @@ public class TelegramBot extends TelegramLongPollingBot {
     }
 
     private void addYaData(long chatId){
-        String clientId = "7e39208ce43e4a2aab9d4901f120ee39";
-        String redirectUri = "https://admetricsbot.ru/ya-redirect";
+        String clientId = getYaClientID();
+        String redirectUri = getYaRedirectURI();
         String state = String.valueOf(chatId);
 
         String yaAuthorizationUrl = "https://oauth.yandex.ru/authorize" +
@@ -201,7 +321,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     }
 
-    private void sendMessage(long chatId, String textToSend) {
+    protected void sendMessage(long chatId, String textToSend) {
         SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
         message.setText(textToSend);

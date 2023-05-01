@@ -1,9 +1,11 @@
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\BiRepository.java
-C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\controllers\YaRedirect.java
+C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\MessageSender.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\config\BotConfig.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\User.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\YaRepository.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\controllers\TestController.java
+C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\ScheduledMessage.java
+C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\ScheduledMessageRepository.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\BitrixRequest.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\TelegramBot.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\YandexDirectRequest.java
@@ -11,5 +13,6 @@ C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\config\BotInitia
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\BiData.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\UserRepository.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\AdMetricsBotApplication.java
+C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\controllers\YaController2.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\controllers\YaController.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\YaData.java

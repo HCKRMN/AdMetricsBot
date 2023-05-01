@@ -9,6 +9,7 @@ import lombok.ToString;
 import java.sql.Timestamp;
 
 @Entity(name = "usersDataTable")
+
 @Getter
 @Setter
 @ToString(of = {"chatId", "userName"})
@@ -18,4 +19,6 @@ public class User {
     private String userName;
     private String firstName;
     private Timestamp registeredAt;
+    private long timeZone;
+
 }

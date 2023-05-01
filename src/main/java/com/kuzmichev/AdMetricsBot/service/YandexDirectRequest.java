@@ -1,5 +1,7 @@
 package com.kuzmichev.AdMetricsBot.service;
 
+import com.kuzmichev.AdMetricsBot.model.YaRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -11,14 +13,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+@Slf4j
 class YandexDirectRequest {
-    public static String ya() throws IOException {
+    public static String ya(YaRepository yaRepository, Long chatId) throws IOException {
+        String bearer = yaRepository.findById(chatId).get().getYaToken();
+
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost("https://api-sandbox.direct.yandex.com/json/v5/reports");
-        request.addHeader("Authorization", "Bearer y0_AgAAAAACVylaAAkJwAAAAADagRgL11wIBrVJR2GH2HzqFP0uzDEDKPI");
+        request.addHeader("Authorization", "Bearer " + bearer);
         request.addHeader("Accept-Language", "en");
-        request.addHeader("Client-Login", "kauhax");
+//        request.addHeader("Client-Login", "kauhax");
         request.addHeader("method", "post");
         request.addHeader("content-type", "application/x-www-form-urlencoded");
         request.addHeader("returnMoneyInMicros", "false");
@@ -64,8 +68,8 @@ class YandexDirectRequest {
         if (m.find()) {
             return m.group(1);
         } else {
-            System.out.println("No match found.");
-            return "-1";
+            log.error("Ответ не содержал данных");
+            return " Произошла ошибка";
         }
     }
 }
