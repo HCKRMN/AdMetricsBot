@@ -310,11 +310,9 @@ public class TelegramBot extends TelegramLongPollingBot {
         int hours = (int) Math.floor(hoursDecimal); // округляем до меньшего целого
         int minutes = (int) Math.round((hoursDecimal - hours) * 60); // получаем дробную часть в минутах, округляем
         LocalTime timeZone = LocalTime.of(hours, minutes); // создаем новый объект LocalTime
-        long mskTimeZone = 3;
         LocalTime timerMessage = LocalTime.
                 parse(messageText.replace(" ", ":")).
-                minusHours(timeZone.getHour()).plusMinutes(timeZone.getMinute()).
-                plusHours(mskTimeZone);
+                minusHours(timeZone.getHour()).plusMinutes(timeZone.getMinute());
 
         YaData yaData = yaRepository.findById(chatId).orElse(null);
         if (yaData != null && yaData.getYaToken() != null) {
