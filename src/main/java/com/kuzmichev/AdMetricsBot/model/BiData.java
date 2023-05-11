@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class BiData {
     @Id
-    private Long chatId;
+    private String chatId;
     private String biToken;
     private String biUserNum;
     private String biDomen;

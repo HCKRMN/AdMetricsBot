@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @EnableJpaRepositories
-public interface UserRepository extends CrudRepository<User,Long> {
+public interface UserRepository extends CrudRepository<User,String> {
 
-    Optional<User> findByChatId(long chatId);
+    Optional<User> findByChatId(String chatId);
 }

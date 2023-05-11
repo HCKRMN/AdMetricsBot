@@ -23,7 +23,7 @@ public class UserIPController {
 
     @GetMapping("/getip")
     public String myEndpoint(HttpServletRequest request,
-                             @RequestParam(name = "chatId") Long chatId) {
+                             @RequestParam(name = "chatId") String chatId) {
         String ip = getIpAddress(request);
         double timeZone = ipToTimeZone.convertIpToTimeZone(chatId, ip);
         Optional<User> userOptional = userRepository.findByChatId(chatId);

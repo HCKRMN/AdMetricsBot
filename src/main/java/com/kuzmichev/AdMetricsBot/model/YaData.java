@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class YaData {
     @Id
-    private Long chatId;
+    private String chatId;
     private String yaToken;
     private String yaLogin;
 

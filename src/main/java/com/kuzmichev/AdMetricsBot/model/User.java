@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 @ToString(of = {"chatId", "userName"})
 public class User {
     @Id
-    private Long chatId;
+    private String chatId;
     private String userName;
     private Timestamp registeredAt;
     @Column(columnDefinition = "DOUBLE PRECISION")

@@ -22,7 +22,7 @@ public class Registration{
     @Autowired
     UserRepository userRepository;
 
-    public void registerUser(long chatId, String userName) {
+    public void registerUser(String chatId, String userName) {
         if(userRepository.findById(chatId).isEmpty()){
             User user = new User();
             ScheduledMessage scheduledMessage = new ScheduledMessage();

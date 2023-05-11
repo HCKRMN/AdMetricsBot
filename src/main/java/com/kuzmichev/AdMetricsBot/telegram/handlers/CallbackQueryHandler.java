@@ -16,7 +16,7 @@ public class CallbackQueryHandler {
     Registration registration;
 
     public BotApiMethod<?> processCallbackQuery(CallbackQuery buttonQuery) {
-        long chatId = buttonQuery.getMessage().getChatId();
+        String chatId = buttonQuery.getMessage().getChatId().toString();
         String userName = buttonQuery.getMessage().getFrom().getUserName();
         String data = buttonQuery.getData();
 

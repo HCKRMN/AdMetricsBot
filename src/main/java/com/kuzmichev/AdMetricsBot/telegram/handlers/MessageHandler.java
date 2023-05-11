@@ -5,6 +5,7 @@ import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import com.kuzmichev.AdMetricsBot.telegram.TelegramApiClient;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.ReplyKeyboardMaker;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Registration;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -24,18 +25,18 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class MessageHandler {
-    TelegramApiClient telegramApiClient;
-    ReplyKeyboardMaker replyKeyboardMaker;
+    Registration registration;
     InlineKeyboardMaker inlineKeyboardMaker;
 
     public BotApiMethod<?> answerMessage(Message message) {
         String chatId = message.getChatId().toString();
+        String userName = message.getFrom().getUserName();
         String messageText = message.getText();
         switch (messageText) {
             case "/start":
                 return startCommandReceived(chatId, message.getChat().getFirstName());
             case "/register":
-                System.out.println("Команда регистрация");
+                registration.registerUser(chatId, userName);
                 break;
             case "/test":
                 System.out.println("Команда тестовая");

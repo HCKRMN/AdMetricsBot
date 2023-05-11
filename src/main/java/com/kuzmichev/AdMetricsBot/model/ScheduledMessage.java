@@ -12,7 +12,7 @@ import java.time.LocalTime;
 @Setter
 public class ScheduledMessage {
     @Id
-    private Long chatId;
+    private String chatId;
     private String timerMessage;
     private boolean enableSendingMessages;
 
