@@ -18,7 +18,6 @@ public class User {
     @Id
     private Long chatId;
     private String userName;
-    private String firstName;
     private Timestamp registeredAt;
     @Column(columnDefinition = "DOUBLE PRECISION")
     private double timeZone;
