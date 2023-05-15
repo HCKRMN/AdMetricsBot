@@ -26,7 +26,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.telegram</groupId>
-			<artifactId>telegrambots-abilities</artifactId>
+			<artifactId>telegrambots</artifactId>
+			<version>${telegram.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.telegram</groupId>
+			<artifactId>telegrambots-spring-boot-starter</artifactId>
 			<version>${telegram.version}</version>
 		</dependency>
 		<dependency>
@@ -96,11 +101,6 @@
 			<groupId>io.ipgeolocation</groupId>
 			<artifactId>ipgeolocation</artifactId>
 			<version>1.0.12</version>
-		</dependency>
-		<dependency>
-			<groupId>org.telegram</groupId>
-			<artifactId>telegrambots-spring-boot-starter</artifactId>
-			<version>5.3.0</version>
 		</dependency>
 	</dependencies>
 	<build>

@@ -25,7 +25,7 @@ public class UserIPController {
     public String myEndpoint(HttpServletRequest request,
                              @RequestParam(name = "chatId") String chatId) {
         String ip = getIpAddress(request);
-        double timeZone = ipToTimeZone.convertIpToTimeZone(chatId, ip);
+        double timeZone = ipToTimeZone.convertIpToTimeZone(ip);
         Optional<User> userOptional = userRepository.findByChatId(chatId);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
@@ -33,8 +33,7 @@ public class UserIPController {
             user.setTimeZone(timeZone);
             userRepository.save(user);
         }
-//      Добавить отдельную страничку
-        return "yandex-r";
+        return "getip";
     }
 
 

@@ -14,8 +14,9 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Slf4j
+public
 class YandexDirectRequest {
-    public static String ya(YaRepository yaRepository, Long chatId) throws IOException {
+    public static String ya(YaRepository yaRepository, String chatId) throws IOException {
         String bearer = yaRepository.findById(chatId).get().getYaToken();
 
         HttpClient httpClient = HttpClientBuilder.create().build();

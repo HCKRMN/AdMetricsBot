@@ -8,7 +8,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -17,13 +16,11 @@ import java.sql.Timestamp;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class Registration{
-    @Autowired
     ScheduledMessageRepository scheduledMessageRepository;
-    @Autowired
     UserRepository userRepository;
 
     public void registerUser(String chatId, String userName) {
-        if(userRepository.findById(chatId).isEmpty()){
+        if(userRepository.findById(chatId).isEmpty()) {
             User user = new User();
             ScheduledMessage scheduledMessage = new ScheduledMessage();
             user.setChatId(chatId);
@@ -34,6 +31,7 @@ public class Registration{
             userRepository.save(user);
             scheduledMessageRepository.save(scheduledMessage);
             log.info("user saved: " + user);
+
         }
     }
 }

@@ -1,11 +1,18 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers;
 
+import com.kuzmichev.AdMetricsBot.config.TelegramConfig;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
+import com.kuzmichev.AdMetricsBot.model.User;
+import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.telegram.TelegramApiClient;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.ReplyKeyboardMaker;
+import com.kuzmichev.AdMetricsBot.telegram.utils.AddTimer;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Registration;
+import com.kuzmichev.AdMetricsBot.telegram.utils.StartCommandReceived;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TimeZoneDefinition;
+import com.vdurmont.emoji.EmojiParser;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -25,43 +32,49 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class MessageHandler {
+    AddTimer addTimer;
     Registration registration;
-    InlineKeyboardMaker inlineKeyboardMaker;
+    TelegramConfig config;
+    UserRepository userRepository;
+    StartCommandReceived startCommandReceived;
+//    TimeZoneDefinition timeZoneDefinition;
 
     public BotApiMethod<?> answerMessage(Message message) {
         String chatId = message.getChatId().toString();
         String userName = message.getFrom().getUserName();
         String messageText = message.getText();
-        switch (messageText) {
-            case "/start":
-                return startCommandReceived(chatId, message.getChat().getFirstName());
-            case "/register":
-                registration.registerUser(chatId, userName);
-                break;
-            case "/test":
-                System.out.println("Команда тестовая");
-                break;
-            default:
-                System.out.println("Неизвестная команда");
-                break;
+
+        if(messageText.contains("/send") && config.getOwnerId() == chatId) {
+            var textToSend = EmojiParser.parseToUnicode(messageText.substring(messageText.indexOf(" ")));
+            var users = userRepository.findAll();
+            for (User user : users) {
+                return new SendMessage(user.getChatId(), textToSend);
+            }
+        }
+
+        else if (messageText.matches("\\d{2} \\d{2}")) {
+            return addTimer.setTimerAndStart(chatId, messageText);
+        }
+
+        else {
+
+            switch (messageText) {
+                case "/start" -> {
+                    return startCommandReceived.sendGreetingMessage(chatId, message.getChat().getFirstName());
+                }
+                case "/register" -> {
+                    registration.registerUser(chatId, userName);
+
+//                timeZoneDefinition.requestTimeZoneSettingLink(chatId);
+                }
+                case "/test" -> {
+                    System.out.println("Команда тестовая");
+                }
+                default -> {
+                    System.out.println("Неизвестная команда");
+                }
+            }
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
-    }
-
-
-    private SendMessage startCommandReceived(String chatId, String firstName) {
-        SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.START_MESSAGE.getMessage());
-
-        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-        rowsInLine.add(inlineKeyboardMaker.getButton(
-                ButtonNameEnum.REGISTRATION_BUTTON.getButtonName(),
-                "START_REGISTRATION",
-                null));
-        markupInLine.setKeyboard(rowsInLine);
-        sendMessage.setReplyMarkup(markupInLine);
-
-        log.info("Пользователь {} с id: {} стартует.", firstName, chatId);
-        return sendMessage;
     }
 }

@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 @EnableJpaRepositories
-public interface ScheduledMessageRepository extends CrudRepository<ScheduledMessage,Long> {
+public interface ScheduledMessageRepository extends CrudRepository<ScheduledMessage,String> {
 
     @Query("SELECT s FROM scheduledMessageTable s WHERE s.timerMessage = ?1")
     List<ScheduledMessage> findByTime(String time);

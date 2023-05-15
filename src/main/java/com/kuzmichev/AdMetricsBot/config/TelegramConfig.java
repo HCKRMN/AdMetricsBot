@@ -16,4 +16,6 @@ public class TelegramConfig {
     String botName;
     @Value("${telegram.bot-token}")
     String botToken;
+    @Value("${telegram.bot-owner-id}")
+    String ownerId;
 }

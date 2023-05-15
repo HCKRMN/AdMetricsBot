@@ -16,7 +16,7 @@ public class YaController2 {
 
     @RequestMapping(value = "/yandex-r")
     public String getYaToken(@RequestParam(name = "access_token", required = false) String yaToken,
-                             @RequestParam(name = "state", required = false) Long chatId
+                             @RequestParam(name = "state", required = false) String chatId
 //            ,                @RequestParam(name = "yaLogin", required = false) String ???)
     ){
         System.out.println(chatId);
