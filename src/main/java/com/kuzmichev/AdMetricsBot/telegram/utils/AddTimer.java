@@ -27,13 +27,14 @@ public class AddTimer {
         LocalTime timeZone = LocalTime.of(hours, minutes); // создаем новый объект LocalTime
         LocalTime timerMessage = LocalTime.
                 parse(messageText.replace(" ", ":")).
-                minusHours(timeZone.getHour()).plusMinutes(timeZone.getMinute());
+                minusHours(timeZone.getHour()).
+                minusMinutes(timeZone.getMinute());
 
         YaData yaData = yaRepository.findById(chatId).orElse(null);
         if (yaData != null && yaData.getYaToken() != null) {
             ScheduledMessage scheduledMessage = new ScheduledMessage();
             scheduledMessage.setChatId(chatId);
-            scheduledMessage.setTimerMessage(String.valueOf(timerMessage));
+            scheduledMessage.setTimerMessage(timerMessage);
             scheduledMessage.setEnableSendingMessages(true);
             scheduledMessageRepository.save(scheduledMessage);
             log.info("User set timer at " + timerMessage);

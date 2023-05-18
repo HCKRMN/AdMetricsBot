@@ -37,7 +37,7 @@ public class MessageHandler {
     TelegramConfig config;
     UserRepository userRepository;
     StartCommandReceived startCommandReceived;
-//    TimeZoneDefinition timeZoneDefinition;
+    TimeZoneDefinition timeZoneDefinition;
 
     public BotApiMethod<?> answerMessage(Message message) {
         String chatId = message.getChatId().toString();
