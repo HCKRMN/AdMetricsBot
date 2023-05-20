@@ -16,7 +16,7 @@ public interface ScheduledMessageRepository extends JpaRepository<ScheduledMessa
     @Query("SELECT s FROM scheduledMessageTable s WHERE s.timerMessage = ?1")
     List<ScheduledMessage> findByTime(LocalTime time);
 
-    @Query("SELECT s FROM scheduledMessageTable s WHERE HOUR(s.timerMessage) = :hours")
+    @Query("SELECT s FROM scheduledMessageTable s WHERE HOUR(s.timerMessage) = :hours AND s.enableSendingMessages = true")
     List<ScheduledMessage> findByTimerMessageHours(@Param("hours") int hours);
 
 }
