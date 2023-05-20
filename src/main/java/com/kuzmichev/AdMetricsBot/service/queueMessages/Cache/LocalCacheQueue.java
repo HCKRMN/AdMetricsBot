@@ -8,7 +8,7 @@ import java.util.*;
 @Service
 public class LocalCacheQueue implements QueueCache {
 
-    private HashMap<String, LocalTime> queueCache = new HashMap<>();
+    private LinkedHashMap<String, LocalTime> queueCache = new LinkedHashMap<>();
 
     @Override
     public void setUserTime(String chatId, LocalTime timerMessage) {

@@ -34,7 +34,7 @@ public class FillMessageQueue {
         int currentMinute = LocalTime.now().getMinute();
 
         // Вычисляем время до следующей cacheMinute минуты
-        int cacheMinute = 55;
+        int cacheMinute = 53;
         int delayMinutes = (currentMinute >= cacheMinute) ? (60 - currentMinute + cacheMinute) : (cacheMinute - currentMinute);
 
         scheduler.scheduleAtFixedRate(() -> {
@@ -44,6 +44,9 @@ public class FillMessageQueue {
 
             // Получаем сообщения из базы данных, относящиеся к текущему часу
             List<ScheduledMessage> messages = scheduledMessageRepository.findByTimerMessageHours(hour);
+
+            // Сортировка списка по возрастанию поля timerMessage
+            Collections.sort(messages, Comparator.comparing(ScheduledMessage::getTimerMessage));
 
             // Наполняем кеш LocalCacheQueue
             for (ScheduledMessage message : messages) {
