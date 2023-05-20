@@ -35,27 +35,27 @@ public class FillMessageQueue {
         int cacheMinute = 33;
         int delayMinutes = (currentMinute >= cacheMinute) ? (60 - currentMinute + cacheMinute) : (cacheMinute - currentMinute);
 
-        scheduler.scheduleAtFixedRate(() -> {
-            System.out.println(1);
-            LocalTime now = LocalTime.now();
-            LocalTime nextHour = now.plusHours(1);
-            System.out.println(2);
-            List<ScheduledMessage> messages = scheduledMessageRepository.findByTimerMessageHour(nextHour);
-            System.out.println(3);
-            System.out.println(messages);
-            // Отсортировать список messages по возрастанию timerMessage
-            messages.sort(Comparator.comparing(ScheduledMessage::getTimerMessage));
-            System.out.println(messages);
-            System.out.println(4);
-            // Заполнить LocalCacheQueue
-            for (ScheduledMessage message : messages) {
-                localCacheQueue.setUserTime(message.getChatId(), message.getTimerMessage());
-            }
-
-//            localCacheQueue.setUserTime(messages.get(0).getChatId(), messages.get(0).getTimerMessage());
-            System.out.println("Кеш наполнен: " + localCacheQueue.getAllUserTime());
-            log.info("Кеш наполнен: " + localCacheQueue.getAllUserTime());
-        }, delayMinutes, 60, TimeUnit.MINUTES);
+//        scheduler.scheduleAtFixedRate(() -> {
+//            System.out.println(1);
+//            LocalTime now = LocalTime.now();
+//            LocalTime nextHour = now.plusHours(1);
+//            System.out.println(2);
+//            List<ScheduledMessage> messages = scheduledMessageRepository.findByTimerMessageHour(nextHour);
+//            System.out.println(3);
+//            System.out.println(messages);
+//            // Отсортировать список messages по возрастанию timerMessage
+//            messages.sort(Comparator.comparing(ScheduledMessage::getTimerMessage));
+//            System.out.println(messages);
+//            System.out.println(4);
+//            // Заполнить LocalCacheQueue
+//            for (ScheduledMessage message : messages) {
+//                localCacheQueue.setUserTime(message.getChatId(), message.getTimerMessage());
+//            }
+//
+////            localCacheQueue.setUserTime(messages.get(0).getChatId(), messages.get(0).getTimerMessage());
+//            System.out.println("Кеш наполнен: " + localCacheQueue.getAllUserTime());
+//            log.info("Кеш наполнен: " + localCacheQueue.getAllUserTime());
+//        }, delayMinutes, 60, TimeUnit.MINUTES);
     }
 }
 

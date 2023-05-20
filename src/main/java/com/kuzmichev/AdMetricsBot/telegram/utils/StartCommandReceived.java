@@ -15,18 +15,19 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
+import java.sql.Time;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class StartCommandReceived {
     InlineKeyboardMaker inlineKeyboardMaker;
-
-
     ScheduledMessageRepository scheduledMessageRepository;
     LocalCacheQueue localCacheQueue;
 
@@ -46,35 +47,25 @@ public class StartCommandReceived {
 
         log.info("Пользователь {} с id: {} стартует.", firstName, chatId);
 
+        int x = 0;
+            LocalTime nextHour = LocalTime.now().plusHours(x);
+        System.out.println(nextHour);
+            int hour = nextHour.getHour();
+        System.out.println(hour);
 
 
+            List<ScheduledMessage> messages = scheduledMessageRepository.findByTimerMessageHours(hour);
+            System.out.println("Не сортирован " + messages);
+            // Сортируем список messages по возрастанию timerMessage
 
-
-
-
-        LocalTime now = LocalTime.now();
-        LocalTime nextHour = now.plusHours(1);
-        List<ScheduledMessage> messages = scheduledMessageRepository.findByTimerMessageHour(nextHour);
-        System.out.println(3);
-        System.out.println(messages);
-        // Отсортировать список messages по возрастанию timerMessage
-        messages.sort(Comparator.comparing(ScheduledMessage::getTimerMessage));
-        System.out.println(messages);
-        System.out.println(4);
-        // Заполнить LocalCacheQueue
-        for (ScheduledMessage message : messages) {
-            localCacheQueue.setUserTime(message.getChatId(), message.getTimerMessage());
-        }
-
-//            localCacheQueue.setUserTime(messages.get(0).getChatId(), messages.get(0).getTimerMessage());
-        System.out.println("Кеш наполнен: " + localCacheQueue.getAllUserTime());
-        log.info("Кеш наполнен: " + localCacheQueue.getAllUserTime());
-
-
-
-
-
-
+        System.out.println("Вроде как сортирован " + messages);
+            // Наполняем кеш LocalCacheQueue
+            for (ScheduledMessage message : messages) {
+                localCacheQueue.setUserTime(message.getChatId(), message.getTimerMessage());
+                System.out.println(localCacheQueue.getAllUserTime());
+            }
+            log.info("Кеш наполнен: " + localCacheQueue.getAllUserTime());
+        System.out.println(localCacheQueue.getUserTime(chatId));
 
 
 

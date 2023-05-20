@@ -52,8 +52,12 @@ public class MessageHandler {
             }
         }
 
-        else if (messageText.matches("\\d{2} \\d{2}")) {
-            return addTimer.setTimerAndStart(chatId, messageText);
+        else if (messageText.matches("(\\d{1,2} \\d{1,2})")) {
+            if (messageText.matches("((?:[01]\\d|2[0-3]) (?:[0-5]\\d))|((?:[0-9]|1\\d|2[0-3]) (?:[0-5]\\d))\n")) {
+                return addTimer.setTimerAndStart(chatId, messageText);
+            } else {
+                return new SendMessage(chatId, BotMessageEnum.INVALID_TIME_MESSAGE.getMessage());
+            }
         }
 
         else {

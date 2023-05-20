@@ -17,6 +17,7 @@ public enum BotMessageEnum {
     YANDEX_RESOULT_MESSAGE("Затраты на рекламу в Яндекс директ: "),
     ERRORE_YANDEX_MESSAGE("Вы незарегистрированы или произошла ошибка при получении данных из Яндекс Директ"),
     TIMER_ADDED_MESSAGE("Таймер установлен на "),
+    INVALID_TIME_MESSAGE("Неверный формат времени. \nВведите время в формате: \n«23 59», \n«00 00». \n\nБез кавычек!"),
     NON_COMMAND_MESSAGE("Вы ввели неизвестную команду"),
 
 

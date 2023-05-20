@@ -40,8 +40,11 @@ public class MessageSender {
             LocalTime now = LocalTime.now();
             String formattedTime = now.format(DateTimeFormatter.ofPattern("HH:mm"));
             System.out.println(formattedTime);
-            List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(formattedTime);
+//            List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(formattedTime);
+
+            List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(now);
             System.out.println(scheduledMessages);
+
             for (ScheduledMessage scheduledMessage : scheduledMessages) {
                 try {
                     telegramBot.sendMessage(scheduledMessage.getChatId(), "Затраты на рекламу в Яндекс директ: " + YandexDirectRequest.ya(yaRepository, scheduledMessage.getChatId()));

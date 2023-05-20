@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.sql.Time;
 import java.time.LocalTime;
+import java.util.Objects;
 
 @Entity(name = "scheduledMessageTable")
 @Getter
@@ -14,7 +16,6 @@ import java.time.LocalTime;
 public class ScheduledMessage {
     @Id
     private String chatId;
-    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime timerMessage;
     private boolean enableSendingMessages;
 }
