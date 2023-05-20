@@ -28,10 +28,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class StartCommandReceived {
     InlineKeyboardMaker inlineKeyboardMaker;
-    ScheduledMessageRepository scheduledMessageRepository;
-    LocalCacheQueue localCacheQueue;
-
-
 
     public SendMessage sendGreetingMessage(String chatId, String firstName) {
         SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.START_MESSAGE.getMessage());
@@ -46,30 +42,6 @@ public class StartCommandReceived {
         sendMessage.setReplyMarkup(markupInLine);
 
         log.info("Пользователь {} с id: {} стартует.", firstName, chatId);
-
-        int x = 0;
-            LocalTime nextHour = LocalTime.now().plusHours(x);
-        System.out.println(nextHour);
-            int hour = nextHour.getHour();
-        System.out.println(hour);
-
-
-            List<ScheduledMessage> messages = scheduledMessageRepository.findByTimerMessageHours(hour);
-            System.out.println("Не сортирован " + messages);
-            // Сортируем список messages по возрастанию timerMessage
-
-        System.out.println("Вроде как сортирован " + messages);
-            // Наполняем кеш LocalCacheQueue
-            for (ScheduledMessage message : messages) {
-                localCacheQueue.setUserTime(message.getChatId(), message.getTimerMessage());
-                System.out.println(localCacheQueue.getAllUserTime());
-            }
-            log.info("Кеш наполнен: " + localCacheQueue.getAllUserTime());
-        System.out.println(localCacheQueue.getUserTime(chatId));
-
-
-
-
 
         return sendMessage;
     }

@@ -17,45 +17,41 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
 @Slf4j
 @Service
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-// Эта штука регулярно в 55 минут каждого часа наполняет очередь кеша, из которой котом будет вытаскиваться по очереди сообщения
+// Сервис для заполнения очереди сообщений в кеше
 public class FillMessageQueue {
-    ScheduledMessageRepository scheduledMessageRepository;
-    LocalCacheQueue localCacheQueue;
-    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    ScheduledMessageRepository scheduledMessageRepository;  // Репозиторий для работы с сообщениями
+    LocalCacheQueue localCacheQueue;  // Кеш очереди сообщений
+    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);  // Планировщик задач
 
     @PostConstruct
     public void startScheduler() {
         // Получаем текущую минуту
         int currentMinute = LocalTime.now().getMinute();
+
         // Вычисляем время до следующей cacheMinute минуты
-        int cacheMinute = 33;
+        int cacheMinute = 55;
         int delayMinutes = (currentMinute >= cacheMinute) ? (60 - currentMinute + cacheMinute) : (cacheMinute - currentMinute);
 
-//        scheduler.scheduleAtFixedRate(() -> {
-//            System.out.println(1);
-//            LocalTime now = LocalTime.now();
-//            LocalTime nextHour = now.plusHours(1);
-//            System.out.println(2);
-//            List<ScheduledMessage> messages = scheduledMessageRepository.findByTimerMessageHour(nextHour);
-//            System.out.println(3);
-//            System.out.println(messages);
-//            // Отсортировать список messages по возрастанию timerMessage
-//            messages.sort(Comparator.comparing(ScheduledMessage::getTimerMessage));
-//            System.out.println(messages);
-//            System.out.println(4);
-//            // Заполнить LocalCacheQueue
-//            for (ScheduledMessage message : messages) {
-//                localCacheQueue.setUserTime(message.getChatId(), message.getTimerMessage());
-//            }
-//
-////            localCacheQueue.setUserTime(messages.get(0).getChatId(), messages.get(0).getTimerMessage());
-//            System.out.println("Кеш наполнен: " + localCacheQueue.getAllUserTime());
-//            log.info("Кеш наполнен: " + localCacheQueue.getAllUserTime());
-//        }, delayMinutes, 60, TimeUnit.MINUTES);
+        scheduler.scheduleAtFixedRate(() -> {
+            // Получаем текущее время + 1 час
+            LocalTime nextHour = LocalTime.now().plusHours(1);
+            int hour = nextHour.getHour();
+
+            // Получаем сообщения из базы данных, относящиеся к текущему часу
+            List<ScheduledMessage> messages = scheduledMessageRepository.findByTimerMessageHours(hour);
+
+            // Наполняем кеш LocalCacheQueue
+            for (ScheduledMessage message : messages) {
+                localCacheQueue.setUserTime(message.getChatId(), message.getTimerMessage());
+            }
+
+            log.info("Кеш наполнен: " + localCacheQueue.getAllUserTime());
+
+        }, delayMinutes, 60, TimeUnit.MINUTES);
     }
 }
-
