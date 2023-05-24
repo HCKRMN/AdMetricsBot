@@ -2,9 +2,6 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
-import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
-import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
-import com.kuzmichev.AdMetricsBot.service.queueMessages.Cache.LocalCacheQueue;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +12,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component
