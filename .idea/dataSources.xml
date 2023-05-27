@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="AdMetricsBot/Hibernate" uuid="4ceb9840-b322-458a-8bac-d343d9af7928">
-      <driver-ref>mysql.8</driver-ref>
+    <data-source source="LOCAL" name="AdMetricsBot/Hibernate" uuid="c2390c35-1bb8-455b-9fff-483fdaf77c31">
+      <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <remarks>Hibernate</remarks>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://kauhax00.beget.tech:3306/kauhax00_test122</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="postgres@194.67.87.54" uuid="c36aa6de-9970-4cb2-9bba-5d25c66d77b4">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://194.67.87.54:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>

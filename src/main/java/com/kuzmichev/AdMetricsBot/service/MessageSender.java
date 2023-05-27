@@ -27,38 +27,23 @@ public class MessageSender {
     ScheduledMessageRepository scheduledMessageRepository;
     YaRepository yaRepository;
     AdMetricsBot telegramBot;
-    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-    //Запускаем на старте
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
     @PostConstruct
     public void startScheduler() {
-        scheduler.schedule(this::sendMessageTask, 0, TimeUnit.MINUTES);
-    }
+        scheduler.scheduleAtFixedRate(() -> {
+            LocalTime now = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
+            List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(now);
+            for (ScheduledMessage scheduledMessage : scheduledMessages) {
+                try {
+                    telegramBot.sendMessage(scheduledMessage.getChatId(), "Затраты на рекламу в Яндекс директ: " + YandexDirectRequest.ya(yaRepository, scheduledMessage.getChatId()));
 
-    // Метод, выполняющий задачу отправки сообщений
-    private void sendMessageTask() {
-        // Округляем текущее время до минуты
-        LocalTime now = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
-        System.out.println("Текущее время: " + now);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
 
-        // Получаем список запланированных сообщений для текущего времени
-        List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(now);
-        System.out.println("Запланированные сообщения: " + scheduledMessages);
-
-        // Отправляем сообщения
-        for (ScheduledMessage scheduledMessage : scheduledMessages) {
-            try {
-                telegramBot.sendMessage(scheduledMessage.getChatId(), "Затраты на рекламу в Яндекс директ: " + YandexDirectRequest.ya(yaRepository, scheduledMessage.getChatId()));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                }
             }
-        }
-
-        // Вычисляем новую задержку до следующей отправки сообщений
-        long delayMinutes = scheduledMessageRepository.findMinTimerMessage().toSecondOfDay() / 60 - LocalTime.now().toSecondOfDay() / 60;
-        System.out.println("Отправка следующих сообщений через: " + delayMinutes + " минут");
-
-        // Запускаем задачу отправки сообщений с новой задержкой
-        scheduler.schedule(this::sendMessageTask, delayMinutes, TimeUnit.MINUTES);
+        }, 0, 1, TimeUnit.MINUTES);
     }
 }

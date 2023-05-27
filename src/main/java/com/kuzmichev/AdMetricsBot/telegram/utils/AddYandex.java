@@ -46,12 +46,12 @@ public class AddYandex {
                 null,
                 yaAuthorizationUrl));
         rowsInLine.add(inlineKeyboardMaker.getButton(
-                ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
-                "NO_CONTINUE",
-                null));
-        rowsInLine.add(inlineKeyboardMaker.getButton(
                 ButtonNameEnum.TEST_YANDEX_BUTTON.getButtonName(),
                 "TEST_YA",
+                null));
+        rowsInLine.add(inlineKeyboardMaker.getButton(
+                ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
+                "NO_CONTINUE",
                 null));
         markupInLine.setKeyboard(rowsInLine);
         sendMessage.setReplyMarkup(markupInLine);

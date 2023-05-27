@@ -9,8 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 @Slf4j
 @Component
@@ -31,8 +29,6 @@ public class AddTimer {
                 parse(messageText.replace(" ", ":")).
                 minusHours(timeZone.getHour()).
                 minusMinutes(timeZone.getMinute());
-
-        System.out.println(timerMessage);
 
         YaData yaData = yaRepository.findById(chatId).orElse(null);
         if (yaData != null && yaData.getYaToken() != null) {
