@@ -24,14 +24,31 @@ public class StartCommandReceived {
     public SendMessage sendGreetingMessage(String chatId, String firstName) {
         SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.START_MESSAGE.getMessage());
 
-        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-        rowsInLine.add(inlineKeyboardMaker.getButton(
-                ButtonNameEnum.REGISTRATION_BUTTON.getButtonName(),
-                "START_REGISTRATION",
-                null));
-        markupInLine.setKeyboard(rowsInLine);
-        sendMessage.setReplyMarkup(markupInLine);
+
+        sendMessage.setReplyMarkup(
+                inlineKeyboardMaker.addMarkup(
+                        inlineKeyboardMaker.addRows(
+                                inlineKeyboardMaker.addRow(
+                                        inlineKeyboardMaker.addButton(
+                                                ButtonNameEnum.REGISTRATION_BUTTON.getButtonName(),
+                                                "START_REGISTRATION",
+                                                null
+                                        )
+                                )
+                        )
+                )
+        );
+
+
+
+//        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
+//        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+//        rowsInLine.add(inlineKeyboardMaker.getButton(
+//                ButtonNameEnum.REGISTRATION_BUTTON.getButtonName(),
+//                "START_REGISTRATION",
+//                null));
+//        markupInLine.setKeyboard(rowsInLine);
+//        sendMessage.setReplyMarkup(markupInLine);
 
         log.info("Пользователь {} с id: {} стартует.", firstName, chatId);
 

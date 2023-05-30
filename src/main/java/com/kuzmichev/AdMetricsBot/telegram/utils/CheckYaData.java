@@ -30,19 +30,40 @@ public class CheckYaData {
         if (yaData != null && yaData.getYaToken() != null) {
 
             SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.ACCOUNT_ALREADY_ADDED_MESSAGE.getMessage());
-            InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
-            List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-            rowsInLine.add(inlineKeyboardMaker.getButton(
-                    ButtonNameEnum.YES_ADD_BUTTON.getButtonName(),
-                    "YES_ADD",
-                    null));
-            rowsInLine.add(inlineKeyboardMaker.getButton(
-                    ButtonNameEnum.NO_CONTINUE_BUTTON.getButtonName(),
-                    "NO_CONTINUE",
-                    null));
 
-            markupInLine.setKeyboard(rowsInLine);
-            sendMessage.setReplyMarkup(markupInLine);
+
+
+            sendMessage.setReplyMarkup(
+                    inlineKeyboardMaker.addMarkup(
+                            inlineKeyboardMaker.addRows(
+                                    inlineKeyboardMaker.addRow(
+                                            inlineKeyboardMaker.addButton(
+                                                    ButtonNameEnum.YES_ADD_BUTTON.getButtonName(),
+                                                    "YES_ADD",
+                                                    null
+                                            )
+                                    )
+                            )
+                    )
+            );
+
+
+
+
+
+//            InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
+//            List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+//            rowsInLine.add(inlineKeyboardMaker.getButton(
+//                    ButtonNameEnum.YES_ADD_BUTTON.getButtonName(),
+//                    "YES_ADD",
+//                    null));
+//            rowsInLine.add(inlineKeyboardMaker.getButton(
+//                    ButtonNameEnum.NO_CONTINUE_BUTTON.getButtonName(),
+//                    "NO_CONTINUE",
+//                    null));
+//
+//            markupInLine.setKeyboard(rowsInLine);
+//            sendMessage.setReplyMarkup(markupInLine);
 
             log.info("Пользователь id: {} Уже добавлял Яндекс.", chatId);
             return sendMessage;

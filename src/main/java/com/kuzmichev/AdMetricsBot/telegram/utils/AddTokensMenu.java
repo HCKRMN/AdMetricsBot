@@ -24,14 +24,31 @@ public class AddTokensMenu {
     public SendMessage addTokens(String chatId) {
         SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.ADD_TOKENS_MESSAGE.getMessage());
 
-        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-        rowsInLine.add(inlineKeyboardMaker.getButton(
-                ButtonNameEnum.ADD_YANDEX_BUTTON.getButtonName(),
-                "ADD_YANDEX",
-                null));
-        markupInLine.setKeyboard(rowsInLine);
-        sendMessage.setReplyMarkup(markupInLine);
+
+        sendMessage.setReplyMarkup(
+                inlineKeyboardMaker.addMarkup(
+                        inlineKeyboardMaker.addRows(
+                                inlineKeyboardMaker.addRow(
+                                        inlineKeyboardMaker.addButton(
+                                                ButtonNameEnum.ADD_YANDEX_BUTTON.getButtonName(),
+                                                "ADD_YANDEX",
+                                                null
+                                        )
+                                )
+                        )
+                )
+        );
+
+
+
+//        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
+//        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+//        rowsInLine.add(inlineKeyboardMaker.getButton(
+//                ButtonNameEnum.ADD_YANDEX_BUTTON.getButtonName(),
+//                "ADD_YANDEX",
+//                null));
+//        markupInLine.setKeyboard(rowsInLine);
+//        sendMessage.setReplyMarkup(markupInLine);
 
         log.info("Пользователь id: {} Подключает Яндекс.", chatId);
         return sendMessage;

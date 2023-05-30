@@ -57,6 +57,6 @@ public class CallbackQueryHandler {
             }
             default -> {}
         }
-        return null;
+        return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

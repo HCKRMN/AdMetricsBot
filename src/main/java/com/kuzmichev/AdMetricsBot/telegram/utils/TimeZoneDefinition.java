@@ -33,18 +33,45 @@ public class TimeZoneDefinition {
 
         SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage());
 
-        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-        rowsInLine.add(inlineKeyboardMaker.getButton(
-                ButtonNameEnum.LINK_BUTTON.getButtonName(),
-                null,
-                ipToTimeZoneLink));
-        rowsInLine.add(inlineKeyboardMaker.getButton(
-                ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
-                "ADD_TOKENS",
-                null));
-        markupInLine.setKeyboard(rowsInLine);
-        sendMessage.setReplyMarkup(markupInLine);
+
+        sendMessage.setReplyMarkup(
+                inlineKeyboardMaker.addMarkup(
+                        inlineKeyboardMaker.addRows(
+                                inlineKeyboardMaker.addRow(
+                                        inlineKeyboardMaker.addButton(
+                                                ButtonNameEnum.LINK_BUTTON.getButtonName(),
+                                                null,
+                                                ipToTimeZoneLink
+                                        )
+                                ),
+                                inlineKeyboardMaker.addRow(
+                                        inlineKeyboardMaker.addButton(
+                                                ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
+                                                "ADD_TOKENS",
+                                                null
+                                        )
+                                )
+                        )
+                )
+        );
+
+
+
+
+
+
+//        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
+//        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
+//        rowsInLine.add(inlineKeyboardMaker.getButton(
+//                ButtonNameEnum.LINK_BUTTON.getButtonName(),
+//                null,
+//                ipToTimeZoneLink));
+//        rowsInLine.add(inlineKeyboardMaker.getButton(
+//                ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
+//                "ADD_TOKENS",
+//                null));
+//        markupInLine.setKeyboard(rowsInLine);
+//        sendMessage.setReplyMarkup(markupInLine);
 
         log.info("Пользователь id: {} установил временную зону.", chatId);
         return sendMessage;

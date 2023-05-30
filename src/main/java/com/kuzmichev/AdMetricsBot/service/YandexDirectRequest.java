@@ -56,22 +56,22 @@ class YandexDirectRequest {
 					  }""");
         request.setEntity(entity);
         HttpResponse response = httpClient.execute(request);
-//
-//                    // Log the request
-//                    log.info("Request: {}", request.getRequestLine());
-//
-//                    // Get the response body
-//                    HttpEntity entity1 = response.getEntity();
-//                    String responseBody = EntityUtils.toString(entity1);
-//
-//                    // Log the response
-//                    log.info("Response: {}", response.getStatusLine());
-//                    log.info("Response Body: {}", responseBody);
-//
-//                    // Print the response to console
-//                    System.out.println("Request: " + request.getRequestLine());
-//                    System.out.println("Response: " + response.getStatusLine());
-//                    System.out.println("Response Body: " + responseBody);
+
+                    // Log the request
+                    log.info("Request: {}", request.getRequestLine());
+
+                    // Get the response body
+                    HttpEntity entity1 = response.getEntity();
+                    String responseBody = EntityUtils.toString(entity1);
+
+                    // Log the response
+                    log.info("Response: {}", response.getStatusLine());
+                    log.info("Response Body: {}", responseBody);
+
+                    // Print the response to console
+                    System.out.println("Request: " + request.getRequestLine());
+                    System.out.println("Response: " + response.getStatusLine());
+                    System.out.println("Response Body: " + responseBody);
 
         BufferedReader rd = new BufferedReader(
                 new InputStreamReader(response.getEntity().getContent()));
