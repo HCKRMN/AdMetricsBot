@@ -1,5 +1,6 @@
 package com.kuzmichev.AdMetricsBot.model;
 
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 @Entity(name = "biDataTable")
 @Getter
 @Setter
+@Cacheable
 public class BiData {
     @Id
     private String chatId;

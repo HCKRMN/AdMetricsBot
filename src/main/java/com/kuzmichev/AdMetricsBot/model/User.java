@@ -1,5 +1,6 @@
 package com.kuzmichev.AdMetricsBot.model;
 
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -14,6 +15,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString(of = {"chatId", "userName"})
+@Cacheable
 public class User {
     @Id
     private String chatId;

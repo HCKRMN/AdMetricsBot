@@ -10,9 +10,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Slf4j
@@ -22,16 +21,16 @@ class YandexDirectRequest {
         String bearer = yaRepository.findById(chatId).get().getYaToken();
 
         HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpPost request = new HttpPost("https://api-sandbox.direct.yandex.com/json/v5/reports");
+        HttpPost request = new HttpPost("https://api.direct.yandex.com/json/v5/reports");
         request.addHeader("Authorization", "Bearer " + bearer);
         request.addHeader("Accept-Language", "en");
 //        request.addHeader("Client-Login", "kauhax");
         request.addHeader("method", "post");
-        request.addHeader("content-type", "application/x-www-form-urlencoded");
+        request.addHeader("content-type", "application/json; charset=utf-8");
         request.addHeader("returnMoneyInMicros", "false");
-        request.addHeader("skipReportHeader", "true");
-        request.addHeader("skipColumnHeader", "true");
-        request.addHeader("skipReportSummary", "true");
+//        request.addHeader("skipReportHeader", "true");
+//        request.addHeader("skipColumnHeader", "true");
+//        request.addHeader("skipReportSummary", "true");
         StringEntity entity = new StringEntity("""
 					{
 					    "params": {
@@ -57,42 +56,32 @@ class YandexDirectRequest {
         request.setEntity(entity);
         HttpResponse response = httpClient.execute(request);
 
-                    // Log the request
-                    log.info("Request: {}", request.getRequestLine());
+        HttpEntity entityResponse = response.getEntity();
+        String responseBody = EntityUtils.toString(entityResponse);
 
-                    // Get the response body
-                    HttpEntity entity1 = response.getEntity();
-                    String responseBody = EntityUtils.toString(entity1);
+//        Отладочная информация
+//        HttpEntity entity2 = request.getEntity();
+//        String requestBody = EntityUtils.toString(entity2);
+//        System.out.println(request);
+//        System.out.println(Arrays.toString(request.getAllHeaders()));
+//        System.out.println("Request Body: " + requestBody);
+        System.out.println(response);
+        System.out.println(response.getStatusLine());
+        System.out.println("Response Body: " + responseBody);
 
-                    // Log the response
-                    log.info("Response: {}", response.getStatusLine());
-                    log.info("Response Body: {}", responseBody);
+        int statusCode = response.getStatusLine().getStatusCode();
 
-                    // Print the response to console
-                    System.out.println("Request: " + request.getRequestLine());
-                    System.out.println("Response: " + response.getStatusLine());
-                    System.out.println("Response Body: " + responseBody);
-
-        BufferedReader rd = new BufferedReader(
-                new InputStreamReader(response.getEntity().getContent()));
-
-
-        StringBuffer tempResult = new StringBuffer();
-        String line = "";
-        System.out.println(line);
-        while ((line = rd.readLine()) != null) {
-            tempResult.append(line);
-        }
         String pattern = "\\s(\\d+\\.\\d+)";
-
         Pattern r = Pattern.compile(pattern);
-        Matcher m = r.matcher(tempResult);
+        Matcher m = r.matcher(responseBody);
 
         if (m.find()) {
             return m.group(1);
+        } else if(statusCode == 200 && responseBody.length() == 0) {
+            return "0";
         } else {
             log.error("Ответ не содержал данных");
-            return "Произошла ошибка";
+            return "-1";
         }
     }
 }

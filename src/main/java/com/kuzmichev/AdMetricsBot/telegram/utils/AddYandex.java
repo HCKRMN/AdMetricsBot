@@ -49,12 +49,14 @@ public class AddYandex {
                                                 ButtonNameEnum.YANDEX_ADD_TOKEN_LINK_BUTTON.getButtonName(),
                                                 null,
                                                 yaAuthorizationUrl
-                                        ),
-                                        inlineKeyboardMaker.addButton(
-                                                ButtonNameEnum.YANDEX_API_SETTINGS_BUTTON.getButtonName(),
-                                                null,
-                                                apiSettingsUrl
                                         )
+//                                        на всякий случай оставлю кнопку получения доступа к апи, вроде как ненужно, но пусть будет
+//                                        ,
+//                                        inlineKeyboardMaker.addButton(
+//                                                ButtonNameEnum.YANDEX_API_SETTINGS_BUTTON.getButtonName(),
+//                                                null,
+//                                                apiSettingsUrl
+//                                        )
                                 ),
                                 inlineKeyboardMaker.addRow(
                                         inlineKeyboardMaker.addButton(
