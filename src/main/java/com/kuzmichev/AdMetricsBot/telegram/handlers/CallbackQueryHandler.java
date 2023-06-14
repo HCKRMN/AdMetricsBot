@@ -1,12 +1,10 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.YaRepository;
 import com.kuzmichev.AdMetricsBot.service.YandexDirectRequest;
-import com.kuzmichev.AdMetricsBot.telegram.utils.AddTokensMenu;
-import com.kuzmichev.AdMetricsBot.telegram.utils.CheckYaData;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Registration;
-import com.kuzmichev.AdMetricsBot.telegram.utils.TimeZoneDefinition;
+import com.kuzmichev.AdMetricsBot.telegram.utils.*;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -16,6 +14,8 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.io.IOException;
 
 
 @Slf4j
@@ -28,6 +28,7 @@ public class CallbackQueryHandler {
     Registration registration;
     TimeZoneDefinition timeZoneDefinition;
     CheckYaData checkYaData;
+    AddYandex addYandex;
 
     public BotApiMethod<?> processCallbackQuery(CallbackQuery buttonQuery) {
         String chatId = buttonQuery.getMessage().getChatId().toString();
@@ -35,25 +36,21 @@ public class CallbackQueryHandler {
         String data = buttonQuery.getData();
 
         switch (data) {
-            case "START_REGISTRATION" -> {
+            case "START_REGISTRATION_CALLBACK" -> {
                 registration.registerUser(chatId, userName);
                 return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
             }
-            case "ADD_TOKENS" -> {
+            case "ADD_ACCOUNTS_CALLBACK" -> {
                 return addTokensMenu.addTokens(chatId);
             }
-            case "ADD_YANDEX" -> {
+            case "ADD_YANDEX_CALLBACK" -> {
                  return checkYaData.findYaData(chatId);
             }
-            case "NO_CONTINUE" -> {
+            case "NO_CONTINUE_CALLBACK" -> {
                 return new SendMessage(chatId, BotMessageEnum.ASK_TIME_MESSAGE.getMessage());
             }
-            case "TEST_YA" ->{              ///////////// Проверить ошибку и дописать лог
-                try {
-                return new SendMessage(chatId, BotMessageEnum.YANDEX_RESOULT_MESSAGE.getMessage() + YandexDirectRequest.ya(yaRepository, chatId));
-            } catch (Exception e) {
-                    return new SendMessage(chatId, BotMessageEnum.ERRORE_YANDEX_MESSAGE.getMessage());
-                }
+            case "TEST_MESSAGE_CALLBACK" ->{
+                return  addYandex.testYaData(yaRepository, chatId);
             }
             default -> {}
         }

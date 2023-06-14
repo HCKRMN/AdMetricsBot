@@ -5,13 +5,12 @@ import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
+import com.kuzmichev.AdMetricsBot.model.YaRepository;
+import com.kuzmichev.AdMetricsBot.service.YandexDirectRequest;
 import com.kuzmichev.AdMetricsBot.telegram.TelegramApiClient;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.ReplyKeyboardMaker;
-import com.kuzmichev.AdMetricsBot.telegram.utils.AddTimer;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Registration;
-import com.kuzmichev.AdMetricsBot.telegram.utils.StartCommandReceived;
-import com.kuzmichev.AdMetricsBot.telegram.utils.TimeZoneDefinition;
+import com.kuzmichev.AdMetricsBot.telegram.utils.*;
 import com.vdurmont.emoji.EmojiParser;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -36,8 +35,11 @@ public class MessageHandler {
     Registration registration;
     TelegramConfig config;
     UserRepository userRepository;
+    YaRepository yaRepository;
     StartCommandReceived startCommandReceived;
     TimeZoneDefinition timeZoneDefinition;
+    AddYandex addYandex;
+    SettingsMenu settingsMenu;
 
     public BotApiMethod<?> answerMessage(Message message) {
         String chatId = message.getChatId().toString();
@@ -61,22 +63,24 @@ public class MessageHandler {
         }
 
         else {
-
             switch (messageText) {
                 case "/start" -> {
                     return startCommandReceived.sendGreetingMessage(chatId, message.getChat().getFirstName());
                 }
+                case "/settings" -> {
+                    return settingsMenu.menuMaker(chatId);
+                }
+                case "/help" -> {
+
+                }
                 case "/register" -> {
                     registration.registerUser(chatId, userName);
-
-//                timeZoneDefinition.requestTimeZoneSettingLink(chatId);
+                    return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
                 }
                 case "/test" -> {
-                    System.out.println("Команда тестовая");
+                    return  addYandex.testYaData(yaRepository, chatId);
                 }
-                default -> {
-                    System.out.println("Неизвестная команда");
-                }
+                default -> {}
             }
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());

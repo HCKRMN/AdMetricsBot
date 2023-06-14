@@ -3,6 +3,7 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 import com.kuzmichev.AdMetricsBot.config.TelegramConfig;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +48,7 @@ public class TimeZoneDefinition {
                                 inlineKeyboardMaker.addRow(
                                         inlineKeyboardMaker.addButton(
                                                 ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
-                                                "ADD_TOKENS",
+                                                CallBackEnum.ADD_ACCOUNTS_CALLBACK,
                                                 null
                                         )
                                 )

@@ -2,7 +2,9 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.YaRepository;
+import com.kuzmichev.AdMetricsBot.service.YandexDirectRequest;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,7 @@ public class AddYandex {
     String link;
     @Value("${yaRedirectURI}")
     String redirectUri;
+    YaRepository yaRepository;
 
     public SendMessage addYaData(String chatId) {
 
@@ -37,7 +40,7 @@ public class AddYandex {
                 "&redirect_uri=" + link + redirectUri +
                 "&state=" + chatId;
 
-        String apiSettingsUrl = "https://direct.yandex.ru/registered/main.pl?cmd=apiSettings";
+//        String apiSettingsUrl = "https://direct.yandex.ru/registered/main.pl?cmd=apiSettings";
 
         SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.ADD_YANDEX_MESSAGE.getMessage());
 
@@ -61,43 +64,33 @@ public class AddYandex {
                                 inlineKeyboardMaker.addRow(
                                         inlineKeyboardMaker.addButton(
                                                 ButtonNameEnum.TEST_YANDEX_BUTTON.getButtonName(),
-                                                "TEST_YA",
+                                                CallBackEnum.TEST_MESSAGE_CALLBACK,
                                                 null
                                         ),
                                         inlineKeyboardMaker.addButton(
                                                 ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
-                                                "NO_CONTINUE",
+                                                CallBackEnum.NO_CONTINUE_CALLBACK,
                                                 null
                                         )
                                 )
                         )
                 )
         );
-
-
-
-//        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
-//        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-//        rowsInLine.add(inlineKeyboardMaker.getButton(
-//                ButtonNameEnum.LINK_BUTTON.getButtonName(),
-//                null,
-//                yaAuthorizationUrl)
-//        );
-//        rowsInLine.add(inlineKeyboardMaker.getButton(
-//                ButtonNameEnum.TEST_YANDEX_BUTTON.getButtonName(),
-//                "TEST_YA",
-//                null));
-//        rowsInLine.add(inlineKeyboardMaker.getButton(
-//                ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
-//                "NO_CONTINUE",
-//                null));
-//        markupInLine.setKeyboard(rowsInLine);
-//        sendMessage.setReplyMarkup(markupInLine);
-
-        log.info("Пользователь id: {} установил временную зону.", chatId);
+        log.info("Пользователь id: {} добавил данные Яндекс.", chatId);
         return sendMessage;
-
-
+    }
+    public SendMessage testYaData(YaRepository yaRepository, String chatId) {
+        try {
+            String result = YandexDirectRequest.ya(yaRepository, chatId);
+            System.out.println(result);
+            if (result.equals("-1")) {
+                return new SendMessage(chatId, BotMessageEnum.YANDEX_ERROR_GET_RESULT_MESSAGE.getMessage());
+            } else {
+                return new SendMessage(chatId, BotMessageEnum.YANDEX_RESULT_MESSAGE.getMessage() + result);
+            }
+        } catch (Exception e) {
+            return new SendMessage(chatId, BotMessageEnum.YANDEX_ERROR_GET_TOKEN_MESSAGE.getMessage());
+        }
     }
 
 

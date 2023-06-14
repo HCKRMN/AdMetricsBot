@@ -2,6 +2,7 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class StartCommandReceived {
                                 inlineKeyboardMaker.addRow(
                                         inlineKeyboardMaker.addButton(
                                                 ButtonNameEnum.REGISTRATION_BUTTON.getButtonName(),
-                                                "START_REGISTRATION",
+                                                CallBackEnum.START_REGISTRATION_CALLBACK,
                                                 null
                                         )
                                 )

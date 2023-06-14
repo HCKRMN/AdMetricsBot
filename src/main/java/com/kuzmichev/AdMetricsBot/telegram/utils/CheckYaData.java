@@ -2,6 +2,7 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.YaData;
 import com.kuzmichev.AdMetricsBot.model.YaRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
@@ -39,7 +40,7 @@ public class CheckYaData {
                                     inlineKeyboardMaker.addRow(
                                             inlineKeyboardMaker.addButton(
                                                     ButtonNameEnum.YES_ADD_BUTTON.getButtonName(),
-                                                    "YES_ADD",
+                                                    CallBackEnum.YES_ADD_CALLBACK,
                                                     null
                                             )
                                     )

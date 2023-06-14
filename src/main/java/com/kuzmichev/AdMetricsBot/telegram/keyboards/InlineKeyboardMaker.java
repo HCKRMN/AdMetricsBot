@@ -1,5 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards;
 
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -11,11 +12,11 @@ import java.util.List;
 @Component
 public class InlineKeyboardMaker {
 
-    public InlineKeyboardButton addButton(String buttonName, String callBackData, String link) {
+    public InlineKeyboardButton addButton(String buttonName, CallBackEnum callBackData, String link) {
 
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText(buttonName);
-        button.setCallbackData(callBackData);
+        button.setCallbackData(String.valueOf(callBackData));
         button.setUrl(link);
 
         return button;

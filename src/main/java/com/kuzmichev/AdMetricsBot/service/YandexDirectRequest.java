@@ -15,8 +15,7 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Slf4j
-public
-class YandexDirectRequest {
+public class YandexDirectRequest {
     public static String ya(YaRepository yaRepository, String chatId) throws IOException {
         String bearer = yaRepository.findById(chatId).get().getYaToken();
 
@@ -65,9 +64,9 @@ class YandexDirectRequest {
 //        System.out.println(request);
 //        System.out.println(Arrays.toString(request.getAllHeaders()));
 //        System.out.println("Request Body: " + requestBody);
-        System.out.println(response);
-        System.out.println(response.getStatusLine());
-        System.out.println("Response Body: " + responseBody);
+//        System.out.println(response);
+//        System.out.println(response.getStatusLine());
+//        System.out.println("Response Body: " + responseBody);
 
         int statusCode = response.getStatusLine().getStatusCode();
 

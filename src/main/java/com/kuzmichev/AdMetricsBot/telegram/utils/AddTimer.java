@@ -40,7 +40,7 @@ public class AddTimer {
             log.info("User set timer at " + timerMessage);
             return new SendMessage(chatId, BotMessageEnum.TIMER_ADDED_MESSAGE.getMessage() + messageText.replace(" ", ":"));
         } else
-            return new SendMessage(chatId, BotMessageEnum.ERRORE_YANDEX_MESSAGE.getMessage());
+            return new SendMessage(chatId, BotMessageEnum.YANDEX_ERROR_GET_TOKEN_MESSAGE.getMessage());
 
     }
 
