@@ -40,17 +40,6 @@ public class AddTokensMenu {
                 )
         );
 
-
-
-//        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
-//        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-//        rowsInLine.add(inlineKeyboardMaker.getButton(
-//                ButtonNameEnum.ADD_YANDEX_BUTTON.getButtonName(),
-//                "ADD_YANDEX",
-//                null));
-//        markupInLine.setKeyboard(rowsInLine);
-//        sendMessage.setReplyMarkup(markupInLine);
-
         log.info("Пользователь id: {} Подключает Яндекс.", chatId);
         return sendMessage;
     }

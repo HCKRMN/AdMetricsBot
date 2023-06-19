@@ -26,14 +26,13 @@ public class Registration{
             ScheduledMessage scheduledMessage = new ScheduledMessage();
             user.setChatId(chatId);
             user.setUserName(userName);
-            user.setUserState(UserStatesEnum.REGISTRATION_STEP_1_STATE.getStateName());
+            user.setUserState(UserStatesEnum.REGISTRATION_STATE.getStateName());
             scheduledMessage.setChatId(chatId);
             scheduledMessage.setEnableSendingMessages(false);
             user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
             userRepository.save(user);
             scheduledMessageRepository.save(scheduledMessage);
             log.info("user saved: " + user);
-
         }
     }
 }

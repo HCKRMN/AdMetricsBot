@@ -21,8 +21,11 @@ public enum BotMessageEnum {
     SETTINGS_MENU_MESSAGE("В этом меню вы можете изменить время отправки уведомлений, часовой пояс, " +
             "подключить новые аккаунты, отключить уведомления, а также удалить полностью свои данные."),
     TIMER_ADDED_MESSAGE("Таймер установлен на "),
+    IN_DEVELOPING_MESSAGE("Эта опция находится в разработке"),
     INVALID_TIME_MESSAGE("Неверный формат времени. \nВведите время в формате: \n«23 59», \n«00 00». \n\nБез кавычек!"),
     NON_COMMAND_MESSAGE("Вы ввели неизвестную команду"),
+    DISABLE_NOTIFICATIONS_MESSAGE("Уведомления отключены"),
+    ENABLE_NOTIFICATIONS_MESSAGE("Уведомления включены"),
 
 
     //ошибки при обработке callback-ов

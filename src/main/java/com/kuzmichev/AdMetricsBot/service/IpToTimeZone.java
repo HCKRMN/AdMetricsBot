@@ -22,7 +22,7 @@ public class IpToTimeZone {
     }
     public double convertIpToTimeZone(String ip) {
         GeolocationParams geoParams = new GeolocationParams();
-        System.out.println(ip);
+//        System.out.println(ip);
         geoParams.setIPAddress(ip);
         geoParams.setFields("geo,time_zone,currency,offset");
         Geolocation geolocation = api.getGeolocation(geoParams);

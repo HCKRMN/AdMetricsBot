@@ -4,6 +4,8 @@ import com.kuzmichev.AdMetricsBot.config.TelegramConfig;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.UserStatesEnum;
+import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TimeZoneDefinition {
     final InlineKeyboardMaker inlineKeyboardMaker;
+    final UserRepository userRepository;
     @Value("${telegram.webhook-path}")
     String link;
 
@@ -35,44 +38,32 @@ public class TimeZoneDefinition {
         SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage());
 
 
+        String state = userRepository.getUserStateByChatId(chatId);
+
+        // Создаем пустой список для кнопок
+        List<InlineKeyboardButton> buttonsRow = new ArrayList<>();
+
+        // Добавляем кнопку "Continue" всегда
+        buttonsRow.add(inlineKeyboardMaker.addButton(
+                ButtonNameEnum.LINK_BUTTON.getButtonName(),
+                CallBackEnum.ADD_ACCOUNTS_CALLBACK,
+                ipToTimeZoneLink
+        ));
+
+        // Добавляем кнопку "Continue" только если условие выполняется
+        if (state.equals(UserStatesEnum.REGISTRATION_STATE.getStateName())) {
+            buttonsRow.add(inlineKeyboardMaker.addButton(
+                    ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
+                    CallBackEnum.ADD_ACCOUNTS_CALLBACK,
+                    null
+            ));
+        }
+
         sendMessage.setReplyMarkup(
                 inlineKeyboardMaker.addMarkup(
-                        inlineKeyboardMaker.addRows(
-                                inlineKeyboardMaker.addRow(
-                                        inlineKeyboardMaker.addButton(
-                                                ButtonNameEnum.LINK_BUTTON.getButtonName(),
-                                                null,
-                                                ipToTimeZoneLink
-                                        )
-                                ),
-                                inlineKeyboardMaker.addRow(
-                                        inlineKeyboardMaker.addButton(
-                                                ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
-                                                CallBackEnum.ADD_ACCOUNTS_CALLBACK,
-                                                null
-                                        )
-                                )
-                        )
+                        inlineKeyboardMaker.addRows(buttonsRow)
                 )
         );
-
-
-
-
-
-
-//        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
-//        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-//        rowsInLine.add(inlineKeyboardMaker.getButton(
-//                ButtonNameEnum.LINK_BUTTON.getButtonName(),
-//                null,
-//                ipToTimeZoneLink));
-//        rowsInLine.add(inlineKeyboardMaker.getButton(
-//                ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
-//                "ADD_TOKENS",
-//                null));
-//        markupInLine.setKeyboard(rowsInLine);
-//        sendMessage.setReplyMarkup(markupInLine);
 
         log.info("Пользователь id: {} установил временную зону.", chatId);
         return sendMessage;

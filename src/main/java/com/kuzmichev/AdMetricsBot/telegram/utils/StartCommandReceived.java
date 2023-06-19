@@ -22,9 +22,15 @@ import java.util.*;
 public class StartCommandReceived {
     InlineKeyboardMaker inlineKeyboardMaker;
 
+    /**
+     * Отправляет приветственное сообщение пользователю.
+     *
+     * @param chatId    идентификатор чата
+     * @param firstName имя пользователя
+     * @return приветственное сообщение
+     */
     public SendMessage sendGreetingMessage(String chatId, String firstName) {
         SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.START_MESSAGE.getMessage());
-
 
         sendMessage.setReplyMarkup(
                 inlineKeyboardMaker.addMarkup(
@@ -39,17 +45,6 @@ public class StartCommandReceived {
                         )
                 )
         );
-
-
-
-//        InlineKeyboardMarkup markupInLine = new InlineKeyboardMarkup();
-//        List<List<InlineKeyboardButton>> rowsInLine = new ArrayList<>();
-//        rowsInLine.add(inlineKeyboardMaker.getButton(
-//                ButtonNameEnum.REGISTRATION_BUTTON.getButtonName(),
-//                "START_REGISTRATION",
-//                null));
-//        markupInLine.setKeyboard(rowsInLine);
-//        sendMessage.setReplyMarkup(markupInLine);
 
         log.info("Пользователь {} с id: {} стартует.", firstName, chatId);
 

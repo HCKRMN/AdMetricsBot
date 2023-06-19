@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.sql.Time;
 import java.time.LocalTime;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity(name = "scheduledMessageTable")
 @Getter
@@ -20,4 +21,5 @@ public class ScheduledMessage {
     private String chatId;
     private LocalTime timerMessage;
     private boolean enableSendingMessages;
+
 }
