@@ -81,7 +81,7 @@ public class SettingsMenu {
                                         // Кнопка удаления данных пользователя
                                         inlineKeyboardMaker.addButton(
                                                 ButtonNameEnum.SETTINGS_DELETE_USER_BUTTON.getButtonName(),
-                                                CallBackEnum.DELETE_USER_CALLBACK,
+                                                CallBackEnum.DELETE_USER_STEP_1_CALLBACK,
                                                 null
                                         )
                                 )

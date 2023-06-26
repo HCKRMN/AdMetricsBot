@@ -37,7 +37,6 @@ public class TimeZoneDefinition {
 
         SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage());
 
-
         String state = userRepository.getUserStateByChatId(chatId);
 
         // Создаем пустой список для кнопок
@@ -65,7 +64,7 @@ public class TimeZoneDefinition {
                 )
         );
 
-        log.info("Пользователь id: {} установил временную зону.", chatId);
+        log.info("Пользователь с id: {} устанавливает временную зону.", chatId);
         return sendMessage;
     }
 }

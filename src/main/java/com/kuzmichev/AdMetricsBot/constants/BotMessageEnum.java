@@ -15,6 +15,8 @@ public enum BotMessageEnum {
     ADD_TOKENS_MESSAGE("Подключение источников данных"),
     ACCOUNT_ALREADY_ADDED_MESSAGE("Аккаунт Яндекс уже добавлен, хотите подключить другие сервисы?"),
     ASK_TIME_MESSAGE("Укажите время отправки уведомления в формате «23 59»"),
+    DELETE_USER_DATA_MESSAGE("Ваши данные полностью удалены"),
+    DELETE_USER_DATA_ASK_MESSAGE("Вы уверены, что хотите удалить данные?"),
     YANDEX_ERROR_GET_RESULT_MESSAGE("Ошибка при получении данных Яндекс"),
     YANDEX_RESULT_MESSAGE("Затраты на рекламу в Яндекс директ: "),
     YANDEX_ERROR_GET_TOKEN_MESSAGE("Вы незарегистрированы в Яндекс Директ"),
@@ -26,6 +28,7 @@ public enum BotMessageEnum {
     NON_COMMAND_MESSAGE("Вы ввели неизвестную команду"),
     DISABLE_NOTIFICATIONS_MESSAGE("Уведомления отключены"),
     ENABLE_NOTIFICATIONS_MESSAGE("Уведомления включены"),
+    NOT_DELETE_USER_DATA_MESSAGE("Мы рады что вы продолжаете пользоваться нашим ботом!"),
 
 
     //ошибки при обработке callback-ов

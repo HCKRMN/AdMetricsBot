@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.time.LocalTime;
-import java.util.Optional;
 
 @Slf4j
 @Component
@@ -19,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AddTimer {
     UserRepository userRepository;
-    YaRepository yaRepository;
+    YandexRepository yandexRepository;
     ScheduledMessageRepository scheduledMessageRepository;
     UserStateEditor userStateEditor;
 
@@ -41,8 +40,8 @@ public class AddTimer {
                 .minusMinutes(timeZone.getMinute());
 
         // Если у юзера есть дата и есть токен, то запускаем таймер
-        YaData yaData = yaRepository.findById(chatId).orElse(null);
-        if (yaData != null && yaData.getYaToken() != null) {
+        Yandex yandex = yandexRepository.findById(chatId).orElse(null);
+        if (yandex != null && yandex.getYaToken() != null) {
             ScheduledMessage scheduledMessage = new ScheduledMessage();
             scheduledMessage.setChatId(chatId);
             scheduledMessage.setTimerMessage(timerMessage);

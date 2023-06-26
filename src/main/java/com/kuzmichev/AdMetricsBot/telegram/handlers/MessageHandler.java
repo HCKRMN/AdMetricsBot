@@ -5,7 +5,7 @@ import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStatesEnum;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
-import com.kuzmichev.AdMetricsBot.model.YaRepository;
+import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import com.kuzmichev.AdMetricsBot.telegram.utils.*;
 import com.vdurmont.emoji.EmojiParser;
 import lombok.AccessLevel;
@@ -26,11 +26,12 @@ public class MessageHandler {
     Registration registration;
     TelegramConfig config;
     UserRepository userRepository;
-    YaRepository yaRepository;
+    YandexRepository yandexRepository;
     StartCommandReceived startCommandReceived;
     TimeZoneDefinition timeZoneDefinition;
     AddYandex addYandex;
     SettingsMenu settingsMenu;
+    DeleteUserData deleteUserData;
 
     public BotApiMethod<?> answerMessage(Message message) {
         String chatId = message.getChatId().toString();
@@ -46,7 +47,7 @@ public class MessageHandler {
             }
         }
 
-        else if (userState.equals(UserStatesEnum.SETTINGS_EDIT_TIMER_STATE.getStateName())) {
+        else if (userState != null && userState.equals(UserStatesEnum.SETTINGS_EDIT_TIMER_STATE.getStateName())) {
         if (messageText.matches("(\\d{1,2} \\d{1,2})")) {
                 if (messageText.matches("((?:[01]\\d|2[0-3]) (?:[0-5]\\d))|((?:[0-9]|1\\d|2[0-3]) (?:[0-5]\\d))\n")) {
                     return addTimer.setTimerAndStart(chatId, messageText);
@@ -72,7 +73,11 @@ public class MessageHandler {
                     return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
                 }
                 case "/test" -> {
-                    return  addYandex.testYaData(yaRepository, chatId);
+                    return  addYandex.testYaData(yandexRepository, chatId);
+                }
+                case "/delete" -> {
+                    deleteUserData.deleteUserData(chatId);
+                    return new SendMessage(chatId, BotMessageEnum.DELETE_USER_DATA_MESSAGE.getMessage());
                 }
                 default -> {}
             }

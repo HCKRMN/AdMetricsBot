@@ -2,7 +2,7 @@ package com.kuzmichev.AdMetricsBot.service;
 
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
-import com.kuzmichev.AdMetricsBot.model.YaRepository;
+import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ import com.kuzmichev.AdMetricsBot.telegram.AdMetricsBot;
 @RequiredArgsConstructor
 public class MessageSender {
     ScheduledMessageRepository scheduledMessageRepository;
-    YaRepository yaRepository;
+    YandexRepository yandexRepository;
     AdMetricsBot telegramBot;
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
@@ -37,7 +37,7 @@ public class MessageSender {
             List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(now);
             for (ScheduledMessage scheduledMessage : scheduledMessages) {
                 try {
-                    telegramBot.sendMessage(scheduledMessage.getChatId(), "Затраты на рекламу в Яндекс директ: " + YandexDirectRequest.ya(yaRepository, scheduledMessage.getChatId()));
+                    telegramBot.sendMessage(scheduledMessage.getChatId(), "Затраты на рекламу в Яндекс директ: " + YandexDirectRequest.ya(yandexRepository, scheduledMessage.getChatId()));
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);

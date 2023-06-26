@@ -3,7 +3,7 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
-import com.kuzmichev.AdMetricsBot.model.YaRepository;
+import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import com.kuzmichev.AdMetricsBot.service.YandexDirectRequest;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
@@ -13,11 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.ArrayList;
-import java.util.List;
 @Slf4j
 @Component
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -30,7 +26,7 @@ public class AddYandex {
     String link;
     @Value("${yaRedirectURI}")
     String redirectUri;
-    YaRepository yaRepository;
+    YandexRepository yandexRepository;
 
     public SendMessage addYaData(String chatId) {
 
@@ -79,9 +75,9 @@ public class AddYandex {
         log.info("Пользователь id: {} добавил данные Яндекс.", chatId);
         return sendMessage;
     }
-    public SendMessage testYaData(YaRepository yaRepository, String chatId) {
+    public SendMessage testYaData(YandexRepository yandexRepository, String chatId) {
         try {
-            String result = YandexDirectRequest.ya(yaRepository, chatId);
+            String result = YandexDirectRequest.ya(yandexRepository, chatId);
             System.out.println(result);
             if (result.equals("-1")) {
                 return new SendMessage(chatId, BotMessageEnum.YANDEX_ERROR_GET_RESULT_MESSAGE.getMessage());

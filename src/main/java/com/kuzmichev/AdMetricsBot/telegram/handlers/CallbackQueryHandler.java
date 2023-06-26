@@ -1,12 +1,9 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStatesEnum;
-import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
-import com.kuzmichev.AdMetricsBot.model.YaRepository;
-import com.kuzmichev.AdMetricsBot.service.YandexDirectRequest;
+import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import com.kuzmichev.AdMetricsBot.telegram.utils.*;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +13,6 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.io.IOException;
-import java.util.Optional;
 
 
 @Slf4j
@@ -27,7 +20,7 @@ import java.util.Optional;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class CallbackQueryHandler {
-    YaRepository yaRepository;
+    YandexRepository yandexRepository;
     UserRepository userRepository;
     AddTokensMenu addTokensMenu;
     Registration registration;
@@ -36,6 +29,7 @@ public class CallbackQueryHandler {
     AddYandex addYandex;
     NotificationController notificationController;
     UserStateEditor userStateEditor;
+    DeleteUserData deleteUserData;
 
     public BotApiMethod<?> processCallbackQuery(CallbackQuery buttonQuery) {
         String chatId = buttonQuery.getMessage().getChatId().toString();
@@ -59,7 +53,7 @@ public class CallbackQueryHandler {
                 return new SendMessage(chatId, BotMessageEnum.ASK_TIME_MESSAGE.getMessage());
             }
             case "TEST_MESSAGE_CALLBACK" ->{
-                return  addYandex.testYaData(yaRepository, chatId);
+                return  addYandex.testYaData(yandexRepository, chatId);
             }
             case "ENABLE_NOTIFICATIONS_CALLBACK" ->{
                 notificationController.enableNotifications(chatId);
@@ -75,7 +69,16 @@ public class CallbackQueryHandler {
             case "EDIT_LANGUAGE_CALLBACK" ->{
                 return new SendMessage(chatId, BotMessageEnum.IN_DEVELOPING_MESSAGE.getMessage());
             }
-
+            case "DELETE_USER_STEP_1_CALLBACK" ->{
+                return deleteUserData.askDeleteUserData(chatId);
+            }
+            case "DELETE_USER_STEP_2_CALLBACK" ->{
+                deleteUserData.deleteUserData(chatId);
+                return new SendMessage(chatId, BotMessageEnum.DELETE_USER_DATA_MESSAGE.getMessage());
+            }
+            case "NOT_DELETE_USER_CALLBACK" ->{
+                return deleteUserData.notDeleteUser(chatId);
+            }
 
             default -> {}
         }

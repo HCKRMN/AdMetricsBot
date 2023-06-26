@@ -10,7 +10,7 @@ import lombok.ToString;
 
 import java.sql.Timestamp;
 
-@Entity(name = "usersDataTable")
+@Entity(name = "usersTable")
 @Getter
 @Setter
 @ToString(of = {"chatId", "userName"})

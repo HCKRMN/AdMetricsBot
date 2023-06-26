@@ -6,16 +6,15 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity(name = "yaDataTable")
+@Entity(name = "bitrixTable")
 @Getter
 @Setter
 @Cacheable
-public class YaData {
+public class Bitrix {
     @Id
     private String chatId;
-    private String yaToken;
-    private String yaLogin;
-
-
+    private String biToken;
+    private String biUserNum;
+    private String biDomen;
 
 }

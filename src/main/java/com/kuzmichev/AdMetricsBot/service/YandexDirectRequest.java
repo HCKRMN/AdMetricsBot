@@ -1,6 +1,6 @@
 package com.kuzmichev.AdMetricsBot.service;
 
-import com.kuzmichev.AdMetricsBot.model.YaRepository;
+import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,8 +16,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Slf4j
 public class YandexDirectRequest {
-    public static String ya(YaRepository yaRepository, String chatId) throws IOException {
-        String bearer = yaRepository.findById(chatId).get().getYaToken();
+    public static String ya(YandexRepository yandexRepository, String chatId) throws IOException {
+        String bearer = yandexRepository.findById(chatId).get().getYaToken();
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost("https://api.direct.yandex.com/json/v5/reports");
@@ -34,11 +34,6 @@ public class YandexDirectRequest {
 					{
 					    "params": {
 					      "SelectionCriteria": {
-					        "Filter": [{
-					          "Field": "Conversions",
-					          "Operator": "GREATER_THAN",
-					          "Values": [ "0" ]
-					        }]
 					      },
 					      "FieldNames": [ "Date", "Cost" ],\s
 					      "OrderBy": [{
@@ -59,14 +54,14 @@ public class YandexDirectRequest {
         String responseBody = EntityUtils.toString(entityResponse);
 
 //        Отладочная информация
-//        HttpEntity entity2 = request.getEntity();
-//        String requestBody = EntityUtils.toString(entity2);
-//        System.out.println(request);
-//        System.out.println(Arrays.toString(request.getAllHeaders()));
-//        System.out.println("Request Body: " + requestBody);
-//        System.out.println(response);
-//        System.out.println(response.getStatusLine());
-//        System.out.println("Response Body: " + responseBody);
+        HttpEntity entity2 = request.getEntity();
+        String requestBody = EntityUtils.toString(entity2);
+        System.out.println(request);
+        System.out.println(Arrays.toString(request.getAllHeaders()));
+        System.out.println("Request Body: " + requestBody);
+        System.out.println(response);
+        System.out.println(response.getStatusLine());
+        System.out.println("Response Body: " + responseBody);
 
         int statusCode = response.getStatusLine().getStatusCode();
 
