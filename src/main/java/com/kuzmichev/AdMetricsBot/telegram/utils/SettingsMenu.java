@@ -44,6 +44,20 @@ public class SettingsMenu {
                 inlineKeyboardMaker.addMarkup(
                         inlineKeyboardMaker.addRows(
                                 inlineKeyboardMaker.addRow(
+                                        // Кнопка создания проекта
+                                        inlineKeyboardMaker.addButton(
+                                                ButtonNameEnum.PROJECT_CREATE_BUTTON.getButtonName(),
+                                                CallBackEnum.PROJECT_CREATE_CALLBACK,
+                                                null
+                                        ),
+                                        // Кнопка управления существующими проектами
+                                        inlineKeyboardMaker.addButton(
+                                                ButtonNameEnum.PROJECTS_BUTTON.getButtonName(),
+                                                CallBackEnum.PROJECTS_CALLBACK,
+                                                null
+                                        )
+                                ),
+                                inlineKeyboardMaker.addRow(
                                         // Кнопка включения/выключения рассылки
                                         inlineKeyboardMaker.addButton(
                                                 launchButton,

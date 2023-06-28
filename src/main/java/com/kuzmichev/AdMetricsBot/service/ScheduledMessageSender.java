@@ -3,6 +3,7 @@ package com.kuzmichev.AdMetricsBot.service;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
+import com.kuzmichev.AdMetricsBot.telegram.utils.BotMessageUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -17,16 +18,15 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import com.kuzmichev.AdMetricsBot.telegram.AdMetricsBot;
 
 @Slf4j
 @Service
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class MessageSender {
+public class ScheduledMessageSender {
     ScheduledMessageRepository scheduledMessageRepository;
     YandexRepository yandexRepository;
-    AdMetricsBot telegramBot;
+    BotMessageUtils botMessageUtils;
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
@@ -37,7 +37,7 @@ public class MessageSender {
             List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(now);
             for (ScheduledMessage scheduledMessage : scheduledMessages) {
                 try {
-                    telegramBot.sendMessage(scheduledMessage.getChatId(), "Затраты на рекламу в Яндекс директ: " + YandexDirectRequest.ya(yandexRepository, scheduledMessage.getChatId()));
+                    botMessageUtils.sendMessage(scheduledMessage.getChatId(), "Затраты на рекламу в Яндекс директ: " + YandexDirectRequest.ya(yandexRepository, scheduledMessage.getChatId()));
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);

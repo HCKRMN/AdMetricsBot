@@ -27,9 +27,9 @@ public class Registration{
             user.setChatId(chatId);
             user.setUserName(userName);
             user.setUserState(UserStatesEnum.REGISTRATION_STATE.getStateName());
+            user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
             scheduledMessage.setChatId(chatId);
             scheduledMessage.setEnableSendingMessages(false);
-            user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
             userRepository.save(user);
             scheduledMessageRepository.save(scheduledMessage);
             log.info("user saved: " + user);

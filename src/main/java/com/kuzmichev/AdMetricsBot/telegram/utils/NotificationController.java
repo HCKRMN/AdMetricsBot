@@ -17,6 +17,7 @@ import java.util.Optional;
 public class NotificationController {
     ScheduledMessageRepository scheduledMessageRepository;
 
+    // Включает уведомления
     public void enableNotifications(String chatId) {
         Optional<ScheduledMessage> scheduledMessageOptional = scheduledMessageRepository.findByChatId(chatId);
         if (scheduledMessageOptional.isPresent()) {
@@ -26,6 +27,7 @@ public class NotificationController {
         }
     }
 
+    // Выключает уведомления
     public void disableNotifications(String chatId) {
         Optional<ScheduledMessage> scheduledMessageOptional = scheduledMessageRepository.findByChatId(chatId);
         if (scheduledMessageOptional.isPresent()) {

@@ -30,6 +30,7 @@ public class CallbackQueryHandler {
     NotificationController notificationController;
     UserStateEditor userStateEditor;
     DeleteUserData deleteUserData;
+    BotMessageUtils botMessageUtils;
 
     public BotApiMethod<?> processCallbackQuery(CallbackQuery buttonQuery) {
         String chatId = buttonQuery.getMessage().getChatId().toString();

@@ -17,10 +17,10 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
+@Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-@Slf4j
 public class MessageHandler {
     AddTimer addTimer;
     Registration registration;
@@ -31,7 +31,9 @@ public class MessageHandler {
     TimeZoneDefinition timeZoneDefinition;
     AddYandex addYandex;
     SettingsMenu settingsMenu;
-    DeleteUserData deleteUserData;
+    BotMessageUtils botMessageUtils;
+    ProjectManager projectManager;
+
 
     public BotApiMethod<?> answerMessage(Message message) {
         String chatId = message.getChatId().toString();
@@ -46,7 +48,7 @@ public class MessageHandler {
                 return new SendMessage(user.getChatId(), textToSend);
             }
         }
-
+        // Ловим и валидируем время таймера
         else if (userState != null && userState.equals(UserStatesEnum.SETTINGS_EDIT_TIMER_STATE.getStateName())) {
         if (messageText.matches("(\\d{1,2} \\d{1,2})")) {
                 if (messageText.matches("((?:[01]\\d|2[0-3]) (?:[0-5]\\d))|((?:[0-9]|1\\d|2[0-3]) (?:[0-5]\\d))\n")) {
@@ -56,8 +58,16 @@ public class MessageHandler {
                 }
             }
         }
+        // Ловим и валидируем название проекта
+        else if (userState != null && userState.equals(UserStatesEnum.PROJECT_NAME_SPELLING_STATE.getStateName())) {
+            if (messageText.matches("((?:[A-ZА-Я][a-zа-я]+))")) {               //Сделать потом нормальную валидацию
+                return projectManager.projectCreate(chatId, messageText);
+            } else {
+                return new SendMessage(chatId, BotMessageEnum.PROJECT_NAME_INVALID_MESSAGE.getMessage());
+            }
+        }
 
-        else {
+        else{
             switch (messageText) {
                 case "/start" -> {
                     return startCommandReceived.sendGreetingMessage(chatId, message.getChat().getFirstName());
@@ -74,10 +84,6 @@ public class MessageHandler {
                 }
                 case "/test" -> {
                     return  addYandex.testYaData(yandexRepository, chatId);
-                }
-                case "/delete" -> {
-                    deleteUserData.deleteUserData(chatId);
-                    return new SendMessage(chatId, BotMessageEnum.DELETE_USER_DATA_MESSAGE.getMessage());
                 }
                 default -> {}
             }

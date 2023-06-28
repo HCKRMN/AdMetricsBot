@@ -19,7 +19,10 @@ public enum ButtonNameEnum {
     SETTINGS_EDIT_TIMER_BUTTON("Время отправки"),
     SETTINGS_ADD_ACCOUNTS_BUTTON("Добавить аккаунты"),
     SETTINGS_DELETE_USER_BUTTON("Удалить данные"),
-    BACK_BUTTON("Назад");
+    BACK_BUTTON("Назад"),
+    PROJECT_CREATE_BUTTON("Создать проект"),
+    PROJECTS_BUTTON("Мои проекты"),
+    ;
 
 
     private final String buttonName;

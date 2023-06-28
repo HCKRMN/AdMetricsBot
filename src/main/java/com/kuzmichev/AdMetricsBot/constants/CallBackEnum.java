@@ -15,6 +15,8 @@ public enum CallBackEnum {
     ENABLE_NOTIFICATIONS_CALLBACK,
     DISABLE_NOTIFICATIONS_CALLBACK,
     NOT_DELETE_USER_CALLBACK,
+    PROJECT_CREATE_CALLBACK,
+    PROJECTS_CALLBACK,
     ;
 //
 //    private final String callBackName;
