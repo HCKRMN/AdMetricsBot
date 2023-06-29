@@ -2,7 +2,8 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers;
 
 import com.kuzmichev.AdMetricsBot.config.TelegramConfig;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.UserStatesEnum;
+import com.kuzmichev.AdMetricsBot.constants.CommandEnum;
+import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
+
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -33,6 +36,7 @@ public class MessageHandler {
     SettingsMenu settingsMenu;
     BotMessageUtils botMessageUtils;
     ProjectManager projectManager;
+    Validator validator;
 
 
     public BotApiMethod<?> answerMessage(Message message) {
@@ -40,53 +44,63 @@ public class MessageHandler {
         String userName = message.getFrom().getUserName();
         String messageText = message.getText();
         String userState = userRepository.getUserStateByChatId(chatId);
+        UserStateEnum userStateEnum = UserStateEnum.valueOf(userState);
 
-        if(messageText.contains("/send") && config.getOwnerId() == chatId) {
+        // Ловим команду отправки сообщения от админа
+        if (messageText.contains("/send") && chatId.equals(config.getOwnerId())){
             var textToSend = EmojiParser.parseToUnicode(messageText.substring(messageText.indexOf(" ")));
             var users = userRepository.findAll();
             for (User user : users) {
                 return new SendMessage(user.getChatId(), textToSend);
             }
         }
-        // Ловим и валидируем время таймера
-        else if (userState != null && userState.equals(UserStatesEnum.SETTINGS_EDIT_TIMER_STATE.getStateName())) {
-        if (messageText.matches("(\\d{1,2} \\d{1,2})")) {
-                if (messageText.matches("((?:[01]\\d|2[0-3]) (?:[0-5]\\d))|((?:[0-9]|1\\d|2[0-3]) (?:[0-5]\\d))\n")) {
-                    return addTimer.setTimerAndStart(chatId, messageText);
-                } else {
-                    return new SendMessage(chatId, BotMessageEnum.INVALID_TIME_MESSAGE.getMessage());
+        // Обработка команд при разных состояниях пользователя
+        else if (userState != null) {
+            switch (userStateEnum) {
+                // Ловим и валидируем время таймера
+                case SETTINGS_EDIT_TIMER_STATE -> {
+                    if (validator.validateTime(messageText)) {
+                        return addTimer.setTimerAndStart(chatId, messageText);
+                    } else {
+                        return new SendMessage(chatId, BotMessageEnum.INVALID_TIME_MESSAGE.getMessage());
+                    }
+                }
+                // Ловим и валидируем имя проекта
+                case PROJECT_CREATE_NAME_STATE -> {
+                    if (validator.validateProjectName(messageText)) {
+                        projectManager.projectCreate(chatId, messageText);
+                        return new SendMessage(chatId, BotMessageEnum.PROJECT_CREATE_DONE_MESSAGE.getMessage());
+                    } else {
+                        return new SendMessage(chatId, BotMessageEnum.PROJECT_NAME_INVALID_MESSAGE.getMessage());
+                    }
+                }
+                case SETTINGS_EDIT_STATE -> {
+                    // Действия для SETTINGS_EDIT_STATE
                 }
             }
         }
-        // Ловим и валидируем название проекта
-        else if (userState != null && userState.equals(UserStatesEnum.PROJECT_NAME_SPELLING_STATE.getStateName())) {
-            if (messageText.matches("((?:[A-ZА-Я][a-zа-я]+))")) {               //Сделать потом нормальную валидацию
-                return projectManager.projectCreate(chatId, messageText);
-            } else {
-                return new SendMessage(chatId, BotMessageEnum.PROJECT_NAME_INVALID_MESSAGE.getMessage());
-            }
-        }
 
-        else{
-            switch (messageText) {
-                case "/start" -> {
+        else {
+            switch (Objects.requireNonNull(CommandEnum.fromCommand(messageText))) {
+                case START -> {
                     return startCommandReceived.sendGreetingMessage(chatId, message.getChat().getFirstName());
                 }
-                case "/settings" -> {
+                case SETTINGS -> {
                     return settingsMenu.menuMaker(chatId);
                 }
-                case "/help" -> {
-
+                case HELP -> {
+                    // Обработка команды "/help"
                 }
-                case "/register" -> {
+                case REGISTER -> {
                     registration.registerUser(chatId, userName);
                     return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
                 }
-                case "/test" -> {
-                    return  addYandex.testYaData(yandexRepository, chatId);
+                case TEST -> {
+                    return addYandex.testYaData(yandexRepository, chatId);
                 }
                 default -> {}
             }
+
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

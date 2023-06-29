@@ -15,7 +15,6 @@ public class Yandex {
     private String chatId;
     private String yaToken;
     private String yaLogin;
-
-
+    private String projectId;
 
 }

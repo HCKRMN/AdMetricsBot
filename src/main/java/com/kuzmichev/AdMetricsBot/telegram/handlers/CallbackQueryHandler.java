@@ -1,7 +1,8 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.UserStatesEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import com.kuzmichev.AdMetricsBot.telegram.utils.*;
@@ -37,47 +38,47 @@ public class CallbackQueryHandler {
         String userName = buttonQuery.getMessage().getFrom().getUserName();
         String data = buttonQuery.getData();
 
-        switch (data) {
-            case "START_REGISTRATION_CALLBACK" -> {
+        switch (CallBackEnum.valueOf(data)) {
+            case START_REGISTRATION_CALLBACK -> {
                 registration.registerUser(chatId, userName);
                 return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
             }
-            case "ADD_ACCOUNTS_CALLBACK" -> {
+            case ADD_ACCOUNTS_CALLBACK -> {
                 return addTokensMenu.addTokens(chatId);
             }
-            case "ADD_YANDEX_CALLBACK" -> {
+            case ADD_YANDEX_CALLBACK -> {
                  return checkYaData.findYaData(chatId);
             }
-            case "NO_CONTINUE_CALLBACK",
-                 "EDIT_TIMER_CALLBACK" -> {
-                userStateEditor.editUserState(chatId, UserStatesEnum.SETTINGS_EDIT_TIMER_STATE.getStateName());
+            case NO_CONTINUE_CALLBACK,
+                 EDIT_TIMER_CALLBACK -> {
+                userStateEditor.editUserState(chatId, UserStateEnum.SETTINGS_EDIT_TIMER_STATE.getStateName());
                 return new SendMessage(chatId, BotMessageEnum.ASK_TIME_MESSAGE.getMessage());
             }
-            case "TEST_MESSAGE_CALLBACK" ->{
+            case TEST_MESSAGE_CALLBACK ->{
                 return  addYandex.testYaData(yandexRepository, chatId);
             }
-            case "ENABLE_NOTIFICATIONS_CALLBACK" ->{
+            case ENABLE_NOTIFICATIONS_CALLBACK ->{
                 notificationController.enableNotifications(chatId);
                 return  new SendMessage(chatId, BotMessageEnum.ENABLE_NOTIFICATIONS_MESSAGE.getMessage());
             }
-            case "DISABLE_NOTIFICATIONS_CALLBACK" ->{
+            case DISABLE_NOTIFICATIONS_CALLBACK ->{
                 notificationController.disableNotifications(chatId);
                 return  new SendMessage(chatId, BotMessageEnum.DISABLE_NOTIFICATIONS_MESSAGE.getMessage());
             }
-            case "EDIT_TIMEZONE_CALLBACK" ->{
+            case EDIT_TIMEZONE_CALLBACK ->{
                 return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
             }
-            case "EDIT_LANGUAGE_CALLBACK" ->{
+            case EDIT_LANGUAGE_CALLBACK ->{
                 return new SendMessage(chatId, BotMessageEnum.IN_DEVELOPING_MESSAGE.getMessage());
             }
-            case "DELETE_USER_STEP_1_CALLBACK" ->{
+            case DELETE_USER_STEP_1_CALLBACK ->{
                 return deleteUserData.askDeleteUserData(chatId);
             }
-            case "DELETE_USER_STEP_2_CALLBACK" ->{
+            case DELETE_USER_STEP_2_CALLBACK ->{
                 deleteUserData.deleteUserData(chatId);
                 return new SendMessage(chatId, BotMessageEnum.DELETE_USER_DATA_MESSAGE.getMessage());
             }
-            case "NOT_DELETE_USER_CALLBACK" ->{
+            case NOT_DELETE_USER_CALLBACK ->{
                 return deleteUserData.notDeleteUser(chatId);
             }
 

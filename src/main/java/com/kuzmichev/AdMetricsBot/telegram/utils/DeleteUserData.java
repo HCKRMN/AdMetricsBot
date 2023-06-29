@@ -3,7 +3,7 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.UserStatesEnum;
+import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.BitrixRepository;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
@@ -63,7 +63,7 @@ public class DeleteUserData {
 
         // Изменяем статус юзера на рабочий
     public SendMessage notDeleteUser (String chatId) {
-        userStateEditor.editUserState(chatId, UserStatesEnum.WORKING_STATE.getStateName());
+        userStateEditor.editUserState(chatId, UserStateEnum.WORKING_STATE.getStateName());
         return new SendMessage(chatId, BotMessageEnum.NOT_DELETE_USER_DATA_MESSAGE.getMessage());
     }
 

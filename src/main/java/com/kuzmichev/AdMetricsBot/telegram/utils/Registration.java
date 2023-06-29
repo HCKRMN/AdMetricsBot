@@ -1,6 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
-import com.kuzmichev.AdMetricsBot.constants.UserStatesEnum;
+import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import com.kuzmichev.AdMetricsBot.model.User;
@@ -26,7 +26,7 @@ public class Registration{
             ScheduledMessage scheduledMessage = new ScheduledMessage();
             user.setChatId(chatId);
             user.setUserName(userName);
-            user.setUserState(UserStatesEnum.REGISTRATION_STATE.getStateName());
+            user.setUserState(UserStateEnum.REGISTRATION_STATE.getStateName());
             user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
             scheduledMessage.setChatId(chatId);
             scheduledMessage.setEnableSendingMessages(false);

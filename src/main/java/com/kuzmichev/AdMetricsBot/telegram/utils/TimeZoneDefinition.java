@@ -1,10 +1,9 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
-import com.kuzmichev.AdMetricsBot.config.TelegramConfig;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.UserStatesEnum;
+import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
@@ -12,10 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;
@@ -50,7 +47,7 @@ public class TimeZoneDefinition {
         ));
 
         // Добавляем кнопку "Continue" только если условие выполняется
-        if (state.equals(UserStatesEnum.REGISTRATION_STATE.getStateName())) {
+        if (state.equals(UserStateEnum.REGISTRATION_STATE.getStateName())) {
             buttonsRow.add(inlineKeyboardMaker.addButton(
                     ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
                     CallBackEnum.ADD_ACCOUNTS_CALLBACK,

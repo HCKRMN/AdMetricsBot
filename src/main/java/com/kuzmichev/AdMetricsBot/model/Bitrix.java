@@ -13,8 +13,9 @@ import lombok.Setter;
 public class Bitrix {
     @Id
     private String chatId;
-    private String biToken;
-    private String biUserNum;
-    private String biDomen;
+    private String bitrixToken;
+    private String bitrixUserNum;
+    private String bitrixDomen;
+    private String projectId;
 
 }

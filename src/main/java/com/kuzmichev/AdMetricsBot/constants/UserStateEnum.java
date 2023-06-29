@@ -1,16 +1,16 @@
 package com.kuzmichev.AdMetricsBot.constants;
 
-public enum UserStatesEnum {
+public enum UserStateEnum {
     REGISTRATION_STATE("REGISTRATION_STATE"),
     SETTINGS_EDIT_STATE("SETTINGS_EDIT_STATE"),
     SETTINGS_EDIT_TIMER_STATE("SETTINGS_EDIT_TIMER_STATE"),
     WORKING_STATE("WORKING_STATE"),
-    PROJECT_NAME_SPELLING_STATE("PROJECT_NAME_WRITING_STATE"),
+    PROJECT_CREATE_NAME_STATE("PROJECT_CREATE_NAME_STATE"),
     ;
 
     private final String stateName;
 
-    UserStatesEnum(String stateName) {
+    UserStateEnum(String stateName) {
         this.stateName = stateName;
     }
 

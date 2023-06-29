@@ -1,6 +1,5 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
-import com.kuzmichev.AdMetricsBot.constants.UserStatesEnum;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import lombok.AccessLevel;
