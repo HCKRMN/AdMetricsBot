@@ -20,11 +20,13 @@ public enum CommandEnum {
 
     public static CommandEnum fromCommand(String command) {
         for (CommandEnum value : CommandEnum.values()) {
-            if (value.getCommand().equalsIgnoreCase(command)) {
+            if (value.getCommand().equalsIgnoreCase(command) || ("/" + value.getCommand()).equalsIgnoreCase(command)) {
                 return value;
             }
         }
         return null;
     }
+
+
 }
 

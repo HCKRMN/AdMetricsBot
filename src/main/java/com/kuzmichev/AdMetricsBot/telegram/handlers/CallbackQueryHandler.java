@@ -32,6 +32,7 @@ public class CallbackQueryHandler {
     UserStateEditor userStateEditor;
     DeleteUserData deleteUserData;
     BotMessageUtils botMessageUtils;
+    ProjectManager projectManager;
 
     public BotApiMethod<?> processCallbackQuery(CallbackQuery buttonQuery) {
         String chatId = buttonQuery.getMessage().getChatId().toString();
@@ -42,6 +43,12 @@ public class CallbackQueryHandler {
             case START_REGISTRATION_CALLBACK -> {
                 registration.registerUser(chatId, userName);
                 return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
+            }
+            case PROJECT_CREATE_CALLBACK -> {
+                return projectManager.projectCreateStarter(chatId);
+            }
+            case PROJECT_CREATE_ASK_NAME_CALLBACK -> {
+                return projectManager.projectCreateAskName(chatId);
             }
             case ADD_ACCOUNTS_CALLBACK -> {
                 return addTokensMenu.addTokens(chatId);

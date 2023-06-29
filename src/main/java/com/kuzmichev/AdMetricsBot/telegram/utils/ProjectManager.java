@@ -5,6 +5,7 @@ import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.Project;
+import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,8 @@ import java.util.UUID;
 public class ProjectManager {
     InlineKeyboardMaker inlineKeyboardMaker;
     UserStateEditor userStateEditor;
+    BotMessageUtils botMessageUtils;
+    ProjectRepository projectRepository;
 
         // Это вроде для регистрации
     public SendMessage projectCreateStarter(String chatId) {
@@ -34,7 +37,7 @@ public class ProjectManager {
                                         // Кнопка создания проекта
                                         inlineKeyboardMaker.addButton(
                                                 ButtonNameEnum.PROJECT_CREATE_BUTTON.getButtonName(),
-                                                CallBackEnum.PROJECT_CREATE_CALLBACK,
+                                                CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK,
                                                 null
                                         )
                                 )
@@ -52,7 +55,7 @@ public class ProjectManager {
     }
 
         // Добавляем проект в базу
-    public void projectCreate(String chatId, String messageText) {
+    public SendMessage projectCreate(String chatId, String messageText) {
 
         // Генерируем UUID и переводим в текст
         String projectId = UUID.randomUUID().toString();
@@ -61,6 +64,27 @@ public class ProjectManager {
         project.setProjectName(messageText);
         project.setChatId(chatId);
         project.setProjectId(projectId);
+        projectRepository.save(project);
+
+        botMessageUtils.sendMessage(chatId, BotMessageEnum.PROJECT_CREATE_DONE_MESSAGE.getMessage());
+
+        SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.ADD_TOKENS_MESSAGE.getMessage());
+        sendMessage.setReplyMarkup(
+                inlineKeyboardMaker.addMarkup(
+                        inlineKeyboardMaker.addRows(
+                                inlineKeyboardMaker.addRow(
+                                        // Кнопка создания проекта
+                                        inlineKeyboardMaker.addButton(
+                                                ButtonNameEnum.ADD_YANDEX_BUTTON.getButtonName(),
+                                                CallBackEnum.ADD_YANDEX_CALLBACK,
+                                                null
+                                        )
+                                )
+                        )
+                )
+        );
+
+        return sendMessage;
     }
 
 }

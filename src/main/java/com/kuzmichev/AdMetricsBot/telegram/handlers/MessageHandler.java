@@ -20,6 +20,8 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.util.Objects;
 
+import static com.kuzmichev.AdMetricsBot.constants.CommandEnum.fromCommand;
+
 @Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
@@ -38,13 +40,19 @@ public class MessageHandler {
     ProjectManager projectManager;
     Validator validator;
 
-
     public BotApiMethod<?> answerMessage(Message message) {
         String chatId = message.getChatId().toString();
         String userName = message.getFrom().getUserName();
         String messageText = message.getText();
         String userState = userRepository.getUserStateByChatId(chatId);
-        UserStateEnum userStateEnum = UserStateEnum.valueOf(userState);
+//        UserStateEnum userStateEnum = UserStateEnum.valueOf(userState);
+//        CommandEnum commandEnum = CommandEnum.fromCommand(messageText);
+//        System.out.println(commandEnum);
+
+
+        CommandEnum commandEnum = CommandEnum.fromCommand(messageText);
+        System.out.println(commandEnum);
+
 
         // Ловим команду отправки сообщения от админа
         if (messageText.contains("/send") && chatId.equals(config.getOwnerId())){
@@ -54,8 +62,33 @@ public class MessageHandler {
                 return new SendMessage(user.getChatId(), textToSend);
             }
         }
+        // Обработка пользовательских комманд
+        else if (commandEnum != null) {
+                switch (commandEnum) {
+                    case START -> {
+                        return startCommandReceived.sendGreetingMessage(chatId, message.getChat().getFirstName());
+                    }
+                    case SETTINGS -> {
+                        return settingsMenu.menuMaker(chatId);
+                    }
+                    case HELP -> {
+                        // Обработка команды "/help"
+                    }
+                    case REGISTER -> {
+                        registration.registerUser(chatId, userName);
+                        return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
+                    }
+                    case TEST -> {
+                        return addYandex.testYaData(yandexRepository, chatId);
+                    }
+                    default -> {
+                    }
+                }
+            }
+
         // Обработка команд при разных состояниях пользователя
         else if (userState != null) {
+            UserStateEnum userStateEnum = UserStateEnum.valueOf(userState);
             switch (userStateEnum) {
                 // Ловим и валидируем время таймера
                 case SETTINGS_EDIT_TIMER_STATE -> {
@@ -68,39 +101,18 @@ public class MessageHandler {
                 // Ловим и валидируем имя проекта
                 case PROJECT_CREATE_NAME_STATE -> {
                     if (validator.validateProjectName(messageText)) {
-                        projectManager.projectCreate(chatId, messageText);
-                        return new SendMessage(chatId, BotMessageEnum.PROJECT_CREATE_DONE_MESSAGE.getMessage());
+                        return projectManager.projectCreate(chatId, messageText);
                     } else {
                         return new SendMessage(chatId, BotMessageEnum.PROJECT_NAME_INVALID_MESSAGE.getMessage());
                     }
                 }
+                    // Действия для SETTINGS_EDIT_STATE
                 case SETTINGS_EDIT_STATE -> {
                     // Действия для SETTINGS_EDIT_STATE
                 }
+                default -> {
+                }
             }
-        }
-
-        else {
-            switch (Objects.requireNonNull(CommandEnum.fromCommand(messageText))) {
-                case START -> {
-                    return startCommandReceived.sendGreetingMessage(chatId, message.getChat().getFirstName());
-                }
-                case SETTINGS -> {
-                    return settingsMenu.menuMaker(chatId);
-                }
-                case HELP -> {
-                    // Обработка команды "/help"
-                }
-                case REGISTER -> {
-                    registration.registerUser(chatId, userName);
-                    return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
-                }
-                case TEST -> {
-                    return addYandex.testYaData(yandexRepository, chatId);
-                }
-                default -> {}
-            }
-
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

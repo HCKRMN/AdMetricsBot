@@ -42,7 +42,7 @@ public class TimeZoneDefinition {
         // Добавляем кнопку "Continue" всегда
         buttonsRow.add(inlineKeyboardMaker.addButton(
                 ButtonNameEnum.LINK_BUTTON.getButtonName(),
-                CallBackEnum.ADD_ACCOUNTS_CALLBACK,
+                null,
                 ipToTimeZoneLink
         ));
 
@@ -50,7 +50,7 @@ public class TimeZoneDefinition {
         if (state.equals(UserStateEnum.REGISTRATION_STATE.getStateName())) {
             buttonsRow.add(inlineKeyboardMaker.addButton(
                     ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
-                    CallBackEnum.ADD_ACCOUNTS_CALLBACK,
+                    CallBackEnum.PROJECT_CREATE_CALLBACK,
                     null
             ));
         }

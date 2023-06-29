@@ -54,14 +54,14 @@ public class YandexDirectRequest {
         String responseBody = EntityUtils.toString(entityResponse);
 
 //        Отладочная информация
-        HttpEntity entity2 = request.getEntity();
-        String requestBody = EntityUtils.toString(entity2);
-        System.out.println(request);
-        System.out.println(Arrays.toString(request.getAllHeaders()));
-        System.out.println("Request Body: " + requestBody);
-        System.out.println(response);
-        System.out.println(response.getStatusLine());
-        System.out.println("Response Body: " + responseBody);
+//        HttpEntity entity2 = request.getEntity();
+//        String requestBody = EntityUtils.toString(entity2);
+//        System.out.println(request);
+//        System.out.println(Arrays.toString(request.getAllHeaders()));
+//        System.out.println("Request Body: " + requestBody);
+//        System.out.println(response);
+//        System.out.println(response.getStatusLine());
+//        System.out.println("Response Body: " + responseBody);
 
         int statusCode = response.getStatusLine().getStatusCode();
 
