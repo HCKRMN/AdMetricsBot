@@ -6,16 +6,12 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalTime;
-
-@Entity(name = "scheduledMessageTable")
+@Entity(name = "tempDataTable")
 @Getter
 @Setter
 @Cacheable
-public class ScheduledMessage {
+public class TempData {
     @Id
     private String chatId;
-    private LocalTime timerMessage;
-    private boolean enableSendingMessages;
-
+    private String tempValue;
 }

@@ -63,7 +63,7 @@ public class DeleteUserData {
 
         // Изменяем статус юзера на рабочий
     public SendMessage notDeleteUser (String chatId) {
-        userStateEditor.editUserState(chatId, UserStateEnum.WORKING_STATE.getStateName());
+        userStateEditor.editUserState(chatId, UserStateEnum.WORKING_STATE);
         return new SendMessage(chatId, BotMessageEnum.NOT_DELETE_USER_DATA_MESSAGE.getMessage());
     }
 

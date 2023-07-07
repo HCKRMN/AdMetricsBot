@@ -45,14 +45,7 @@ public class MessageHandler {
         String userName = message.getFrom().getUserName();
         String messageText = message.getText();
         String userState = userRepository.getUserStateByChatId(chatId);
-//        UserStateEnum userStateEnum = UserStateEnum.valueOf(userState);
-//        CommandEnum commandEnum = CommandEnum.fromCommand(messageText);
-//        System.out.println(commandEnum);
-
-
         CommandEnum commandEnum = CommandEnum.fromCommand(messageText);
-        System.out.println(commandEnum);
-
 
         // Ловим команду отправки сообщения от админа
         if (messageText.contains("/send") && chatId.equals(config.getOwnerId())){
@@ -69,7 +62,7 @@ public class MessageHandler {
                         return startCommandReceived.sendGreetingMessage(chatId, message.getChat().getFirstName());
                     }
                     case SETTINGS -> {
-                        return settingsMenu.menuMaker(chatId);
+                        return settingsMenu.SettingsMenuMaker(chatId);
                     }
                     case HELP -> {
                         // Обработка команды "/help"

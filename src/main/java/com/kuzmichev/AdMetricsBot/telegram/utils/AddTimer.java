@@ -49,7 +49,7 @@ public class AddTimer {
             scheduledMessageRepository.save(scheduledMessage);
 
             // Изменяем статус юзера на рабочий
-            userStateEditor.editUserState(chatId, UserStateEnum.WORKING_STATE.getStateName());
+            userStateEditor.editUserState(chatId, UserStateEnum.WORKING_STATE);
 
             log.info("User set timer at " + timerMessage);
             return new SendMessage(chatId, BotMessageEnum.TIMER_ADDED_MESSAGE.getMessage() + messageText.replace(" ", ":"));

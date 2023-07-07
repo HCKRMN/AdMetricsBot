@@ -6,6 +6,8 @@ import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.Project;
 import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
+import com.kuzmichev.AdMetricsBot.model.TempData;
+import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,7 @@ public class ProjectManager {
     UserStateEditor userStateEditor;
     BotMessageUtils botMessageUtils;
     ProjectRepository projectRepository;
+    TempDataRepository tempDataRepository;
 
         // Это вроде для регистрации
     public SendMessage projectCreateStarter(String chatId) {
@@ -50,7 +53,7 @@ public class ProjectManager {
 
         // Запрашиваем имя проекта и меняем состояние пользователя
     public SendMessage projectCreateAskName(String chatId) {
-        userStateEditor.editUserState(chatId, UserStateEnum.PROJECT_CREATE_NAME_STATE.getStateName());
+        userStateEditor.editUserState(chatId, UserStateEnum.PROJECT_CREATE_NAME_STATE);
         return new SendMessage(chatId, BotMessageEnum.PROJECT_NAME_ASK_MESSAGE.getMessage());
     }
 
@@ -65,6 +68,11 @@ public class ProjectManager {
         project.setChatId(chatId);
         project.setProjectId(projectId);
         projectRepository.save(project);
+
+        TempData tempData = new TempData();
+        tempData.setTempValue(projectId);
+        tempData.setChatId(chatId);
+        tempDataRepository.save(tempData);
 
         botMessageUtils.sendMessage(chatId, BotMessageEnum.PROJECT_CREATE_DONE_MESSAGE.getMessage());
 

@@ -1,5 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
+import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import lombok.AccessLevel;
@@ -15,10 +16,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserStateEditor {
     UserRepository userRepository;
-    public void editUserState(String chatId, String userState) {
+    public void editUserState(String chatId, UserStateEnum userState) {
+        String userStateString = userState.getStateName();
         Optional<User> userOptional = userRepository.findByChatId(chatId);
         User user = userOptional.get();
-        user.setUserState(userState);
+        user.setUserState(userStateString);
         userRepository.save(user);
     }
 }

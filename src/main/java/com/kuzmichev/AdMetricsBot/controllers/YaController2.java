@@ -1,7 +1,6 @@
 package com.kuzmichev.AdMetricsBot.controllers;
 
-import com.kuzmichev.AdMetricsBot.model.Yandex;
-import com.kuzmichev.AdMetricsBot.model.YandexRepository;
+import com.kuzmichev.AdMetricsBot.model.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,23 +10,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @Slf4j
 public class YaController2 {
-    @Autowired
-    private YandexRepository yandexRepository;
+    private final YandexRepository yandexRepository;
+    TempDataRepository tempDataRepository;
+
+    public YaController2(YandexRepository yandexRepository) {
+        this.yandexRepository = yandexRepository;
+    }
 
     @RequestMapping(value = "/yandex-r")
-    public String getYaToken(@RequestParam(name = "access_token", required = false) String yaToken,
-                             @RequestParam(name = "state", required = false) String chatId
-//            ,                @RequestParam(name = "yaLogin", required = false) String ???)
-    ){
-//        System.out.println(chatId);
-//        System.out.println(yaLogin);
-//        System.out.println(yaToken);
+    public String getYaToken(@RequestParam(name = "access_token", required = false) String yaToken, // Сделать обязательным потом и проверить
+                             @RequestParam(name = "state", required = false) String chatId){
 
+
+        String projectId = tempDataRepository.findTempValueByChatId(chatId);
         Yandex yandex = new Yandex();
         yandex.setChatId(chatId);
         yandex.setYaToken(yaToken);
+        yandex.setProjectId(projectId);
         yandexRepository.save(yandex);
-        log.info("yandex saved: " + yandex);
+        log.info("Пользователь с Id: {} добавил аккаунт Yandex", chatId);
 
         return "yandex-r";
     }
