@@ -4,6 +4,7 @@ import com.kuzmichev.AdMetricsBot.config.TelegramConfig;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CommandEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
+import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
@@ -17,10 +18,6 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
-
-import java.util.Objects;
-
-import static com.kuzmichev.AdMetricsBot.constants.CommandEnum.fromCommand;
 
 @Slf4j
 @Component
@@ -36,9 +33,11 @@ public class MessageHandler {
     TimeZoneDefinition timeZoneDefinition;
     AddYandex addYandex;
     SettingsMenu settingsMenu;
-    BotMessageUtils botMessageUtils;
     ProjectManager projectManager;
     Validator validator;
+    UserStateEditor userStateEditor;
+    MessageCleaner messageCleaner;
+    TempDataRepository tempDataRepository;
 
     public BotApiMethod<?> answerMessage(Message message) {
         String chatId = message.getChatId().toString();
@@ -86,14 +85,17 @@ public class MessageHandler {
                 // Ловим и валидируем время таймера
                 case SETTINGS_EDIT_TIMER_STATE -> {
                     if (validator.validateTime(messageText)) {
+                        int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
+                        messageCleaner.putMessageToQueue(chatId, messageId);
                         return addTimer.setTimerAndStart(chatId, messageText);
                     } else {
                         return new SendMessage(chatId, BotMessageEnum.INVALID_TIME_MESSAGE.getMessage());
                     }
                 }
                 // Ловим и валидируем имя проекта
-                case PROJECT_CREATE_NAME_STATE -> {
+                case SETTINGS_PROJECT_CREATE_ASK_NAME_STATE -> {
                     if (validator.validateProjectName(messageText)) {
+                        userStateEditor.editUserState(chatId, UserStateEnum.REGISTRATION_STATE);
                         return projectManager.projectCreate(chatId, messageText);
                     } else {
                         return new SendMessage(chatId, BotMessageEnum.PROJECT_NAME_INVALID_MESSAGE.getMessage());

@@ -2,13 +2,18 @@ package com.kuzmichev.AdMetricsBot.telegram.keyboards;
 
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
+import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+
+import java.util.List;
 
 @Slf4j
 @Component
@@ -17,8 +22,9 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 public class InlineKeyboards {
     InlineKeyboardMaker inlineKeyboardMaker;
     ScheduledMessageRepository scheduledMessageRepository;
+    UserRepository userRepository;
 
-    public InlineKeyboardMarkup inlineKeyboardSettingsMenu(String chatId) {
+    public InlineKeyboardMarkup settingsMenu(String chatId) {
 
         String launchButton;
         CallBackEnum launchCallback;
@@ -123,8 +129,8 @@ public class InlineKeyboards {
                 )
         );
     }
-
-    public InlineKeyboardMarkup projectsNameMenu() {
+// Это кнопки меню второго уровня, оно универсальное. Подходит для меню проектов, настройки времени
+    public InlineKeyboardMarkup projectCreateMenu() {
 
         return inlineKeyboardMaker.addMarkup(
                 inlineKeyboardMaker.addRows(
@@ -144,6 +150,87 @@ public class InlineKeyboards {
                         )
                 )
         );
+    }
+
+
+    public InlineKeyboardMarkup deleteUserDataMenu() {
+
+        return inlineKeyboardMaker.addMarkup(
+                        inlineKeyboardMaker.addRows(
+                                inlineKeyboardMaker.addRow(
+                                        inlineKeyboardMaker.addButton(
+                                                ButtonNameEnum.DELETE_USER_DATA_BUTTON.getButtonName(),
+                                                CallBackEnum.DELETE_USER_STEP_2_CALLBACK,
+                                                null
+                                        ),
+                                        inlineKeyboardMaker.addButton(
+                                                ButtonNameEnum.NOT_DELETE_USER_DATA_BUTTON.getButtonName(),
+                                                CallBackEnum.NOT_DELETE_USER_CALLBACK,
+                                                null
+                                        )
+                                )
+                        )
+                );
+
+    }
+
+    public InlineKeyboardMarkup notDeleteUserDataMenu() {
+
+        return inlineKeyboardMaker.addMarkup(
+                inlineKeyboardMaker.addRows(
+                        inlineKeyboardMaker.addRow(
+                                inlineKeyboardMaker.addButton(
+                                        ButtonNameEnum.SETTINGS_EXIT_BUTTON.getButtonName(),
+                                        CallBackEnum.SETTINGS_EXIT_CALLBACK,
+                                        null
+                                )
+                        )
+                )
+        );
+
+    }
+    // Это кнопки меню второго уровня, оно универсальное. Подходит для настройки времени
+    public List<List<InlineKeyboardButton>> backAndExitMenuButtons(String chatId) {
+
+        String userState = userRepository.getUserStateByChatId(chatId);
+
+        CallBackEnum backButtonCallBackEnum;
+
+        switch (UserStateEnum.valueOf(userState)){
+            case    SETTINGS_EDIT_TIMER_STATE,
+                    SETTINGS_PROJECTS_STATE
+                    -> {
+                backButtonCallBackEnum = CallBackEnum.SETTINGS_BACK_CALLBACK;
+            }
+            case SETTINGS_PROJECT_CREATE_STATE
+                    -> {
+                backButtonCallBackEnum = CallBackEnum.PROJECTS_CALLBACK;
+            }
+            default -> {
+                backButtonCallBackEnum = null;
+            }
+        }
+
+        return inlineKeyboardMaker.addRows(
+                    inlineKeyboardMaker.addRow(
+                            // Кнопка назад
+                            inlineKeyboardMaker.addButton(
+                                    ButtonNameEnum.SETTINGS_BACK_BUTTON.getButtonName(),
+                                    backButtonCallBackEnum,
+                                    null
+                            ),
+                            // Кнопка выход
+                            inlineKeyboardMaker.addButton(
+                                    ButtonNameEnum.SETTINGS_EXIT_BUTTON.getButtonName(),
+                                    CallBackEnum.SETTINGS_EXIT_CALLBACK,
+                                    null
+                            )
+                    )
+            );
+    }
+    // Это универсальное меню с двумя кнопками: Назад и Выход
+    public InlineKeyboardMarkup backAndExitMenu(String chatId) {
+        return inlineKeyboardMaker.addMarkup(backAndExitMenuButtons(chatId));
     }
 
 

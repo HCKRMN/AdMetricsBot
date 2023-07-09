@@ -24,7 +24,6 @@ public class AdMetricsBot extends SpringWebhookBot {
     String botPath;
     String botUsername;
     String botToken;
-
     MessageHandler messageHandler;
     CallbackQueryHandler callbackQueryHandler;
 

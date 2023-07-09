@@ -13,5 +13,6 @@ import lombok.Setter;
 public class TempData {
     @Id
     private String chatId;
-    private String tempValue;
+    private String lastProjectId;
+    private int lastMessageId;
 }

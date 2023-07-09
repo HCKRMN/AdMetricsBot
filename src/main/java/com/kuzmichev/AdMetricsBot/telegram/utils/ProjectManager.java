@@ -25,7 +25,7 @@ import java.util.UUID;
 public class ProjectManager {
     InlineKeyboardMaker inlineKeyboardMaker;
     UserStateEditor userStateEditor;
-    BotMessageUtils botMessageUtils;
+    MessageUtils messageUtils;
     ProjectRepository projectRepository;
     TempDataRepository tempDataRepository;
 
@@ -53,8 +53,8 @@ public class ProjectManager {
 
         // Запрашиваем имя проекта и меняем состояние пользователя
     public SendMessage projectCreateAskName(String chatId) {
-        userStateEditor.editUserState(chatId, UserStateEnum.PROJECT_CREATE_NAME_STATE);
-        return new SendMessage(chatId, BotMessageEnum.PROJECT_NAME_ASK_MESSAGE.getMessage());
+        userStateEditor.editUserState(chatId, UserStateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE);
+        return new SendMessage(chatId, BotMessageEnum.PROJECT_CREATE_ASK_NAME_MESSAGE.getMessage());
     }
 
         // Добавляем проект в базу
@@ -70,11 +70,11 @@ public class ProjectManager {
         projectRepository.save(project);
 
         TempData tempData = new TempData();
-        tempData.setTempValue(projectId);
+        tempData.setLastProjectId(projectId);
         tempData.setChatId(chatId);
         tempDataRepository.save(tempData);
 
-        botMessageUtils.sendMessage(chatId, BotMessageEnum.PROJECT_CREATE_DONE_MESSAGE.getMessage());
+        messageUtils.sendMessage(chatId, BotMessageEnum.PROJECT_CREATE_DONE_MESSAGE.getMessage());
 
         SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.ADD_TOKENS_MESSAGE.getMessage());
         sendMessage.setReplyMarkup(

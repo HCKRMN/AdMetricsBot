@@ -6,7 +6,6 @@ public enum CommandEnum {
     HELP("/help"),
     REGISTER("/register"),
     TEST("/test"),
-    TEST_MENU("/1"),
     ;
 
     private final String command;

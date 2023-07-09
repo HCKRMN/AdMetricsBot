@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class YaController {
     @RequestMapping(value = "/yandex")
     public String getYaToken() {
+
         return "yandex";
     }
 }

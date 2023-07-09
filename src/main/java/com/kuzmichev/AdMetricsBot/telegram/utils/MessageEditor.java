@@ -19,34 +19,38 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 public class MessageEditor {
     UserStateEditor userStateEditor;
 
-    public EditMessageText editMessage(String chatId, int messageId, BotMessageEnum text, InlineKeyboardMarkup keyboard) {
+    public EditMessageText editMessage(
+            String chatId,
+            int messageId,
+            BotMessageEnum text,
+            InlineKeyboardMarkup keyboard,
+            UserStateEnum userState) {
 
         EditMessageText newMessage = new EditMessageText();
         newMessage.setChatId(chatId);
         newMessage.setMessageId(messageId);
         newMessage.setText(text.getMessage());
-        newMessage.setReplyMarkup(keyboard);
+        if (keyboard != null) {
+            newMessage.setReplyMarkup(keyboard);
+        }
+        if (userState != null) {
+            userStateEditor.editUserState(chatId, userState);
+        }
         return newMessage;
     }
 
-    public EditMessageText editMessage(String chatId, int messageId, BotMessageEnum text, InlineKeyboardMarkup keyboard, UserStateEnum userState) {
+    public DeleteMessage deleteMessage(
+            String chatId,
+            int messageId,
+            UserStateEnum userState) {
 
-    EditMessageText newMessage = new EditMessageText();
-                newMessage.setChatId(chatId);
-                newMessage.setMessageId(messageId);
-                newMessage.setText(text.getMessage());
-                newMessage.setReplyMarkup(keyboard);
-                userStateEditor.editUserState(chatId, userState);
-                return newMessage;
-    }
-
-    public DeleteMessage deleteMessage(String chatId, int messageId, UserStateEnum userState) {
-
-        DeleteMessage settingsExit = new DeleteMessage();
-        settingsExit.setChatId(chatId);
-        settingsExit.setMessageId(messageId);
-        userStateEditor.editUserState(chatId, userState);
-        return settingsExit;
+        DeleteMessage deleteMessage = new DeleteMessage();
+        deleteMessage.setChatId(chatId);
+        deleteMessage.setMessageId(messageId);
+        if (userState != null) {
+            userStateEditor.editUserState(chatId, userState);
+        }
+        return deleteMessage;
 
     }
 

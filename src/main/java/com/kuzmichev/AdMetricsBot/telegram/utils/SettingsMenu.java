@@ -27,7 +27,7 @@ public class SettingsMenu {
     public SendMessage SettingsMenuMaker(String chatId) {
         userStateEditor.editUserState(chatId, UserStateEnum.SETTINGS_EDIT_STATE);
         SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.SETTINGS_MENU_MESSAGE.getMessage());
-        sendMessage.setReplyMarkup(inlineKeyboards.inlineKeyboardSettingsMenu(chatId));
+        sendMessage.setReplyMarkup(inlineKeyboards.settingsMenu(chatId));
         return sendMessage;
     }
 }
