@@ -3,7 +3,7 @@ package com.kuzmichev.AdMetricsBot.service;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
-import com.kuzmichev.AdMetricsBot.telegram.utils.MessageUtils;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

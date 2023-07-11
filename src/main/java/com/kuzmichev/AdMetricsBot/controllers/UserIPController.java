@@ -1,8 +1,10 @@
 package com.kuzmichev.AdMetricsBot.controllers;
 
+import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.service.IpToTimeZone;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageCleaner;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,10 @@ public class UserIPController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private TempDataRepository tempDataRepository;
+    @Autowired
+    private MessageCleaner messageCleaner;
+    @Autowired
     private IpToTimeZone ipToTimeZone;
 
     @GetMapping("/getip")
@@ -26,6 +32,10 @@ public class UserIPController {
                              @RequestParam(name = "chatId") String chatId) {
         String ip = getIpAddress(request);
         double timeZone = ipToTimeZone.convertIpToTimeZone(ip);
+
+        int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
+        messageCleaner.putMessageToQueue(chatId, messageId);
+
         Optional<User> userOptional = userRepository.findByChatId(chatId);
         if (userOptional.isPresent()) {
             User user = userOptional.get();

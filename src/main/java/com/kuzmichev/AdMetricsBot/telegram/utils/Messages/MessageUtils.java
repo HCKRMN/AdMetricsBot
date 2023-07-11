@@ -1,4 +1,4 @@
-package com.kuzmichev.AdMetricsBot.telegram.utils;
+package com.kuzmichev.AdMetricsBot.telegram.utils.Messages;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
 @Slf4j
 @Component
@@ -31,12 +31,18 @@ public class MessageUtils {
         message.setText(textToSend);
         eventPublisher.publishEvent(message);
     }
+    public void sendMessage(String chatId, String textToSend, InlineKeyboardMarkup keyboard) {
+        SendMessage message = new SendMessage();
+        message.setChatId(String.valueOf(chatId));
+        message.setText(textToSend);
+        message.setReplyMarkup(keyboard);
+        eventPublisher.publishEvent(message);
+    }
 
     public void deleteMessage(String chatId, int messageId) {
         DeleteMessage deleteMessage = new DeleteMessage();
         deleteMessage.setChatId(String.valueOf(chatId));
         deleteMessage.setMessageId(messageId);
-        System.out.println(deleteMessage + " deleteMessage");
         eventPublisher.publishEvent(deleteMessage);
     }
 }

@@ -3,6 +3,7 @@ package com.kuzmichev.AdMetricsBot.constants;
 public enum CallBackEnum {
     ADD_YANDEX_CALLBACK,
     EDIT_TIMEZONE_CALLBACK,
+    EDIT_TIMEZONE_MANUAL_CALLBACK,
     EDIT_LANGUAGE_CALLBACK,
     TEST_MESSAGE_CALLBACK,
     NO_CONTINUE_CALLBACK,

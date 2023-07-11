@@ -24,6 +24,9 @@ public enum ButtonNameEnum {
     PROJECT_CREATE_BUTTON("Создать проект"),
     PROJECTS_BUTTON("Проекты"),
     PROJECTS_EDIT_BUTTON("Редактировать проекты"),
+    CANCEL_BUTTON("Отмена"),
+    DONE_BUTTON("Готово"),
+    MANUAL_INPUT_BUTTON("Ручной ввод"),
     ;
 
 

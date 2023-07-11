@@ -8,7 +8,11 @@ import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.*;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageCleaner;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageEditor;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageUtils;
 import com.vdurmont.emoji.EmojiParser;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +42,9 @@ public class MessageHandler {
     UserStateEditor userStateEditor;
     MessageCleaner messageCleaner;
     TempDataRepository tempDataRepository;
-
+    InlineKeyboards inlineKeyboards;
+    MessageEditor messageEditor;
+    MessageUtils messageUtils;
     public BotApiMethod<?> answerMessage(Message message) {
         String chatId = message.getChatId().toString();
         String userName = message.getFrom().getUserName();
@@ -81,15 +87,28 @@ public class MessageHandler {
         // Обработка команд при разных состояниях пользователя
         else if (userState != null) {
             UserStateEnum userStateEnum = UserStateEnum.valueOf(userState);
+            int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
             switch (userStateEnum) {
                 // Ловим и валидируем время таймера
                 case SETTINGS_EDIT_TIMER_STATE -> {
                     if (validator.validateTime(messageText)) {
-                        int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
                         messageCleaner.putMessageToQueue(chatId, messageId);
                         return addTimer.setTimerAndStart(chatId, messageText);
                     } else {
-                        return new SendMessage(chatId, BotMessageEnum.INVALID_TIME_MESSAGE.getMessage());
+//                        messageCleaner.putMessageToQueue(chatId, messageId);
+//                        return messageEditor.sendMessage(
+//                                chatId,
+//                                BotMessageEnum.INVALID_TIME_MESSAGE,
+//                                inlineKeyboards.backAndExitMenu(chatId),
+//                        null);
+                        messageCleaner.putMessageToQueue(chatId, messageId);
+                        SendMessage sendMessage = messageEditor.sendMessage(
+                                chatId,
+                                BotMessageEnum.INVALID_TIME_MESSAGE,
+                                inlineKeyboards.backAndExitMenu(chatId),
+                                null);
+                        messageUtils.sendMessage(sendMessage);
+                        return null;
                     }
                 }
                 // Ловим и валидируем имя проекта
@@ -101,9 +120,21 @@ public class MessageHandler {
                         return new SendMessage(chatId, BotMessageEnum.PROJECT_NAME_INVALID_MESSAGE.getMessage());
                     }
                 }
-                    // Действия для SETTINGS_EDIT_STATE
-                case SETTINGS_EDIT_STATE -> {
-                    // Действия для SETTINGS_EDIT_STATE
+                // Речной ввод времени пользователя
+                case EDIT_TIMEZONE_MANUAL_STATE -> {
+                    if (validator.validateTime(messageText)) {
+                        messageCleaner.putMessageToQueue(chatId, messageId);
+                        return timeZoneDefinition.manualTimeZone(chatId, messageText);
+                    } else {
+                        messageCleaner.putMessageToQueue(chatId, messageId);
+                        SendMessage sendMessage = messageEditor.sendMessage(
+                                chatId,
+                                BotMessageEnum.INVALID_TIME_MESSAGE,
+                                inlineKeyboards.backAndExitMenu(chatId),
+                                null);
+                        messageUtils.sendMessage(sendMessage);
+                        return null;
+                    }
                 }
                 default -> {
                 }

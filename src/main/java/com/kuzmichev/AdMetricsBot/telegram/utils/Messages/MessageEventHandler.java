@@ -1,6 +1,7 @@
-package com.kuzmichev.AdMetricsBot.telegram.utils;
+package com.kuzmichev.AdMetricsBot.telegram.utils.Messages;
 
 import com.kuzmichev.AdMetricsBot.telegram.AdMetricsBot;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -9,6 +10,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Slf4j
@@ -17,12 +19,25 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @RequiredArgsConstructor
 public class MessageEventHandler {
     AdMetricsBot adMetricsBot;
+    TempDataSaver tempDataSaver;
+    MessageCleaner messageCleaner;
+
+//    @EventListener
+//    public void handleSendMessageEvent(SendMessage message) {
+//        try {
+//            adMetricsBot.execute(message);
+//        } catch (TelegramApiException e) {
+//            log.error("ERROR_TEXT" + e.getMessage());
+//        }
+//    }
 
     @EventListener
     public void handleSendMessageEvent(SendMessage message) {
-        System.out.println(message + " sendMessage");
         try {
-            adMetricsBot.execute(message);
+            int messageId = adMetricsBot.execute(message).getMessageId();
+            String chatId = message.getChatId();
+            tempDataSaver.tempMessageId(chatId, messageId);
+//            messageCleaner.putMessageToQueue(chatId, messageId);
         } catch (TelegramApiException e) {
             log.error("ERROR_TEXT" + e.getMessage());
         }
@@ -30,7 +45,6 @@ public class MessageEventHandler {
 
     @EventListener
     public void handleDeleteMessageEvent(DeleteMessage message) {
-        System.out.println(message + " deleteMessage");
         try {
             adMetricsBot.execute(message);
         } catch (TelegramApiException e) {

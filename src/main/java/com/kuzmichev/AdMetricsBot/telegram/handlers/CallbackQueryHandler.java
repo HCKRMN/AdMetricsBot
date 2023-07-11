@@ -3,12 +3,13 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
-import com.kuzmichev.AdMetricsBot.model.TempData;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
-import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.*;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageCleaner;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageEditor;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,8 +18,6 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
-
-import java.util.Optional;
 
 
 @Slf4j
@@ -39,6 +38,8 @@ public class CallbackQueryHandler {
     InlineKeyboards inlineKeyboards;
     MessageEditor messageEditor;
     TempDataRepository tempDataRepository;
+    MessageCleaner messageCleaner;
+    TempDataSaver tempDataSaver;
 
     public BotApiMethod<?> processCallbackQuery(CallbackQuery buttonQuery) {
         String chatId = buttonQuery.getMessage().getChatId().toString();
@@ -64,8 +65,8 @@ public class CallbackQueryHandler {
                         chatId,
                         messageId,
                         BotMessageEnum.SETTINGS_MENU_MESSAGE,
-                        inlineKeyboards.settingsMenu(chatId),
-                null);
+                null,
+                        inlineKeyboards.settingsMenu(chatId));
             }
             case DISABLE_NOTIFICATIONS_CALLBACK -> {
                 notificationController.disableNotifications(chatId);
@@ -73,19 +74,20 @@ public class CallbackQueryHandler {
                         chatId,
                         messageId,
                         BotMessageEnum.SETTINGS_MENU_MESSAGE,
-                        inlineKeyboards.settingsMenu(chatId),
-                        null);
+                        null,
+                        inlineKeyboards.settingsMenu(chatId));
             }
             case DELETE_USER_STEP_1_CALLBACK -> {
                 return messageEditor.editMessage(
                         chatId,
                         messageId,
                         BotMessageEnum.DELETE_USER_DATA_ASK_MESSAGE,
-                        inlineKeyboards.deleteUserDataMenu(),
-                        null);
+                        null,
+                        inlineKeyboards.deleteUserDataMenu());
             }
             case DELETE_USER_STEP_2_CALLBACK -> {
                 deleteUserData.deleteUserData(chatId);
+                messageCleaner.putMessageToQueue(chatId, messageId);
                 return messageEditor.editMessage(
                         chatId,
                         messageId,
@@ -94,20 +96,21 @@ public class CallbackQueryHandler {
                         null);
             }
             case NOT_DELETE_USER_CALLBACK -> {
+                messageCleaner.putMessageToQueue(chatId, messageId);
                 return messageEditor.editMessage(
                                 chatId,
                                 messageId,
                                 BotMessageEnum.NOT_DELETE_USER_DATA_MESSAGE,
-                                inlineKeyboards.notDeleteUserDataMenu(),
-                                UserStateEnum.WORKING_STATE);
+                                UserStateEnum.WORKING_STATE,
+                                null);
             }
             case PROJECTS_CALLBACK -> {
                 return messageEditor.editMessage(
                         chatId,
                         messageId,
                         BotMessageEnum.PROJECT_MENU_MESSAGE,
-                        inlineKeyboards.projectsMenu(),
-                        UserStateEnum.SETTINGS_PROJECTS_STATE);
+                        UserStateEnum.SETTINGS_PROJECTS_STATE,
+                        inlineKeyboards.projectsMenu());
             }
 
             case EDIT_LANGUAGE_CALLBACK -> {
@@ -121,8 +124,8 @@ public class CallbackQueryHandler {
                         chatId,
                         messageId,
                         BotMessageEnum.SETTINGS_MENU_MESSAGE,
-                        inlineKeyboards.settingsMenu(chatId),
-                        UserStateEnum.SETTINGS_EDIT_STATE);
+                        UserStateEnum.SETTINGS_EDIT_STATE,
+                        inlineKeyboards.settingsMenu(chatId));
             }
             case SETTINGS_EXIT_CALLBACK -> {
                 return messageEditor.deleteMessage(
@@ -132,24 +135,13 @@ public class CallbackQueryHandler {
             }
 
             case EDIT_TIMER_CALLBACK -> {
-
-                TempData tempData = new TempData();
-                tempData.setChatId(chatId);
-                tempData.setLastMessageId(messageId);
-                tempDataRepository.save(tempData);
-
-//                Optional<TempData> tempDataOptional = tempDataRepository.findByChatId(chatId);
-//                if (tempDataOptional.isPresent()) {
-//                    TempData tempData = tempDataOptional.get();
-//                    tempData.setLastMessageId(messageId);
-//                    tempDataRepository.save(tempData);
-//                }
+                tempDataSaver.tempMessageId(chatId, messageId);
                 return messageEditor.editMessage(
                         chatId,
                         messageId,
                         BotMessageEnum.ASK_TIME_MESSAGE,
-                        inlineKeyboards.backAndExitMenu(chatId),
-                        UserStateEnum.SETTINGS_EDIT_TIMER_STATE);
+                        UserStateEnum.SETTINGS_EDIT_TIMER_STATE,
+                        inlineKeyboards.backAndExitMenu(chatId));
             }
 
             // Универсальные
@@ -158,8 +150,25 @@ public class CallbackQueryHandler {
                         chatId,
                         messageId,
                         BotMessageEnum.PROJECT_CREATE_ASK_NAME_MESSAGE,
-                        inlineKeyboards.projectCreateMenu(),
-                        UserStateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE);
+                        UserStateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE,
+                        inlineKeyboards.projectCreateMenu());
+            }
+            case EDIT_TIMEZONE_CALLBACK -> {
+                tempDataSaver.tempMessageId(chatId, messageId);
+                return messageEditor.editMessage(
+                        chatId,
+                        messageId,
+                        BotMessageEnum.TIME_ZONE_DEFINITION_MESSAGE,
+                        UserStateEnum.SETTINGS_EDIT_TIMEZONE_STATE,
+                        inlineKeyboards.timeZoneMenu(chatId));
+            }
+            case EDIT_TIMEZONE_MANUAL_CALLBACK -> {
+                return messageEditor.editMessage(
+                        chatId,
+                        messageId,
+                        BotMessageEnum.EDIT_TIMEZONE_MANUAL_MESSAGE,
+                        UserStateEnum.EDIT_TIMEZONE_MANUAL_STATE,
+                        inlineKeyboards.backAndExitMenu(chatId));
             }
             case ADD_ACCOUNTS_CALLBACK -> {
                 return addTokensMenu.addTokens(chatId);
@@ -176,9 +185,6 @@ public class CallbackQueryHandler {
 //                спросить время отправки
                 userStateEditor.editUserState(chatId, UserStateEnum.SETTINGS_EDIT_TIMER_STATE);
                 return new SendMessage(chatId, BotMessageEnum.ASK_TIME_MESSAGE.getMessage());
-            }
-            case EDIT_TIMEZONE_CALLBACK -> {
-                return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
             }
             default -> {
             }

@@ -1,13 +1,14 @@
-package com.kuzmichev.AdMetricsBot.telegram.utils;
+package com.kuzmichev.AdMetricsBot.telegram.utils.Messages;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
+import com.kuzmichev.AdMetricsBot.telegram.utils.UserStateEditor;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -19,22 +20,40 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 public class MessageEditor {
     UserStateEditor userStateEditor;
 
+    public SendMessage sendMessage(
+            String chatId,
+            BotMessageEnum text,
+            InlineKeyboardMarkup keyboard,
+            UserStateEnum userState) {
+
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(text.getMessage());
+        if (keyboard != null) {
+            sendMessage.setReplyMarkup(keyboard);
+        }
+        if (userState != null) {
+            userStateEditor.editUserState(chatId, userState);
+        }
+        return sendMessage;
+    }
+
     public EditMessageText editMessage(
             String chatId,
             int messageId,
             BotMessageEnum text,
-            InlineKeyboardMarkup keyboard,
-            UserStateEnum userState) {
+            UserStateEnum userState,
+            InlineKeyboardMarkup keyboard) {
 
         EditMessageText newMessage = new EditMessageText();
         newMessage.setChatId(chatId);
         newMessage.setMessageId(messageId);
         newMessage.setText(text.getMessage());
-        if (keyboard != null) {
-            newMessage.setReplyMarkup(keyboard);
-        }
         if (userState != null) {
             userStateEditor.editUserState(chatId, userState);
+        }
+        if (keyboard != null) {
+            newMessage.setReplyMarkup(keyboard);
         }
         return newMessage;
     }
@@ -51,7 +70,6 @@ public class MessageEditor {
             userStateEditor.editUserState(chatId, userState);
         }
         return deleteMessage;
-
     }
 
 }
