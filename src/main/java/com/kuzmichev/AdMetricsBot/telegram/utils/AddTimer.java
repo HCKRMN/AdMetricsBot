@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.time.LocalTime;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -18,7 +19,6 @@ import java.time.LocalTime;
 @RequiredArgsConstructor
 public class AddTimer {
     UserRepository userRepository;
-    YandexRepository yandexRepository;
     ScheduledMessageRepository scheduledMessageRepository;
     UserStateEditor userStateEditor;
 
@@ -26,9 +26,10 @@ public class AddTimer {
      * Устанавливает таймер и запускает его.
      *
      * @param chatId       идентификатор чата
-     * @param messageText  текст сообщения
+     * @param messageText  текст сообщения, которое содержит время отправки в формате «23 59»
      * @return сообщение о добавлении таймера
      */
+
     public SendMessage setTimerAndStart(String chatId, String messageText) {
 
         double hoursDecimal = userRepository.findById(chatId).get().getTimeZone(); // получаем временную зону
@@ -39,23 +40,17 @@ public class AddTimer {
                 .minusHours(timeZone.getHour())
                 .minusMinutes(timeZone.getMinute());
 
-        // Если у юзера есть дата и есть токен, то запускаем таймер
-        Yandex yandex = yandexRepository.findById(chatId).orElse(null);
-        if (yandex != null && yandex.getYaToken() != null) {
-            ScheduledMessage scheduledMessage = new ScheduledMessage();
-            scheduledMessage.setChatId(chatId);
-            scheduledMessage.setTimerMessage(timerMessage);
-            scheduledMessage.setEnableSendingMessages(true);
-            scheduledMessageRepository.save(scheduledMessage);
+        Optional<ScheduledMessage> scheduledMessageOptional = scheduledMessageRepository.findByChatId(chatId);
+        ScheduledMessage scheduledMessage = scheduledMessageOptional.get();
+        scheduledMessage.setTimerMessage(timerMessage);
+        scheduledMessageRepository.save(scheduledMessage);
 
-            // Изменяем статус юзера на рабочий
-            userStateEditor.editUserState(chatId, UserStateEnum.WORKING_STATE);
+        // Изменяем статус юзера на рабочий
+        userStateEditor.editUserState(chatId, UserStateEnum.WORKING_STATE);
 
-            log.info("User set timer at " + timerMessage);
-            return new SendMessage(chatId, BotMessageEnum.TIMER_ADDED_MESSAGE.getMessage() + messageText.replace(" ", ":"));
-        } else {
-            return new SendMessage(chatId, BotMessageEnum.YANDEX_ERROR_GET_TOKEN_MESSAGE.getMessage());
-        }
+        log.info("User set timer at " + timerMessage);
+        return new SendMessage(chatId, BotMessageEnum.TIMER_ADDED_MESSAGE.getMessage() + messageText.replace(" ", ":"));
+
     }
 
 }
