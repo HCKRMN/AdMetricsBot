@@ -3,7 +3,7 @@ package com.kuzmichev.AdMetricsBot.service;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageUtils;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import jakarta.annotation.PostConstruct;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 public class ScheduledMessageSender {
     ScheduledMessageRepository scheduledMessageRepository;
     YandexRepository yandexRepository;
-    MessageUtils messageUtils;
+    MessageWithoutReturn messageWithoutReturn;
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
@@ -37,7 +37,7 @@ public class ScheduledMessageSender {
             List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(now);
             for (ScheduledMessage scheduledMessage : scheduledMessages) {
                 try {
-                    messageUtils.sendMessage(scheduledMessage.getChatId(), "Затраты на рекламу в Яндекс директ: " + YandexDirectRequest.ya(yandexRepository, scheduledMessage.getChatId()));
+                    messageWithoutReturn.sendMessage(scheduledMessage.getChatId(), "Затраты на рекламу в Яндекс директ: " + YandexDirectRequest.ya(yandexRepository, scheduledMessage.getChatId()));
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);

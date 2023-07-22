@@ -11,8 +11,8 @@ import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.*;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageCleaner;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageEditor;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageUtils;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import com.vdurmont.emoji.EmojiParser;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -43,8 +43,8 @@ public class MessageHandler {
     MessageCleaner messageCleaner;
     TempDataRepository tempDataRepository;
     InlineKeyboards inlineKeyboards;
-    MessageEditor messageEditor;
-    MessageUtils messageUtils;
+    MessageWithReturn messageWithReturn;
+    MessageWithoutReturn messageWithoutReturn;
     public BotApiMethod<?> answerMessage(Message message) {
         String chatId = message.getChatId().toString();
         String userName = message.getFrom().getUserName();
@@ -76,9 +76,9 @@ public class MessageHandler {
                         registration.registerUser(chatId, userName);
                         return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
                     }
-                    case TEST -> {
-                        return addYandex.testYaData(yandexRepository, chatId);
-                    }
+//                    case TEST -> {
+//                        return addYandex.testYandex(yandexRepository, chatId);
+//                    }
                     default -> {
                     }
                 }
@@ -95,29 +95,31 @@ public class MessageHandler {
                         messageCleaner.putMessageToQueue(chatId, messageId);
                         return addTimer.setTimerAndStart(chatId, messageText);
                     } else {
-//                        messageCleaner.putMessageToQueue(chatId, messageId);
-//                        return messageEditor.sendMessage(
-//                                chatId,
-//                                BotMessageEnum.INVALID_TIME_MESSAGE,
-//                                inlineKeyboards.backAndExitMenu(chatId),
-//                        null);
                         messageCleaner.putMessageToQueue(chatId, messageId);
-                        SendMessage sendMessage = messageEditor.sendMessage(
+                        SendMessage sendMessage = messageWithReturn.sendMessage(
                                 chatId,
                                 BotMessageEnum.INVALID_TIME_MESSAGE,
                                 inlineKeyboards.backAndExitMenu(chatId),
                                 null);
-                        messageUtils.sendMessage(sendMessage);
+                        messageWithoutReturn.sendMessage(sendMessage);
                         return null;
                     }
                 }
                 // Ловим и валидируем имя проекта
                 case SETTINGS_PROJECT_CREATE_ASK_NAME_STATE -> {
                     if (validator.validateProjectName(messageText)) {
-                        userStateEditor.editUserState(chatId, UserStateEnum.REGISTRATION_STATE);
+                        messageCleaner.putMessageToQueue(chatId, messageId);
+                        userStateEditor.editUserState(chatId, UserStateEnum.SETTINGS_PROJECT_ADD_TOKENS_STATE);
                         return projectManager.projectCreate(chatId, messageText);
                     } else {
-                        return new SendMessage(chatId, BotMessageEnum.PROJECT_NAME_INVALID_MESSAGE.getMessage());
+                        messageCleaner.putMessageToQueue(chatId, messageId);
+                        SendMessage sendMessage = messageWithReturn.sendMessage(
+                                chatId,
+                                BotMessageEnum.PROJECT_NAME_INVALID_MESSAGE,
+                                inlineKeyboards.backAndExitMenu(chatId),
+                                null);
+                        messageWithoutReturn.sendMessage(sendMessage);
+                        return null;
                     }
                 }
                 // Речной ввод времени пользователя
@@ -127,12 +129,12 @@ public class MessageHandler {
                         return timeZoneDefinition.manualTimeZone(chatId, messageText);
                     } else {
                         messageCleaner.putMessageToQueue(chatId, messageId);
-                        SendMessage sendMessage = messageEditor.sendMessage(
+                        SendMessage sendMessage = messageWithReturn.sendMessage(
                                 chatId,
                                 BotMessageEnum.INVALID_TIME_MESSAGE,
                                 inlineKeyboards.backAndExitMenu(chatId),
                                 null);
-                        messageUtils.sendMessage(sendMessage);
+                        messageWithoutReturn.sendMessage(sendMessage);
                         return null;
                     }
                 }

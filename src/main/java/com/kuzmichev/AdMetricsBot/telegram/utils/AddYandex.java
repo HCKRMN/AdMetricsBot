@@ -1,11 +1,10 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
-import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import com.kuzmichev.AdMetricsBot.service.YandexDirectRequest;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,74 +19,91 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 @RequiredArgsConstructor
 public class AddYandex {
     final InlineKeyboardMaker inlineKeyboardMaker;
+    final YandexRepository yandexRepository;
     @Value("${yaClientID}")
     String clientId;
     @Value("${telegram.webhook-path}")
     String link;
     @Value("${yaRedirectURI}")
     String redirectUri;
-    YandexRepository yandexRepository;
 
-    public SendMessage addYaData(String chatId) {
 
-        String yaAuthorizationUrl = "https://oauth.yandex.ru/authorize" +
+    public String getYaAuthorizationUrl(String chatId) {
+        return "https://oauth.yandex.ru/authorize" +
                 "?response_type=token" +
                 "&client_id=" + clientId +
                 "&redirect_uri=" + link + redirectUri +
                 "&state=" + chatId;
-
-//        String apiSettingsUrl = "https://direct.yandex.ru/registered/main.pl?cmd=apiSettings";
-
-        SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.ADD_YANDEX_MESSAGE.getMessage());
-
-        sendMessage.setReplyMarkup(
-                inlineKeyboardMaker.addMarkup(
-                        inlineKeyboardMaker.addRows(
-                                inlineKeyboardMaker.addRow(
-                                        inlineKeyboardMaker.addButton(
-                                                ButtonNameEnum.YANDEX_ADD_TOKEN_LINK_BUTTON.getButtonName(),
-                                                null,
-                                                yaAuthorizationUrl
-                                        )
-//                                        на всякий случай оставлю кнопку получения доступа к апи, вроде как ненужно, но пусть будет
-//                                        ,
-//                                        inlineKeyboardMaker.addButton(
-//                                                ButtonNameEnum.YANDEX_API_SETTINGS_BUTTON.getButtonName(),
-//                                                null,
-//                                                apiSettingsUrl
-//                                        )
-                                ),
-                                inlineKeyboardMaker.addRow(
-                                        inlineKeyboardMaker.addButton(
-                                                ButtonNameEnum.TEST_YANDEX_BUTTON.getButtonName(),
-                                                CallBackEnum.TEST_MESSAGE_CALLBACK,
-                                                null
-                                        ),
-                                        inlineKeyboardMaker.addButton(
-                                                ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
-                                                CallBackEnum.NO_CONTINUE_CALLBACK,
-                                                null
-                                        )
-                                )
-                        )
-                )
-        );
-        log.info("Пользователь id: {} добавил данные Яндекс.", chatId);
-        return sendMessage;
     }
-    public SendMessage testYaData(YandexRepository yandexRepository, String chatId) {
+    public String getApiSettingsUrl(String chatId) {
+        return "https://direct.yandex.ru/registered/main.pl?cmd=apiSettings";
+    }
+
+    public String testYandex(String chatId) {
         try {
             String result = YandexDirectRequest.ya(yandexRepository, chatId);
             System.out.println(result);
             if (result.equals("-1")) {
-                return new SendMessage(chatId, BotMessageEnum.YANDEX_ERROR_GET_RESULT_MESSAGE.getMessage());
+                return BotMessageEnum.YANDEX_ERROR_GET_RESULT_MESSAGE.getMessage();
             } else {
-                return new SendMessage(chatId, BotMessageEnum.YANDEX_RESULT_MESSAGE.getMessage() + result);
+                return BotMessageEnum.YANDEX_RESULT_MESSAGE.getMessage() + result;
             }
         } catch (Exception e) {
-            return new SendMessage(chatId, BotMessageEnum.YANDEX_ERROR_GET_TOKEN_MESSAGE.getMessage());
+            return BotMessageEnum.YANDEX_ERROR_GET_TOKEN_MESSAGE.getMessage();
         }
     }
+
+
+
+
+
+//    public SendMessage addYaData(String chatId) {
+//
+//        String yaAuthorizationUrl = "https://oauth.yandex.ru/authorize" +
+//                "?response_type=token" +
+//                "&client_id=" + clientId +
+//                "&redirect_uri=" + link + redirectUri +
+//                "&state=" + chatId;
+//
+//        String apiSettingsUrl = "https://direct.yandex.ru/registered/main.pl?cmd=apiSettings";
+//
+//        SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.ADD_YANDEX_MESSAGE.getMessage());
+//
+//        sendMessage.setReplyMarkup(inlineKeyboards.addYandexMenu(chatId, yaAuthorizationUrl, apiSettingsUrl));
+////                inlineKeyboardMaker.addMarkup(
+////                        inlineKeyboardMaker.addRows(
+////                                inlineKeyboardMaker.addRow(
+////                                        inlineKeyboardMaker.addButton(
+////                                                ButtonNameEnum.YANDEX_ADD_TOKEN_LINK_BUTTON.getButtonName(),
+////                                                null,
+////                                                yaAuthorizationUrl
+////                                        )
+//////                                        на всякий случай оставлю кнопку получения доступа к апи, вроде как ненужно, но пусть будет
+//////                                        ,
+//////                                        inlineKeyboardMaker.addButton(
+//////                                                ButtonNameEnum.YANDEX_API_SETTINGS_BUTTON.getButtonName(),
+//////                                                null,
+//////                                                apiSettingsUrl
+//////                                        )
+////                                ),
+////                                inlineKeyboardMaker.addRow(
+////                                        inlineKeyboardMaker.addButton(
+////                                                ButtonNameEnum.TEST_YANDEX_BUTTON.getButtonName(),
+////                                                CallBackEnum.TEST_MESSAGE_CALLBACK,
+////                                                null
+////                                        ),
+////                                        inlineKeyboardMaker.addButton(
+////                                                ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
+////                                                CallBackEnum.NO_CONTINUE_CALLBACK,
+////                                                null
+////                                        )
+////                                )
+////                        )
+////                )
+////        );
+//        log.info("Пользователь id: {} добавил данные Яндекс.", chatId);
+//        return sendMessage;
+//    }
 
 
 }

@@ -1,5 +1,8 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils.Messages;
 
+import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
+import com.kuzmichev.AdMetricsBot.telegram.utils.UserStateEditor;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -15,14 +18,34 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class MessageUtils {
+public class MessageWithoutReturn {
     ApplicationEventPublisher eventPublisher;
+    UserStateEditor userStateEditor;
 
     public void sendMessage(SendMessage sendMessage) {
         eventPublisher.publishEvent(sendMessage);
     }
-    public void editMessage(EditMessageText sendMessage) {
-        eventPublisher.publishEvent(sendMessage);
+    public void editMessage(EditMessageText sendMessage) { eventPublisher.publishEvent(sendMessage);
+    }
+
+    public  void editMessage(
+            String chatId,
+            int messageId,
+            BotMessageEnum text,
+            UserStateEnum userState,
+            InlineKeyboardMarkup keyboard) {
+
+        EditMessageText message = new EditMessageText();
+        message.setChatId(chatId);
+        message.setMessageId(messageId);
+        message.setText(text.getMessage());
+        if (userState != null) {
+            userStateEditor.editUserState(chatId, userState);
+        }
+        if (keyboard != null) {
+            message.setReplyMarkup(keyboard);
+        }
+        eventPublisher.publishEvent(message);
     }
 
     public void sendMessage(String chatId, String textToSend) {

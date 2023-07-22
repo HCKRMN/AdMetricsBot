@@ -17,7 +17,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class MessageEditor {
+public class MessageWithReturn {
     UserStateEditor userStateEditor;
 
     public SendMessage sendMessage(
@@ -41,14 +41,14 @@ public class MessageEditor {
     public EditMessageText editMessage(
             String chatId,
             int messageId,
-            BotMessageEnum text,
+            String text,
             UserStateEnum userState,
             InlineKeyboardMarkup keyboard) {
 
         EditMessageText newMessage = new EditMessageText();
         newMessage.setChatId(chatId);
         newMessage.setMessageId(messageId);
-        newMessage.setText(text.getMessage());
+        newMessage.setText(text);
         if (userState != null) {
             userStateEditor.editUserState(chatId, userState);
         }

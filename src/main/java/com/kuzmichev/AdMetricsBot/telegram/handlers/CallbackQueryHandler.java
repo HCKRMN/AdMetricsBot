@@ -3,12 +3,11 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
-import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.*;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageCleaner;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageEditor;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -26,18 +25,14 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 @RequiredArgsConstructor
 public class CallbackQueryHandler {
     YandexRepository yandexRepository;
-    AddTokensMenu addTokensMenu;
     Registration registration;
     TimeZoneDefinition timeZoneDefinition;
-    CheckYaData checkYaData;
     AddYandex addYandex;
     NotificationController notificationController;
-    UserStateEditor userStateEditor;
     DeleteUserData deleteUserData;
     ProjectManager projectManager;
     InlineKeyboards inlineKeyboards;
-    MessageEditor messageEditor;
-    TempDataRepository tempDataRepository;
+    MessageWithReturn messageWithReturn;
     MessageCleaner messageCleaner;
     TempDataSaver tempDataSaver;
 
@@ -61,54 +56,54 @@ public class CallbackQueryHandler {
             // Меню
             case ENABLE_NOTIFICATIONS_CALLBACK -> {
                 notificationController.enableNotifications(chatId);
-                return messageEditor.editMessage(
+                return messageWithReturn.editMessage(
                         chatId,
                         messageId,
-                        BotMessageEnum.SETTINGS_MENU_MESSAGE,
+                        BotMessageEnum.SETTINGS_MENU_MESSAGE.getMessage(),
                 null,
                         inlineKeyboards.settingsMenu(chatId));
             }
             case DISABLE_NOTIFICATIONS_CALLBACK -> {
                 notificationController.disableNotifications(chatId);
-                return messageEditor.editMessage(
+                return messageWithReturn.editMessage(
                         chatId,
                         messageId,
-                        BotMessageEnum.SETTINGS_MENU_MESSAGE,
+                        BotMessageEnum.SETTINGS_MENU_MESSAGE.getMessage(),
                         null,
                         inlineKeyboards.settingsMenu(chatId));
             }
             case DELETE_USER_STEP_1_CALLBACK -> {
-                return messageEditor.editMessage(
+                return messageWithReturn.editMessage(
                         chatId,
                         messageId,
-                        BotMessageEnum.DELETE_USER_DATA_ASK_MESSAGE,
+                        BotMessageEnum.DELETE_USER_DATA_ASK_MESSAGE.getMessage(),
                         null,
                         inlineKeyboards.deleteUserDataMenu());
             }
             case DELETE_USER_STEP_2_CALLBACK -> {
                 deleteUserData.deleteUserData(chatId);
                 messageCleaner.putMessageToQueue(chatId, messageId);
-                return messageEditor.editMessage(
+                return messageWithReturn.editMessage(
                         chatId,
                         messageId,
-                        BotMessageEnum.DELETE_USER_DATA_MESSAGE,
+                        BotMessageEnum.DELETE_USER_DATA_MESSAGE.getMessage(),
                         null,
                         null);
             }
             case NOT_DELETE_USER_CALLBACK -> {
                 messageCleaner.putMessageToQueue(chatId, messageId);
-                return messageEditor.editMessage(
-                                chatId,
-                                messageId,
-                                BotMessageEnum.NOT_DELETE_USER_DATA_MESSAGE,
-                                UserStateEnum.WORKING_STATE,
-                                null);
-            }
-            case PROJECTS_CALLBACK -> {
-                return messageEditor.editMessage(
+                return messageWithReturn.editMessage(
                         chatId,
                         messageId,
-                        BotMessageEnum.PROJECT_MENU_MESSAGE,
+                        BotMessageEnum.NOT_DELETE_USER_DATA_MESSAGE.getMessage(),
+                        UserStateEnum.WORKING_STATE,
+                        null);
+            }
+            case PROJECTS_CALLBACK -> {
+                return messageWithReturn.editMessage(
+                        chatId,
+                        messageId,
+                        BotMessageEnum.PROJECT_MENU_MESSAGE.getMessage(),
                         UserStateEnum.SETTINGS_PROJECTS_STATE,
                         inlineKeyboards.projectsMenu());
             }
@@ -120,15 +115,15 @@ public class CallbackQueryHandler {
             }
 
             case SETTINGS_BACK_CALLBACK -> {
-                return messageEditor.editMessage(
+                return messageWithReturn.editMessage(
                         chatId,
                         messageId,
-                        BotMessageEnum.SETTINGS_MENU_MESSAGE,
+                        BotMessageEnum.SETTINGS_MENU_MESSAGE.getMessage(),
                         UserStateEnum.SETTINGS_EDIT_STATE,
                         inlineKeyboards.settingsMenu(chatId));
             }
             case SETTINGS_EXIT_CALLBACK -> {
-                return messageEditor.deleteMessage(
+                return messageWithReturn.deleteMessage(
                         chatId,
                         messageId,
                         UserStateEnum.WORKING_STATE);
@@ -136,56 +131,68 @@ public class CallbackQueryHandler {
 
             case EDIT_TIMER_CALLBACK -> {
                 tempDataSaver.tempMessageId(chatId, messageId);
-                return messageEditor.editMessage(
+                return messageWithReturn.editMessage(
                         chatId,
                         messageId,
-                        BotMessageEnum.ASK_TIME_MESSAGE,
+                        BotMessageEnum.ASK_TIME_MESSAGE.getMessage(),
                         UserStateEnum.SETTINGS_EDIT_TIMER_STATE,
                         inlineKeyboards.backAndExitMenu(chatId));
             }
 
             // Универсальные
             case PROJECT_CREATE_ASK_NAME_CALLBACK -> {
-                return messageEditor.editMessage(
+                tempDataSaver.tempMessageId(chatId, messageId);
+                return messageWithReturn.editMessage(
                         chatId,
                         messageId,
-                        BotMessageEnum.PROJECT_CREATE_ASK_NAME_MESSAGE,
+                        BotMessageEnum.PROJECT_CREATE_ASK_NAME_MESSAGE.getMessage(),
                         UserStateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE,
                         inlineKeyboards.projectCreateMenu());
             }
             case EDIT_TIMEZONE_CALLBACK -> {
                 tempDataSaver.tempMessageId(chatId, messageId);
-                return messageEditor.editMessage(
+                return messageWithReturn.editMessage(
                         chatId,
                         messageId,
-                        BotMessageEnum.TIME_ZONE_DEFINITION_MESSAGE,
+                        BotMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
                         UserStateEnum.SETTINGS_EDIT_TIMEZONE_STATE,
                         inlineKeyboards.timeZoneMenu(chatId));
             }
             case EDIT_TIMEZONE_MANUAL_CALLBACK -> {
-                return messageEditor.editMessage(
+                return messageWithReturn.editMessage(
                         chatId,
                         messageId,
-                        BotMessageEnum.EDIT_TIMEZONE_MANUAL_MESSAGE,
+                        BotMessageEnum.EDIT_TIMEZONE_MANUAL_MESSAGE.getMessage(),
                         UserStateEnum.EDIT_TIMEZONE_MANUAL_STATE,
                         inlineKeyboards.backAndExitMenu(chatId));
             }
-            case ADD_ACCOUNTS_CALLBACK -> {
-                return addTokensMenu.addTokens(chatId);
+            case ADD_TOKENS_CALLBACK -> {
+                return messageWithReturn.editMessage(
+                        chatId,
+                        messageId,
+                        BotMessageEnum.ADD_TOKENS_MESSAGE.getMessage(),
+                        UserStateEnum.SETTINGS_PROJECT_ADD_TOKENS_STATE,
+                        inlineKeyboards.addTokensMenu(chatId));
             }
             case ADD_YANDEX_CALLBACK -> {
-                return checkYaData.findYaData(chatId);
+                tempDataSaver.tempMessageId(chatId, messageId);
+                return messageWithReturn.editMessage(
+                        chatId,
+                        messageId,
+                        BotMessageEnum.ADD_YANDEX_MESSAGE.getMessage(),
+                        UserStateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE,
+                        inlineKeyboards.addYandexMenu(chatId));
             }
-            case TEST_MESSAGE_CALLBACK -> {
-                return addYandex.testYaData(yandexRepository, chatId);
+            case TEST_YANDEX_CALLBACK -> {
+                return messageWithReturn.editMessage(
+                        chatId,
+                        messageId,
+                        addYandex.testYandex(chatId),
+                        UserStateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE,
+                        inlineKeyboards.addYandexTestMenu(chatId));
+
             }
 
-            // Непонятно
-            case NO_CONTINUE_CALLBACK -> {
-//                спросить время отправки
-                userStateEditor.editUserState(chatId, UserStateEnum.SETTINGS_EDIT_TIMER_STATE);
-                return new SendMessage(chatId, BotMessageEnum.ASK_TIME_MESSAGE.getMessage());
-            }
             default -> {
             }
         }

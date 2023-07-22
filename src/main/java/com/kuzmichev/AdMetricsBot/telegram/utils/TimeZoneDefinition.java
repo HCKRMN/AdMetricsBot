@@ -6,18 +6,16 @@ import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
-import com.kuzmichev.AdMetricsBot.model.TempData;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageEditor;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
@@ -34,7 +32,7 @@ public class TimeZoneDefinition {
     final InlineKeyboards inlineKeyboards;
     final UserRepository userRepository;
     final ScheduledMessageRepository scheduledMessageRepository;
-    final MessageEditor messageEditor;
+    final MessageWithReturn messageWithReturn;
     @Value("${telegram.webhook-path}")
     String link;
 
@@ -91,7 +89,7 @@ public class TimeZoneDefinition {
         scheduledMessage.setTimerMessage(resultTime);
         scheduledMessageRepository.save(scheduledMessage);
 
-        return messageEditor.sendMessage(
+        return messageWithReturn.sendMessage(
                 chatId,
                 BotMessageEnum.TIME_ZONE_DEFINITION_COMPLETE_MESSAGE,
                 inlineKeyboards.done(),

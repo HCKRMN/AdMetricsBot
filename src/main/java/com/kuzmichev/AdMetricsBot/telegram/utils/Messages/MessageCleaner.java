@@ -14,7 +14,7 @@ import java.util.HashMap;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class MessageCleaner implements Runnable {
-    MessageUtils messageUtils;
+    MessageWithoutReturn messageWithoutReturn;
     HashMap<String, Integer> queueForDeletion = new HashMap<>();
     private boolean isRunning = true;
 
@@ -51,7 +51,7 @@ public class MessageCleaner implements Runnable {
 
                 for (String chatId : deletionMap.keySet()) {
                     int messageId = deletionMap.get(chatId);
-                    messageUtils.deleteMessage(chatId, messageId);
+                    messageWithoutReturn.deleteMessage(chatId, messageId);
                 }
             }
         }

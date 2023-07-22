@@ -3,13 +3,12 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.Project;
 import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
 import com.kuzmichev.AdMetricsBot.model.TempData;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageUtils;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -25,10 +24,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProjectManager {
     InlineKeyboardMaker inlineKeyboardMaker;
-    UserStateEditor userStateEditor;
-    MessageUtils messageUtils;
     ProjectRepository projectRepository;
     TempDataRepository tempDataRepository;
+    InlineKeyboards inlineKeyboards;
 
         // Это вроде для регистрации
     public SendMessage projectCreateStarter(String chatId) {
@@ -52,12 +50,6 @@ public class ProjectManager {
         return sendMessage;
     }
 
-        // Запрашиваем имя проекта и меняем состояние пользователя
-    public SendMessage projectCreateAskName(String chatId) {
-        userStateEditor.editUserState(chatId, UserStateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE);
-        return new SendMessage(chatId, BotMessageEnum.PROJECT_CREATE_ASK_NAME_MESSAGE.getMessage());
-    }
-
         // Добавляем проект в базу
     public SendMessage projectCreate(String chatId, String messageText) {
 
@@ -75,23 +67,8 @@ public class ProjectManager {
         tempData.setChatId(chatId);
         tempDataRepository.save(tempData);
 
-        messageUtils.sendMessage(chatId, BotMessageEnum.PROJECT_CREATE_DONE_MESSAGE.getMessage());
-
         SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.ADD_TOKENS_MESSAGE.getMessage());
-        sendMessage.setReplyMarkup(
-                inlineKeyboardMaker.addMarkup(
-                        inlineKeyboardMaker.addRows(
-                                inlineKeyboardMaker.addRow(
-                                        // Кнопка создания проекта
-                                        inlineKeyboardMaker.addButton(
-                                                ButtonNameEnum.ADD_YANDEX_BUTTON.getButtonName(),
-                                                CallBackEnum.ADD_YANDEX_CALLBACK,
-                                                null
-                                        )
-                                )
-                        )
-                )
-        );
+        sendMessage.setReplyMarkup(inlineKeyboards.addTokensMenu(chatId));
 
         return sendMessage;
     }

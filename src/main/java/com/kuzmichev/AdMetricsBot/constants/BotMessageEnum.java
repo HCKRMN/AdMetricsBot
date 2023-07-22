@@ -14,6 +14,7 @@ public enum BotMessageEnum {
     TIME_ZONE_DEFINITION_COMPLETE_MESSAGE("Разница часовых поясов успешно добавлена"),
     EDIT_TIMEZONE_MANUAL_MESSAGE("Укажите ваше текущщее время в формате «23 59»"),
     ADD_YANDEX_MESSAGE("Перейдите по ссылке чтобы подключить аккаунт Яндекс Директ"),
+    ADD_YANDEX_TEST_MESSAGE("Проверьте получение данных с аккаунта Яндекс Директ"),
     ADD_TOKENS_MESSAGE("Добавьте источники данных"),
     ACCOUNT_ALREADY_ADDED_MESSAGE("Аккаунт Яндекс уже добавлен, хотите подключить другие сервисы?"),
     ASK_TIME_MESSAGE("Укажите время отправки уведомления в формате «23 59»"),
