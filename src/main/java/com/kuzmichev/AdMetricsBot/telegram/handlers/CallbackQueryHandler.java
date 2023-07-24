@@ -3,10 +3,10 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
-import com.kuzmichev.AdMetricsBot.model.YandexRepository;
+import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.*;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageCleaner;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
@@ -18,13 +18,15 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 @Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class CallbackQueryHandler {
-    YandexRepository yandexRepository;
     Registration registration;
     TimeZoneDefinition timeZoneDefinition;
     AddYandex addYandex;
@@ -33,17 +35,31 @@ public class CallbackQueryHandler {
     ProjectManager projectManager;
     InlineKeyboards inlineKeyboards;
     MessageWithReturn messageWithReturn;
-    MessageCleaner messageCleaner;
+    MessageManagementService messageManagementService;
     TempDataSaver tempDataSaver;
+    ProjectRepository projectRepository;
 
     public BotApiMethod<?> processCallbackQuery(CallbackQuery buttonQuery) {
         String chatId = buttonQuery.getMessage().getChatId().toString();
         String userName = buttonQuery.getMessage().getFrom().getUserName();
         String data = buttonQuery.getData();
+        String projectId = "";
         int messageId = buttonQuery.getMessage().getMessageId();
+//        messageManagementService.deleteMessage(chatId);
+
+        String regex = "project_.+";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(data);
+        if (matcher.find()) {
+            // Находим индекс начала id (после "project_")
+            int startIndex = data.indexOf("project_") + "project_".length();
+
+            // Извлекаем id как подстроку, начиная с startIndex
+            projectId = data.substring(startIndex);
+            data = "SOME_PROJECT_CALLBACK";
+        }
 
         switch (CallBackEnum.valueOf(data)) {
-
             // Регистрация
             case START_REGISTRATION_CALLBACK -> {
                 registration.registerUser(chatId, userName);
@@ -82,7 +98,7 @@ public class CallbackQueryHandler {
             }
             case DELETE_USER_STEP_2_CALLBACK -> {
                 deleteUserData.deleteUserData(chatId);
-                messageCleaner.putMessageToQueue(chatId, messageId);
+                messageManagementService.putMessageToQueue(chatId, messageId);
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,
@@ -91,7 +107,7 @@ public class CallbackQueryHandler {
                         null);
             }
             case NOT_DELETE_USER_CALLBACK -> {
-                messageCleaner.putMessageToQueue(chatId, messageId);
+                messageManagementService.putMessageToQueue(chatId, messageId);
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,
@@ -100,6 +116,7 @@ public class CallbackQueryHandler {
                         null);
             }
             case PROJECTS_CALLBACK -> {
+                tempDataSaver.tempMessageId(chatId, messageId);
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,
@@ -138,6 +155,35 @@ public class CallbackQueryHandler {
                         UserStateEnum.SETTINGS_EDIT_TIMER_STATE,
                         inlineKeyboards.backAndExitMenu(chatId));
             }
+
+
+            case PROJECT_GET_LIST_CALLBACK -> {
+                messageManagementService.putMessageToQueue(chatId, messageId);
+                return messageWithReturn.editMessage(
+                        chatId,
+                        messageId,
+                        BotMessageEnum.SETTINGS_PROJECTS_LIST_MENU_MESSAGE.getMessage(),
+                        null,
+                        inlineKeyboards.projectListMenu(chatId));
+            }
+
+
+            case SOME_PROJECT_CALLBACK -> {
+                return messageWithReturn.editMessage(
+                        chatId,
+                        messageId,
+                        projectRepository.findProjectnameByProjectId(projectId),
+                        null,
+                        inlineKeyboards.someProjectMenu(chatId));
+
+            }
+
+
+
+
+
+
+
 
             // Универсальные
             case PROJECT_CREATE_ASK_NAME_CALLBACK -> {
@@ -189,7 +235,7 @@ public class CallbackQueryHandler {
                         messageId,
                         addYandex.testYandex(chatId),
                         UserStateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE,
-                        inlineKeyboards.addYandexTestMenu(chatId));
+                        inlineKeyboards.addYandexTestMenu());
 
             }
 

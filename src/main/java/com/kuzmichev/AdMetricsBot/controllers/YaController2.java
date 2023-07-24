@@ -1,11 +1,10 @@
 package com.kuzmichev.AdMetricsBot.controllers;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.AddYandex;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageCleaner;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -19,16 +18,16 @@ public class YaController2 {
     private final TempDataRepository tempDataRepository;
     private final MessageWithoutReturn messageWithoutReturn;
     private final InlineKeyboards inlineKeyboards;
-    private final MessageCleaner messageCleaner;
+    private final MessageManagementService messageManagementService;
     private final AddYandex addYandex;
 
-    public YaController2(YandexRepository yandexRepository, TempDataRepository tempDataRepository, MessageWithoutReturn messageWithoutReturn, InlineKeyboards inlineKeyboards, AddYandex addYandex, MessageCleaner messageCleaner) {
+    public YaController2(YandexRepository yandexRepository, TempDataRepository tempDataRepository, MessageWithoutReturn messageWithoutReturn, InlineKeyboards inlineKeyboards, AddYandex addYandex, MessageManagementService messageManagementService) {
         this.yandexRepository = yandexRepository;
         this.tempDataRepository = tempDataRepository;
         this.messageWithoutReturn = messageWithoutReturn;
         this.inlineKeyboards = inlineKeyboards;
         this.addYandex = addYandex;
-        this.messageCleaner = messageCleaner;
+        this.messageManagementService = messageManagementService;
     }
 
     @RequestMapping(value = "/yandex-r")
@@ -43,12 +42,12 @@ public class YaController2 {
         yandexRepository.save(yandex);
 
         int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
-        messageCleaner.putMessageToQueue(chatId, messageId);
+        messageManagementService.putMessageToQueue(chatId, messageId);
 
         messageWithoutReturn.sendMessage(
                 chatId,
                 BotMessageEnum.ADD_YANDEX_TEST_MESSAGE.getMessage(),
-                inlineKeyboards.addYandexTestMenu(chatId));
+                inlineKeyboards.addYandexTestMenu());
 
         log.info("Пользователь с Id: {} добавил аккаунт Yandex", chatId);
         return "yandex-r";

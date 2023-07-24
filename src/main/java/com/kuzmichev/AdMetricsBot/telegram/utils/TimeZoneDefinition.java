@@ -59,7 +59,7 @@ public class TimeZoneDefinition {
         if (state.equals(UserStateEnum.SETTINGS_EDIT_STATE.getStateName())) {
             buttonsRow.add(inlineKeyboardMaker.addButton(
                     ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
-                    CallBackEnum.PROJECT_CREATE_CALLBACK,
+                    CallBackEnum.PROJECT_CREATE_CALLBACK.getCallBackName(),
                     null
             ));
         }
@@ -91,7 +91,7 @@ public class TimeZoneDefinition {
 
         return messageWithReturn.sendMessage(
                 chatId,
-                BotMessageEnum.TIME_ZONE_DEFINITION_COMPLETE_MESSAGE,
+                BotMessageEnum.TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
                 inlineKeyboards.done(),
                 UserStateEnum.WORKING_STATE
         );

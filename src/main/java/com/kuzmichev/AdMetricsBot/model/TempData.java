@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Entity(name = "tempDataTable")
 @Getter
 @Setter
@@ -15,4 +16,5 @@ public class TempData {
     private String chatId;
     private String lastProjectId;
     private int lastMessageId;
+    private String messagesIdsToDelete;
 }

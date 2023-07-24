@@ -20,10 +20,10 @@ public class InlineKeyboardMaker {
      * @param link         ссылка
      * @return созданная кнопка
      */
-    public InlineKeyboardButton addButton(String buttonName, CallBackEnum callBackData, String link) {
+    public InlineKeyboardButton addButton(String buttonName, String callBackData, String link) {
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText(buttonName);
-        button.setCallbackData(String.valueOf(callBackData));
+        button.setCallbackData(callBackData);
         button.setUrl(link);
         return button;
     }

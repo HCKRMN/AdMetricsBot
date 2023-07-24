@@ -22,13 +22,13 @@ public class MessageWithReturn {
 
     public SendMessage sendMessage(
             String chatId,
-            BotMessageEnum text,
+            String text,
             InlineKeyboardMarkup keyboard,
             UserStateEnum userState) {
 
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
-        sendMessage.setText(text.getMessage());
+        sendMessage.setText(text);
         if (keyboard != null) {
             sendMessage.setReplyMarkup(keyboard);
         }

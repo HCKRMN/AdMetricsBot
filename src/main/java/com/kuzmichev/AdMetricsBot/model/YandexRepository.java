@@ -11,4 +11,6 @@ public interface YandexRepository extends CrudRepository<Yandex,String> {
     @Transactional
     void removeYandexByChatId(String chatId);
 
+    boolean existsByProjectId (String projectId);
+
 }

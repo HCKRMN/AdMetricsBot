@@ -7,4 +7,6 @@ public interface BitrixRepository extends CrudRepository<Bitrix,Long> {
 
     @Transactional
     void removeBitrixByChatId(String chatId);
+
+    boolean existsByProjectId (String projectId);
 }

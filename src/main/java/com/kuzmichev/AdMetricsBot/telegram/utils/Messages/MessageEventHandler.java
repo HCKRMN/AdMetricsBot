@@ -10,7 +10,6 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Slf4j
@@ -20,7 +19,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class MessageEventHandler {
     AdMetricsBot adMetricsBot;
     TempDataSaver tempDataSaver;
-    MessageCleaner messageCleaner;
+    MessageManagementService messageManagementService;
 
 //    @EventListener
 //    public void handleSendMessageEvent(SendMessage message) {
@@ -36,7 +35,9 @@ public class MessageEventHandler {
         try {
             int messageId = adMetricsBot.execute(message).getMessageId();
             String chatId = message.getChatId();
-            tempDataSaver.tempMessageId(chatId, messageId);
+            messageManagementService.putMessageToQueue(chatId, messageId);
+//            tempDataSaver.tempMessageId(chatId, messageId);
+            // тут отправляем в метод добавления очереди
 //            messageCleaner.putMessageToQueue(chatId, messageId);
         } catch (TelegramApiException e) {
             log.error("ERROR_TEXT" + e.getMessage());

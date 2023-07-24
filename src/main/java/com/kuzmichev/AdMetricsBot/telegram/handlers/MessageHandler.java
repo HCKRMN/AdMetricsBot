@@ -10,7 +10,7 @@ import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.*;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageCleaner;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import com.vdurmont.emoji.EmojiParser;
@@ -32,15 +32,13 @@ public class MessageHandler {
     Registration registration;
     TelegramConfig config;
     UserRepository userRepository;
-    YandexRepository yandexRepository;
     StartCommandReceived startCommandReceived;
     TimeZoneDefinition timeZoneDefinition;
-    AddYandex addYandex;
     SettingsMenu settingsMenu;
     ProjectManager projectManager;
     Validator validator;
     UserStateEditor userStateEditor;
-    MessageCleaner messageCleaner;
+    MessageManagementService messageManagementService;
     TempDataRepository tempDataRepository;
     InlineKeyboards inlineKeyboards;
     MessageWithReturn messageWithReturn;
@@ -51,6 +49,8 @@ public class MessageHandler {
         String messageText = message.getText();
         String userState = userRepository.getUserStateByChatId(chatId);
         CommandEnum commandEnum = CommandEnum.fromCommand(messageText);
+//        messageManagementService.deleteMessage(chatId);
+//        messageManagementService.putMessageToQueue(chatId, message.getMessageId());
 
         // Ловим команду отправки сообщения от админа
         if (messageText.contains("/send") && chatId.equals(config.getOwnerId())){
@@ -77,7 +77,8 @@ public class MessageHandler {
                         return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
                     }
 //                    case TEST -> {
-//                        return addYandex.testYandex(yandexRepository, chatId);
+//                        messageManagementService.deleteMessage(chatId);
+////                        return addYandex.testYandex(yandexRepository, chatId);
 //                    }
                     default -> {
                     }
@@ -92,13 +93,13 @@ public class MessageHandler {
                 // Ловим и валидируем время таймера
                 case SETTINGS_EDIT_TIMER_STATE -> {
                     if (validator.validateTime(messageText)) {
-                        messageCleaner.putMessageToQueue(chatId, messageId);
+                        messageManagementService.putMessageToQueue(chatId, messageId);
                         return addTimer.setTimerAndStart(chatId, messageText);
                     } else {
-                        messageCleaner.putMessageToQueue(chatId, messageId);
+                        messageManagementService.putMessageToQueue(chatId, messageId);
                         SendMessage sendMessage = messageWithReturn.sendMessage(
                                 chatId,
-                                BotMessageEnum.INVALID_TIME_MESSAGE,
+                                BotMessageEnum.INVALID_TIME_MESSAGE.getMessage(),
                                 inlineKeyboards.backAndExitMenu(chatId),
                                 null);
                         messageWithoutReturn.sendMessage(sendMessage);
@@ -108,14 +109,14 @@ public class MessageHandler {
                 // Ловим и валидируем имя проекта
                 case SETTINGS_PROJECT_CREATE_ASK_NAME_STATE -> {
                     if (validator.validateProjectName(messageText)) {
-                        messageCleaner.putMessageToQueue(chatId, messageId);
+                        messageManagementService.putMessageToQueue(chatId, messageId);
                         userStateEditor.editUserState(chatId, UserStateEnum.SETTINGS_PROJECT_ADD_TOKENS_STATE);
                         return projectManager.projectCreate(chatId, messageText);
                     } else {
-                        messageCleaner.putMessageToQueue(chatId, messageId);
+                        messageManagementService.putMessageToQueue(chatId, messageId);
                         SendMessage sendMessage = messageWithReturn.sendMessage(
                                 chatId,
-                                BotMessageEnum.PROJECT_NAME_INVALID_MESSAGE,
+                                BotMessageEnum.PROJECT_NAME_INVALID_MESSAGE.getMessage(),
                                 inlineKeyboards.backAndExitMenu(chatId),
                                 null);
                         messageWithoutReturn.sendMessage(sendMessage);
@@ -125,13 +126,13 @@ public class MessageHandler {
                 // Речной ввод времени пользователя
                 case EDIT_TIMEZONE_MANUAL_STATE -> {
                     if (validator.validateTime(messageText)) {
-                        messageCleaner.putMessageToQueue(chatId, messageId);
+                        messageManagementService.putMessageToQueue(chatId, messageId);
                         return timeZoneDefinition.manualTimeZone(chatId, messageText);
                     } else {
-                        messageCleaner.putMessageToQueue(chatId, messageId);
+                        messageManagementService.putMessageToQueue(chatId, messageId);
                         SendMessage sendMessage = messageWithReturn.sendMessage(
                                 chatId,
-                                BotMessageEnum.INVALID_TIME_MESSAGE,
+                                BotMessageEnum.INVALID_TIME_MESSAGE.getMessage(),
                                 inlineKeyboards.backAndExitMenu(chatId),
                                 null);
                         messageWithoutReturn.sendMessage(sendMessage);

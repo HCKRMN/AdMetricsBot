@@ -3,6 +3,8 @@ package com.kuzmichev.AdMetricsBot.telegram.keyboards;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
+import com.kuzmichev.AdMetricsBot.model.Project;
+import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.telegram.utils.AddYandex;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -26,6 +29,7 @@ public class InlineKeyboards {
     final ScheduledMessageRepository scheduledMessageRepository;
     final UserRepository userRepository;
     final AddYandex addYandex;
+    final ProjectRepository projectRepository;
 
     @Value("${telegram.webhook-path}")
     String link;
@@ -49,13 +53,13 @@ public class InlineKeyboards {
                                 // Кнопка управления проектами
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.PROJECTS_BUTTON.getButtonName(),
-                                        CallBackEnum.PROJECTS_CALLBACK,
+                                        CallBackEnum.PROJECTS_CALLBACK.getCallBackName(),
                                         null
                                 ),
                                 // Кнопка включения/выключения рассылки
                                 inlineKeyboardMaker.addButton(
                                         launchButton,
-                                        launchCallback,
+                                        launchCallback.getCallBackName(),
                                         null
                                 )
                         ),
@@ -63,13 +67,13 @@ public class InlineKeyboards {
                                 // Кнопка настроек часового пояса
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.SETTINGS_EDIT_TIMEZONE_BUTTON.getButtonName(),
-                                        CallBackEnum.EDIT_TIMEZONE_CALLBACK,
+                                        CallBackEnum.EDIT_TIMEZONE_CALLBACK.getCallBackName(),
                                         null
                                 ),
                                 // Кнопка настроек таймера
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.SETTINGS_EDIT_TIMER_BUTTON.getButtonName(),
-                                        CallBackEnum.EDIT_TIMER_CALLBACK,
+                                        CallBackEnum.EDIT_TIMER_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -77,13 +81,13 @@ public class InlineKeyboards {
                                 // Кнопка настроек языка
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.SETTINGS_EDIT_LANGUAGE_BUTTON.getButtonName(),
-                                        CallBackEnum.EDIT_LANGUAGE_CALLBACK,
+                                        CallBackEnum.EDIT_LANGUAGE_CALLBACK.getCallBackName(),
                                         null
                                 ),
                                 // Кнопка удаления данных пользователя
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.SETTINGS_DELETE_USER_BUTTON.getButtonName(),
-                                        CallBackEnum.DELETE_USER_STEP_1_CALLBACK,
+                                        CallBackEnum.DELETE_USER_STEP_1_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -91,7 +95,7 @@ public class InlineKeyboards {
                                 // Кнопка выхода из меню
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.SETTINGS_EXIT_BUTTON.getButtonName(),
-                                        CallBackEnum.SETTINGS_EXIT_CALLBACK,
+                                        CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
                                         null
                                 )
                         )
@@ -106,15 +110,15 @@ public class InlineKeyboards {
                                 // Кнопка добавления проекта
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.PROJECT_CREATE_BUTTON.getButtonName(),
-                                        CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK,
+                                        CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
                         inlineKeyboardMaker.addRow(
-                                // Кнопка редактирования проекта
+                                // Кнопка получения списка проектов
                                 inlineKeyboardMaker.addButton(
-                                        ButtonNameEnum.PROJECTS_EDIT_BUTTON.getButtonName(),
-                                        CallBackEnum.PROJECT_EDIT_CALLBACK,
+                                        ButtonNameEnum.PROJECTS_GET_LIST_BUTTON.getButtonName(),
+                                        CallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -122,13 +126,13 @@ public class InlineKeyboards {
                                 // Кнопка назад
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.SETTINGS_BACK_BUTTON.getButtonName(),
-                                        CallBackEnum.SETTINGS_BACK_CALLBACK,
+                                        CallBackEnum.SETTINGS_BACK_CALLBACK.getCallBackName(),
                                         null
                                 ),
                                 // Кнопка выход
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.SETTINGS_EXIT_BUTTON.getButtonName(),
-                                        CallBackEnum.SETTINGS_EXIT_CALLBACK,
+                                        CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
                                         null
                                 )
                         )
@@ -144,13 +148,13 @@ public class InlineKeyboards {
                                 // Кнопка назад
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.SETTINGS_BACK_BUTTON.getButtonName(),
-                                        CallBackEnum.PROJECTS_CALLBACK,
+                                        CallBackEnum.PROJECTS_CALLBACK.getCallBackName(),
                                         null
                                 ),
                                 // Кнопка выход
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.SETTINGS_EXIT_BUTTON.getButtonName(),
-                                        CallBackEnum.SETTINGS_EXIT_CALLBACK,
+                                        CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
                                         null
                                 )
                         )
@@ -166,12 +170,12 @@ public class InlineKeyboards {
                                 inlineKeyboardMaker.addRow(
                                         inlineKeyboardMaker.addButton(
                                                 ButtonNameEnum.DELETE_USER_DATA_BUTTON.getButtonName(),
-                                                CallBackEnum.DELETE_USER_STEP_2_CALLBACK,
+                                                CallBackEnum.DELETE_USER_STEP_2_CALLBACK.getCallBackName(),
                                                 null
                                         ),
                                         inlineKeyboardMaker.addButton(
                                                 ButtonNameEnum.NOT_DELETE_USER_DATA_BUTTON.getButtonName(),
-                                                CallBackEnum.NOT_DELETE_USER_CALLBACK,
+                                                CallBackEnum.NOT_DELETE_USER_CALLBACK.getCallBackName(),
                                                 null
                                         )
                                 )
@@ -213,13 +217,13 @@ public class InlineKeyboards {
                             // Кнопка назад
                             inlineKeyboardMaker.addButton(
                                     ButtonNameEnum.SETTINGS_BACK_BUTTON.getButtonName(),
-                                    backButtonCallBackEnum,
+                                    backButtonCallBackEnum.getCallBackName(),
                                     null
                             ),
                             // Кнопка выход
                             inlineKeyboardMaker.addButton(
                                     ButtonNameEnum.SETTINGS_EXIT_BUTTON.getButtonName(),
-                                    CallBackEnum.SETTINGS_EXIT_CALLBACK,
+                                    CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
                                     null
                             )
 
@@ -255,7 +259,7 @@ public class InlineKeyboards {
                         inlineKeyboardMaker.addRow(
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.DONE_BUTTON.getButtonName(),
-                                        CallBackEnum.SETTINGS_EXIT_CALLBACK,
+                                        CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
                                         null
                                 )
                         )
@@ -282,7 +286,7 @@ public class InlineKeyboards {
                                 inlineKeyboardMaker.addButton(
                                         // Ручной ввод текущего времени пользователя
                                         ButtonNameEnum.MANUAL_INPUT_BUTTON.getButtonName(),
-                                        CallBackEnum.EDIT_TIMEZONE_MANUAL_CALLBACK,
+                                        CallBackEnum.EDIT_TIMEZONE_MANUAL_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -313,7 +317,7 @@ public class InlineKeyboards {
                                 // Кнопка добавления Яндекс
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.ADD_YANDEX_BUTTON.getButtonName(),
-                                        CallBackEnum.ADD_YANDEX_CALLBACK,
+                                        CallBackEnum.ADD_YANDEX_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -321,7 +325,7 @@ public class InlineKeyboards {
                                 // Кнопка добавления VK
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.ADD_VK_BUTTON.getButtonName(),
-                                        CallBackEnum.ADD_VK_CALLBACK,
+                                        CallBackEnum.ADD_VK_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -329,7 +333,7 @@ public class InlineKeyboards {
                                 // Кнопка добавления MyTarget
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.ADD_MYTARGET_BUTTON.getButtonName(),
-                                        CallBackEnum.ADD_MYTARGET_CALLBACK,
+                                        CallBackEnum.ADD_MYTARGET_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -337,7 +341,7 @@ public class InlineKeyboards {
                                 // Кнопка добавления Bitrix
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.ADD_BITRIX_BUTTON.getButtonName(),
-                                        CallBackEnum.ADD_BITRIX_CALLBACK,
+                                        CallBackEnum.ADD_BITRIX_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -345,7 +349,7 @@ public class InlineKeyboards {
                                 // Кнопка добавления AmoCRM
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.ADD_AMOCRM_BUTTON.getButtonName(),
-                                        CallBackEnum.ADD_AMOCRM_CALLBACK,
+                                        CallBackEnum.ADD_AMOCRM_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -353,7 +357,7 @@ public class InlineKeyboards {
                                 // Кнопка добавления Yclients
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.ADD_YCLIENTS_BUTTON.getButtonName(),
-                                        CallBackEnum.ADD_YCLIENTS_CALLBACK,
+                                        CallBackEnum.ADD_YCLIENTS_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -391,14 +395,14 @@ public class InlineKeyboards {
         );
     }
 
-    public InlineKeyboardMarkup addYandexTestMenu(String chatId) {
+    public InlineKeyboardMarkup addYandexTestMenu() {
         return inlineKeyboardMaker.addMarkup(
                 inlineKeyboardMaker.addRows(
                         //Кнопка тестового запроса
                         inlineKeyboardMaker.addRow(
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.TEST_YANDEX_BUTTON.getButtonName(),
-                                        CallBackEnum.TEST_YANDEX_CALLBACK,
+                                        CallBackEnum.TEST_YANDEX_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -406,7 +410,7 @@ public class InlineKeyboards {
                         inlineKeyboardMaker.addRow(
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.SETTINGS_ADD_ACCOUNTS_BUTTON.getButtonName(),
-                                        CallBackEnum.ADD_TOKENS_CALLBACK,
+                                        CallBackEnum.ADD_TOKENS_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -414,7 +418,7 @@ public class InlineKeyboards {
                         inlineKeyboardMaker.addRow(
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.DONE_BUTTON.getButtonName(),
-                                        CallBackEnum.SETTINGS_EXIT_CALLBACK,
+                                        CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
                                         null
                                 )
                         )
@@ -422,10 +426,69 @@ public class InlineKeyboards {
         );
     }
 
+    public InlineKeyboardMarkup someProjectMenu(String chatId) {
+        return inlineKeyboardMaker.addMarkup(
+                    inlineKeyboardMaker.addRows(
+                            inlineKeyboardMaker.addRow(
+                                    inlineKeyboardMaker.addButton(
+                                            ButtonNameEnum.PROJECT_ADD_TOKEN_BUTTON.getButtonName(),
+                                            CallBackEnum.PROJECT_ADD_TOKEN_CALLBACK.getCallBackName(),
+                                            null
+                                    )
+                            ),
+                            inlineKeyboardMaker.addRow(
+                                    inlineKeyboardMaker.addButton(
+                                            ButtonNameEnum.PROJECT_DELETE_TOKEN_BUTTON.getButtonName(),
+                                            CallBackEnum.PROJECT_DELETE_TOKEN_CALLBACK.getCallBackName(),
+                                            null
+                                    )
+                            ),
+                            inlineKeyboardMaker.addRow(
+                                    inlineKeyboardMaker.addButton(
+                                            ButtonNameEnum.PROJECT_GET_INFO_BUTTON.getButtonName(),
+                                            CallBackEnum.PROJECT_GET_INFO_CALLBACK.getCallBackName(),
+                                            null
+                                    )
+                            ),
+                            inlineKeyboardMaker.addRow(
+                                    inlineKeyboardMaker.addButton(
+                                            ButtonNameEnum.PROJECT_DELETE_BUTTON.getButtonName(),
+                                            CallBackEnum.PROJECT_DELETE_CALLBACK.getCallBackName(),
+                                            null
+
+                                    )
+                            ),
+                            backAndExitMenuButtons(chatId)
+                    )
+        );
+    }
 
 
+    public InlineKeyboardMarkup projectListMenu(String chatId) {
+        String projectName;
+        String projectCallback;
+        List<Project> projects = projectRepository.findProjectsByChatId(chatId);
 
+        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
 
+        for (Project project : projects) {
+            projectName = project.getProjectName();
+            projectCallback = "project_" + project.getProjectId();
+            rows.add(
+                    inlineKeyboardMaker.addRow(
+                            inlineKeyboardMaker.addButton(
+                                    projectName,
+                                    projectCallback,
+                                    null
+                            )
+                    )
+            );
+        }
+
+        rows.add(backAndExitMenuButtons(chatId));
+
+        return inlineKeyboardMaker.addMarkup(rows);
+    }
 
 
 

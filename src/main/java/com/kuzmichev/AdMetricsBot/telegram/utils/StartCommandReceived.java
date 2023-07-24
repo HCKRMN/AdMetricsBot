@@ -36,7 +36,7 @@ public class StartCommandReceived {
                                 inlineKeyboardMaker.addRow(
                                         inlineKeyboardMaker.addButton(
                                                 ButtonNameEnum.REGISTRATION_BUTTON.getButtonName(),
-                                                CallBackEnum.START_REGISTRATION_CALLBACK,
+                                                CallBackEnum.START_REGISTRATION_CALLBACK.getCallBackName(),
                                                 null
                                         )
                                 )
