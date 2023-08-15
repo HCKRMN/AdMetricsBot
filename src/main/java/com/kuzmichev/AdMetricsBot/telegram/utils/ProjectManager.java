@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -28,6 +29,7 @@ public class ProjectManager {
     InlineKeyboards inlineKeyboards;
     YandexRepository yandexRepository;
     BitrixRepository bitrixRepository;
+    UserRepository userRepository;
 
         // Это вроде для регистрации
     public SendMessage projectCreateStarter(String chatId) {
@@ -54,6 +56,8 @@ public class ProjectManager {
         // Добавляем проект в базу
     public SendMessage projectCreate(String chatId, String messageText) {
 
+        int projectsCount = userRepository.getProjectsCountByChatId(chatId) + 1;
+
         // Генерируем UUID и переводим в текст
         String projectId = UUID.randomUUID().toString();
 
@@ -61,7 +65,15 @@ public class ProjectManager {
         project.setProjectName(messageText);
         project.setChatId(chatId);
         project.setProjectId(projectId);
+        project.setProjectNumber(projectsCount);
         projectRepository.save(project);
+
+        Optional<User> userOptional = userRepository.findByChatId(chatId);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setProjectsCount(projectsCount);
+            userRepository.save(user);
+        }
 
         TempData tempData = new TempData();
         tempData.setLastProjectId(projectId);
@@ -74,32 +86,32 @@ public class ProjectManager {
         return sendMessage;
     }
 
-    public void getProjects(String chatId) {
-        String projectName;
-        String projectId;
-        List<Project> projects = projectRepository.findProjectsByChatId(chatId);
-        for (Project project : projects){
-            projectName = project.getProjectName();
-            projectId = project.getProjectId();
-
-            StringBuilder projectInfo = new StringBuilder();
-            projectInfo.append("Название проекта:").append("\n");
-            projectInfo.append(projectName).append("\n\n");
-            projectInfo.append("Подключенные источники:").append("\n");
-            if (yandexRepository.existsByProjectId(projectId)){
-                projectInfo.append("Yandex").append("\n");
-            }
-            if (bitrixRepository.existsByProjectId(projectId)){
-                projectInfo.append("Bitrix").append("\n");
-            }
-
-//            messageWithoutReturn.sendMessage(
-//                    chatId,
-//                    projectInfo.toString(),
-//                    inlineKeyboards.projectEditAndDeleteMenu()
-//            );
-        }
-    }
+//    public void getProjects(String chatId) {
+//        String projectName;
+//        String projectId;
+//        List<Project> projects = projectRepository.findProjectsByChatId(chatId);
+//        for (Project project : projects){
+//            projectName = project.getProjectName();
+//            projectId = project.getProjectId();
+//
+//            StringBuilder projectInfo = new StringBuilder();
+//            projectInfo.append("Название проекта:").append("\n");
+//            projectInfo.append(projectName).append("\n\n");
+//            projectInfo.append("Подключенные источники:").append("\n");
+//            if (yandexRepository.existsByProjectId(projectId)){
+//                projectInfo.append("Yandex").append("\n");
+//            }
+//            if (bitrixRepository.existsByProjectId(projectId)){
+//                projectInfo.append("Bitrix").append("\n");
+//            }
+//
+////            messageWithoutReturn.sendMessage(
+////                    chatId,
+////                    projectInfo.toString(),
+////                    inlineKeyboards.projectEditAndDeleteMenu()
+////            );
+//        }
+//    }
 }
 
 

@@ -28,6 +28,8 @@ public class Registration{
             user.setUserName(userName);
             user.setUserState(UserStateEnum.REGISTRATION_STATE.getStateName());
             user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
+            user.setProjectsCount(0);
+            user.setProjectsPage(0);
             scheduledMessage.setChatId(chatId);
             scheduledMessage.setEnableSendingMessages(false);
             userRepository.save(user);

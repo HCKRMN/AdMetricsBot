@@ -19,14 +19,12 @@ public class YaController2 {
     private final MessageWithoutReturn messageWithoutReturn;
     private final InlineKeyboards inlineKeyboards;
     private final MessageManagementService messageManagementService;
-    private final AddYandex addYandex;
 
-    public YaController2(YandexRepository yandexRepository, TempDataRepository tempDataRepository, MessageWithoutReturn messageWithoutReturn, InlineKeyboards inlineKeyboards, AddYandex addYandex, MessageManagementService messageManagementService) {
+    public YaController2(YandexRepository yandexRepository, TempDataRepository tempDataRepository, MessageWithoutReturn messageWithoutReturn, InlineKeyboards inlineKeyboards, MessageManagementService messageManagementService) {
         this.yandexRepository = yandexRepository;
         this.tempDataRepository = tempDataRepository;
         this.messageWithoutReturn = messageWithoutReturn;
         this.inlineKeyboards = inlineKeyboards;
-        this.addYandex = addYandex;
         this.messageManagementService = messageManagementService;
     }
 
@@ -43,6 +41,7 @@ public class YaController2 {
 
         int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
         messageManagementService.putMessageToQueue(chatId, messageId);
+        messageManagementService.deleteMessage(chatId);
 
         messageWithoutReturn.sendMessage(
                 chatId,

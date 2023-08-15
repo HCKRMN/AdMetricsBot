@@ -54,14 +54,14 @@ public class YandexDirectRequest {
         String responseBody = EntityUtils.toString(entityResponse);
 
 //        Отладочная информация
-//        HttpEntity entity2 = request.getEntity();
-//        String requestBody = EntityUtils.toString(entity2);
-//        System.out.println(request);
-//        System.out.println(Arrays.toString(request.getAllHeaders()));
-//        System.out.println("Request Body: " + requestBody);
-//        System.out.println(response);
-//        System.out.println(response.getStatusLine());
-//        System.out.println("Response Body: " + responseBody);
+        HttpEntity entity2 = request.getEntity();
+        String requestBody = EntityUtils.toString(entity2);
+        System.out.println(request);
+        System.out.println(Arrays.toString(request.getAllHeaders()));
+        System.out.println("Request Body: " + requestBody);
+        System.out.println(response);
+        System.out.println(response.getStatusLine());
+        System.out.println("Response Body: " + responseBody);
 
         int statusCode = response.getStatusLine().getStatusCode();
 
@@ -69,13 +69,26 @@ public class YandexDirectRequest {
         Pattern r = Pattern.compile(pattern);
         Matcher m = r.matcher(responseBody);
 
+
         if (m.find()) {
             return m.group(1);
-        } else if(statusCode == 200 && responseBody.length() == 0) {
+        } else if(statusCode == 200 && responseBody.contains("Total rows: 0")) {
             return "0";
         } else {
             log.error("Ответ не содержал данных");
+
+            // Добавляем отладочную информацию в лог
+            log.info("Request: {}", request);
+            log.info("Request Headers: {}", Arrays.toString(request.getAllHeaders()));
+            log.info("Request Body: {}", requestBody);
+            log.info("Response: {}", response);
+            log.info("Response Status Line: {}", response.getStatusLine());
+            log.info("Response Body: {}", responseBody);
+
             return "-1";
         }
+
+
+
     }
 }

@@ -18,4 +18,10 @@ public interface UserRepository extends CrudRepository<User,String> {
 
     @Transactional
     void removeUserByChatId(String chatId);
+
+    @Query("SELECT u.projectsCount FROM usersTable u WHERE u.chatId = :chatId")
+    int getProjectsCountByChatId(String chatId);
+
+    @Query("SELECT u.projectsPage FROM usersTable u WHERE u.chatId = :chatId")
+    int getProjectsPageByChatId(String chatId);
 }

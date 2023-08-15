@@ -3,7 +3,7 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
-import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
+import com.kuzmichev.AdMetricsBot.model.*;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.*;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
@@ -18,6 +18,8 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
+import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,6 +40,8 @@ public class CallbackQueryHandler {
     MessageManagementService messageManagementService;
     TempDataSaver tempDataSaver;
     ProjectRepository projectRepository;
+    UserRepository userRepository;
+    DynamicCallback dynamicCallback;
 
     public BotApiMethod<?> processCallbackQuery(CallbackQuery buttonQuery) {
         String chatId = buttonQuery.getMessage().getChatId().toString();
@@ -45,19 +49,25 @@ public class CallbackQueryHandler {
         String data = buttonQuery.getData();
         String projectId = "";
         int messageId = buttonQuery.getMessage().getMessageId();
-//        messageManagementService.deleteMessage(chatId);
+        int currentPage = 1;
 
-        String regex = "project_.+";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(data);
-        if (matcher.find()) {
-            // Находим индекс начала id (после "project_")
-            int startIndex = data.indexOf("project_") + "project_".length();
 
-            // Извлекаем id как подстроку, начиная с startIndex
-            projectId = data.substring(startIndex);
+
+        // Секция обработки динамический колбеков с данными
+        String regexProject = "project_.+";
+        Map<String, String> projectData = DynamicCallback.handleDynamicCallback(data, regexProject, "project_");
+        if (!projectData.isEmpty()) {
+            projectId = projectData.get("value");
             data = "SOME_PROJECT_CALLBACK";
         }
+
+        String regexPage = "PROJECT_PAGE_CALLBACK_.+";
+        Map<String, String> pageData = DynamicCallback.handleDynamicCallback(data, regexPage, "PROJECT_PAGE_CALLBACK_");
+        if (!pageData.isEmpty()) {
+            currentPage = Integer.parseInt(pageData.get("value"));
+            data = "PROJECT_GET_LIST_CALLBACK";
+        }
+
 
         switch (CallBackEnum.valueOf(data)) {
             // Регистрация
@@ -159,6 +169,13 @@ public class CallbackQueryHandler {
 
             case PROJECT_GET_LIST_CALLBACK -> {
                 messageManagementService.putMessageToQueue(chatId, messageId);
+                Optional<User> userOptional = userRepository.findByChatId(chatId);
+                if (userOptional.isPresent()) {
+                    User user = userOptional.get();
+                    user.setProjectsPage(currentPage);
+                    userRepository.save(user);
+                }
+
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,
@@ -166,7 +183,6 @@ public class CallbackQueryHandler {
                         null,
                         inlineKeyboards.projectListMenu(chatId));
             }
-
 
             case SOME_PROJECT_CALLBACK -> {
                 return messageWithReturn.editMessage(
@@ -188,6 +204,7 @@ public class CallbackQueryHandler {
             // Универсальные
             case PROJECT_CREATE_ASK_NAME_CALLBACK -> {
                 tempDataSaver.tempMessageId(chatId, messageId);
+                System.out.println("messageId1: " + messageId);
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,

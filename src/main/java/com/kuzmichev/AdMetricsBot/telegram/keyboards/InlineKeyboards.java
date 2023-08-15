@@ -3,10 +3,7 @@ package com.kuzmichev.AdMetricsBot.telegram.keyboards;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
-import com.kuzmichev.AdMetricsBot.model.Project;
-import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
-import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
-import com.kuzmichev.AdMetricsBot.model.UserRepository;
+import com.kuzmichev.AdMetricsBot.model.*;
 import com.kuzmichev.AdMetricsBot.telegram.utils.AddYandex;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -197,19 +194,13 @@ public class InlineKeyboards {
                     SETTINGS_EDIT_TIMER_STATE,
                     SETTINGS_PROJECTS_STATE,
                     SETTINGS_EDIT_TIMEZONE_STATE
-                    ->
-            { backButtonCallBackEnum = CallBackEnum.SETTINGS_BACK_CALLBACK;}
+                    -> backButtonCallBackEnum = CallBackEnum.SETTINGS_BACK_CALLBACK;
 
-            case SETTINGS_PROJECT_CREATE_STATE
-                    ->
-            { backButtonCallBackEnum = CallBackEnum.PROJECTS_CALLBACK;}
+            case SETTINGS_PROJECT_CREATE_STATE,
+                    SETTINGS_PROJECT_ADD_TOKENS_STATE
+                    -> backButtonCallBackEnum = CallBackEnum.PROJECTS_CALLBACK;
 
-            case SETTINGS_PROJECT_ADD_TOKENS_STATE
-                    ->
-            { backButtonCallBackEnum = CallBackEnum.ADD_TOKENS_CALLBACK;}
-
-            default -> {
-                backButtonCallBackEnum = CallBackEnum.SETTINGS_EXIT_CALLBACK;}
+            default -> backButtonCallBackEnum = CallBackEnum.SETTINGS_EXIT_CALLBACK;
 
         }
 
@@ -290,21 +281,6 @@ public class InlineKeyboards {
                                         null
                                 )
                         ),
-//                        inlineKeyboardMaker.addRow(
-//                                // Кнопка назад
-//                                inlineKeyboardMaker.addButton(
-//                                        ButtonNameEnum.SETTINGS_BACK_BUTTON.getButtonName(),
-//                                        CallBackEnum.SETTINGS_BACK_CALLBACK,
-//                                        null
-//                                ),
-//                                // Кнопка выход
-//                                inlineKeyboardMaker.addButton(
-//                                        ButtonNameEnum.SETTINGS_EXIT_BUTTON.getButtonName(),
-//                                        CallBackEnum.SETTINGS_EXIT_CALLBACK,
-//                                        null
-//                                )
-//
-//                        )
                         backAndExitMenuButtons(chatId)
                 )
         );
@@ -467,11 +443,19 @@ public class InlineKeyboards {
     public InlineKeyboardMarkup projectListMenu(String chatId) {
         String projectName;
         String projectCallback;
+
+        int projectsPerPage = 5;
+        int currentPage = userRepository.getProjectsPageByChatId(chatId);
+
         List<Project> projects = projectRepository.findProjectsByChatId(chatId);
 
+        int startIndex = currentPage * projectsPerPage - projectsPerPage;
+        int endIndex = Math.min(startIndex + projectsPerPage, projects.size());
+
+        List<Project> projectsForPage = projects.subList(startIndex, endIndex);
         List<List<InlineKeyboardButton>> rows = new ArrayList<>();
 
-        for (Project project : projects) {
+        for (Project project : projectsForPage) {
             projectName = project.getProjectName();
             projectCallback = "project_" + project.getProjectId();
             rows.add(
@@ -484,13 +468,37 @@ public class InlineKeyboards {
                     )
             );
         }
-
+        rows.add(paginationButtons(currentPage, projects.size() / projectsPerPage));
         rows.add(backAndExitMenuButtons(chatId));
 
         return inlineKeyboardMaker.addMarkup(rows);
     }
 
+    private List<InlineKeyboardButton> paginationButtons(int currentPage, int totalPages) {
+        List<InlineKeyboardButton> buttons = new ArrayList<>();
 
+        if (currentPage > 1) {
+            buttons.add(
+                    inlineKeyboardMaker.addButton(
+                            ButtonNameEnum.PROJECT_PREVIOUS_PAGE_BUTTON.getButtonName(),
+                            CallBackEnum.PROJECT_PAGE_CALLBACK.getCallBackName() + (currentPage - 1),
+                            null
+                    )
+            );
+        }
+
+        if (currentPage < totalPages ) {
+            buttons.add(
+                    inlineKeyboardMaker.addButton(
+                            ButtonNameEnum.PROJECT_NEXT_PAGE_BUTTON.getButtonName(),
+                            CallBackEnum.PROJECT_PAGE_CALLBACK.getCallBackName() + (currentPage + 1),
+                            null
+                    )
+            );
+        }
+
+        return buttons;
+    }
 
 
 

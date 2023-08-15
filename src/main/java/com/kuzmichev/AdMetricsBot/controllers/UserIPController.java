@@ -33,8 +33,9 @@ public class UserIPController {
         String ip = getIpAddress(request);
         double timeZone = ipToTimeZone.convertIpToTimeZone(ip);
 
-        int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
-        messageManagementService.putMessageToQueue(chatId, messageId);
+        // ЧТО ЭТО ТАКОЕ????
+//        int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
+//        messageManagementService.putMessageToQueue(chatId, messageId);
 
         Optional<User> userOptional = userRepository.findByChatId(chatId);
         if (userOptional.isPresent()) {

@@ -7,7 +7,7 @@
       <imported>true</imported>
       <remarks>Hibernate</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://194.67.87.54:5432/postgres</jdbc-url>
+      <jdbc-url>jdbc:postgresql://95.163.241.160:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

@@ -49,8 +49,6 @@ public class MessageHandler {
         String messageText = message.getText();
         String userState = userRepository.getUserStateByChatId(chatId);
         CommandEnum commandEnum = CommandEnum.fromCommand(messageText);
-//        messageManagementService.deleteMessage(chatId);
-//        messageManagementService.putMessageToQueue(chatId, message.getMessageId());
 
         // Ловим команду отправки сообщения от админа
         if (messageText.contains("/send") && chatId.equals(config.getOwnerId())){
@@ -89,11 +87,12 @@ public class MessageHandler {
         else if (userState != null) {
             UserStateEnum userStateEnum = UserStateEnum.valueOf(userState);
             int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
+            messageManagementService.putMessageToQueue(chatId, messageId);
+            messageManagementService.deleteMessage(chatId);
             switch (userStateEnum) {
                 // Ловим и валидируем время таймера
                 case SETTINGS_EDIT_TIMER_STATE -> {
                     if (validator.validateTime(messageText)) {
-                        messageManagementService.putMessageToQueue(chatId, messageId);
                         return addTimer.setTimerAndStart(chatId, messageText);
                     } else {
                         messageManagementService.putMessageToQueue(chatId, messageId);
@@ -109,11 +108,9 @@ public class MessageHandler {
                 // Ловим и валидируем имя проекта
                 case SETTINGS_PROJECT_CREATE_ASK_NAME_STATE -> {
                     if (validator.validateProjectName(messageText)) {
-                        messageManagementService.putMessageToQueue(chatId, messageId);
                         userStateEditor.editUserState(chatId, UserStateEnum.SETTINGS_PROJECT_ADD_TOKENS_STATE);
                         return projectManager.projectCreate(chatId, messageText);
                     } else {
-                        messageManagementService.putMessageToQueue(chatId, messageId);
                         SendMessage sendMessage = messageWithReturn.sendMessage(
                                 chatId,
                                 BotMessageEnum.PROJECT_NAME_INVALID_MESSAGE.getMessage(),
@@ -126,10 +123,8 @@ public class MessageHandler {
                 // Речной ввод времени пользователя
                 case EDIT_TIMEZONE_MANUAL_STATE -> {
                     if (validator.validateTime(messageText)) {
-                        messageManagementService.putMessageToQueue(chatId, messageId);
                         return timeZoneDefinition.manualTimeZone(chatId, messageText);
                     } else {
-                        messageManagementService.putMessageToQueue(chatId, messageId);
                         SendMessage sendMessage = messageWithReturn.sendMessage(
                                 chatId,
                                 BotMessageEnum.INVALID_TIME_MESSAGE.getMessage(),

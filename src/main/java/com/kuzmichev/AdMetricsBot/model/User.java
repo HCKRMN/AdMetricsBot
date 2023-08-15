@@ -24,5 +24,7 @@ public class User {
     private double timeZone;
     private String ip;
     private String userState;
+    private int projectsCount;
+    private int projectsPage;
 
 }
