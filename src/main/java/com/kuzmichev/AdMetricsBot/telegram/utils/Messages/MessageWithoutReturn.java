@@ -28,17 +28,17 @@ public class MessageWithoutReturn {
     public void editMessage(EditMessageText sendMessage) { eventPublisher.publishEvent(sendMessage);
     }
 
-    public  void editMessage(
+    public void editMessage(
             String chatId,
             int messageId,
-            BotMessageEnum text,
+            String text,
             UserStateEnum userState,
             InlineKeyboardMarkup keyboard) {
 
         EditMessageText message = new EditMessageText();
         message.setChatId(chatId);
         message.setMessageId(messageId);
-        message.setText(text.getMessage());
+        message.setText(text);
         if (userState != null) {
             userStateEditor.editUserState(chatId, userState);
         }

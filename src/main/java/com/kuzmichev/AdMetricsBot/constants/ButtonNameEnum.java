@@ -38,6 +38,7 @@ public enum ButtonNameEnum {
     PROJECT_DELETE_BUTTON("Удалить проект"),
     PROJECT_PREVIOUS_PAGE_BUTTON("Предыдущие"),
     PROJECT_NEXT_PAGE_BUTTON("Следующие"),
+    DELETE_PROJECT_BUTTON("Удалить"),
     CANCEL_BUTTON("Отмена"),
     DONE_BUTTON("Готово"),
     MANUAL_INPUT_BUTTON("Ручной ввод"),

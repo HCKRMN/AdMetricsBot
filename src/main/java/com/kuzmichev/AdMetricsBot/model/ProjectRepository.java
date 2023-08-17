@@ -13,6 +13,9 @@ public interface ProjectRepository extends CrudRepository<Project, String> {
     void removeProjectsByChatId(String chatId);
 
     @Query("select p.projectName from projectTable p where p.projectId = :projectId")
-    String findProjectnameByProjectId(String projectId);
+    String findProjectNameByProjectId(String projectId);
+
+    @Transactional
+    void removeProjectByProjectId(String projectId);
 
 }

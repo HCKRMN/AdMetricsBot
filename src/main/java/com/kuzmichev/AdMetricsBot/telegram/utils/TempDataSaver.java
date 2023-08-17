@@ -28,4 +28,11 @@ public class TempDataSaver {
                 tempData.setMessagesIdsToDelete(messagesIdsToDelete);
                 tempDataRepository.save(tempData);
     }
+
+    public void tempProjectId(String chatId, String projectId) {
+        TempData tempData = new TempData();
+        tempData.setChatId(chatId);
+        tempData.setLastProjectId(projectId);
+        tempDataRepository.save(tempData);
+    }
 }

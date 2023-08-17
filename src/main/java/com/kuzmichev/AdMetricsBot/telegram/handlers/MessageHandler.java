@@ -3,6 +3,7 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers;
 import com.kuzmichev.AdMetricsBot.config.TelegramConfig;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CommandEnum;
+import com.kuzmichev.AdMetricsBot.constants.InputsEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.model.User;
@@ -43,6 +44,7 @@ public class MessageHandler {
     InlineKeyboards inlineKeyboards;
     MessageWithReturn messageWithReturn;
     MessageWithoutReturn messageWithoutReturn;
+    InputsManager inputsManager;
     public BotApiMethod<?> answerMessage(Message message) {
         String chatId = message.getChatId().toString();
         String userName = message.getFrom().getUserName();
@@ -74,10 +76,15 @@ public class MessageHandler {
                         registration.registerUser(chatId, userName);
                         return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
                     }
-//                    case TEST -> {
+                    case TEST -> {
 //                        messageManagementService.deleteMessage(chatId);
 ////                        return addYandex.testYandex(yandexRepository, chatId);
-//                    }
+
+                        String projectId = "07fcd821-668b-4bb0-be86-5a1afaeec507";
+                        String inputName = InputsEnum.Yandex.getInputName();
+
+                        inputsManager.deleteInputs(projectId, inputName);
+                    }
                     default -> {
                     }
                 }

@@ -2,9 +2,11 @@ package com.kuzmichev.AdMetricsBot.telegram.keyboards;
 
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.InputsEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
 import com.kuzmichev.AdMetricsBot.telegram.utils.AddYandex;
+import com.kuzmichev.AdMetricsBot.telegram.utils.InputsManager;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -27,6 +29,8 @@ public class InlineKeyboards {
     final UserRepository userRepository;
     final AddYandex addYandex;
     final ProjectRepository projectRepository;
+    final TempDataRepository tempDataRepository;
+    final InputsManager inputsManager;
 
     @Value("${telegram.webhook-path}")
     String link;
@@ -99,43 +103,36 @@ public class InlineKeyboards {
                 )
         );
     }
-    public InlineKeyboardMarkup projectsMenu() {
+    public InlineKeyboardMarkup projectsMenu(String chatId) {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> rows= new ArrayList<>();
+        inlineKeyboardMarkup.setKeyboard(rows);
 
-        return inlineKeyboardMaker.addMarkup(
-                inlineKeyboardMaker.addRows(
-                        inlineKeyboardMaker.addRow(
-                                // Кнопка добавления проекта
-                                inlineKeyboardMaker.addButton(
-                                        ButtonNameEnum.PROJECT_CREATE_BUTTON.getButtonName(),
-                                        CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName(),
-                                        null
-                                )
-                        ),
-                        inlineKeyboardMaker.addRow(
-                                // Кнопка получения списка проектов
-                                inlineKeyboardMaker.addButton(
-                                        ButtonNameEnum.PROJECTS_GET_LIST_BUTTON.getButtonName(),
-                                        CallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName(),
-                                        null
-                                )
-                        ),
-                        inlineKeyboardMaker.addRow(
-                                // Кнопка назад
-                                inlineKeyboardMaker.addButton(
-                                        ButtonNameEnum.SETTINGS_BACK_BUTTON.getButtonName(),
-                                        CallBackEnum.SETTINGS_BACK_CALLBACK.getCallBackName(),
-                                        null
-                                ),
-                                // Кнопка выход
-                                inlineKeyboardMaker.addButton(
-                                        ButtonNameEnum.SETTINGS_EXIT_BUTTON.getButtonName(),
-                                        CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
-                                        null
-                                )
-                        )
+        // Кнопка добавления проекта
+        List<InlineKeyboardButton> createProjectButton = inlineKeyboardMaker.addRow(
+                inlineKeyboardMaker.addButton(
+                        ButtonNameEnum.PROJECT_CREATE_BUTTON.getButtonName(),
+                        CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName(),
+                        null
                 )
         );
+
+        // Кнопка получения списка проектов
+        List<InlineKeyboardButton> projectsButton = inlineKeyboardMaker.addRow(
+                                                         inlineKeyboardMaker.addButton(
+                                                            ButtonNameEnum.PROJECTS_GET_LIST_BUTTON.getButtonName(),
+                                                            CallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName(),
+                                                            null
+                                                        )
+                                                    );
+        rows.add(createProjectButton);
+        if (userRepository.getProjectsCountByChatId(chatId) != 0) {
+            rows.add(projectsButton);
+        }
+        rows.add(backAndExitMenuButtons(chatId));
+        return inlineKeyboardMarkup;
     }
+
 // Это кнопки меню второго уровня, оно универсальное. Подходит для меню проектов, настройки времени
     public InlineKeyboardMarkup projectCreateMenu() {
 
@@ -179,6 +176,25 @@ public class InlineKeyboards {
                         )
                 );
 
+    }
+
+    public InlineKeyboardMarkup deleteProjectMenu() {
+        return inlineKeyboardMaker.addMarkup(
+                inlineKeyboardMaker.addRows(
+                        inlineKeyboardMaker.addRow(
+                                inlineKeyboardMaker.addButton(
+                                        ButtonNameEnum.DELETE_PROJECT_BUTTON.getButtonName(),
+                                        CallBackEnum.PROJECT_DELETE_STEP_2_CALLBACK.getCallBackName(),
+                                        null
+                                ),
+                                inlineKeyboardMaker.addButton(
+                                        ButtonNameEnum.CANCEL_BUTTON.getButtonName(),
+                                        CallBackEnum.NOT_DELETE_PROJECT_CALLBACK.getCallBackName(),
+                                        null
+                                )
+                        )
+                )
+        );
     }
 
     // Это кнопки меню второго уровня, оно универсальное. Подходит для настройки времени, настройки проектов и тд
@@ -415,7 +431,7 @@ public class InlineKeyboards {
                             inlineKeyboardMaker.addRow(
                                     inlineKeyboardMaker.addButton(
                                             ButtonNameEnum.PROJECT_DELETE_TOKEN_BUTTON.getButtonName(),
-                                            CallBackEnum.PROJECT_DELETE_TOKEN_CALLBACK.getCallBackName(),
+                                            CallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName(),
                                             null
                                     )
                             ),
@@ -429,7 +445,7 @@ public class InlineKeyboards {
                             inlineKeyboardMaker.addRow(
                                     inlineKeyboardMaker.addButton(
                                             ButtonNameEnum.PROJECT_DELETE_BUTTON.getButtonName(),
-                                            CallBackEnum.PROJECT_DELETE_CALLBACK.getCallBackName(),
+                                            CallBackEnum.PROJECT_DELETE_STEP_1_CALLBACK.getCallBackName(),
                                             null
 
                                     )
@@ -500,6 +516,26 @@ public class InlineKeyboards {
         return buttons;
     }
 
+    public InlineKeyboardMarkup deleteInputsMenu(String chatId) {
+        String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
+        List<InputsEnum> inputs = inputsManager.getInputsByProjectId(projectId);
+
+        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
+
+        for (InputsEnum input : inputs) {
+            rows.add(
+                    inlineKeyboardMaker.addRow(
+                            inlineKeyboardMaker.addButton(
+                                    input.getInputName(),
+                                    CallBackEnum.INPUT_CALLBACK.getCallBackName() + input.getInputName(),
+                                    null
+                            )
+                    )
+            );
+        }
+        rows.add(backAndExitMenuButtons(chatId));
+        return inlineKeyboardMaker.addMarkup(rows);
+    }
 
 
 

@@ -27,8 +27,6 @@ public class ProjectManager {
     ProjectRepository projectRepository;
     TempDataRepository tempDataRepository;
     InlineKeyboards inlineKeyboards;
-    YandexRepository yandexRepository;
-    BitrixRepository bitrixRepository;
     UserRepository userRepository;
 
         // Это вроде для регистрации
@@ -85,33 +83,6 @@ public class ProjectManager {
 
         return sendMessage;
     }
-
-//    public void getProjects(String chatId) {
-//        String projectName;
-//        String projectId;
-//        List<Project> projects = projectRepository.findProjectsByChatId(chatId);
-//        for (Project project : projects){
-//            projectName = project.getProjectName();
-//            projectId = project.getProjectId();
-//
-//            StringBuilder projectInfo = new StringBuilder();
-//            projectInfo.append("Название проекта:").append("\n");
-//            projectInfo.append(projectName).append("\n\n");
-//            projectInfo.append("Подключенные источники:").append("\n");
-//            if (yandexRepository.existsByProjectId(projectId)){
-//                projectInfo.append("Yandex").append("\n");
-//            }
-//            if (bitrixRepository.existsByProjectId(projectId)){
-//                projectInfo.append("Bitrix").append("\n");
-//            }
-//
-////            messageWithoutReturn.sendMessage(
-////                    chatId,
-////                    projectInfo.toString(),
-////                    inlineKeyboards.projectEditAndDeleteMenu()
-////            );
-//        }
-//    }
 }
 
 

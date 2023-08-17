@@ -20,9 +20,6 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
 import java.util.Map;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 @Slf4j
 @Component
@@ -41,7 +38,8 @@ public class CallbackQueryHandler {
     TempDataSaver tempDataSaver;
     ProjectRepository projectRepository;
     UserRepository userRepository;
-    DynamicCallback dynamicCallback;
+    TempDataRepository tempDataRepository;
+    InputsManager inputsManager;
 
     public BotApiMethod<?> processCallbackQuery(CallbackQuery buttonQuery) {
         String chatId = buttonQuery.getMessage().getChatId().toString();
@@ -50,7 +48,7 @@ public class CallbackQueryHandler {
         String projectId = "";
         int messageId = buttonQuery.getMessage().getMessageId();
         int currentPage = 1;
-
+        String inputName = null;
 
 
         // Секция обработки динамический колбеков с данными
@@ -58,15 +56,26 @@ public class CallbackQueryHandler {
         Map<String, String> projectData = DynamicCallback.handleDynamicCallback(data, regexProject, "project_");
         if (!projectData.isEmpty()) {
             projectId = projectData.get("value");
+            tempDataSaver.tempProjectId(chatId, projectId);
             data = "SOME_PROJECT_CALLBACK";
         }
 
-        String regexPage = "PROJECT_PAGE_CALLBACK_.+";
-        Map<String, String> pageData = DynamicCallback.handleDynamicCallback(data, regexPage, "PROJECT_PAGE_CALLBACK_");
+        String regexPage = "page_.+";
+        Map<String, String> pageData = DynamicCallback.handleDynamicCallback(data, regexPage, "page_");
         if (!pageData.isEmpty()) {
             currentPage = Integer.parseInt(pageData.get("value"));
             data = "PROJECT_GET_LIST_CALLBACK";
         }
+
+        String regexInput = "input_.+";
+        Map<String, String> inputData = DynamicCallback.handleDynamicCallback(data, regexInput, "input_");
+        if (!inputData.isEmpty()) {
+            inputName = inputData.get("value");
+            System.out.println(inputName);
+            data = "PROJECT_INPUT_DELETE_CALLBACK";
+        }
+
+
 
 
         switch (CallBackEnum.valueOf(data)) {
@@ -132,15 +141,13 @@ public class CallbackQueryHandler {
                         messageId,
                         BotMessageEnum.PROJECT_MENU_MESSAGE.getMessage(),
                         UserStateEnum.SETTINGS_PROJECTS_STATE,
-                        inlineKeyboards.projectsMenu());
+                        inlineKeyboards.projectsMenu(chatId));
             }
-
             case EDIT_LANGUAGE_CALLBACK -> {
                 return new SendMessage(
                         chatId,
                         BotMessageEnum.IN_DEVELOPING_MESSAGE.getMessage());
             }
-
             case SETTINGS_BACK_CALLBACK -> {
                 return messageWithReturn.editMessage(
                         chatId,
@@ -149,13 +156,12 @@ public class CallbackQueryHandler {
                         UserStateEnum.SETTINGS_EDIT_STATE,
                         inlineKeyboards.settingsMenu(chatId));
             }
-            case SETTINGS_EXIT_CALLBACK -> {
+            case SETTINGS_EXIT_CALLBACK, NOT_DELETE_PROJECT_CALLBACK -> {
                 return messageWithReturn.deleteMessage(
                         chatId,
                         messageId,
                         UserStateEnum.WORKING_STATE);
             }
-
             case EDIT_TIMER_CALLBACK -> {
                 tempDataSaver.tempMessageId(chatId, messageId);
                 return messageWithReturn.editMessage(
@@ -165,8 +171,6 @@ public class CallbackQueryHandler {
                         UserStateEnum.SETTINGS_EDIT_TIMER_STATE,
                         inlineKeyboards.backAndExitMenu(chatId));
             }
-
-
             case PROJECT_GET_LIST_CALLBACK -> {
                 messageManagementService.putMessageToQueue(chatId, messageId);
                 Optional<User> userOptional = userRepository.findByChatId(chatId);
@@ -175,7 +179,6 @@ public class CallbackQueryHandler {
                     user.setProjectsPage(currentPage);
                     userRepository.save(user);
                 }
-
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,
@@ -183,19 +186,47 @@ public class CallbackQueryHandler {
                         null,
                         inlineKeyboards.projectListMenu(chatId));
             }
-
             case SOME_PROJECT_CALLBACK -> {
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,
-                        projectRepository.findProjectnameByProjectId(projectId),
+                        projectRepository.findProjectNameByProjectId(projectId),
                         null,
                         inlineKeyboards.someProjectMenu(chatId));
-
+            }
+            case PROJECT_DELETE_STEP_1_CALLBACK -> {
+                return messageWithReturn.editMessage(
+                        chatId,
+                        messageId,
+                        BotMessageEnum.PROJECT_DELETE_STEP_1_MESSAGE.getMessage(),
+                        null,
+                        inlineKeyboards.deleteProjectMenu());
             }
 
-
-
+            case PROJECT_DELETE_STEP_2_CALLBACK -> {
+                projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
+                projectRepository.removeProjectByProjectId(projectId);
+                userRepository.decrementProjectsCount(chatId);
+                return messageWithReturn.editMessage(
+                        chatId,
+                        messageId,
+                        BotMessageEnum.PROJECT_DELETE_STEP_2_MESSAGE.getMessage(),
+                        null,
+                        inlineKeyboards.done()
+                );
+            }
+            case PROJECT_INPUT_DELETE_CALLBACK -> {
+                if (inputName != null){
+                    projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
+                    inputsManager.deleteInputs(projectId, inputName);
+                }
+                 return messageWithReturn.editMessage(
+                        chatId,
+                        messageId,
+                        BotMessageEnum.PROJECT_INPUT_DELETE_MESSAGE.getMessage(),
+                        null,
+                        inlineKeyboards.deleteInputsMenu(chatId));
+            }
 
 
 
@@ -229,7 +260,7 @@ public class CallbackQueryHandler {
                         UserStateEnum.EDIT_TIMEZONE_MANUAL_STATE,
                         inlineKeyboards.backAndExitMenu(chatId));
             }
-            case ADD_TOKENS_CALLBACK -> {
+            case ADD_TOKENS_CALLBACK, PROJECT_ADD_TOKEN_CALLBACK -> {
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,
