@@ -62,7 +62,7 @@ public class MessageWithoutReturn {
         eventPublisher.publishEvent(message);
     }
 
-    public void deleteMessage(String chatId, int messageId) {
+    public void deleteMessage(String chatId, Integer messageId) {
         DeleteMessage deleteMessage = new DeleteMessage();
         deleteMessage.setChatId(String.valueOf(chatId));
         deleteMessage.setMessageId(messageId);

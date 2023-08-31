@@ -3,32 +3,28 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import com.kuzmichev.AdMetricsBot.service.YandexDirectRequest;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 @Slf4j
 @Component
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class AddYandex {
-    final InlineKeyboardMaker inlineKeyboardMaker;
     final YandexRepository yandexRepository;
-    @Value("${yaClientID}")
+    @Value("${yandexClientID}")
     String clientId;
     @Value("${telegram.webhook-path}")
     String link;
-    @Value("${yaRedirectURI}")
+    @Value("${yandexRedirectURI}")
     String redirectUri;
 
 
-    public String getYaAuthorizationUrl(String chatId) {
+    public String getYandexAuthorizationUrl(String chatId) {
         return "https://oauth.yandex.ru/authorize" +
                 "?response_type=token" +
                 "&client_id=" + clientId +

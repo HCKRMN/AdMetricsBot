@@ -5,6 +5,7 @@ import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.InputsEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
+import com.kuzmichev.AdMetricsBot.telegram.utils.AddBitrix;
 import com.kuzmichev.AdMetricsBot.telegram.utils.AddYandex;
 import com.kuzmichev.AdMetricsBot.telegram.utils.InputsManager;
 import lombok.AccessLevel;
@@ -31,6 +32,7 @@ public class InlineKeyboards {
     final ProjectRepository projectRepository;
     final TempDataRepository tempDataRepository;
     final InputsManager inputsManager;
+    final AddBitrix addBitrix;
 
     @Value("${telegram.webhook-path}")
     String link;
@@ -333,7 +335,7 @@ public class InlineKeyboards {
                                 // Кнопка добавления Bitrix
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.ADD_BITRIX_BUTTON.getButtonName(),
-                                        CallBackEnum.ADD_BITRIX_CALLBACK.getCallBackName(),
+                                        CallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -364,7 +366,7 @@ public class InlineKeyboards {
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.YANDEX_ADD_TOKEN_LINK_BUTTON.getButtonName(),
                                         null,
-                                        addYandex.getYaAuthorizationUrl(chatId)
+                                        addYandex.getYandexAuthorizationUrl(chatId)
                                 )
 //                                        на всякий случай оставлю кнопку получения доступа к апи, вроде как ненужно, но пусть будет
 //                                        ,
@@ -537,6 +539,23 @@ public class InlineKeyboards {
         return inlineKeyboardMaker.addMarkup(rows);
     }
 
+    public InlineKeyboardMarkup bitrixLinkMenu(String chatId) {
+        return inlineKeyboardMaker.addMarkup(
+                inlineKeyboardMaker.addRows(
+                        inlineKeyboardMaker.addRow(
+                                // Ссылка на получения токена битрикс
+                                inlineKeyboardMaker.addButton(
+                                        ButtonNameEnum.LINK_BUTTON.getButtonName(),
+                                        null,
+                                        addBitrix.getBitrixAuthorizationUrl(chatId)
+                                )
+
+                        ),
+                        backAndExitMenuButtons(chatId)
+                )
+        );
+
+    }
 
 
 

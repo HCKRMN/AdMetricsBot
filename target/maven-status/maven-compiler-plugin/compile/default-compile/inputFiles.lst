@@ -27,6 +27,7 @@ C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\BitrixRe
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\ScheduledMessageSender.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\UserRepository.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\AdMetricsBotApplication.java
+C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\constants\InputsEnum.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\constants\CallBackEnum.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\constants\ButtonNameEnum.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\Yandex.java
@@ -45,10 +46,14 @@ C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\M
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\Bitrix.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\AddTimer.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\AdMetricsBot.java
+C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\DynamicCallback.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\Delete\AddTokensMenu.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\Registration.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\keyboards\InlineKeyboards.java
+C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\AddBitrix.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\ScheduledMessageRepository.java
+C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\controllers\BitrixController.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\CallbackQueryHandler.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\TelegramApiClient.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\controllers\YaController.java
+C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\InputsManager.java

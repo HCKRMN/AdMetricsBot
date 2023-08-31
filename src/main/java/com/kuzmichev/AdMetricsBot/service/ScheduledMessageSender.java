@@ -37,7 +37,12 @@ public class ScheduledMessageSender {
             List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(now);
             for (ScheduledMessage scheduledMessage : scheduledMessages) {
                 try {
-                    messageWithoutReturn.sendMessage(scheduledMessage.getChatId(), "Затраты на рекламу в Яндекс директ: " + YandexDirectRequest.ya(yandexRepository, scheduledMessage.getChatId()));
+                    messageWithoutReturn.sendMessage(
+                            scheduledMessage.getChatId(),
+                            "Затраты на рекламу в Яндекс директ: "
+                                    + YandexDirectRequest.ya(
+                                            yandexRepository,
+                                            scheduledMessage.getChatId()));
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);

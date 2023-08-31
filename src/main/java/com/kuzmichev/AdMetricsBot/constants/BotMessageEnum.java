@@ -15,6 +15,9 @@ public enum BotMessageEnum {
     EDIT_TIMEZONE_MANUAL_MESSAGE("Укажите ваше текущщее время в формате «23 59»"),
     ADD_YANDEX_MESSAGE("Перейдите по ссылке чтобы подключить аккаунт Яндекс Директ"),
     ADD_YANDEX_TEST_MESSAGE("Проверьте получение данных с аккаунта Яндекс Директ"),
+    ADD_BITRIX_STEP_1_MESSAGE("Введите домен вашего портала Битрикс24 в формате, без кавычек: \n«test.bitrix24.ru». " +
+            "\nЕсли у вас собственный домен без bitrix.ru, введите его."),
+    ADD_BITRIX_STEP_2_MESSAGE("Теперь перейдите по ссылке"),
     ADD_TOKENS_MESSAGE("Добавьте источники данных"),
     ACCOUNT_ALREADY_ADDED_MESSAGE("Аккаунт Яндекс уже добавлен, хотите подключить другие сервисы?"),
     ASK_TIME_MESSAGE("Укажите время отправки уведомления в формате «23 59»"),
@@ -32,8 +35,8 @@ public enum BotMessageEnum {
     PROJECT_MENU_MESSAGE("Создайте новый, отредактируйте существующий или удалите ненужный проект"),
     PROJECT_CREATE_ASK_NAME_MESSAGE("Введите название проекта, не более 30 символов"),
     SETTINGS_PROJECTS_LIST_MENU_MESSAGE("В этом меню отображены все ваши проекты. Вы можете изменить подключенные источники данных или удалить проект"),
-    PROJECT_NAME_INVALID_MESSAGE("Вы ввели некоректное название проекта. Введите название из 30 символов, " +
-            "используйте кирилицу или латиницу, а также цифры."),
+    PROJECT_NAME_INVALID_MESSAGE("Вы ввели некорректное название проекта. Введите название из 30 символов, " +
+            "используйте кириллицу или латиницу, а также цифры."),
     PROJECT_DELETE_STEP_1_MESSAGE("Вы уверены, что хотите удалить проект?"),
     PROJECT_DELETE_STEP_2_MESSAGE("Проект удалён"),
     NOT_DELETE_PROJECT_MESSAGE("Удаление проекта отменено"),
@@ -41,6 +44,8 @@ public enum BotMessageEnum {
 
 
     INVALID_TIME_MESSAGE("Неверный формат времени. \nВведите время в формате: \n«23 59», \n«00 00». \n\nБез кавычек!"),
+    INVALID_BITRIXDOMAIN_MESSAGE("Неверный формат домена. \nВведите значение в формате, без кавычек: \n«test.bitrix24.ru»" +
+            "\n Если у вас собственный домен без bitrix.ru, введите его."),
     NON_COMMAND_MESSAGE("Вы ввели неизвестную команду"),
     DISABLE_NOTIFICATIONS_MESSAGE("Уведомления отключены"),
     ENABLE_NOTIFICATIONS_MESSAGE("Уведомления включены"),

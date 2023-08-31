@@ -19,26 +19,13 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class MessageEventHandler {
     AdMetricsBot adMetricsBot;
     TempDataSaver tempDataSaver;
-    MessageManagementService messageManagementService;
-
-//    @EventListener
-//    public void handleSendMessageEvent(SendMessage message) {
-//        try {
-//            adMetricsBot.execute(message);
-//        } catch (TelegramApiException e) {
-//            log.error("ERROR_TEXT" + e.getMessage());
-//        }
-//    }
 
     @EventListener
     public void handleSendMessageEvent(SendMessage message) {
         try {
             int messageId = adMetricsBot.execute(message).getMessageId();
             String chatId = message.getChatId();
-            messageManagementService.putMessageToQueue(chatId, messageId);
-//            tempDataSaver.tempMessageId(chatId, messageId);
-            // тут отправляем в метод добавления очереди
-//            messageCleaner.putMessageToQueue(chatId, messageId);
+            tempDataSaver.tempLastMessageId(chatId, messageId);
         } catch (TelegramApiException e) {
             log.error("ERROR_TEXT" + e.getMessage());
         }

@@ -1,3 +1,4 @@
+com\kuzmichev\AdMetricsBot\telegram\utils\InputsManager$1.class
 com\kuzmichev\AdMetricsBot\constants\BotMessageEnum.class
 com\kuzmichev\AdMetricsBot\model\User.class
 com\kuzmichev\AdMetricsBot\service\YandexDirectRequest.class
@@ -14,14 +15,17 @@ com\kuzmichev\AdMetricsBot\service\IpToTimeZone.class
 com\kuzmichev\AdMetricsBot\service\BitrixRequest.class
 com\kuzmichev\AdMetricsBot\telegram\utils\UserStateEditor.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\ReplyKeyboardMaker.class
+com\kuzmichev\AdMetricsBot\telegram\utils\AddBitrix.class
 com\kuzmichev\AdMetricsBot\model\BitrixRepository.class
 com\kuzmichev\AdMetricsBot\model\UserRepository.class
 com\kuzmichev\AdMetricsBot\model\ScheduledMessage.class
+com\kuzmichev\AdMetricsBot\telegram\utils\InputsManager.class
 com\kuzmichev\AdMetricsBot\constants\CommandEnum.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\InlineKeyboards$1.class
 com\kuzmichev\AdMetricsBot\telegram\TelegramApiClient.class
 com\kuzmichev\AdMetricsBot\telegram\utils\Messages\MessageWithReturn.class
 com\kuzmichev\AdMetricsBot\AdMetricsBotApplication.class
+com\kuzmichev\AdMetricsBot\telegram\handlers\DynamicCallback.class
 com\kuzmichev\AdMetricsBot\model\Bitrix.class
 com\kuzmichev\AdMetricsBot\controllers\UserIPController.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\MessageHandler.class
@@ -41,6 +45,8 @@ com\kuzmichev\AdMetricsBot\telegram\utils\Messages\MessageWithoutReturn.class
 com\kuzmichev\AdMetricsBot\telegram\utils\Validator.class
 com\kuzmichev\AdMetricsBot\constants\UserStateEnum.class
 com\kuzmichev\AdMetricsBot\model\TempDataRepository.class
+com\kuzmichev\AdMetricsBot\constants\InputsEnum.class
+com\kuzmichev\AdMetricsBot\controllers\BitrixController.class
 com\kuzmichev\AdMetricsBot\controllers\YaController.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\InlineKeyboards.class
 com\kuzmichev\AdMetricsBot\telegram\utils\ProjectManager.class

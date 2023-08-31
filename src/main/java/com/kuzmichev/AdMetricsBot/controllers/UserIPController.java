@@ -18,6 +18,8 @@ import java.util.Optional;
 @Slf4j
 public class UserIPController {
 
+
+    // ПОЧЕМУ ТУТ АВТОВАЙРЕД????
     @Autowired
     private UserRepository userRepository;
     @Autowired

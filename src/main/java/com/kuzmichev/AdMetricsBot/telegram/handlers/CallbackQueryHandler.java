@@ -135,7 +135,7 @@ public class CallbackQueryHandler {
                         null);
             }
             case PROJECTS_CALLBACK -> {
-                tempDataSaver.tempMessageId(chatId, messageId);
+                tempDataSaver.tempLastMessageId(chatId, messageId);
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,
@@ -163,7 +163,7 @@ public class CallbackQueryHandler {
                         UserStateEnum.WORKING_STATE);
             }
             case EDIT_TIMER_CALLBACK -> {
-                tempDataSaver.tempMessageId(chatId, messageId);
+                tempDataSaver.tempLastMessageId(chatId, messageId);
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,
@@ -172,7 +172,7 @@ public class CallbackQueryHandler {
                         inlineKeyboards.backAndExitMenu(chatId));
             }
             case PROJECT_GET_LIST_CALLBACK -> {
-                messageManagementService.putMessageToQueue(chatId, messageId);
+//                messageManagementService.putMessageToQueue(chatId, messageId);
                 Optional<User> userOptional = userRepository.findByChatId(chatId);
                 if (userOptional.isPresent()) {
                     User user = userOptional.get();
@@ -227,6 +227,15 @@ public class CallbackQueryHandler {
                         null,
                         inlineKeyboards.deleteInputsMenu(chatId));
             }
+            case ADD_BITRIX_STEP_1_CALLBACK -> {
+                tempDataSaver.tempLastMessageId(chatId, messageId);
+                return messageWithReturn.editMessage(
+                        chatId,
+                        messageId,
+                        BotMessageEnum.ADD_BITRIX_STEP_1_MESSAGE.getMessage(),
+                        UserStateEnum.SETTINGS_PROJECT_ADD_BITRIX_STATE,
+                        inlineKeyboards.backAndExitMenu(chatId));
+            }
 
 
 
@@ -234,8 +243,8 @@ public class CallbackQueryHandler {
 
             // Универсальные
             case PROJECT_CREATE_ASK_NAME_CALLBACK -> {
-                tempDataSaver.tempMessageId(chatId, messageId);
-                System.out.println("messageId1: " + messageId);
+                tempDataSaver.tempLastMessageId(chatId, messageId);
+                System.out.println("messageId: " + messageId);
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,
@@ -244,7 +253,7 @@ public class CallbackQueryHandler {
                         inlineKeyboards.projectCreateMenu());
             }
             case EDIT_TIMEZONE_CALLBACK -> {
-                tempDataSaver.tempMessageId(chatId, messageId);
+                tempDataSaver.tempLastMessageId(chatId, messageId);
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,
@@ -269,7 +278,7 @@ public class CallbackQueryHandler {
                         inlineKeyboards.addTokensMenu(chatId));
             }
             case ADD_YANDEX_CALLBACK -> {
-                tempDataSaver.tempMessageId(chatId, messageId);
+                tempDataSaver.tempLastMessageId(chatId, messageId);
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,

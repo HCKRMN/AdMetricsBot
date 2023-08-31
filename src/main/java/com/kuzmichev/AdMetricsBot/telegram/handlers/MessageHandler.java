@@ -3,12 +3,10 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers;
 import com.kuzmichev.AdMetricsBot.config.TelegramConfig;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CommandEnum;
-import com.kuzmichev.AdMetricsBot.constants.InputsEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
-import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
-import com.kuzmichev.AdMetricsBot.model.User;
-import com.kuzmichev.AdMetricsBot.model.UserRepository;
-import com.kuzmichev.AdMetricsBot.model.YandexRepository;
+import com.kuzmichev.AdMetricsBot.model.*;
+import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMainRequest;
+import com.kuzmichev.AdMetricsBot.service.bitrix.CountRecordsRequest;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.*;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
@@ -43,8 +41,11 @@ public class MessageHandler {
     TempDataRepository tempDataRepository;
     InlineKeyboards inlineKeyboards;
     MessageWithReturn messageWithReturn;
+    BitrixRepository bitrixRepository;
     MessageWithoutReturn messageWithoutReturn;
-    InputsManager inputsManager;
+    BitrixMainRequest bitrixMainRequest;
+
+
     public BotApiMethod<?> answerMessage(Message message) {
         String chatId = message.getChatId().toString();
         String userName = message.getFrom().getUserName();
@@ -60,7 +61,7 @@ public class MessageHandler {
                 return new SendMessage(user.getChatId(), textToSend);
             }
         }
-        // Обработка пользовательских комманд
+        // Обработка пользовательских команд
         else if (commandEnum != null) {
                 switch (commandEnum) {
                     case START -> {
@@ -77,13 +78,8 @@ public class MessageHandler {
                         return timeZoneDefinition.requestTimeZoneSettingLink(chatId);
                     }
                     case TEST -> {
-//                        messageManagementService.deleteMessage(chatId);
-////                        return addYandex.testYandex(yandexRepository, chatId);
-
-                        String projectId = "07fcd821-668b-4bb0-be86-5a1afaeec507";
-                        String inputName = InputsEnum.Yandex.getInputName();
-
-                        inputsManager.deleteInputs(projectId, inputName);
+                        String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
+                        return new SendMessage(chatId, "ЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫ: " + bitrixMainRequest.mainBitrixRequest(projectId));
                     }
                     default -> {
                     }
@@ -93,23 +89,24 @@ public class MessageHandler {
         // Обработка команд при разных состояниях пользователя
         else if (userState != null) {
             UserStateEnum userStateEnum = UserStateEnum.valueOf(userState);
+
+            // Эта секция нужна для удаления старых сообщений
             int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
             messageManagementService.putMessageToQueue(chatId, messageId);
             messageManagementService.deleteMessage(chatId);
+
             switch (userStateEnum) {
                 // Ловим и валидируем время таймера
                 case SETTINGS_EDIT_TIMER_STATE -> {
                     if (validator.validateTime(messageText)) {
                         return addTimer.setTimerAndStart(chatId, messageText);
                     } else {
-                        messageManagementService.putMessageToQueue(chatId, messageId);
-                        SendMessage sendMessage = messageWithReturn.sendMessage(
+                        messageWithoutReturn.sendMessage(
                                 chatId,
                                 BotMessageEnum.INVALID_TIME_MESSAGE.getMessage(),
-                                inlineKeyboards.backAndExitMenu(chatId),
-                                null);
-                        messageWithoutReturn.sendMessage(sendMessage);
+                                inlineKeyboards.backAndExitMenu(chatId));
                         return null;
+
                     }
                 }
                 // Ловим и валидируем имя проекта
@@ -118,26 +115,43 @@ public class MessageHandler {
                         userStateEditor.editUserState(chatId, UserStateEnum.SETTINGS_PROJECT_ADD_TOKENS_STATE);
                         return projectManager.projectCreate(chatId, messageText);
                     } else {
-                        SendMessage sendMessage = messageWithReturn.sendMessage(
+                         messageWithoutReturn.sendMessage(
                                 chatId,
                                 BotMessageEnum.PROJECT_NAME_INVALID_MESSAGE.getMessage(),
-                                inlineKeyboards.backAndExitMenu(chatId),
-                                null);
-                        messageWithoutReturn.sendMessage(sendMessage);
+                                inlineKeyboards.backAndExitMenu(chatId));
                         return null;
                     }
                 }
-                // Речной ввод времени пользователя
+                // Ручной ввод времени пользователя для временной зоны
                 case EDIT_TIMEZONE_MANUAL_STATE -> {
                     if (validator.validateTime(messageText)) {
                         return timeZoneDefinition.manualTimeZone(chatId, messageText);
                     } else {
-                        SendMessage sendMessage = messageWithReturn.sendMessage(
+                        messageWithoutReturn.sendMessage(
                                 chatId,
                                 BotMessageEnum.INVALID_TIME_MESSAGE.getMessage(),
-                                inlineKeyboards.backAndExitMenu(chatId),
+                                inlineKeyboards.backAndExitMenu(chatId));
+                        return null;
+                    }
+                }
+                // Ввод домена bitrix
+                case SETTINGS_PROJECT_ADD_BITRIX_STATE -> {
+                    if (validator.validateBitrixDomain(messageText)) {
+                        Bitrix bitrix = new Bitrix();
+                        bitrix.setBitrixDomain(messageText);
+                        bitrix.setChatId(chatId);
+                        bitrix.setProjectId(tempDataRepository.findLastProjectIdByChatId(chatId));
+                        bitrixRepository.save(bitrix);
+                        return messageWithReturn.sendMessage(
+                                chatId,
+                                BotMessageEnum.ADD_BITRIX_STEP_2_MESSAGE.getMessage(),
+                                inlineKeyboards.bitrixLinkMenu(chatId),
                                 null);
-                        messageWithoutReturn.sendMessage(sendMessage);
+                    } else {
+                        messageWithoutReturn.sendMessage(
+                                chatId,
+                                BotMessageEnum.INVALID_BITRIXDOMAIN_MESSAGE.getMessage(),
+                                inlineKeyboards.backAndExitMenu(chatId));
                         return null;
                     }
                 }

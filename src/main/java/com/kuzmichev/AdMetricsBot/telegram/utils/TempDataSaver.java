@@ -2,11 +2,14 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 
 import com.kuzmichev.AdMetricsBot.model.TempData;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
+import com.kuzmichev.AdMetricsBot.model.User;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -15,11 +18,17 @@ import org.springframework.stereotype.Component;
 public class TempDataSaver {
     TempDataRepository tempDataRepository;
 
-    public void tempMessageId(String chatId, int messageId) {
-    TempData tempData = new TempData();
-                tempData.setChatId(chatId);
-                tempData.setLastMessageId(messageId);
-                tempDataRepository.save(tempData);
+    public void tempLastMessageId(String chatId, int messageId) {
+        Optional<TempData> tempDataOptional = tempDataRepository.findByChatId(chatId);
+        TempData tempData;
+        if (tempDataOptional.isPresent()) {
+            tempData = tempDataOptional.get();
+        } else {
+            tempData = new TempData();
+            tempData.setChatId(chatId);
+        }
+        tempData.setLastMessageId(messageId);
+        tempDataRepository.save(tempData);
     }
 
     public void tempMessagesIdsToDelete(String chatId, String messagesIdsToDelete) {

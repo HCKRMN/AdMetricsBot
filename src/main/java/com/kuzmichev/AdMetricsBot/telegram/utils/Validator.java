@@ -25,11 +25,20 @@ public class Validator {
 
         // Проверка наличия только латинских и кириллических букв, цифр и пробелов
         String regex = "^[a-zA-Zа-яА-Я0-9\\s]+$";
-        if (!projectName.matches(regex)) {
-            return false;
-        }
+        return projectName.matches(regex);
+    }
 
-        return true;
+    public boolean validateBitrixDomain(String bitrixDomain) {
+//        // Допустимые символы для доменных имен
+//        String validCharacters = "a-zA-Zа-яА-ЯёЁ0-9\\-";
+//
+//        // Регулярное выражение для проверки доменного имени
+//        String regex = "^[" + validCharacters + "]+(\\." + validCharacters + "+)+$";
+//
+//        return bitrixDomain.matches(regex);
+
+        String regex = "^(?:[a-zA-Z0-9\\-]+\\.)+[a-zA-Z0-9\\-]+\\.[a-zA-Zа-яА-ЯёЁ\\-]+(?:\\.[a-zA-Zа-яА-ЯёЁ]+)?$";
+        return bitrixDomain.matches(regex);
     }
 
 }
