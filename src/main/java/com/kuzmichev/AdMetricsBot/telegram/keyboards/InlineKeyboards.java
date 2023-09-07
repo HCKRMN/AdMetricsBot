@@ -70,7 +70,7 @@ public class InlineKeyboards {
                                 // Кнопка настроек часового пояса
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.SETTINGS_EDIT_TIMEZONE_BUTTON.getButtonName(),
-                                        CallBackEnum.EDIT_TIMEZONE_CALLBACK.getCallBackName(),
+                                        CallBackEnum.EDIT_TIMEZONE_LINK_CALLBACK.getCallBackName(),
                                         null
                                 ),
                                 // Кнопка настроек таймера
@@ -404,7 +404,7 @@ public class InlineKeyboards {
                         inlineKeyboardMaker.addRow(
                                 inlineKeyboardMaker.addButton(
                                         ButtonNameEnum.SETTINGS_ADD_ACCOUNTS_BUTTON.getButtonName(),
-                                        CallBackEnum.ADD_TOKENS_CALLBACK.getCallBackName(),
+                                        CallBackEnum.ADD_INPUTS_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
@@ -426,7 +426,7 @@ public class InlineKeyboards {
                             inlineKeyboardMaker.addRow(
                                     inlineKeyboardMaker.addButton(
                                             ButtonNameEnum.PROJECT_ADD_TOKEN_BUTTON.getButtonName(),
-                                            CallBackEnum.PROJECT_ADD_TOKEN_CALLBACK.getCallBackName(),
+                                            CallBackEnum.ADD_INPUTS_CALLBACK.getCallBackName(),
                                             null
                                     )
                             ),
@@ -505,7 +505,7 @@ public class InlineKeyboards {
             );
         }
 
-        if (currentPage < totalPages ) {
+        if (currentPage <= totalPages ) {
             buttons.add(
                     inlineKeyboardMaker.addButton(
                             ButtonNameEnum.PROJECT_NEXT_PAGE_BUTTON.getButtonName(),

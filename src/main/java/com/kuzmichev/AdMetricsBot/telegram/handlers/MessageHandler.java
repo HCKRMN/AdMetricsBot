@@ -6,7 +6,6 @@ import com.kuzmichev.AdMetricsBot.constants.CommandEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
 import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMainRequest;
-import com.kuzmichev.AdMetricsBot.service.bitrix.CountRecordsRequest;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.*;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
