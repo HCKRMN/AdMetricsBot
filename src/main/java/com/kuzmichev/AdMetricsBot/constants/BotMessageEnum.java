@@ -25,7 +25,7 @@ public enum BotMessageEnum {
     DELETE_USER_DATA_ASK_MESSAGE("Вы уверены, что хотите удалить данные?"),
     YANDEX_ERROR_GET_RESULT_MESSAGE("Ошибка при получении данных Яндекс"),
     YANDEX_RESULT_MESSAGE("Затраты на рекламу в Яндекс директ: "),
-    YANDEX_ERROR_GET_TOKEN_MESSAGE("Вы незарегистрированы в Яндекс Директ"),
+    YANDEX_ERROR_GET_TOKEN_MESSAGE("Вы не зарегистрированы в Яндекс Директ"),
     SETTINGS_MENU_MESSAGE("В этом меню вы можете изменить время отправки уведомлений, часовой пояс, " +
             "подключить новые аккаунты, отключить уведомления, а также удалить полностью свои данные."),
     TIMER_ADDED_MESSAGE("Таймер установлен на "),
@@ -57,8 +57,9 @@ public enum BotMessageEnum {
 
     //прочие ошибки
     EXCEPTION_ILLEGAL_MESSAGE("Неверный формат сообщения"),
-    EXCEPTION_WHAT_THE_FUCK("Что-то пошло не так");
+    EXCEPTION_WHAT_THE_FUCK("Что-то пошло не так"),
 
+    HELP_MESSAGE("Список команд: \n" +  "Потом написать список команд");
     private final String message;
 
     BotMessageEnum(String message) {

@@ -1,6 +1,6 @@
-package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.Projects;
+package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Projects;
 
-import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.CallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

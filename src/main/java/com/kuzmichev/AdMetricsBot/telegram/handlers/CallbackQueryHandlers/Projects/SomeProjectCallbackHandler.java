@@ -1,12 +1,12 @@
-package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.Projects;
+package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Projects;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.CallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.DynamicCallback;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
-import com.kuzmichev.AdMetricsBot.telegram.utils.InputsManager;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -24,15 +24,15 @@ import java.util.Objects;
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class DeleteInputCallbackHandler implements CallbackHandler {
+public class SomeProjectCallbackHandler  implements CallbackHandler {
     MessageWithReturn messageWithReturn;
     InlineKeyboards inlineKeyboards;
-    TempDataRepository tempDataRepository;
-    InputsManager inputsManager;
+    ProjectRepository projectRepository;
+    TempDataRepository tempDataSaver;
 
     @Override
     public boolean canHandle(String data) {
-        return data.contains("input_");
+        return data.contains("project_");
     }
 
     @Override
@@ -40,28 +40,23 @@ public class DeleteInputCallbackHandler implements CallbackHandler {
         String chatId = buttonQuery.getMessage().getChatId().toString();
         String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
-        String inputName = "";
         String projectId = "";
 
-        String regexInput = "input_.+";
-        Map<String, String> inputData = DynamicCallback.handleDynamicCallback(data, regexInput, "input_");
-        if (!inputData.isEmpty()) {
-            inputName = inputData.get("value");
-            System.out.println(inputName);
-            data = CallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName();
+        String regexProject = "project_.+";
+        Map<String, String> projectData = DynamicCallback.handleDynamicCallback(data, regexProject, "project_");
+        if (!projectData.isEmpty()) {
+            projectId = projectData.get("value");
+            tempDataSaver.findLastProjectIdByChatId(chatId);
+            data = CallBackEnum.SOME_PROJECT_CALLBACK.getCallBackName();
         }
 
-        if (Objects.equals(data, CallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName())) {
-            if (inputName != null){
-                projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
-                inputsManager.deleteInputs(projectId, inputName);
-            }
+        if (Objects.equals(data, CallBackEnum.SOME_PROJECT_CALLBACK.getCallBackName())) {
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    BotMessageEnum.PROJECT_INPUT_DELETE_MESSAGE.getMessage(),
+                    projectRepository.findProjectNameByProjectId(projectId),
                     null,
-                    inlineKeyboards.deleteInputsMenu(chatId));
+                    inlineKeyboards.someProjectMenu(chatId));
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

@@ -1,9 +1,9 @@
-package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.Projects;
+package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Projects;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.CallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
@@ -22,14 +22,14 @@ import java.util.Objects;
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class ProjectsMenuCallbackHandlers  implements CallbackHandler{
-    TempDataSaver tempDataSaver;
+public class ProjectCreateCallbackHandler implements CallbackHandler {
     MessageWithReturn messageWithReturn;
     InlineKeyboards inlineKeyboards;
+    TempDataSaver tempDataSaver;
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, CallBackEnum.PROJECTS_CALLBACK.getCallBackName());
+        return Objects.equals(data, CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -38,14 +38,14 @@ public class ProjectsMenuCallbackHandlers  implements CallbackHandler{
         String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        if (Objects.equals(data, CallBackEnum.PROJECTS_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName())) {
             tempDataSaver.tempLastMessageId(chatId, messageId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    BotMessageEnum.PROJECT_MENU_MESSAGE.getMessage(),
-                    UserStateEnum.SETTINGS_PROJECTS_STATE,
-                    inlineKeyboards.projectsMenu(chatId));
+                    BotMessageEnum.PROJECT_CREATE_ASK_NAME_MESSAGE.getMessage(),
+                    UserStateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE,
+                    inlineKeyboards.projectCreateMenu());
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

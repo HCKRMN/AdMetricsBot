@@ -6,7 +6,6 @@ import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -14,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

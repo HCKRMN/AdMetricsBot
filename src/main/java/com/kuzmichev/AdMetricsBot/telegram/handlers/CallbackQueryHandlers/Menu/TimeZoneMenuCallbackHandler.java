@@ -1,11 +1,10 @@
-package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.Inputs;
+package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Menu;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.CallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
-import com.kuzmichev.AdMetricsBot.telegram.utils.AddYandex;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
@@ -18,21 +17,19 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
 import java.util.Objects;
-
 @Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class YandexCallbackHandler implements CallbackHandler {
+public class TimeZoneMenuCallbackHandler implements CallbackHandler {
     TempDataSaver tempDataSaver;
     MessageWithReturn messageWithReturn;
     InlineKeyboards inlineKeyboards;
-    AddYandex addYandex;
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, CallBackEnum.ADD_YANDEX_CALLBACK.getCallBackName())
-                || Objects.equals(data, CallBackEnum.TEST_YANDEX_CALLBACK.getCallBackName());
+        return Objects.equals(data, CallBackEnum.EDIT_TIMEZONE_LINK_CALLBACK.getCallBackName())
+                || Objects.equals(data, CallBackEnum.EDIT_TIMEZONE_MANUAL_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -41,21 +38,21 @@ public class YandexCallbackHandler implements CallbackHandler {
         String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        if (Objects.equals(data, CallBackEnum.ADD_YANDEX_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.EDIT_TIMEZONE_LINK_CALLBACK.getCallBackName())) {
             tempDataSaver.tempLastMessageId(chatId, messageId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    BotMessageEnum.ADD_YANDEX_MESSAGE.getMessage(),
-                    UserStateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE,
-                    inlineKeyboards.addYandexMenu(chatId));
-        } else if (Objects.equals(data, CallBackEnum.TEST_YANDEX_CALLBACK.getCallBackName())) {
+                    BotMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
+                    UserStateEnum.SETTINGS_EDIT_TIMEZONE_STATE,
+                    inlineKeyboards.timeZoneMenu(chatId));
+        } else if (Objects.equals(data, CallBackEnum.EDIT_TIMEZONE_MANUAL_CALLBACK.getCallBackName())) {
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    addYandex.testYandex(chatId),
-                    UserStateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE,
-                    inlineKeyboards.addYandexTestMenu());
+                    BotMessageEnum.EDIT_TIMEZONE_MANUAL_MESSAGE.getMessage(),
+                    UserStateEnum.EDIT_TIMEZONE_MANUAL_STATE,
+                    inlineKeyboards.backAndExitMenu(chatId));
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

@@ -1,8 +1,8 @@
-package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery;
+package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers;
 
-import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.Inputs.InputCallbackHandlersList;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.Menu.*;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.Projects.ProjectCallbackHandlersList;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Inputs.InputCallbackHandlersList;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Menu.*;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Projects.ProjectCallbackHandlersList;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class CallbackHandlersList {
-    private final List<CallbackHandler> callbackHandlers;
+    List<CallbackHandler> callbackHandlers;
 
     public CallbackHandlersList(
             MenuCallbackHandlersList menuCallbackHandlersList,

@@ -1,8 +1,8 @@
 package com.kuzmichev.AdMetricsBot.telegram;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandler;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.MessageHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.MainCallbackQueryHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.MessageHandlers.MessageHandler;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,12 +25,12 @@ public class AdMetricsBot extends SpringWebhookBot {
     String botUsername;
     String botToken;
     MessageHandler messageHandler;
-    CallbackQueryHandler callbackQueryHandler;
+    MainCallbackQueryHandler mainCallbackQueryHandler;
 
-    public AdMetricsBot(SetWebhook setWebhook, MessageHandler messageHandler, CallbackQueryHandler callbackQueryHandler) {
+    public AdMetricsBot(SetWebhook setWebhook, MessageHandler messageHandler, MainCallbackQueryHandler mainCallbackQueryHandler) {
         super(setWebhook);
         this.messageHandler = messageHandler;
-        this.callbackQueryHandler = callbackQueryHandler;
+        this.mainCallbackQueryHandler = mainCallbackQueryHandler;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class AdMetricsBot extends SpringWebhookBot {
     private BotApiMethod<?> handleUpdate(Update update) {
         if (update.hasCallbackQuery()) {
             CallbackQuery callbackQuery = update.getCallbackQuery();
-            return callbackQueryHandler.processCallbackQuery(callbackQuery);
+            return mainCallbackQueryHandler.processCallbackQuery(callbackQuery);
         } else {
             Message message = update.getMessage();
             if (message != null) {

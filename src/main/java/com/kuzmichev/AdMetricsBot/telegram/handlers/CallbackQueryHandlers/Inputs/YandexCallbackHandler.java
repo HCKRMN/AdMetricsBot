@@ -1,10 +1,11 @@
-package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.Inputs;
+package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Inputs;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.CallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
+import com.kuzmichev.AdMetricsBot.telegram.utils.AddYandex;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
@@ -22,14 +23,16 @@ import java.util.Objects;
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class BitrixCallbackHandler implements CallbackHandler {
+public class YandexCallbackHandler implements CallbackHandler {
     TempDataSaver tempDataSaver;
     MessageWithReturn messageWithReturn;
     InlineKeyboards inlineKeyboards;
+    AddYandex addYandex;
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, CallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName());
+        return Objects.equals(data, CallBackEnum.ADD_YANDEX_CALLBACK.getCallBackName())
+                || Objects.equals(data, CallBackEnum.TEST_YANDEX_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -38,14 +41,21 @@ public class BitrixCallbackHandler implements CallbackHandler {
         String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        if (Objects.equals(data, CallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.ADD_YANDEX_CALLBACK.getCallBackName())) {
             tempDataSaver.tempLastMessageId(chatId, messageId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    BotMessageEnum.ADD_BITRIX_STEP_1_MESSAGE.getMessage(),
-                    UserStateEnum.SETTINGS_PROJECT_ADD_BITRIX_STATE,
-                    inlineKeyboards.backAndExitMenu(chatId));
+                    BotMessageEnum.ADD_YANDEX_MESSAGE.getMessage(),
+                    UserStateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE,
+                    inlineKeyboards.addYandexMenu(chatId));
+        } else if (Objects.equals(data, CallBackEnum.TEST_YANDEX_CALLBACK.getCallBackName())) {
+            return messageWithReturn.editMessage(
+                    chatId,
+                    messageId,
+                    addYandex.testYandex(chatId),
+                    UserStateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE,
+                    inlineKeyboards.addYandexTestMenu());
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

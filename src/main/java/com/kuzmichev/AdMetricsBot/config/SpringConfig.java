@@ -1,8 +1,8 @@
 package com.kuzmichev.AdMetricsBot.config;
 
 import com.kuzmichev.AdMetricsBot.telegram.AdMetricsBot;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandler;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.MessageHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.MainCallbackQueryHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.MessageHandlers.MessageHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +21,8 @@ public class SpringConfig {
     @Bean
     public AdMetricsBot springWebhookBot(SetWebhook setWebhook,
                                          MessageHandler messageHandler,
-                                         CallbackQueryHandler callbackQueryHandler) {
-        AdMetricsBot bot = new AdMetricsBot(setWebhook, messageHandler, callbackQueryHandler);
+                                         MainCallbackQueryHandler mainCallbackQueryHandler) {
+        AdMetricsBot bot = new AdMetricsBot(setWebhook, messageHandler, mainCallbackQueryHandler);
 
         bot.setBotPath(telegramConfig.getWebhookPath());
         bot.setBotUsername(telegramConfig.getBotName());

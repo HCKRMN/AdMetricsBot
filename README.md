@@ -82,4 +82,6 @@
 79) При обновлении токена битрикс он два раза берет одно и то же из базы. Нужно сделать чтобы он перекидывал в метод токен
 80) Убрать запрос в базу при использовании страниц в списке проектов
 81) Подумать над счетчиком проектов в базе
-82) Пить пиво
+82) Добавить обработку ошибки битрикс: org.springframework.web.client.HttpClientErrorException$Unauthorized: 401 Unauthorized: "{"error":"ACCESS_DENIED","error_description":"REST is available only on commercial plans."}"
+83) Убрать возвращение null в стейт хендлере
+84) Пить пиво

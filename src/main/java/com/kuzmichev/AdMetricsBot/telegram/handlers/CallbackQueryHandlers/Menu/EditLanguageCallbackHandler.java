@@ -1,8 +1,8 @@
-package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.Menu;
+package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Menu;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQuery.CallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
