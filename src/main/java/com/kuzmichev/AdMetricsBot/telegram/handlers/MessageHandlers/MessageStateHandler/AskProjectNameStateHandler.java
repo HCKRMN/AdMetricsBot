@@ -1,7 +1,9 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.MessageHandlers.MessageStateHandler;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.AddTokensMenu;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.BackAndExitMenu;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.ProjectManager;
 import com.kuzmichev.AdMetricsBot.telegram.utils.UserStateEditor;
@@ -25,7 +27,9 @@ public class AskProjectNameStateHandler implements StateHandler {
     UserStateEditor userStateEditor;
     ProjectManager projectManager;
     MessageWithoutReturn messageWithoutReturn;
-    InlineKeyboards inlineKeyboards;
+    MessageWithReturn messageWithReturn;
+    BackAndExitMenu backAndExitMenu;
+    AddTokensMenu addTokensMenu;
 
     @Override
     public boolean canHandle(String userStateEnum) {
@@ -37,12 +41,17 @@ public class AskProjectNameStateHandler implements StateHandler {
 
         if (validator.validateProjectName(messageText)) {
             userStateEditor.editUserState(chatId, UserStateEnum.SETTINGS_PROJECT_ADD_TOKENS_STATE);
-            return projectManager.projectCreate(chatId, messageText);
+            projectManager.projectCreate(chatId, messageText);
+            return messageWithReturn.sendMessage(
+                    chatId,
+                    BotMessageEnum.ADD_TOKENS_MESSAGE.getMessage(),
+                    addTokensMenu.addTokensMenu(chatId),
+                    null);
         } else {
             messageWithoutReturn.sendMessage(
                     chatId,
                     BotMessageEnum.PROJECT_NAME_INVALID_MESSAGE.getMessage(),
-                    inlineKeyboards.backAndExitMenu(chatId));
+                    backAndExitMenu.backAndExitMenu(chatId));
             return null;
         }
     }

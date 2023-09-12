@@ -3,8 +3,8 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Proje
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.ProjectCreateMenu;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
@@ -24,7 +24,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class ProjectCreateCallbackHandler implements CallbackHandler {
     MessageWithReturn messageWithReturn;
-    InlineKeyboards inlineKeyboards;
+    ProjectCreateMenu projectCreateMenu;
     TempDataSaver tempDataSaver;
 
     @Override
@@ -45,7 +45,7 @@ public class ProjectCreateCallbackHandler implements CallbackHandler {
                     messageId,
                     BotMessageEnum.PROJECT_CREATE_ASK_NAME_MESSAGE.getMessage(),
                     UserStateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE,
-                    inlineKeyboards.projectCreateMenu());
+                    projectCreateMenu.projectCreateMenu());
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

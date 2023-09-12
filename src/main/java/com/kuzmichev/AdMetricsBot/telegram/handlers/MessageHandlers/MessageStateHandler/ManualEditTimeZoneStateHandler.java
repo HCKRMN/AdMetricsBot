@@ -2,8 +2,7 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.MessageHandlers.MessageStat
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
-import com.kuzmichev.AdMetricsBot.telegram.utils.AddTimer;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.BackAndExitMenu;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TimeZoneDefinition;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Validator;
@@ -23,7 +22,7 @@ import java.util.Objects;
 public class ManualEditTimeZoneStateHandler implements StateHandler {
     Validator validator;
     MessageWithoutReturn messageWithoutReturn;
-    InlineKeyboards inlineKeyboards;
+    BackAndExitMenu backAndExitMenu;
     TimeZoneDefinition timeZoneDefinition;
 
     @Override
@@ -40,7 +39,7 @@ public class ManualEditTimeZoneStateHandler implements StateHandler {
             messageWithoutReturn.sendMessage(
                     chatId,
                     BotMessageEnum.INVALID_TIME_MESSAGE.getMessage(),
-                    inlineKeyboards.backAndExitMenu(chatId));
+                    backAndExitMenu.backAndExitMenu(chatId));
             return null;
         }
     }

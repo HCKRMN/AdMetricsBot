@@ -1,6 +1,5 @@
-package com.kuzmichev.AdMetricsBot.telegram.keyboards;
+package com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards;
 
-import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;

@@ -4,8 +4,8 @@ import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.AddTokensMenu;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -24,33 +24,12 @@ public class ProjectManager {
     InlineKeyboardMaker inlineKeyboardMaker;
     ProjectRepository projectRepository;
     TempDataRepository tempDataRepository;
-    InlineKeyboards inlineKeyboards;
+    AddTokensMenu addTokensMenu;
     UserRepository userRepository;
 
-        // Это вроде для регистрации
-    public SendMessage projectCreateStarter(String chatId) {
-
-        SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.PROJECT_CREATE_START_MESSAGE.getMessage());
-        sendMessage.setReplyMarkup(
-                inlineKeyboardMaker.addMarkup(
-                        inlineKeyboardMaker.addRows(
-                                inlineKeyboardMaker.addRow(
-                                        // Кнопка создания проекта
-                                        inlineKeyboardMaker.addButton(
-                                                ButtonNameEnum.PROJECT_CREATE_BUTTON.getButtonName(),
-                                                CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName(),
-                                                null
-                                        )
-                                )
-                        )
-                )
-        );
-
-        return sendMessage;
-    }
 
         // Добавляем проект в базу
-    public SendMessage projectCreate(String chatId, String messageText) {
+    public void projectCreate(String chatId, String messageText) {
 
         int projectsCount = userRepository.getProjectsCountByChatId(chatId) + 1;
 
@@ -75,11 +54,11 @@ public class ProjectManager {
         tempData.setLastProjectId(projectId);
         tempData.setChatId(chatId);
         tempDataRepository.save(tempData);
-
-        SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.ADD_TOKENS_MESSAGE.getMessage());
-        sendMessage.setReplyMarkup(inlineKeyboards.addTokensMenu(chatId));
-
-        return sendMessage;
+//
+//        SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.ADD_TOKENS_MESSAGE.getMessage());
+//        sendMessage.setReplyMarkup(addTokensMenu.addTokensMenu(chatId));
+//
+//        return sendMessage;
     }
 }
 

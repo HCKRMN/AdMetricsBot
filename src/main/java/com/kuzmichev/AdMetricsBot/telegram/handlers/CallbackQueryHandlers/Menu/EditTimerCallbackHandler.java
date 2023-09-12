@@ -3,8 +3,8 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Menu;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.BackAndExitMenu;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
@@ -25,7 +25,7 @@ import java.util.Objects;
 public class EditTimerCallbackHandler implements CallbackHandler {
     TempDataSaver tempDataSaver;
     MessageWithReturn messageWithReturn;
-    InlineKeyboards inlineKeyboards;
+    BackAndExitMenu backAndExitMenu;
 
     @Override
     public boolean canHandle(String data) {
@@ -45,7 +45,7 @@ public class EditTimerCallbackHandler implements CallbackHandler {
                     messageId,
                     BotMessageEnum.ASK_TIME_MESSAGE.getMessage(),
                     UserStateEnum.SETTINGS_EDIT_TIMER_STATE,
-                    inlineKeyboards.backAndExitMenu(chatId));
+                    backAndExitMenu.backAndExitMenu(chatId));
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

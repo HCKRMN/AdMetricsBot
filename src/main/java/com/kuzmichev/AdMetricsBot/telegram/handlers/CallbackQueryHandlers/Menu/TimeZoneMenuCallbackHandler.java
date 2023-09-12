@@ -3,8 +3,9 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Menu;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.BackAndExitMenu;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.TimeZoneMenu;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
@@ -24,7 +25,8 @@ import java.util.Objects;
 public class TimeZoneMenuCallbackHandler implements CallbackHandler {
     TempDataSaver tempDataSaver;
     MessageWithReturn messageWithReturn;
-    InlineKeyboards inlineKeyboards;
+    TimeZoneMenu timeZoneMenu;
+    BackAndExitMenu backAndExitMenu;
 
     @Override
     public boolean canHandle(String data) {
@@ -45,14 +47,14 @@ public class TimeZoneMenuCallbackHandler implements CallbackHandler {
                     messageId,
                     BotMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
                     UserStateEnum.SETTINGS_EDIT_TIMEZONE_STATE,
-                    inlineKeyboards.timeZoneMenu(chatId));
+                    timeZoneMenu.timeZoneMenu(chatId));
         } else if (Objects.equals(data, CallBackEnum.EDIT_TIMEZONE_MANUAL_CALLBACK.getCallBackName())) {
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
                     BotMessageEnum.EDIT_TIMEZONE_MANUAL_MESSAGE.getMessage(),
                     UserStateEnum.EDIT_TIMEZONE_MANUAL_STATE,
-                    inlineKeyboards.backAndExitMenu(chatId));
+                    backAndExitMenu.backAndExitMenu(chatId));
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

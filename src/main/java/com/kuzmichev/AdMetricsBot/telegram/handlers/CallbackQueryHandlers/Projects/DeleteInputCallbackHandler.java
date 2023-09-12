@@ -3,9 +3,9 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Proje
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.DeleteInputsMenu;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.DynamicCallback;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.InputsManager;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import lombok.AccessLevel;
@@ -26,7 +26,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class DeleteInputCallbackHandler implements CallbackHandler {
     MessageWithReturn messageWithReturn;
-    InlineKeyboards inlineKeyboards;
+    DeleteInputsMenu deleteInputsMenu;
     TempDataRepository tempDataRepository;
     InputsManager inputsManager;
 
@@ -60,7 +60,7 @@ public class DeleteInputCallbackHandler implements CallbackHandler {
                     messageId,
                     BotMessageEnum.PROJECT_INPUT_DELETE_MESSAGE.getMessage(),
                     null,
-                    inlineKeyboards.deleteInputsMenu(chatId));
+                    deleteInputsMenu.deleteInputsMenu(chatId));
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

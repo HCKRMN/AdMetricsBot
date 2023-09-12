@@ -7,8 +7,8 @@ import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboardMaker;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.DoneButtonMenu;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.InlineKeyboardMaker;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TimeZoneDefinition {
     final InlineKeyboardMaker inlineKeyboardMaker;
-    final InlineKeyboards inlineKeyboards;
+    final DoneButtonMenu doneButtonMenu;
     final UserRepository userRepository;
     final ScheduledMessageRepository scheduledMessageRepository;
     final MessageWithReturn messageWithReturn;
@@ -92,7 +92,7 @@ public class TimeZoneDefinition {
         return messageWithReturn.sendMessage(
                 chatId,
                 BotMessageEnum.TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
-                inlineKeyboards.done(),
+                doneButtonMenu.done(),
                 UserStateEnum.WORKING_STATE
         );
     }

@@ -5,8 +5,9 @@ import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.DeleteProjectMenu;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.DoneButtonMenu;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -25,10 +26,11 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class DeleteProjectCallbackHandler implements CallbackHandler {
     MessageWithReturn messageWithReturn;
-    InlineKeyboards inlineKeyboards;
+    DeleteProjectMenu deleteProjectMenu;
     TempDataRepository tempDataRepository;
     ProjectRepository projectRepository;
     UserRepository userRepository;
+    DoneButtonMenu doneButtonMenu;
 
     @Override
     public boolean canHandle(String data) {
@@ -50,7 +52,7 @@ public class DeleteProjectCallbackHandler implements CallbackHandler {
                     messageId,
                     BotMessageEnum.PROJECT_DELETE_STEP_1_MESSAGE.getMessage(),
                     null,
-                    inlineKeyboards.deleteProjectMenu());
+                    deleteProjectMenu.deleteProjectMenu());
         } else if(Objects.equals(data, CallBackEnum.PROJECT_DELETE_STEP_2_CALLBACK.getCallBackName())) {
             projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
             projectRepository.removeProjectByProjectId(projectId);
@@ -60,7 +62,7 @@ public class DeleteProjectCallbackHandler implements CallbackHandler {
                     messageId,
                     BotMessageEnum.PROJECT_DELETE_STEP_2_MESSAGE.getMessage(),
                     null,
-                    inlineKeyboards.done()
+                    doneButtonMenu.done()
             );
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());

@@ -3,8 +3,8 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Input
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.AddTokensMenu;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class AddInputsCallbackHandler implements CallbackHandler {
     MessageWithReturn messageWithReturn;
-    InlineKeyboards inlineKeyboards;
+    AddTokensMenu addTokensMenu;
 
     @Override
     public boolean canHandle(String data) {
@@ -42,7 +42,7 @@ public class AddInputsCallbackHandler implements CallbackHandler {
                     messageId,
                     BotMessageEnum.ADD_TOKENS_MESSAGE.getMessage(),
                     UserStateEnum.SETTINGS_PROJECT_ADD_TOKENS_STATE,
-                    inlineKeyboards.addTokensMenu(chatId));
+                    addTokensMenu.addTokensMenu(chatId));
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

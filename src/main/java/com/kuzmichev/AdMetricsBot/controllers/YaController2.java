@@ -2,8 +2,7 @@ package com.kuzmichev.AdMetricsBot.controllers;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
-import com.kuzmichev.AdMetricsBot.telegram.utils.AddYandex;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.AddYandexTestMenu;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import lombok.extern.slf4j.Slf4j;
@@ -17,14 +16,14 @@ public class YaController2 {
     private final YandexRepository yandexRepository;
     private final TempDataRepository tempDataRepository;
     private final MessageWithoutReturn messageWithoutReturn;
-    private final InlineKeyboards inlineKeyboards;
+    private final AddYandexTestMenu addYandexTestMenu;
     private final MessageManagementService messageManagementService;
 
-    public YaController2(YandexRepository yandexRepository, TempDataRepository tempDataRepository, MessageWithoutReturn messageWithoutReturn, InlineKeyboards inlineKeyboards, MessageManagementService messageManagementService) {
+    public YaController2(YandexRepository yandexRepository, TempDataRepository tempDataRepository, MessageWithoutReturn messageWithoutReturn, AddYandexTestMenu addYandexTestMenu, MessageManagementService messageManagementService) {
         this.yandexRepository = yandexRepository;
         this.tempDataRepository = tempDataRepository;
         this.messageWithoutReturn = messageWithoutReturn;
-        this.inlineKeyboards = inlineKeyboards;
+        this.addYandexTestMenu = addYandexTestMenu;
         this.messageManagementService = messageManagementService;
     }
 
@@ -46,7 +45,7 @@ public class YaController2 {
         messageWithoutReturn.sendMessage(
                 chatId,
                 BotMessageEnum.ADD_YANDEX_TEST_MESSAGE.getMessage(),
-                inlineKeyboards.addYandexTestMenu());
+                addYandexTestMenu.addYandexTestMenu());
 
         log.info("Пользователь с Id: {} добавил аккаунт Yandex", chatId);
         return "yandex-r";

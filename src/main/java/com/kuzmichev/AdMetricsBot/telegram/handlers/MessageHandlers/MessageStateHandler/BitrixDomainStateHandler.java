@@ -5,7 +5,8 @@ import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.model.Bitrix;
 import com.kuzmichev.AdMetricsBot.model.BitrixRepository;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.BackAndExitMenu;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.BitrixLinkMenu;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Validator;
@@ -25,7 +26,8 @@ import java.util.Objects;
 public class BitrixDomainStateHandler implements StateHandler {
     Validator validator;
     MessageWithoutReturn messageWithoutReturn;
-    InlineKeyboards inlineKeyboards;
+    BitrixLinkMenu bitrixLinkMenu;
+    BackAndExitMenu backAndExitMenu;
     BitrixRepository bitrixRepository;
     TempDataRepository tempDataRepository;
     MessageWithReturn messageWithReturn;
@@ -47,13 +49,13 @@ public class BitrixDomainStateHandler implements StateHandler {
             return messageWithReturn.sendMessage(
                     chatId,
                     BotMessageEnum.ADD_BITRIX_STEP_2_MESSAGE.getMessage(),
-                    inlineKeyboards.bitrixLinkMenu(chatId),
+                    bitrixLinkMenu.bitrixLinkMenu(chatId),
                     null);
         } else {
             messageWithoutReturn.sendMessage(
                     chatId,
                     BotMessageEnum.INVALID_BITRIXDOMAIN_MESSAGE.getMessage(),
-                    inlineKeyboards.backAndExitMenu(chatId));
+                    backAndExitMenu.backAndExitMenu(chatId));
             return null;
         }
     }

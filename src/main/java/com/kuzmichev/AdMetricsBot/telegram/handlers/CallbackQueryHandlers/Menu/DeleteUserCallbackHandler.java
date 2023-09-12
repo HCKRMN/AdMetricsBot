@@ -3,8 +3,9 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Menu;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.DeleteUserDataMenu;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.DoneButtonMenu;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.DeleteUserData;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import lombok.AccessLevel;
@@ -24,8 +25,9 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class DeleteUserCallbackHandler implements CallbackHandler {
     MessageWithReturn messageWithReturn;
-    InlineKeyboards inlineKeyboards;
+    DeleteUserDataMenu deleteUserDataMenu;
     DeleteUserData deleteUserData;
+    DoneButtonMenu doneButtonMenu;
 
     @Override
     public boolean canHandle(String data) {
@@ -46,7 +48,7 @@ public class DeleteUserCallbackHandler implements CallbackHandler {
                     messageId,
                     BotMessageEnum.DELETE_USER_DATA_ASK_MESSAGE.getMessage(),
                     null,
-                    inlineKeyboards.deleteUserDataMenu());
+                    deleteUserDataMenu.deleteUserDataMenu());
         } else if(Objects.equals(data, CallBackEnum.DELETE_USER_STEP_2_CALLBACK.getCallBackName())) {
             deleteUserData.deleteUserData(chatId);
             return messageWithReturn.editMessage(
@@ -54,14 +56,14 @@ public class DeleteUserCallbackHandler implements CallbackHandler {
                     messageId,
                     BotMessageEnum.DELETE_USER_DATA_ASK_MESSAGE.getMessage(),
                     null,
-                    inlineKeyboards.done());
+                    doneButtonMenu.done());
         } else if(Objects.equals(data, CallBackEnum.NOT_DELETE_USER_CALLBACK.getCallBackName())) {
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
                     BotMessageEnum.NOT_DELETE_USER_DATA_MESSAGE.getMessage(),
                     UserStateEnum.WORKING_STATE,
-                    inlineKeyboards.done());
+                    doneButtonMenu.done());
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

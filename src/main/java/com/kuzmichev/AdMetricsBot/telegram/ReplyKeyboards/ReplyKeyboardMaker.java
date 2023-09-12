@@ -1,13 +1,6 @@
-package com.kuzmichev.AdMetricsBot.telegram.keyboards;
+package com.kuzmichev.AdMetricsBot.telegram.ReplyKeyboards;
 
-import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class ReplyKeyboardMaker {

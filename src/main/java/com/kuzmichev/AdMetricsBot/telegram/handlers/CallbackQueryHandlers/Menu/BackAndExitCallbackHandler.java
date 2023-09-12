@@ -3,8 +3,8 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Menu;
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.SettingsMenu;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class BackAndExitCallbackHandler implements CallbackHandler {
     MessageWithReturn messageWithReturn;
-    InlineKeyboards inlineKeyboards;
+    SettingsMenu settingsMenu;
 
     @Override
     public boolean canHandle(String data) {
@@ -44,7 +44,7 @@ public class BackAndExitCallbackHandler implements CallbackHandler {
                     messageId,
                     BotMessageEnum.SETTINGS_MENU_MESSAGE.getMessage(),
                     UserStateEnum.SETTINGS_EDIT_STATE,
-                    inlineKeyboards.settingsMenu(chatId));
+                    settingsMenu.settingsMenu(chatId));
         } else if(Objects.equals(data, CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName())
                 || Objects.equals(data, CallBackEnum.NOT_DELETE_PROJECT_CALLBACK.getCallBackName())) {
             return messageWithReturn.deleteMessage(

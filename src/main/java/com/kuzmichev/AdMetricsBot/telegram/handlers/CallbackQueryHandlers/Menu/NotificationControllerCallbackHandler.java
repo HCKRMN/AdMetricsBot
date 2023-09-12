@@ -2,8 +2,8 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.Menu;
 
 import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.SettingsMenu;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.NotificationController;
 import lombok.AccessLevel;
@@ -24,7 +24,7 @@ import java.util.Objects;
 public class NotificationControllerCallbackHandler implements CallbackHandler {
     NotificationController notificationController;
     MessageWithReturn messageWithReturn;
-    InlineKeyboards inlineKeyboards;
+    SettingsMenu settingsMenu;
 
     @Override
     public boolean canHandle(String data) {
@@ -45,7 +45,7 @@ public class NotificationControllerCallbackHandler implements CallbackHandler {
                         messageId,
                         BotMessageEnum.SETTINGS_MENU_MESSAGE.getMessage(),
                         null,
-                        inlineKeyboards.settingsMenu(chatId));
+                        settingsMenu.settingsMenu(chatId));
             } else if (Objects.equals(data, CallBackEnum.DISABLE_NOTIFICATIONS_CALLBACK.getCallBackName())) {
                 notificationController.disableNotifications(chatId);
                 return messageWithReturn.editMessage(
@@ -53,7 +53,7 @@ public class NotificationControllerCallbackHandler implements CallbackHandler {
                         messageId,
                         BotMessageEnum.SETTINGS_MENU_MESSAGE.getMessage(),
                         null,
-                        inlineKeyboards.settingsMenu(chatId));
+                        settingsMenu.settingsMenu(chatId));
             }
             return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
         }

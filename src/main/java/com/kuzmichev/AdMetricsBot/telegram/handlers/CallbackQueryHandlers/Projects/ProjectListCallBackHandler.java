@@ -4,9 +4,9 @@ import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
+import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.ProjectListMenu;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.DynamicCallback;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.InlineKeyboards;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProjectListCallBackHandler implements CallbackHandler {
     MessageWithReturn messageWithReturn;
-    InlineKeyboards inlineKeyboards;
+    ProjectListMenu projectListMenu;
     UserRepository userRepository;
 
     @Override
@@ -62,7 +62,7 @@ public class ProjectListCallBackHandler implements CallbackHandler {
                     messageId,
                     BotMessageEnum.SETTINGS_PROJECTS_LIST_MENU_MESSAGE.getMessage(),
                     null,
-                    inlineKeyboards.projectListMenu(chatId));
+                    projectListMenu.projectListMenu(chatId));
         }
         return new SendMessage(chatId, BotMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
