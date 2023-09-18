@@ -15,7 +15,6 @@ public class WebhookController {
 
     @PostMapping("/")
     public BotApiMethod<?> onUpdateReceived(@RequestBody Update update) {
-//        System.out.println(update);
         return adMetricsBot.onWebhookUpdateReceived(update);
     }
 }

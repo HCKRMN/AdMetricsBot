@@ -1,8 +1,9 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
-import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
-import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
-import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
+import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+//import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
+//import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import lombok.AccessLevel;
@@ -17,23 +18,23 @@ import java.sql.Timestamp;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class Registration{
-    ScheduledMessageRepository scheduledMessageRepository;
+//    ScheduledMessageRepository scheduledMessageRepository;
     UserRepository userRepository;
 
     public void registerUser(String chatId, String userName) {
         if(userRepository.findById(chatId).isEmpty()) {
             User user = new User();
-            ScheduledMessage scheduledMessage = new ScheduledMessage();
+//            ScheduledMessage scheduledMessage = new ScheduledMessage();
             user.setChatId(chatId);
             user.setUserName(userName);
-            user.setUserState(UserStateEnum.REGISTRATION_STATE.getStateName());
+            user.setUserState(RegistrationStateEnum.REGISTRATION_STATE.getStateName());
             user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
             user.setProjectsCount(0);
             user.setProjectsPage(0);
-            scheduledMessage.setChatId(chatId);
-            scheduledMessage.setEnableSendingMessages(false);
+//            scheduledMessage.setChatId(chatId);
+//            scheduledMessage.setEnableSendingMessages(false);
             userRepository.save(user);
-            scheduledMessageRepository.save(scheduledMessage);
+//            scheduledMessageRepository.save(scheduledMessage);
             log.info("user saved: " + user);
         }
     }

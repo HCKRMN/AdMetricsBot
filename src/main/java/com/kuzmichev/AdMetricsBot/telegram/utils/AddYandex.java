@@ -1,6 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
-import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import com.kuzmichev.AdMetricsBot.service.YandexDirectRequest;
 import lombok.AccessLevel;
@@ -39,12 +39,12 @@ public class AddYandex {
             String result = YandexDirectRequest.ya(yandexRepository, chatId);
             System.out.println(result);
             if (result.equals("-1")) {
-                return BotMessageEnum.YANDEX_ERROR_GET_RESULT_MESSAGE.getMessage();
+                return SettingsMessageEnum.YANDEX_ERROR_GET_RESULT_MESSAGE.getMessage();
             } else {
-                return BotMessageEnum.YANDEX_RESULT_MESSAGE.getMessage() + result;
+                return SettingsMessageEnum.YANDEX_RESULT_MESSAGE.getMessage() + result;
             }
         } catch (Exception e) {
-            return BotMessageEnum.YANDEX_ERROR_GET_TOKEN_MESSAGE.getMessage();
+            return SettingsMessageEnum.YANDEX_ERROR_GET_TOKEN_MESSAGE.getMessage();
         }
     }
 }

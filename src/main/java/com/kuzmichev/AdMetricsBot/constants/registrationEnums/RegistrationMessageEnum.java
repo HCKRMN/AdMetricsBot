@@ -1,0 +1,30 @@
+package com.kuzmichev.AdMetricsBot.constants.registrationEnums;
+
+/**
+ * Текстовые сообщения, используемые в процессе первичной регистрации
+ */
+public enum RegistrationMessageEnum {
+    START_MESSAGE("\uD83D\uDC4B Привет! Этот бот собирает данные по рекламным источникам и срм, " +
+            "после чего в заданное время регулярно отправляет сообщение с краткой статистикой. \n\n" +
+            "Благодаря этому ты можешь держать руку на пульсе своего бизнеса и принимать своевременные решения!" +
+            "Зарегистрируйтесь, чтобы начать работу\uD83D\uDC47"),
+
+    TIME_ZONE_DEFINITION_MESSAGE("Часовой пояс успешно добавлен!\n Теперь необходимо создать проект"),
+    TIME_ZONE_DEFINITION_COMPLETE_MESSAGE("Разница часовых поясов успешно добавлена!\n Теперь необходимо создать проект"),
+
+
+
+
+
+    ;
+
+    private final String message;
+
+    RegistrationMessageEnum(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+}

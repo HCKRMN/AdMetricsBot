@@ -1,8 +1,8 @@
 package com.kuzmichev.AdMetricsBot.telegram;
 
-import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.MainCallbackQueryHandler;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.MessageHandlers.MessageHandler;
+import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.MainCallbackQueryHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers.MessageHandler;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +12,6 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.starter.SpringWebhookBot;
 
@@ -39,11 +38,10 @@ public class AdMetricsBot extends SpringWebhookBot {
             return handleUpdate(update);
         } catch (IllegalArgumentException e) {
             return new SendMessage(update.getMessage().getChatId().toString(),
-                    BotMessageEnum.EXCEPTION_ILLEGAL_MESSAGE.getMessage());
+                    SettingsMessageEnum.EXCEPTION_ILLEGAL_MESSAGE.getMessage());
         } catch (Exception e) {
-            System.out.println(e);
             return new SendMessage(update.getMessage().getChatId().toString(),
-                    BotMessageEnum.EXCEPTION_WHAT_THE_FUCK.getMessage());
+                    SettingsMessageEnum.EXCEPTION_WHAT_THE_FUCK.getMessage());
         }
     }
 
@@ -52,11 +50,11 @@ public class AdMetricsBot extends SpringWebhookBot {
             CallbackQuery callbackQuery = update.getCallbackQuery();
             return mainCallbackQueryHandler.processCallbackQuery(callbackQuery);
         } else {
-            Message message = update.getMessage();
-            if (message != null) {
+            if (update.getMessage() != null) {
                 return messageHandler.answerMessage(update.getMessage());
             }
         }
-        return null;
+        String chatId = update.getMessage().getChatId().toString();
+        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

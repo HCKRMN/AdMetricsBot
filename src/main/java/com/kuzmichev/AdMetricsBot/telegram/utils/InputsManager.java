@@ -16,14 +16,11 @@ import java.util.List;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class InputsManager {
-    TempDataRepository tempDataRepository;
-    ProjectRepository projectRepository;
     YandexRepository yandexRepository;
     BitrixRepository bitrixRepository;
 
     public void deleteInputs(String projectId, String inputName) {
 
-        System.out.println("projectId: " + projectId + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         switch (InputsEnum.valueOf(inputName)) {
             case Yandex -> {
                 yandexRepository.removeYandexByProjectId(projectId);

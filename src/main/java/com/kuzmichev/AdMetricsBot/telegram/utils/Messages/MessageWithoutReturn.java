@@ -1,7 +1,5 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils.Messages;
 
-import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.utils.UserStateEditor;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +18,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 @RequiredArgsConstructor
 public class MessageWithoutReturn {
     ApplicationEventPublisher eventPublisher;
-    UserStateEditor userStateEditor;
+    UserStateEditor stateEditor;
 
     public void sendMessage(SendMessage sendMessage) {
         eventPublisher.publishEvent(sendMessage);
@@ -32,15 +30,15 @@ public class MessageWithoutReturn {
             String chatId,
             int messageId,
             String text,
-            UserStateEnum userState,
+            String state,
             InlineKeyboardMarkup keyboard) {
 
         EditMessageText message = new EditMessageText();
         message.setChatId(chatId);
         message.setMessageId(messageId);
         message.setText(text);
-        if (userState != null) {
-            userStateEditor.editUserState(chatId, userState);
+        if (state != null) {
+            stateEditor.editState(chatId, state);
         }
         if (keyboard != null) {
             message.setReplyMarkup(keyboard);

@@ -1,14 +1,15 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
-import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
-import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalButtonEnum;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
-import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.DoneButtonMenu;
-import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.InlineKeyboardMaker;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.DoneButtonKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.InlineKeyboardMaker;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TimeZoneDefinition {
     final InlineKeyboardMaker inlineKeyboardMaker;
-    final DoneButtonMenu doneButtonMenu;
+    final DoneButtonKeyboard doneButtonKeyboard;
     final UserRepository userRepository;
     final ScheduledMessageRepository scheduledMessageRepository;
     final MessageWithReturn messageWithReturn;
@@ -41,7 +42,7 @@ public class TimeZoneDefinition {
         String ipToTimeZoneLink = link + "/getip" +
                 "?chatId=" + chatId;
 
-        SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage());
+        SendMessage sendMessage = new SendMessage(chatId, SettingsMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage());
 
         String state = userRepository.getUserStateByChatId(chatId);
 
@@ -50,16 +51,16 @@ public class TimeZoneDefinition {
 
         // Добавляем кнопку "Ссылка" всегда
         buttonsRow.add(inlineKeyboardMaker.addButton(
-                ButtonNameEnum.LINK_BUTTON.getButtonName(),
+                UniversalButtonEnum.LINK_BUTTON.getButtonName(),
                 null,
                 ipToTimeZoneLink
         ));
 
         // Добавляем кнопку "Continue" только если условие выполняется
-        if (state.equals(UserStateEnum.SETTINGS_EDIT_STATE.getStateName())) {
+        if (state.equals(SettingsStateEnum.SETTINGS_EDIT_STATE.getStateName())) {
             buttonsRow.add(inlineKeyboardMaker.addButton(
-                    ButtonNameEnum.CONTINUE_BUTTON.getButtonName(),
-                    CallBackEnum.PROJECT_CREATE_CALLBACK.getCallBackName(),
+                    SettingsButtonEnum.CONTINUE_BUTTON.getButtonName(),
+                    SettingsCallBackEnum.PROJECT_CREATE_CALLBACK.getCallBackName(),
                     null
             ));
         }
@@ -91,9 +92,9 @@ public class TimeZoneDefinition {
 
         return messageWithReturn.sendMessage(
                 chatId,
-                BotMessageEnum.TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
-                doneButtonMenu.done(),
-                UserStateEnum.WORKING_STATE
+                SettingsMessageEnum.TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
+                doneButtonKeyboard.doneButtonMenu(),
+                SettingsStateEnum.WORKING_STATE.getStateName()
         );
     }
 }

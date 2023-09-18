@@ -1,7 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils.Messages;
 
-import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.utils.UserStateEditor;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ public class MessageWithReturn {
             String chatId,
             String text,
             InlineKeyboardMarkup keyboard,
-            UserStateEnum userState) {
+            String state) {
 
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
@@ -32,8 +31,8 @@ public class MessageWithReturn {
         if (keyboard != null) {
             sendMessage.setReplyMarkup(keyboard);
         }
-        if (userState != null) {
-            userStateEditor.editUserState(chatId, userState);
+        if (state != null) {
+            userStateEditor.editState(chatId, state);
         }
         return sendMessage;
     }
@@ -42,32 +41,32 @@ public class MessageWithReturn {
             String chatId,
             int messageId,
             String text,
-            UserStateEnum userState,
+            String state,
             InlineKeyboardMarkup keyboard) {
 
-        EditMessageText newMessage = new EditMessageText();
-        newMessage.setChatId(chatId);
-        newMessage.setMessageId(messageId);
-        newMessage.setText(text);
-        if (userState != null) {
-            userStateEditor.editUserState(chatId, userState);
+        EditMessageText editMessage = new EditMessageText();
+        editMessage.setChatId(chatId);
+        editMessage.setMessageId(messageId);
+        editMessage.setText(text);
+        if (state != null) {
+            userStateEditor.editState(chatId, state);
         }
         if (keyboard != null) {
-            newMessage.setReplyMarkup(keyboard);
+            editMessage.setReplyMarkup(keyboard);
         }
-        return newMessage;
+        return editMessage;
     }
 
     public DeleteMessage deleteMessage(
             String chatId,
             int messageId,
-            UserStateEnum userState) {
+            String state) {
 
         DeleteMessage deleteMessage = new DeleteMessage();
         deleteMessage.setChatId(chatId);
         deleteMessage.setMessageId(messageId);
-        if (userState != null) {
-            userStateEditor.editUserState(chatId, userState);
+        if (state != null) {
+            userStateEditor.editState(chatId, state);
         }
         return deleteMessage;
     }

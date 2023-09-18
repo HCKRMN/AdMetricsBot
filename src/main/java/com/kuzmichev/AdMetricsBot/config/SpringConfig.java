@@ -1,8 +1,8 @@
 package com.kuzmichev.AdMetricsBot.config;
 
 import com.kuzmichev.AdMetricsBot.telegram.AdMetricsBot;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.CallbackQueryHandlers.MainCallbackQueryHandler;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.MessageHandlers.MessageHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.MainCallbackQueryHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers.MessageHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

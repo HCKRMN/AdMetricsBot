@@ -1,0 +1,19 @@
+package com.kuzmichev.AdMetricsBot.constants.registrationEnums;
+
+public enum RegistrationStateEnum {
+    REGISTRATION_STATE("REGISTRATION_STATE"),
+    REGISTRATION_PROJECT_CREATE_ASK_NAME_STATE("REGISTRATION_PROJECT_CREATE_ASK_NAME_STATE"),
+    REGISTRATION_PROJECT_ADD_TOKENS_STATE("REGISTRATION_PROJECT_ADD_TOKENS_STATE"),
+
+            ;
+
+    private final String stateName;
+
+    RegistrationStateEnum(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+}

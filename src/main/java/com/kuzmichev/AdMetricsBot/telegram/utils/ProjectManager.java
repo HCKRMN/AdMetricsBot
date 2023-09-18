@@ -1,17 +1,11 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
-import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.ButtonNameEnum;
-import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
-import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.AddTokensMenu;
-import com.kuzmichev.AdMetricsBot.telegram.InlineKeyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -21,10 +15,8 @@ import java.util.UUID;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class ProjectManager {
-    InlineKeyboardMaker inlineKeyboardMaker;
     ProjectRepository projectRepository;
     TempDataRepository tempDataRepository;
-    AddTokensMenu addTokensMenu;
     UserRepository userRepository;
 
 
@@ -54,11 +46,6 @@ public class ProjectManager {
         tempData.setLastProjectId(projectId);
         tempData.setChatId(chatId);
         tempDataRepository.save(tempData);
-//
-//        SendMessage sendMessage = new SendMessage(chatId, BotMessageEnum.ADD_TOKENS_MESSAGE.getMessage());
-//        sendMessage.setReplyMarkup(addTokensMenu.addTokensMenu(chatId));
-//
-//        return sendMessage;
     }
 }
 

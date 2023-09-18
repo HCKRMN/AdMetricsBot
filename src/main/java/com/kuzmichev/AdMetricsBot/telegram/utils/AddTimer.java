@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
-import com.kuzmichev.AdMetricsBot.constants.BotMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.UserStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -46,10 +46,10 @@ public class AddTimer {
         scheduledMessageRepository.save(scheduledMessage);
 
         // Изменяем статус юзера на рабочий
-        userStateEditor.editUserState(chatId, UserStateEnum.WORKING_STATE);
+        userStateEditor.editState(chatId, SettingsStateEnum.WORKING_STATE.getStateName());
 
         log.info("User set timer at " + timerMessage);
-        return new SendMessage(chatId, BotMessageEnum.TIMER_ADDED_MESSAGE.getMessage() + messageText.replace(" ", ":"));
+        return new SendMessage(chatId, SettingsMessageEnum.TIMER_ADDED_MESSAGE.getMessage() + messageText.replace(" ", ":"));
 
     }
 

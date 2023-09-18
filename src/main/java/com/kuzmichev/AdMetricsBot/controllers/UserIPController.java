@@ -1,13 +1,19 @@
 package com.kuzmichev.AdMetricsBot.controllers;
 
+import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.service.IpToTimeZone;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.DoneButtonKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.ProjectCreateKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,19 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Optional;
 
 @Controller
-@Slf4j
+@AllArgsConstructor
 public class UserIPController {
-
-
-    // ПОЧЕМУ ТУТ АВТОВАЙРЕД????
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private TempDataRepository tempDataRepository;
-    @Autowired
-    private MessageManagementService messageManagementService;
-    @Autowired
-    private IpToTimeZone ipToTimeZone;
+    private final UserRepository userRepository;
+    private final TempDataRepository tempDataRepository;
+    private final MessageManagementService messageManagementService;
+    private final MessageWithoutReturn messageWithoutReturn;
+    private final IpToTimeZone ipToTimeZone;
+    private final ProjectCreateKeyboard projectCreateKeyboard;
+    private final DoneButtonKeyboard doneButtonKeyboard;
 
     @GetMapping("/getip")
     public String myEndpoint(HttpServletRequest request,
@@ -35,9 +37,8 @@ public class UserIPController {
         String ip = getIpAddress(request);
         double timeZone = ipToTimeZone.convertIpToTimeZone(ip);
 
-        // ЧТО ЭТО ТАКОЕ????
-//        int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
-//        messageManagementService.putMessageToQueue(chatId, messageId);
+        int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
+        messageManagementService.putMessageToQueue(chatId, messageId);
 
         Optional<User> userOptional = userRepository.findByChatId(chatId);
         if (userOptional.isPresent()) {
@@ -45,6 +46,20 @@ public class UserIPController {
             user.setIp(ip);
             user.setTimeZone(timeZone);
             userRepository.save(user);
+            if (user.getUserState().equals(RegistrationStateEnum.REGISTRATION_STATE.getStateName())) {
+                messageWithoutReturn.sendMessage(
+                        chatId,
+                        RegistrationMessageEnum.TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
+                        projectCreateKeyboard.projectCreateKeyboard(user.getUserState())
+                );
+            } else {
+                messageWithoutReturn.sendMessage(
+                        chatId,
+                        SettingsMessageEnum.TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
+                        doneButtonKeyboard.doneButtonMenu()
+                );
+            }
+                messageManagementService.deleteMessage(chatId);
         }
         return "getip";
     }
@@ -69,9 +84,4 @@ public class UserIPController {
         }
         return ip;
     }
-
-
-
-
-
 }
