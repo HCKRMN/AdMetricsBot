@@ -5,6 +5,9 @@ import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CommandEnum;
 import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalMessageEnum;
+import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
+import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMainRequest;
@@ -36,12 +39,11 @@ public class CommandHandler {
     StartRegistrationKeyboard startRegistrationKeyboard;
     Registration registration;
     TimeZoneKeyboard timeZoneKeyboard;
-    UserRepository userRepository;
-    public BotApiMethod<?> handleUserCommand(Message message) {
+
+    public BotApiMethod<?> handleUserCommand(Message message, String userState) {
         String chatId = message.getChatId().toString();
         String messageText = message.getText();
         String userName = message.getFrom().getUserName();
-        String userState = userRepository.getUserStateByChatId(chatId);
         CommandEnum commandEnum = CommandEnum.fromCommand(messageText);
 
         if (commandEnum != null) {
@@ -51,7 +53,8 @@ public class CommandHandler {
                             chatId,
                             RegistrationMessageEnum.START_MESSAGE.getMessage(),
                             startRegistrationKeyboard.startRegistrationKeyboard(),
-                            RegistrationStateEnum.REGISTRATION_STATE.getStateName());
+                            RegistrationStateEnum.REGISTRATION_STATE.getStateName()
+                    );
                 }
                 case SETTINGS -> {
                     return messageWithReturn.sendMessage(
@@ -67,7 +70,7 @@ public class CommandHandler {
                     registration.registerUser(chatId, userName);
                     return messageWithReturn.sendMessage(
                             chatId,
-                            SettingsMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
+                            UniversalMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
                             timeZoneKeyboard.timeZoneKeyboard(chatId, userState),
                             null);
                 }

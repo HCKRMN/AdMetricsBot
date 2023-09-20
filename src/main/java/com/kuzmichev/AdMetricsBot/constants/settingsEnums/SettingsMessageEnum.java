@@ -4,16 +4,14 @@ package com.kuzmichev.AdMetricsBot.constants.settingsEnums;
  * Текстовые сообщения, посылаемые ботом
  */
 public enum SettingsMessageEnum {
-
-    TIME_ZONE_DEFINITION_MESSAGE("Перейдите по ссылке чтобы добавить разницу часовых поясов. " +
-            "Обязательно выключите VPN, если используете его.\n" +
-            "Вы также можете добавить разницу часовых поясов вручную."),
-    TIME_ZONE_DEFINITION_COMPLETE_MESSAGE("Разница часовых поясов успешно добавлена"),
+    SETTINGS_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE("Разница часовых поясов успешно добавлена"),
     EDIT_TIMEZONE_MANUAL_MESSAGE("Укажите ваше текущее время в формате «23 59»"),
     ADD_YANDEX_MESSAGE("Перейдите по ссылке чтобы подключить аккаунт Яндекс Директ"),
     ADD_YANDEX_TEST_MESSAGE("Проверьте получение данных с аккаунта Яндекс Директ"),
-    ADD_BITRIX_STEP_1_MESSAGE("Введите домен вашего портала Битрикс24 в формате, без кавычек: \n«test.bitrix24.ru». " +
-            "\nЕсли у вас собственный домен без bitrix.ru, введите его."),
+    ADD_BITRIX_STEP_1_MESSAGE("""
+            Введите домен вашего портала Битрикс24 в формате, без кавычек:\s
+            «test.bitrix24.ru».\s
+            Если у вас собственный домен без bitrix.ru, введите его."""),
     ADD_BITRIX_STEP_2_MESSAGE("Теперь перейдите по ссылке"),
     ADD_TOKENS_MESSAGE("Добавьте источники данных"),
     ASK_TIME_MESSAGE("Укажите время отправки уведомления в формате «23 59»"),
@@ -37,8 +35,11 @@ public enum SettingsMessageEnum {
 
 
     INVALID_TIME_MESSAGE("Неверный формат времени. \nВведите время в формате: \n«23 59», \n«00 00». \n\nБез кавычек!"),
-    INVALID_BITRIXDOMAIN_MESSAGE("Неверный формат домена. \nВведите значение в формате, без кавычек: \n«test.bitrix24.ru»" +
-            "\n Если у вас собственный домен без bitrix24.ru, введите его."),
+    INVALID_BITRIXDOMAIN_MESSAGE("""
+            Неверный формат домена. \s
+            Введите значение в формате, без кавычек: \s
+            «test.bitrix24.ru»
+            Если у вас собственный домен без bitrix24.ru, введите его."""),
     NON_COMMAND_MESSAGE("Вы ввели неизвестную команду"),
     DISABLE_NOTIFICATIONS_MESSAGE("Уведомления отключены"),
     ENABLE_NOTIFICATIONS_MESSAGE("Уведомления включены"),

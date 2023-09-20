@@ -20,13 +20,8 @@ public class TempDataSaver {
 
     public void tempLastMessageId(String chatId, int messageId) {
         Optional<TempData> tempDataOptional = tempDataRepository.findByChatId(chatId);
-        TempData tempData;
-        if (tempDataOptional.isPresent()) {
-            tempData = tempDataOptional.get();
-        } else {
-            tempData = new TempData();
-            tempData.setChatId(chatId);
-        }
+        TempData tempData = tempDataOptional.orElseGet(TempData::new);
+        tempData.setChatId(chatId);
         tempData.setLastMessageId(messageId);
         tempDataRepository.save(tempData);
     }

@@ -31,6 +31,7 @@ public class SettingsKeyboard {
             launchCallback = SettingsCallBackEnum.ENABLE_NOTIFICATIONS_CALLBACK;
         }
 
+
         return inlineKeyboardMaker.addMarkup(
                         inlineKeyboardMaker.addRow(
                                 // Кнопка управления проектами

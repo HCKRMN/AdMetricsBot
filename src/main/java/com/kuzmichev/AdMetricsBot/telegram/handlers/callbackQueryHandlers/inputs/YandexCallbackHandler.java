@@ -3,6 +3,7 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.input
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.AddYandexKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.AddYandexTestKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
@@ -30,6 +31,7 @@ public class YandexCallbackHandler implements CallbackHandler {
     AddYandexTestKeyboard addYandexTestKeyboard;
     AddYandex addYandex;
     AddYandexKeyboard addYandexKeyboard;
+    TempDataRepository tempDataRepository;
 
     @Override
     public boolean canHandle(String data) {
@@ -52,10 +54,11 @@ public class YandexCallbackHandler implements CallbackHandler {
                     SettingsStateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE.getStateName(),
                     addYandexKeyboard.addYandexMenu(chatId, userState));
         } else if (Objects.equals(data, SettingsCallBackEnum.TEST_YANDEX_CALLBACK.getCallBackName())) {
+            String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    addYandex.testYandex(chatId),
+                    addYandex.testYandex(projectId),
                     SettingsStateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE.getStateName(),
                     addYandexTestKeyboard.addYandexTestMenu());
         }

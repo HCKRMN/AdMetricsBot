@@ -28,13 +28,13 @@ public class YaController2 {
     }
 
     @RequestMapping(value = "/yandex-r")
-    public String getYaToken(@RequestParam(name = "access_token", required = false) String yaToken, // Сделать обязательным потом и проверить
-                             @RequestParam(name = "state", required = false) String chatId){
+    public String getYaToken(@RequestParam(name = "access_token") String yaToken,
+                             @RequestParam(name = "state") String chatId){
 
         String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
         Yandex yandex = new Yandex();
         yandex.setChatId(chatId);
-        yandex.setYaToken(yaToken);
+        yandex.setYandexToken(yaToken);
         yandex.setProjectId(projectId);
         yandexRepository.save(yandex);
 
@@ -47,7 +47,7 @@ public class YaController2 {
                 SettingsMessageEnum.ADD_YANDEX_TEST_MESSAGE.getMessage(),
                 addYandexTestKeyboard.addYandexTestMenu());
 
-        log.info("Пользователь с Id: {} добавил аккаунт Yandex", chatId);
+        log.info("Пользователь {} добавил аккаунт Yandex", chatId);
         return "yandex-r";
     }
 }

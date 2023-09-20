@@ -37,9 +37,11 @@ public class AdMetricsBot extends SpringWebhookBot {
         try {
             return handleUpdate(update);
         } catch (IllegalArgumentException e) {
+            log.error(e.getMessage());
             return new SendMessage(update.getMessage().getChatId().toString(),
                     SettingsMessageEnum.EXCEPTION_ILLEGAL_MESSAGE.getMessage());
         } catch (Exception e) {
+            log.error(e.toString());
             return new SendMessage(update.getMessage().getChatId().toString(),
                     SettingsMessageEnum.EXCEPTION_WHAT_THE_FUCK.getMessage());
         }

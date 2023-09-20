@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 @Slf4j
 public class YandexDirectRequest {
     public static String ya(YandexRepository yandexRepository, String chatId) throws IOException {
-        String bearer = yandexRepository.findById(chatId).get().getYaToken();
+        String bearer = yandexRepository.findById(chatId).get().getYandexToken();
 
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost("https://api.direct.yandex.com/json/v5/reports");

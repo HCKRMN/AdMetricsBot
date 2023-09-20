@@ -24,7 +24,6 @@ import java.util.List;
 public class TimeZoneKeyboard {
     final InlineKeyboardMaker inlineKeyboardMaker;
     final BackAndExitKeyboard backAndExitKeyboard;
-    final UserRepository userRepository;
     @Value("${telegram.webhook-path}")
     String link;
     public InlineKeyboardMarkup timeZoneKeyboard(String chatId, String userState) {
@@ -48,8 +47,7 @@ public class TimeZoneKeyboard {
                                         SettingsCallBackEnum.EDIT_TIMEZONE_MANUAL_CALLBACK.getCallBackName(),
                                         null
                                 )
-                        ),
-                        backAndExitKeyboard.backAndExitMenuButtons(userState)
+                        ), backAndExitKeyboard.backAndExitMenuButtons(userState)
         );
     }
 }

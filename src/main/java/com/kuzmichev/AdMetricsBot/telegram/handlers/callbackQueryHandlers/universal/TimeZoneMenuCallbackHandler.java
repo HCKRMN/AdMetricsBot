@@ -1,8 +1,10 @@
-package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.menu;
+package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.universal;
 
+import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationStateEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalMessageEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.TimeZoneKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
@@ -45,17 +47,25 @@ public class TimeZoneMenuCallbackHandler implements CallbackHandler {
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    SettingsMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
+                    UniversalMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
                     SettingsStateEnum.SETTINGS_EDIT_TIMEZONE_STATE.getStateName(),
                     timeZoneKeyboard.timeZoneKeyboard(chatId, userState));
+
         } else if (Objects.equals(data, SettingsCallBackEnum.EDIT_TIMEZONE_MANUAL_CALLBACK.getCallBackName())) {
+            String newState;
+            if(userState.contains("REGISTRATION")){
+                newState = RegistrationStateEnum.REGISTRATION_EDIT_TIMEZONE_MANUAL_STATE.getStateName();
+            } else {
+                newState = SettingsStateEnum.SETTINGS_EDIT_TIMEZONE_MANUAL_STATE.getStateName();
+            }
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
                     SettingsMessageEnum.EDIT_TIMEZONE_MANUAL_MESSAGE.getMessage(),
-                    SettingsStateEnum.EDIT_TIMEZONE_MANUAL_STATE.getStateName(),
+                    newState,
                     backAndExitKeyboard.backAndExitMenu(userState));
         }
+
         return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

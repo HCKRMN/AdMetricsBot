@@ -19,7 +19,7 @@ public enum SettingsStateEnum {
 
     // Универсальные
     WORKING_STATE("WORKING_STATE"),
-    EDIT_TIMEZONE_MANUAL_STATE("EDIT_TIMEZONE_MANUAL_STATE"),
+    SETTINGS_EDIT_TIMEZONE_MANUAL_STATE("EDIT_TIMEZONE_MANUAL_STATE"),
     ;
 
     private final String stateName;

@@ -12,9 +12,9 @@ import lombok.Setter;
 @Cacheable
 public class Yandex {
     @Id
-    private String chatId;
-    private String yaToken;
-    private String yaLogin;
     private String projectId;
+    private String chatId;
+    private String yandexToken;
+    private String yandexLogin;
 
 }

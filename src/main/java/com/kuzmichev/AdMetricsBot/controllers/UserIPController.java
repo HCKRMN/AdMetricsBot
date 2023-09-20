@@ -3,7 +3,6 @@ package com.kuzmichev.AdMetricsBot.controllers;
 import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationStateEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
@@ -49,13 +48,13 @@ public class UserIPController {
             if (user.getUserState().equals(RegistrationStateEnum.REGISTRATION_STATE.getStateName())) {
                 messageWithoutReturn.sendMessage(
                         chatId,
-                        RegistrationMessageEnum.TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
+                        RegistrationMessageEnum.REGISTRATION_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
                         projectCreateKeyboard.projectCreateKeyboard(user.getUserState())
                 );
             } else {
                 messageWithoutReturn.sendMessage(
                         chatId,
-                        SettingsMessageEnum.TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
+                        SettingsMessageEnum.SETTINGS_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
                         doneButtonKeyboard.doneButtonMenu()
                 );
             }

@@ -3,6 +3,7 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.regis
 import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationCallbackEnum;
 import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalMessageEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.TimeZoneKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
@@ -41,16 +42,16 @@ public class RegistrationCallbackHandler implements CallbackHandler {
         String userName = buttonQuery.getMessage().getFrom().getUserName();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        registration.registerUser(chatId, userName);
-
         if (Objects.equals(data, RegistrationCallbackEnum.START_REGISTRATION_CALLBACK.getCallBackName())) {
+            registration.registerUser(chatId, userName);
             tempDataSaver.tempLastMessageId(chatId, messageId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    RegistrationMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
+                    UniversalMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
                     null,
-                    timeZoneKeyboard.timeZoneKeyboard(chatId, userState));
+                    timeZoneKeyboard.timeZoneKeyboard(chatId, userState)
+            );
         }
         return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

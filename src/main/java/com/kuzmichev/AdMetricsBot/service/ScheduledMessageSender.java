@@ -36,18 +36,19 @@ public class ScheduledMessageSender {
             LocalTime now = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
             List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(now);
             for (ScheduledMessage scheduledMessage : scheduledMessages) {
-                try {
-                    messageWithoutReturn.sendMessage(
-                            scheduledMessage.getChatId(),
-                            "Затраты на рекламу в Яндекс директ: "
-                                    + YandexDirectRequest.ya(
-                                            yandexRepository,
-                                            scheduledMessage.getChatId()));
-
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-
-                }
+                System.out.println("SSSSSSSSSSSSSS");
+//                try {
+//                    messageWithoutReturn.sendMessage(
+//                            scheduledMessage.getChatId(),
+//                            "Затраты на рекламу в Яндекс директ: "
+//                                    + YandexDirectRequest.ya(
+//                                            yandexRepository,
+//                                            scheduledMessage.getChatId()));
+//
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//
+//                }
             }
         }, 0, 1, TimeUnit.MINUTES);
     }

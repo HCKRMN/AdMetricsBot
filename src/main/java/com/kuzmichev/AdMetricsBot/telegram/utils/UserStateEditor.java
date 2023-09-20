@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+
 @Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
@@ -17,7 +18,8 @@ public class UserStateEditor {
     UserRepository userRepository;
     public void editState(String chatId, String state) {
         Optional<User> userOptional = userRepository.findByChatId(chatId);
-        User user = userOptional.get();
+        User user = userOptional.orElseGet(User::new);
+        user.setChatId(chatId);
         user.setUserState(state);
         userRepository.save(user);
     }

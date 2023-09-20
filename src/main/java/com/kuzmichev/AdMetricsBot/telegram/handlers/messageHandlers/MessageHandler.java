@@ -56,6 +56,6 @@ public class MessageHandler {
         }
 
         // Обрабатываем обычные пользовательские команды
-        return commandHandler.handleUserCommand(message);
+        return commandHandler.handleUserCommand(message, userState);
     }
 }

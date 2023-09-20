@@ -17,7 +17,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 public class AddInputsKeyboard {
     InlineKeyboardMaker inlineKeyboardMaker;
     BackAndExitKeyboard backAndExitKeyboard;
-    UserRepository userRepository;
     public InlineKeyboardMarkup addTokensMenu(String userState) {
 
         return inlineKeyboardMaker.addMarkup(

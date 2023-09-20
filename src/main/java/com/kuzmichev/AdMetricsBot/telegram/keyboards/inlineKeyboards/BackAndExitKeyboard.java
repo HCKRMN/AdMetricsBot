@@ -1,8 +1,10 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
+import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationStateEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import jdk.swing.interop.SwingInterOpUtils;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -49,7 +51,7 @@ public class BackAndExitKeyboard {
                     )
             );
         } else {
-//            Возвращаем здесь null потому что далее он будет обработан в методе отправке сообщений
+//            Возвращаем здесь null потому что в этом случае кнопки нам ненужны
             return null;
         }
 
