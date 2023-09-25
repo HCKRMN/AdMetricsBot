@@ -22,4 +22,6 @@ public interface TempDataRepository extends JpaRepository<TempData, String> {
 
     @Query("select t.messagesIdsToDelete from tempDataTable t where t.chatId = :chatId")
     String findMessagesIdsToDeleteByChatId(@Param("chatId") String chatId);
+
+    TempData getByChatId(String chatId);
 }

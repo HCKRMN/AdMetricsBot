@@ -31,10 +31,10 @@ public class UserIPController {
     private final DoneButtonKeyboard doneButtonKeyboard;
 
     @GetMapping("/getip")
-    public String myEndpoint(HttpServletRequest request,
-                             @RequestParam(name = "chatId") String chatId) {
+    public String getUserIp(HttpServletRequest request,
+                            @RequestParam(name = "chatId") String chatId) {
         String ip = getIpAddress(request);
-        double timeZone = ipToTimeZone.convertIpToTimeZone(ip);
+        int timeZone = ipToTimeZone.convertIpToTimeZone(ip);
 
         int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
         messageManagementService.putMessageToQueue(chatId, messageId);
@@ -43,7 +43,7 @@ public class UserIPController {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             user.setIp(ip);
-            user.setTimeZone(timeZone);
+            user.setTimeDifferenceInMinutes(timeZone);
             userRepository.save(user);
             if (user.getUserState().equals(RegistrationStateEnum.REGISTRATION_STATE.getStateName())) {
                 messageWithoutReturn.sendMessage(

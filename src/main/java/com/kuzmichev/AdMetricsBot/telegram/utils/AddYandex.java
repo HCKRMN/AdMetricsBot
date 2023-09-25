@@ -23,12 +23,13 @@ public class AddYandex {
     @Value("${yandexRedirectURI}")
     String redirectUri;
 
-    public String getYandexAuthorizationUrl(String chatId) {
+    public String getYandexAuthorizationUrl(String chatId, String userState) {
         return "https://oauth.yandex.ru/authorize" +
                 "?response_type=token" +
                 "&client_id=" + clientId +
                 "&redirect_uri=" + link + redirectUri +
-                "&state=" + chatId;
+                "&state=" + chatId +
+                "_" + userState;
     }
 //    public String getApiSettingsUrl(String chatId) {
 //        return "https://direct.yandex.ru/registered/main.pl?cmd=apiSettings";

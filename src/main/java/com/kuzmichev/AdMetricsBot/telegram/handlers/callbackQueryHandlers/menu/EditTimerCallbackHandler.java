@@ -1,8 +1,8 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.menu;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalCallbackEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
@@ -29,7 +29,7 @@ public class EditTimerCallbackHandler implements CallbackHandler {
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, SettingsCallBackEnum.EDIT_TIMER_CALLBACK.getCallBackName());
+        return Objects.equals(data, UniversalCallbackEnum.UNIVERSAL_EDIT_TIMER_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -38,7 +38,7 @@ public class EditTimerCallbackHandler implements CallbackHandler {
         String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        if (Objects.equals(data, SettingsCallBackEnum.EDIT_TIMER_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, UniversalCallbackEnum.UNIVERSAL_EDIT_TIMER_CALLBACK.getCallBackName())) {
             tempDataSaver.tempLastMessageId(chatId, messageId);
             return messageWithReturn.editMessage(
                     chatId,

@@ -2,7 +2,11 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalMessageEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.DoneButtonKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.TimeZoneKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -21,6 +25,9 @@ public class AddTimer {
     UserRepository userRepository;
     ScheduledMessageRepository scheduledMessageRepository;
     UserStateEditor userStateEditor;
+    MessageWithReturn messageWithReturn;
+    TimeZoneKeyboard timeZoneKeyboard;
+    DoneButtonKeyboard doneButtonKeyboard;
 
     /**
      * Устанавливает таймер и запускает его.
@@ -30,27 +37,37 @@ public class AddTimer {
      * @return сообщение о добавлении таймера
      */
 
-    public SendMessage setTimerAndStart(String chatId, String messageText) {
+    public SendMessage setTimerAndStart(String chatId, String messageText, String userState) {
+        // Если юзер найден
+        Optional<User> user = userRepository.findById(chatId);
+        if (user.isPresent()){
+            int timeDifferenceInMinutes = user.get().getTimeDifferenceInMinutes(); // получаем разницу часовых поясов в минутах
+            LocalTime timerMessage = LocalTime.parse(messageText.replace(" ", ":"))
+                .plusMinutes(timeDifferenceInMinutes); // добавляем разницу часовых поясов к таймеру
 
-        double hoursDecimal = userRepository.findById(chatId).get().getTimeZone(); // получаем временную зону
-        int hours = (int) Math.floor(hoursDecimal); // округляем до меньшего целого
-        int minutes = (int) Math.round((hoursDecimal - hours) * 60); // получаем дробную часть в минутах, округляем
-        LocalTime timeZone = LocalTime.of(hours, minutes); // создаем новый объект LocalTime
-        LocalTime timerMessage = LocalTime.parse(messageText.replace(" ", ":"))
-                .minusHours(timeZone.getHour())
-                .minusMinutes(timeZone.getMinute());
+            ScheduledMessage scheduledMessage = new ScheduledMessage();
+            scheduledMessage.setTimerMessage(timerMessage);
+            scheduledMessage.setChatId(chatId);
+            scheduledMessage.setEnableSendingMessages(true);
+            scheduledMessageRepository.save(scheduledMessage);
 
-        Optional<ScheduledMessage> scheduledMessageOptional = scheduledMessageRepository.findByChatId(chatId);
-        ScheduledMessage scheduledMessage = scheduledMessageOptional.get();
-        scheduledMessage.setTimerMessage(timerMessage);
-        scheduledMessageRepository.save(scheduledMessage);
+            // Изменяем статус юзера на рабочий
+            userStateEditor.editState(chatId, SettingsStateEnum.WORKING_STATE.getStateName());
 
-        // Изменяем статус юзера на рабочий
-        userStateEditor.editState(chatId, SettingsStateEnum.WORKING_STATE.getStateName());
+            log.info("Пользователь {} установил таймер на " + timerMessage, chatId);
+            return messageWithReturn.sendMessage(
+                    chatId,
+                    SettingsMessageEnum.TIMER_ADDED_MESSAGE.getMessage() + messageText.replace(" ", ":"),
+                    doneButtonKeyboard.doneButtonMenu(),
+                    SettingsStateEnum.WORKING_STATE.getStateName());
 
-        log.info("User set timer at " + timerMessage);
-        return new SendMessage(chatId, SettingsMessageEnum.TIMER_ADDED_MESSAGE.getMessage() + messageText.replace(" ", ":"));
-
+        }
+        return messageWithReturn.sendMessage(
+                chatId,
+                UniversalMessageEnum.TIMER_ADD_ERROR_MESSAGE.getMessage(),
+                timeZoneKeyboard.timeZoneKeyboard(chatId, userState),
+                null
+        );
     }
 
 }

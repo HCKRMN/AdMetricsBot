@@ -20,18 +20,17 @@ public class IpToTimeZone {
     private void init() {
         api = new IPGeolocationAPI(api_key);
     }
-    public double convertIpToTimeZone(String ip) {
+    public int convertIpToTimeZone(String ip) {
         GeolocationParams geoParams = new GeolocationParams();
-//        System.out.println(ip);
         geoParams.setIPAddress(ip);
         geoParams.setFields("geo,time_zone,currency,offset");
         Geolocation geolocation = api.getGeolocation(geoParams);
 
-        // Проверяем подключение
         if (geolocation.getStatus() == 200) {
             double timeZone = geolocation.getTimezone().getOffset();
-
-            return timeZone;
+            // timeZone - представляет собой временную зону в часах от гринвича
+            // переводим его в минуты и вычитаем разницу с мск, так как сервер с там
+            return (int) (timeZone * 60 - 180);
 
 
         } else {

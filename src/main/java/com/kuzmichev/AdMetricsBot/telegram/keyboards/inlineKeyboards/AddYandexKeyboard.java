@@ -30,7 +30,7 @@ public class AddYandexKeyboard {
                                 inlineKeyboardMaker.addButton(
                                         SettingsButtonEnum.YANDEX_ADD_TOKEN_LINK_BUTTON.getButtonName(),
                                         null,
-                                        addYandex.getYandexAuthorizationUrl(chatId)
+                                        addYandex.getYandexAuthorizationUrl(chatId, userState)
                                 )
 //                                        на всякий случай оставлю кнопку получения доступа к апи, вроде как ненужно, но пусть будет
 //                                        ,

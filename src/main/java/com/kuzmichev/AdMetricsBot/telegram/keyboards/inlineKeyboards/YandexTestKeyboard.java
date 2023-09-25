@@ -1,7 +1,10 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
+import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationStateEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalCallbackEnum;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -13,10 +16,15 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class AddYandexTestKeyboard {
+public class YandexTestKeyboard {
     InlineKeyboardMaker inlineKeyboardMaker;
 
-    public InlineKeyboardMarkup addYandexTestMenu() {
+    public InlineKeyboardMarkup yandexTestMenu(String userState) {
+        String callBack = SettingsCallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName();
+        if (userState.equals(RegistrationStateEnum.REGISTRATION_PROJECT_ADD_TOKENS_STATE.getStateName())) {
+            callBack = UniversalCallbackEnum.UNIVERSAL_EDIT_TIMER_CALLBACK.getCallBackName();
+        }
+
         return inlineKeyboardMaker.addMarkup(
                         //Кнопка тестового запроса
                         inlineKeyboardMaker.addRow(
@@ -34,11 +42,11 @@ public class AddYandexTestKeyboard {
                                         null
                                 )
                         ),
-                        //Кнопка готово
+                        //Кнопка продолжить
                         inlineKeyboardMaker.addRow(
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.DONE_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
+                                        UniversalButtonEnum.UNIVERSAL_CONTINUE_BUTTON.getButtonName(),
+                                        callBack,
                                         null
                                 )
                         )

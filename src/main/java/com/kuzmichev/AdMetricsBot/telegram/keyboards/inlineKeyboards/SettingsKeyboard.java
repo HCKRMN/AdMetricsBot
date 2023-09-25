@@ -2,6 +2,7 @@ package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalCallbackEnum;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -57,7 +58,7 @@ public class SettingsKeyboard {
                                 // Кнопка настроек таймера
                                 inlineKeyboardMaker.addButton(
                                         SettingsButtonEnum.SETTINGS_EDIT_TIMER_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.EDIT_TIMER_CALLBACK.getCallBackName(),
+                                        UniversalCallbackEnum.UNIVERSAL_EDIT_TIMER_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),

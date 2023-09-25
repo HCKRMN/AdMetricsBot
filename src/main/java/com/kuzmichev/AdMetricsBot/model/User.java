@@ -1,7 +1,6 @@
 package com.kuzmichev.AdMetricsBot.model;
 
 import jakarta.persistence.Cacheable;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
@@ -20,8 +19,7 @@ public class User {
     private String chatId;
     private String userName;
     private Timestamp registeredAt;
-    @Column(columnDefinition = "DOUBLE PRECISION")
-    private double timeZone;
+    private int timeDifferenceInMinutes;
     private String ip;
     private String userState;
     private int projectsCount;

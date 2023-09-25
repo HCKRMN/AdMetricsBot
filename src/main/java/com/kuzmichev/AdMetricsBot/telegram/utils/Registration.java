@@ -21,8 +21,9 @@ public class Registration{
     UserRepository userRepository;
 
     public void registerUser(String chatId, String userName) {
-//        Сделать проверку подругому, мб по юзернейму, или добавить счетчик регистрации
-        if(scheduledMessageRepository.findById(chatId).isEmpty()) {
+        if (
+//                userRepository.findById(chatId).isEmpty() &&
+                scheduledMessageRepository.findById(chatId).isEmpty()) {
             ScheduledMessage scheduledMessage = new ScheduledMessage();
             scheduledMessage.setChatId(chatId);
             scheduledMessage.setEnableSendingMessages(false);

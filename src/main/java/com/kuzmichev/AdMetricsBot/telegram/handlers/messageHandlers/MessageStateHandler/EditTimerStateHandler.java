@@ -34,7 +34,7 @@ public class EditTimerStateHandler implements StateHandler {
     public BotApiMethod<?> handleState(String chatId, String messageText, String userState) {
 
         if (validator.validateTime(messageText)) {
-            return addTimer.setTimerAndStart(chatId, messageText);
+            return addTimer.setTimerAndStart(chatId, messageText, userState);
         } else {
             messageWithoutReturn.sendMessage(
                     chatId,
