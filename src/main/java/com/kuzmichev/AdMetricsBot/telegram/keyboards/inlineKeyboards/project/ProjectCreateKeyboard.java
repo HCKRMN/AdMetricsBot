@@ -1,7 +1,9 @@
-package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
+package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project;
 
 import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalButtonEnum;
 import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalCallbackEnum;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

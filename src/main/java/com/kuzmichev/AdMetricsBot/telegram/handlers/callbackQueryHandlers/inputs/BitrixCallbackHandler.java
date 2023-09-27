@@ -3,8 +3,11 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.input
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
+import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMainRequest;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BitrixTestKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
@@ -26,10 +29,14 @@ public class BitrixCallbackHandler implements CallbackHandler {
     TempDataSaver tempDataSaver;
     MessageWithReturn messageWithReturn;
     BackAndExitKeyboard backAndExitKeyboard;
+    TempDataRepository tempDataRepository;
+    BitrixMainRequest bitrixMainRequest;
+    BitrixTestKeyboard bitrixTestKeyboard;
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, SettingsCallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName());
+        return Objects.equals(data, SettingsCallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName())
+                || Objects.equals(data, SettingsCallBackEnum.TEST_BITRIX_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -39,7 +46,6 @@ public class BitrixCallbackHandler implements CallbackHandler {
         int messageId = buttonQuery.getMessage().getMessageId();
 
         if (Objects.equals(data, SettingsCallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName())) {
-            tempDataSaver.tempLastMessageId(chatId, messageId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
@@ -47,6 +53,16 @@ public class BitrixCallbackHandler implements CallbackHandler {
                     SettingsStateEnum.SETTINGS_PROJECT_ADD_BITRIX_STATE.getStateName(),
                     backAndExitKeyboard.backAndExitMenu(userState));
         }
+        if (Objects.equals(data, SettingsCallBackEnum.TEST_BITRIX_CALLBACK.getCallBackName())) {
+            String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
+            return messageWithReturn.editMessage(
+                    chatId,
+                    messageId,
+                    bitrixMainRequest.bitrixMainRequest(projectId),
+                    null,
+                    bitrixTestKeyboard.bitrixTestMenu(userState));
+        }
+
         return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

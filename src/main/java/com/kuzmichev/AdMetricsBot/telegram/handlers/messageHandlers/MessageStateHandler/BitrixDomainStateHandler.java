@@ -6,7 +6,7 @@ import com.kuzmichev.AdMetricsBot.model.Bitrix;
 import com.kuzmichev.AdMetricsBot.model.BitrixRepository;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BitrixLinkKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BitrixAddKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Validator;
@@ -26,7 +26,7 @@ import java.util.Objects;
 public class BitrixDomainStateHandler implements StateHandler {
     Validator validator;
     MessageWithoutReturn messageWithoutReturn;
-    BitrixLinkKeyboard bitrixLinkKeyboard;
+    BitrixAddKeyboard bitrixAddKeyboard;
     BackAndExitKeyboard backAndExitKeyboard;
     BitrixRepository bitrixRepository;
     TempDataRepository tempDataRepository;
@@ -39,24 +39,23 @@ public class BitrixDomainStateHandler implements StateHandler {
 
     @Override
     public BotApiMethod<?> handleState(String chatId, String messageText, String userState) {
-
         if (validator.validateBitrixDomain(messageText)) {
+            String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
             Bitrix bitrix = new Bitrix();
             bitrix.setBitrixDomain(messageText);
             bitrix.setChatId(chatId);
-            bitrix.setProjectId(tempDataRepository.findLastProjectIdByChatId(chatId));
+            bitrix.setProjectId(projectId);
             bitrixRepository.save(bitrix);
-            return messageWithReturn.sendMessage(
+            messageWithoutReturn.sendMessage(
                     chatId,
                     SettingsMessageEnum.ADD_BITRIX_STEP_2_MESSAGE.getMessage(),
-                    bitrixLinkKeyboard.bitrixLinkMenu(chatId, userState),
-                    null);
+                    bitrixAddKeyboard.bitrixLinkMenu(chatId, projectId, userState));
         } else {
             messageWithoutReturn.sendMessage(
                     chatId,
                     SettingsMessageEnum.INVALID_BITRIXDOMAIN_MESSAGE.getMessage(),
                     backAndExitKeyboard.backAndExitMenu(userState));
-            return null;
         }
+        return null;
     }
 }

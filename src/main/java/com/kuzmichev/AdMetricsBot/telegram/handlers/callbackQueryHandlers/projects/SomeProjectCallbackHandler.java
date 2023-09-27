@@ -4,7 +4,7 @@ import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.SomeProjectKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project.ProjectSomeKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.DynamicCallback;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
@@ -26,7 +26,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class SomeProjectCallbackHandler  implements CallbackHandler {
     MessageWithReturn messageWithReturn;
-    SomeProjectKeyboard someProjectKeyboard;
+    ProjectSomeKeyboard projectSomeKeyboard;
     ProjectRepository projectRepository;
     TempDataRepository tempDataSaver;
 
@@ -56,7 +56,7 @@ public class SomeProjectCallbackHandler  implements CallbackHandler {
                     messageId,
                     projectRepository.findProjectNameByProjectId(projectId),
                     null,
-                    someProjectKeyboard.someProjectMenu(userState));
+                    projectSomeKeyboard.someProjectMenu(userState));
         }
         return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

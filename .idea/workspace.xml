@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8a2360ef-aa09-42a0-805e-aa78730c3294" name="Changes" comment="переделал установку временной зоны и таймера">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/BitrixTestKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/registrationEnums/RegistrationMessageEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/registrationEnums/RegistrationMessageEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/registrationEnums/RegistrationStateEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/registrationEnums/RegistrationStateEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/settingsEnums/SettingsButtonEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/settingsEnums/SettingsButtonEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/settingsEnums/SettingsCallBackEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/settingsEnums/SettingsCallBackEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/settingsEnums/SettingsMessageEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/settingsEnums/SettingsMessageEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/universalEnums/UniversalButtonEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/universalEnums/UniversalButtonEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/universalEnums/UniversalMessageEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/universalEnums/UniversalMessageEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/BitrixController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/BitrixController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/UserIPController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/UserIPController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YaController2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YaController2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMainRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMainRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/BitrixCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/BitrixCallbackHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/YandexCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/YandexCallbackHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/DeleteProjectCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/DeleteProjectCallbackHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/ProjectListCallBackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/ProjectListCallBackHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/ProjectsMenuCallbackHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/ProjectsMenuCallbackHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/SomeProjectCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/SomeProjectCallbackHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/AskProjectNameStateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/AskProjectNameStateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/BitrixDomainStateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/BitrixDomainStateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/ManualEditTimeZoneStateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/ManualEditTimeZoneStateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/AddYandexKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/YandexAddKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/BitrixLinkKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/BitrixAddKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/DeleteProjectKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectDeleteKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/ProjectCreateKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectCreateKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/ProjectListKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectListKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/ProjectsKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectsKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/SomeProjectKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectSomeKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/YandexTestKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/YandexTestKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/AddBitrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/AddBitrix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/bitrix.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/bitrix.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/getip.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/getip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/yandex-r.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/yandex-r.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/getip.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/getip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/yandex-r.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/yandex-r.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="spring-beans.schema" />
+        <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2QHSpYHUtFPhHSsYF8G67zEqnkQ" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;last.edited.regexp&quot;: &quot;Sample Text&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/GitHub/AdMetricsBot/src/main/resources/templates&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;7fb271e9b6c3c1e2b748a2e4662cab55&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\GitHub\AdMetricsBot\src\main\resources\templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\_delete" />
+      <recent name="C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\Delete" />
+      <recent name="C:\GitHub\AdMetricsBot\src\main\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Ngrok.Ngrok Run">
+    <configuration name="AdMetricsBotApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="ACTIVE_PROFILES" />
+      <module name="AdMetricsBot" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.kuzmichev.AdMetricsBot.AdMetricsBotApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.kuzmichev.AdMetricsBot.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Ngrok Run" type="ngrok-deploy" factoryName="Ngrok" server-name="Ngrok">
+      <deployment type="Ngrok">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Ngrok.Ngrok Run" />
+      <item itemvalue="Spring Boot.AdMetricsBotApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.AdMetricsBotApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8a2360ef-aa09-42a0-805e-aa78730c3294" name="Changes" comment="" />
+      <created>1685009199418</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685009199418</updated>
+      <workItem from="1685009201773" duration="63000" />
+      <workItem from="1685009274274" duration="81000" />
+      <workItem from="1685025551053" duration="4594000" />
+      <workItem from="1685103865376" duration="4191000" />
+      <workItem from="1685162933195" duration="6742000" />
+      <workItem from="1685170374308" duration="17000" />
+      <workItem from="1685171087368" duration="675000" />
+      <workItem from="1685332929648" duration="42000" />
+      <workItem from="1685427018229" duration="7257000" />
+      <workItem from="1685506515063" duration="4540000" />
+      <workItem from="1685536526192" duration="326000" />
+      <workItem from="1685596252627" duration="4320000" />
+      <workItem from="1685952154302" duration="32000" />
+      <workItem from="1686617780995" duration="19570000" />
+      <workItem from="1686645935550" duration="1763000" />
+      <workItem from="1686713944324" duration="1834000" />
+      <workItem from="1686802743962" duration="5931000" />
+      <workItem from="1687172358897" duration="12389000" />
+      <workItem from="1687187761949" duration="161000" />
+      <workItem from="1687533536685" duration="38000" />
+      <workItem from="1687584639003" duration="17812000" />
+      <workItem from="1687661718022" duration="834000" />
+      <workItem from="1687748419676" duration="5198000" />
+      <workItem from="1687755202449" duration="965000" />
+      <workItem from="1687838461560" duration="8861000" />
+      <workItem from="1687923601092" duration="8365000" />
+      <workItem from="1688010201459" duration="13760000" />
+      <workItem from="1688191233544" duration="595000" />
+      <workItem from="1688267837679" duration="3734000" />
+      <workItem from="1688391765646" duration="2546000" />
+      <workItem from="1688469593913" duration="9640000" />
+      <workItem from="1688563523396" duration="1590000" />
+      <workItem from="1688644951482" duration="2899000" />
+      <workItem from="1688650112573" duration="5398000" />
+      <workItem from="1688728684776" duration="2157000" />
+      <workItem from="1688797557097" duration="5514000" />
+      <workItem from="1688804627633" duration="1103000" />
+      <workItem from="1688822092452" duration="1136000" />
+      <workItem from="1688823250453" duration="6977000" />
+      <workItem from="1688872226378" duration="8937000" />
+      <workItem from="1688882427564" duration="148000" />
+      <workItem from="1688882586208" duration="652000" />
+      <workItem from="1688957966731" duration="4077000" />
+      <workItem from="1689046238962" duration="15160000" />
+      <workItem from="1689134617486" duration="1147000" />
+      <workItem from="1690013426838" duration="14491000" />
+      <workItem from="1690080738562" duration="15262000" />
+      <workItem from="1690104757225" duration="1405000" />
+      <workItem from="1690169725891" duration="7880000" />
+      <workItem from="1690180978521" duration="603000" />
+      <workItem from="1691829579360" duration="4472000" />
+      <workItem from="1691902314900" duration="1975000" />
+      <workItem from="1691904317257" duration="8887000" />
+      <workItem from="1692101698674" duration="6471000" />
+      <workItem from="1692180890768" duration="8510000" />
+      <workItem from="1692269844143" duration="2223000" />
+      <workItem from="1692272395111" duration="8097000" />
+      <workItem from="1692411598029" duration="6379000" />
+      <workItem from="1692585630689" duration="10630000" />
+      <workItem from="1692678347018" duration="11859000" />
+      <workItem from="1692760709951" duration="1027000" />
+      <workItem from="1692761956578" duration="9105000" />
+      <workItem from="1692778029214" duration="1105000" />
+      <workItem from="1692851414129" duration="7225000" />
+      <workItem from="1692864180141" duration="642000" />
+      <workItem from="1692864861032" duration="38000" />
+      <workItem from="1693218805478" duration="11569000" />
+      <workItem from="1693304350574" duration="8044000" />
+      <workItem from="1693392157155" duration="5959000" />
+      <workItem from="1693398982703" duration="1130000" />
+      <workItem from="1693406828215" duration="1394000" />
+      <workItem from="1693478966585" duration="3948000" />
+      <workItem from="1693636350327" duration="9273000" />
+      <workItem from="1693974481558" duration="9354000" />
+      <workItem from="1694061056433" duration="9800000" />
+      <workItem from="1694149649235" duration="3583000" />
+      <workItem from="1694429348549" duration="7455000" />
+      <workItem from="1694515804783" duration="4856000" />
+      <workItem from="1694528973028" duration="635000" />
+      <workItem from="1694603355395" duration="12125000" />
+      <workItem from="1694695174654" duration="368000" />
+      <workItem from="1694695767989" duration="8264000" />
+      <workItem from="1694921202522" duration="15457000" />
+      <workItem from="1695008574269" duration="6728000" />
+      <workItem from="1695018930093" duration="7484000" />
+      <workItem from="1695028849430" duration="168000" />
+      <workItem from="1695093664727" duration="13840000" />
+      <workItem from="1695196949260" duration="761000" />
+      <workItem from="1695272824272" duration="7540000" />
+      <workItem from="1695358377084" duration="360000" />
+      <workItem from="1695358747961" duration="129000" />
+      <workItem from="1695359010813" duration="7371000" />
+      <workItem from="1695536399300" duration="4567000" />
+      <workItem from="1695645441956" duration="1692000" />
+      <workItem from="1695726443594" duration="9820000" />
+    </task>
+    <task id="LOCAL-00001" summary="Вернул обратно шедулер, но оставил кеш базы">
+      <created>1685169464728</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1685169464729</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Переписал инлайнкейбордмейкер">
+      <created>1685438341153</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685438341153</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Закончил с директом, сделал возврат нуля">
+      <created>1686627261307</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1686627261307</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Сделал меню настроек с динамическими кнопками">
+      <created>1686715703829</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1686715703829</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Добавил обработку колбеков для меню, добавил статусы обработки времени">
+      <created>1687187686724</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1687187686724</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Прикрутил удаление данных юзера, исправил запрос в яндекс(там зачем то был фильтр на конверсии)">
+      <created>1687755906773</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1687755906773</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Сделал отправку сообщений без return, начал формировать меню проектов, добавил модельи репозиторий проектов">
+      <created>1687932954431</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1687932954431</updated>
+    </task>
+    <task id="LOCAL-00008" summary="убрал хардкод из хендлеров, добавил свич на обработку состояний юзера">
+      <created>1688018933487</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1688018933487</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Исправил обработку комманд, переделал этап регистрации с учетом создания проектов">
+      <created>1688026703536</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1688026703536</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Сделал редактор и удалятор сообщений, начал переделывать и расширять меню">
+      <created>1688730800915</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1688730800915</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Добавил регулярный удолятор сообщений, бесконечный поток который каждые 5 сек проверяет есть ли че удалить. если находит удаляет">
+      <created>1688882124307</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1688882124307</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Сделал ещё две ветки меню, настроил удаление старых сообщений при инвалидном сообщении">
+      <created>1689064061434</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1689064061434</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Убрал включение таймера сразу по установке времени, а также проверку яндекса в этом же методе">
+      <created>1689135624885</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1689135624885</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Переделал меню подключения аккаунтов и создания проектов">
+      <created>1690031757121</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1690031757121</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Сделал выдачу проектов кнопками, исправил косяки">
+      <created>1690180643812</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1690180643812</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Закончил меню, начал рефакторить, сделал систему страниц для пользователей с кучей проектов, добавил кнопки страниц предыдущие и следующие.&#10;&#10;Исправил выдачу ответа при тесте яндекса без затрат. И добавил в условие с ошибкой запись логов">
+      <created>1692109039542</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1692109039542</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Нифига меню не закончено, нужно сделать несколько динамических кнопок.&#10;Пока сделал кнопку удаления источников">
+      <created>1692280812197</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1692280812197</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Сделал получение данных с битрикса, настроил обновление токена, нужно ещё потом будет подумать над обновлением самого рефреш токена">
+      <created>1693483043771</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1693483043771</updated>
+    </task>
+    <task id="LOCAL-00019" summary="РЕФААААКТОРИИИИНГ">
+      <created>1694074204540</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1694074204540</updated>
+    </task>
+    <task id="LOCAL-00020" summary="РЕФААААКТОРИИИИНГ&#10;Разобрал обработчик команд из сообщений">
+      <created>1694436795851</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1694436795851</updated>
+    </task>
+    <task id="LOCAL-00021" summary="РЕФААААКТОРИИИИНГ&#10;Разобрал инлайн кнопки">
+      <created>1694529488610</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1694529488610</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Переработал и оптимизировал клавиатуры">
+      <created>1695010806940</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1695010806940</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Исправил ошибки при записи в базу в разных случаях + разные мелкие ошибки">
+      <created>1695197357077</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1695197357077</updated>
+    </task>
+    <task id="LOCAL-00024" summary="переделал установку временной зоны и таймера">
+      <created>1695647094908</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1695647094908</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Вернул обратно шедулер, но оставил кеш базы" />
+    <MESSAGE value="Переписал инлайнкейбордмейкер" />
+    <MESSAGE value="Закончил с директом, сделал возврат нуля" />
+    <MESSAGE value="Сделал меню настроек с динамическими кнопками" />
+    <MESSAGE value="Добавил обработку колбеков для меню, добавил статусы обработки времени" />
+    <MESSAGE value="Прикрутил удаление данных юзера, исправил запрос в яндекс(там зачем то был фильтр на конверсии)" />
+    <MESSAGE value="Сделал отправку сообщений без return, начал формировать меню проектов, добавил модельи репозиторий проектов" />
+    <MESSAGE value="убрал хардкод из хендлеров, добавил свич на обработку состояний юзера" />
+    <MESSAGE value="Исправил обработку комманд, переделал этап регистрации с учетом создания проектов" />
+    <MESSAGE value="Сделал редактор и удалятор сообщений, начал переделывать и расширять меню" />
+    <MESSAGE value="Добавил регулярный удолятор сообщений, бесконечный поток который каждые 5 сек проверяет есть ли че удалить. если находит удаляет" />
+    <MESSAGE value="Сделал ещё две ветки меню, настроил удаление старых сообщений при инвалидном сообщении" />
+    <MESSAGE value="Убрал включение таймера сразу по установке времени, а также проверку яндекса в этом же методе" />
+    <MESSAGE value="Переделал меню подключения аккаунтов и создания проектов" />
+    <MESSAGE value="Сделал выдачу проектов кнопками, исправил косяки" />
+    <MESSAGE value="Закончил меню, начал рефакторить, сделал систему страниц для пользователей с кучей проектов, добавил кнопки страниц предыдущие и следующие.&#10;&#10;Исправил выдачу ответа при тесте яндекса без затрат. И добавил в условие с ошибкой запись логов" />
+    <MESSAGE value="Нифига меню не закончено, нужно сделать несколько динамических кнопок.&#10;Пока сделал кнопку удаления источников" />
+    <MESSAGE value="Сделал получение данных с битрикса, настроил обновление токена, нужно ещё потом будет подумать над обновлением самого рефреш токена" />
+    <MESSAGE value="РЕФААААКТОРИИИИНГ" />
+    <MESSAGE value="РЕФААААКТОРИИИИНГ&#10;Разобрал обработчик команд из сообщений" />
+    <MESSAGE value="РЕФААААКТОРИИИИНГ&#10;Разобрал инлайн кнопки" />
+    <MESSAGE value="Переработал и оптимизировал клавиатуры" />
+    <MESSAGE value="Исправил ошибки при записи в базу в разных случаях + разные мелкие ошибки" />
+    <MESSAGE value="переделал установку временной зоны и таймера" />
+    <option name="LAST_COMMIT_MESSAGE" value="переделал установку временной зоны и таймера" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

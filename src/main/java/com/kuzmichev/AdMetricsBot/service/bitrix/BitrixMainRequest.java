@@ -1,5 +1,6 @@
 package com.kuzmichev.AdMetricsBot.service.bitrix;
 
+import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalMessageEnum;
 import com.kuzmichev.AdMetricsBot.model.Bitrix;
 import com.kuzmichev.AdMetricsBot.model.BitrixRepository;
 import lombok.AccessLevel;
@@ -19,7 +20,7 @@ public class BitrixMainRequest {
     CountRecordsRequest countRecordsRequest;
     RefreshTokenRequest refreshTokenRequest;
     @SneakyThrows
-    public int mainBitrixRequest(String projectId){
+    public String bitrixMainRequest(String projectId){
         Bitrix bitrix = bitrixRepository.findBitrixByProjectId(projectId);
         String accessToken = bitrix.getAccessToken();
         String domain = bitrix.getBitrixDomain();
@@ -27,14 +28,16 @@ public class BitrixMainRequest {
         int responseCode = testConnectionRequest.testConnectionRequest(bitrix);
 
          if (responseCode == 200){
-            return countRecordsRequest.countRecordsRequest(accessToken, domain, chatId);
+            int leadCount = countRecordsRequest.countRecordsRequest(accessToken, domain, chatId);
+            return UniversalMessageEnum.BITRIX_LEADS_COUNT_MESSAGE.getMessage() + leadCount;
          } else if (responseCode == 401){
             log.info("User " + bitrix.getChatId() + ". Выполняю обновление токена bitrix");
             accessToken = refreshTokenRequest.refreshTokenRequest(bitrix);
-            return countRecordsRequest.countRecordsRequest(accessToken, domain, chatId);
+            int leadCount = countRecordsRequest.countRecordsRequest(accessToken, domain, chatId);
+            return UniversalMessageEnum.BITRIX_LEADS_COUNT_MESSAGE.getMessage() + leadCount;
         } else {
             log.error("User " + bitrix.getChatId() + ". Не удалось обновить токен bitrix, но тестовый запрос пройден");
-            return -1;
+            return UniversalMessageEnum.BITRIX_ERROR_MESSAGE.getMessage() + responseCode;
         }
     }
 }

@@ -58,16 +58,16 @@ public class YaController2 {
             messageManagementService.putMessageToQueue(chatId, messageId);
             messageManagementService.deleteMessage(chatId);
 
-            if (userState.equals(RegistrationStateEnum.REGISTRATION_PROJECT_ADD_TOKENS_STATE.getStateName())) {
+            if (userState.equals(RegistrationStateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName())) {
                 messageWithoutReturn.sendMessage(
                         chatId,
-                        RegistrationMessageEnum.REGISTRATION_YANDEX_TEST_MESSAGE.getMessage(),
+                        RegistrationMessageEnum.REGISTRATION_TEST_INPUTS_MESSAGE.getMessage(),
                         yandexTestKeyboard.yandexTestMenu(userState));
 
             } else {
                 messageWithoutReturn.sendMessage(
                         chatId,
-                        SettingsMessageEnum.ADD_YANDEX_TEST_MESSAGE.getMessage(),
+                        SettingsMessageEnum.INPUT_TEST_MESSAGE.getMessage(),
                         yandexTestKeyboard.yandexTestMenu(userState));
             }
             log.info("Пользователь {} добавил аккаунт Yandex", chatId);
@@ -76,6 +76,6 @@ public class YaController2 {
         else {
             log.info("Ошибка обработки chatId_userState: {}", chatId_userState);
         }
-        return "yandex-r";
+        return "bitrix";
     }
 }

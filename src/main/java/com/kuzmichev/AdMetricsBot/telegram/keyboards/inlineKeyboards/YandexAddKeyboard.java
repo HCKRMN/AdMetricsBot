@@ -1,9 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
-import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationStateEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
-import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.telegram.utils.AddYandex;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -11,15 +8,12 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-
-import java.util.List;
 
 @Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class AddYandexKeyboard {
+public class YandexAddKeyboard {
     InlineKeyboardMaker inlineKeyboardMaker;
     AddYandex addYandex;
     BackAndExitKeyboard backAndExitKeyboard;

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 public class AddBitrix {
 
     final BitrixRepository bitrixRepository;
-    final TempDataRepository tempDataRepository;
     @Value("${bitrixClientID}")
     String clientId;
     @Value("${telegram.webhook-path}")
@@ -24,12 +23,11 @@ public class AddBitrix {
     @Value("${bitrixRedirectURI}")
     String redirectUri;
 
-    public String getBitrixAuthorizationUrl(String chatId) {
-        String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
+    public String getBitrixAuthorizationUrl(String chatId, String projectId, String userState) {
         String bitrixDomain = bitrixRepository.getBitrixDomainByProjectId(projectId);
         return "https://" + bitrixDomain +
                 "/oauth/authorize/?client_id=" + clientId +
                 "&response_type=code&redirect_uri=" + link + redirectUri +
-                "&state=" + projectId;
+                "&state=" + chatId + ":" + projectId + ":" + userState;
     }
 }

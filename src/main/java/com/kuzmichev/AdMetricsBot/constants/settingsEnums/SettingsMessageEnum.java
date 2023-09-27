@@ -7,7 +7,7 @@ public enum SettingsMessageEnum {
     SETTINGS_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE("Разница часовых поясов успешно добавлена"),
     EDIT_TIMEZONE_MANUAL_MESSAGE("Укажите ваше текущее время в формате «23 59»"),
     ADD_YANDEX_MESSAGE("Перейдите по ссылке чтобы подключить аккаунт Яндекс Директ"),
-    ADD_YANDEX_TEST_MESSAGE("Проверьте получение данных с аккаунта Яндекс Директ"),
+    INPUT_TEST_MESSAGE("Проверьте получение данных"),
     ADD_BITRIX_STEP_1_MESSAGE("""
             Введите домен вашего портала Битрикс24 в формате, без кавычек:\s
             «test.bitrix24.ru».\s

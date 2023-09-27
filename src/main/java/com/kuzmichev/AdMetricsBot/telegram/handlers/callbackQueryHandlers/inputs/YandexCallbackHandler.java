@@ -4,7 +4,7 @@ import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.AddYandexKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.YandexAddKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.YandexTestKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.utils.AddYandex;
@@ -30,7 +30,7 @@ public class YandexCallbackHandler implements CallbackHandler {
     MessageWithReturn messageWithReturn;
     YandexTestKeyboard yandexTestKeyboard;
     AddYandex addYandex;
-    AddYandexKeyboard addYandexKeyboard;
+    YandexAddKeyboard yandexAddKeyboard;
     TempDataRepository tempDataRepository;
 
     @Override
@@ -52,7 +52,7 @@ public class YandexCallbackHandler implements CallbackHandler {
                     messageId,
                     SettingsMessageEnum.ADD_YANDEX_MESSAGE.getMessage(),
                     SettingsStateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE.getStateName(),
-                    addYandexKeyboard.addYandexMenu(chatId, userState));
+                    yandexAddKeyboard.addYandexMenu(chatId, userState));
         } else if (Objects.equals(data, SettingsCallBackEnum.TEST_YANDEX_CALLBACK.getCallBackName())) {
             String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
             return messageWithReturn.editMessage(

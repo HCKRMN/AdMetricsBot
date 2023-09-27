@@ -16,10 +16,10 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class YandexTestKeyboard {
+public class BitrixTestKeyboard {
     InlineKeyboardMaker inlineKeyboardMaker;
 
-    public InlineKeyboardMarkup yandexTestMenu(String userState) {
+    public InlineKeyboardMarkup bitrixTestMenu(String userState) {
         String callBack = SettingsCallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName();
         if (userState.equals(RegistrationStateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName())) {
             callBack = UniversalCallbackEnum.UNIVERSAL_EDIT_TIMER_CALLBACK.getCallBackName();
@@ -30,7 +30,7 @@ public class YandexTestKeyboard {
                         inlineKeyboardMaker.addRow(
                                 inlineKeyboardMaker.addButton(
                                         UniversalButtonEnum.TEST_INPUTS_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.TEST_YANDEX_CALLBACK.getCallBackName(),
+                                        SettingsCallBackEnum.TEST_BITRIX_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),

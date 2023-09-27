@@ -5,7 +5,7 @@ import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.DeleteProjectKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project.ProjectDeleteKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.DoneButtonKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
@@ -26,7 +26,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class DeleteProjectCallbackHandler implements CallbackHandler {
     MessageWithReturn messageWithReturn;
-    DeleteProjectKeyboard deleteProjectKeyboard;
+    ProjectDeleteKeyboard projectDeleteKeyboard;
     TempDataRepository tempDataRepository;
     ProjectRepository projectRepository;
     UserRepository userRepository;
@@ -52,7 +52,7 @@ public class DeleteProjectCallbackHandler implements CallbackHandler {
                     messageId,
                     SettingsMessageEnum.PROJECT_DELETE_STEP_1_MESSAGE.getMessage(),
                     null,
-                    deleteProjectKeyboard.deleteProjectMenu());
+                    projectDeleteKeyboard.deleteProjectMenu());
         } else if(Objects.equals(data, SettingsCallBackEnum.PROJECT_DELETE_STEP_2_CALLBACK.getCallBackName())) {
             projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
             projectRepository.removeProjectByProjectId(projectId);

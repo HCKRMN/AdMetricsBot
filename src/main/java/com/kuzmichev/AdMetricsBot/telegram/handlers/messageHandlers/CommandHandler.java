@@ -76,8 +76,8 @@ public class CommandHandler {
                 }
                 case TEST -> {
 //                    Тест битрикса
-                    String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
-                    return new SendMessage(chatId, "ЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫ: " + bitrixMainRequest.mainBitrixRequest(projectId));
+//                    String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
+//                    return new SendMessage(chatId, "ЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫ: " + bitrixMainRequest.mainBitrixRequest(projectId));
                 }
                 default -> {
                     messageWithoutReturn.sendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());

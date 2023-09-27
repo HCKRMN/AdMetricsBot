@@ -46,7 +46,7 @@ public class AskProjectNameStateHandler implements StateHandler {
             if(Objects.equals(userState, SettingsStateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE.getStateName())){
                 userStateEditor.editState(chatId, SettingsStateEnum.SETTINGS_PROJECT_ADD_TOKENS_STATE.getStateName());
             } else if(Objects.equals(userState, RegistrationStateEnum.REGISTRATION_PROJECT_CREATE_ASK_NAME_STATE.getStateName())){
-                userStateEditor.editState(chatId, RegistrationStateEnum.REGISTRATION_PROJECT_ADD_TOKENS_STATE.getStateName());
+                userStateEditor.editState(chatId, RegistrationStateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName());
             } else userStateEditor.editState(chatId, SettingsStateEnum.WORKING_STATE.getStateName());
 
             projectManager.projectCreate(chatId, messageText);

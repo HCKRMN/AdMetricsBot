@@ -16,7 +16,6 @@ public enum SettingsButtonEnum {
     YES_ADD_BUTTON("Да, добавить"),
     CONTINUE_BUTTON("Продолжить"),
     NO_CONTINUE_BUTTON("Нет, продолжить"),
-    TEST_YANDEX_BUTTON("Тест запроса Яндекс"),
     SETTINGS_ENABLE_NOTIFICATIONS_BUTTON("Вкл. уведомления"),
     SETTINGS_DISABLE_NOTIFICATIONS_BUTTON("Откл. уведомления"),
     SETTINGS_EDIT_TIMEZONE_BUTTON("Часовой пояс"),

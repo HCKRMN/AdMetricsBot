@@ -1,7 +1,9 @@
-package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
+package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project;
 
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -13,7 +15,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class SomeProjectKeyboard {
+public class ProjectSomeKeyboard {
     InlineKeyboardMaker inlineKeyboardMaker;
     BackAndExitKeyboard backAndExitKeyboard;
     public InlineKeyboardMarkup someProjectMenu(String userState) {
