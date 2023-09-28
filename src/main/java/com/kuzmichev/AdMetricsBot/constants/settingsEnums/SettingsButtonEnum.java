@@ -39,6 +39,7 @@ public enum SettingsButtonEnum {
     CANCEL_BUTTON("Отмена"),
     DONE_BUTTON("Готово"),
     MANUAL_INPUT_BUTTON("Ручной ввод"),
+    CLOSE_BUTTON("Закрыть")
     ;
 
 

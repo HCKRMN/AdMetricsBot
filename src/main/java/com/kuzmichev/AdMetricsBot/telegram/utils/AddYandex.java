@@ -2,7 +2,7 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
-import com.kuzmichev.AdMetricsBot.service.YandexDirectRequest;
+import com.kuzmichev.AdMetricsBot.service.YandexMainRequest;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class AddYandex {
-    final YandexRepository yandexRepository;
+    final YandexMainRequest yandexMainRequest;
     @Value("${yandexClientID}")
     String clientId;
     @Value("${telegram.webhook-path}")
@@ -37,14 +37,15 @@ public class AddYandex {
 
     public String testYandex(String chatId) {
         try {
-            String result = YandexDirectRequest.ya(yandexRepository, chatId);
+            int result = yandexMainRequest.yandexMainRequest(chatId);
             System.out.println(result);
-            if (result.equals("-1")) {
+            if (result == -1) {
                 return SettingsMessageEnum.YANDEX_ERROR_GET_RESULT_MESSAGE.getMessage();
             } else {
                 return SettingsMessageEnum.YANDEX_RESULT_MESSAGE.getMessage() + result;
             }
         } catch (Exception e) {
+            log.error(e.toString());
             return SettingsMessageEnum.YANDEX_ERROR_GET_TOKEN_MESSAGE.getMessage();
         }
     }

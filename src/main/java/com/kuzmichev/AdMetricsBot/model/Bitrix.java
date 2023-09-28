@@ -12,11 +12,11 @@ import lombok.Setter;
 @Cacheable
 public class Bitrix {
     @Id
+    private String projectId;
     private String chatId;
     private String code;
     private String userId;
     private String bitrixDomain;
-    private String projectId;
     private String memberId;
     private String refreshToken;
     private String accessToken;

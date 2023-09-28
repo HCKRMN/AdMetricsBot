@@ -4,45 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a2360ef-aa09-42a0-805e-aa78730c3294" name="Changes" comment="переделал установку временной зоны и таймера">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/BitrixTestKeyboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/registrationEnums/RegistrationMessageEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/registrationEnums/RegistrationMessageEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/registrationEnums/RegistrationStateEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/registrationEnums/RegistrationStateEnum.java" afterDir="false" />
+    <list default="true" id="8a2360ef-aa09-42a0-805e-aa78730c3294" name="Changes" comment="доработка подключения битрикса при регистрации и в меню + вывод данных">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/MetricsMessageBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/CloseButtonKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/settingsEnums/SettingsButtonEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/settingsEnums/SettingsButtonEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/settingsEnums/SettingsCallBackEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/settingsEnums/SettingsCallBackEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/settingsEnums/SettingsMessageEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/settingsEnums/SettingsMessageEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/universalEnums/UniversalButtonEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/universalEnums/UniversalButtonEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/universalEnums/UniversalMessageEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/universalEnums/UniversalMessageEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/BitrixController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/BitrixController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/UserIPController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/UserIPController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YaController2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YaController2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMainRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMainRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/BitrixCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/BitrixCallbackHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/YandexCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/YandexCallbackHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/DeleteProjectCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/DeleteProjectCallbackHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/ProjectListCallBackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/ProjectListCallBackHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/ProjectsMenuCallbackHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/ProjectsMenuCallbackHandlers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/SomeProjectCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/SomeProjectCallbackHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/Bitrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/Bitrix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/YandexRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/YandexRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/IpToTimeZone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/IpToTimeZone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/ScheduledMessageSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/ScheduledMessageSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/YandexDirectRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/YandexMainRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/AskProjectNameStateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/AskProjectNameStateHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/BitrixDomainStateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/BitrixDomainStateHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/ManualEditTimeZoneStateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/ManualEditTimeZoneStateHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/AddYandexKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/YandexAddKeyboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/BitrixLinkKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/BitrixAddKeyboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/DeleteProjectKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectDeleteKeyboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/ProjectCreateKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectCreateKeyboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/ProjectListKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectListKeyboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/ProjectsKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectsKeyboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/SomeProjectKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectSomeKeyboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/YandexTestKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/YandexTestKeyboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/AddBitrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/AddBitrix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/AddYandex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/AddYandex.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/bitrix.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/bitrix.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/getip.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/getip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/yandex-r.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/yandex-r.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/getip.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/getip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/yandex-r.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/yandex-r.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +98,7 @@
       <recent name="com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards" />
     </key>
   </component>
-  <component name="RunManager" selected="Ngrok.Ngrok Run">
+  <component name="RunManager" selected="Spring Boot.AdMetricsBotApplication">
     <configuration name="AdMetricsBotApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <option name="ACTIVE_PROFILES" />
       <module name="AdMetricsBot" />
@@ -255,6 +232,8 @@
       <workItem from="1695536399300" duration="4567000" />
       <workItem from="1695645441956" duration="1692000" />
       <workItem from="1695726443594" duration="9820000" />
+      <workItem from="1695818149850" duration="295000" />
+      <workItem from="1695899308060" duration="7653000" />
     </task>
     <task id="LOCAL-00001" summary="Вернул обратно шедулер, но оставил кеш базы">
       <created>1685169464728</created>
@@ -424,7 +403,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695647094908</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="доработка подключения битрикса при регистрации и в меню + вывод данных">
+      <created>1695818318228</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1695818318228</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -466,7 +452,8 @@
     <MESSAGE value="Переработал и оптимизировал клавиатуры" />
     <MESSAGE value="Исправил ошибки при записи в базу в разных случаях + разные мелкие ошибки" />
     <MESSAGE value="переделал установку временной зоны и таймера" />
-    <option name="LAST_COMMIT_MESSAGE" value="переделал установку временной зоны и таймера" />
+    <MESSAGE value="доработка подключения битрикса при регистрации и в меню + вывод данных" />
+    <option name="LAST_COMMIT_MESSAGE" value="доработка подключения битрикса при регистрации и в меню + вывод данных" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

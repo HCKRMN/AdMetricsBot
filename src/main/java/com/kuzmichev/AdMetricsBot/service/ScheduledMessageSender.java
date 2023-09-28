@@ -2,7 +2,7 @@ package com.kuzmichev.AdMetricsBot.service;
 
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
-import com.kuzmichev.AdMetricsBot.model.YandexRepository;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.CloseButtonKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import jakarta.annotation.PostConstruct;
 import lombok.AccessLevel;
@@ -11,7 +11,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -25,8 +24,9 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class ScheduledMessageSender {
     ScheduledMessageRepository scheduledMessageRepository;
-    YandexRepository yandexRepository;
     MessageWithoutReturn messageWithoutReturn;
+    MetricsMessageBuilder metricsMessageBuilder;
+    CloseButtonKeyboard closeButtonKeyboard;
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
@@ -36,19 +36,11 @@ public class ScheduledMessageSender {
             LocalTime now = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
             List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(now);
             for (ScheduledMessage scheduledMessage : scheduledMessages) {
-                System.out.println("SSSSSSSSSSSSSS");
-//                try {
-//                    messageWithoutReturn.sendMessage(
-//                            scheduledMessage.getChatId(),
-//                            "Затраты на рекламу в Яндекс директ: "
-//                                    + YandexDirectRequest.ya(
-//                                            yandexRepository,
-//                                            scheduledMessage.getChatId()));
-//
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//
-//                }
+                String chatId = scheduledMessage.getChatId();
+                messageWithoutReturn.sendMessage(
+                        chatId,
+                        metricsMessageBuilder.getMessage(chatId),
+                        closeButtonKeyboard.closeButtonKeyboard());
             }
         }, 0, 1, TimeUnit.MINUTES);
     }

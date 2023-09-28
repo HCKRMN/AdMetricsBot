@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.39">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>2872</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2907</IntrospectionStateNumber>
       <ServerVersion>13.3</ServerVersion>
       <StartupTime>1692864569</StartupTime>
       <TimeZones>true ACDT
@@ -801,7 +801,7 @@ true posixrules
 13158||10|C|G
 13158||-9223372036854775808|U|G
 13158||10|U|G</Grants>
-      <IntrospectionStateNumber>2872</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2914</IntrospectionStateNumber>
       <ObjectId>13442</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4123,289 +4123,364 @@ true posixrules
     <schema id="252" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>2872</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2914</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>287</StateNumber>
       <OwnerName>postgres</OwnerName>
     </schema>
-    <table id="253" parent="252" name="project_table">
-      <ObjectId>18258</ObjectId>
-      <StateNumber>2842</StateNumber>
+    <table id="253" parent="252" name="bitrix_table">
+      <ObjectId>18304</ObjectId>
+      <StateNumber>2908</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="254" parent="252" name="scheduled_message_table">
-      <ObjectId>18266</ObjectId>
-      <StateNumber>2843</StateNumber>
+    <table id="254" parent="252" name="project_table">
+      <ObjectId>18312</ObjectId>
+      <StateNumber>2909</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="255" parent="252" name="temp_data_table">
-      <ObjectId>18271</ObjectId>
-      <StateNumber>2844</StateNumber>
+    <table id="255" parent="252" name="scheduled_message_table">
+      <ObjectId>18320</ObjectId>
+      <StateNumber>2910</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="256" parent="252" name="users_table">
-      <ObjectId>18279</ObjectId>
-      <StateNumber>2845</StateNumber>
+    <table id="256" parent="252" name="temp_data_table">
+      <ObjectId>18325</ObjectId>
+      <StateNumber>2911</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="257" parent="252" name="yandex_table">
-      <ObjectId>18287</ObjectId>
-      <StateNumber>2846</StateNumber>
+    <table id="257" parent="252" name="users_table">
+      <ObjectId>18333</ObjectId>
+      <StateNumber>2912</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="258" parent="253" name="project_id">
+    <table id="258" parent="252" name="yandex_table">
+      <ObjectId>18341</ObjectId>
+      <StateNumber>2913</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <column id="259" parent="253" name="project_id">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>2842</StateNumber>
+      <StateNumber>2908</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="259" parent="253" name="chat_id">
+    <column id="260" parent="253" name="access_token">
       <DataType>varchar(255)|0s</DataType>
       <Position>2</Position>
-      <StateNumber>2842</StateNumber>
+      <StateNumber>2908</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="260" parent="253" name="project_name">
+    <column id="261" parent="253" name="bitrix_domain">
       <DataType>varchar(255)|0s</DataType>
       <Position>3</Position>
-      <StateNumber>2842</StateNumber>
+      <StateNumber>2908</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="261" parent="253" name="project_number">
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
+    <column id="262" parent="253" name="chat_id">
+      <DataType>varchar(255)|0s</DataType>
       <Position>4</Position>
-      <StateNumber>2842</StateNumber>
-      <TypeId>23</TypeId>
+      <StateNumber>2908</StateNumber>
+      <TypeId>1043</TypeId>
     </column>
-    <index id="262" parent="253" name="project_table_pkey">
+    <column id="263" parent="253" name="code">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>5</Position>
+      <StateNumber>2908</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="264" parent="253" name="member_id">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>6</Position>
+      <StateNumber>2908</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="265" parent="253" name="refresh_token">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>7</Position>
+      <StateNumber>2908</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="266" parent="253" name="user_id">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>8</Position>
+      <StateNumber>2908</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="267" parent="253" name="bitrix_table_pkey">
       <ColNames>project_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>18264</ObjectId>
+      <ObjectId>18310</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>2842</StateNumber>
+      <StateNumber>2908</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="263" parent="253" name="project_table_pkey">
+    <key id="268" parent="253" name="bitrix_table_pkey">
       <ColNames>project_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>18265</ObjectId>
+      <ObjectId>18311</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>2842</StateNumber>
-      <UnderlyingIndexId>18264</UnderlyingIndexId>
+      <StateNumber>2908</StateNumber>
+      <UnderlyingIndexId>18310</UnderlyingIndexId>
     </key>
-    <column id="264" parent="254" name="chat_id">
+    <column id="269" parent="254" name="project_id">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>2843</StateNumber>
+      <StateNumber>2909</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="265" parent="254" name="enable_sending_messages">
+    <column id="270" parent="254" name="chat_id">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>2</Position>
+      <StateNumber>2909</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="271" parent="254" name="project_name">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>3</Position>
+      <StateNumber>2909</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="272" parent="254" name="project_number">
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>2909</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="273" parent="254" name="project_table_pkey">
+      <ColNames>project_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>18318</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>2909</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+      <CollationNames>default</CollationNames>
+      <CollationIds>100</CollationIds>
+      <CollationParentNames>pg_catalog</CollationParentNames>
+    </index>
+    <key id="274" parent="254" name="project_table_pkey">
+      <ColNames>project_id</ColNames>
+      <NameSurrogate>1</NameSurrogate>
+      <ObjectId>18319</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>2909</StateNumber>
+      <UnderlyingIndexId>18318</UnderlyingIndexId>
+    </key>
+    <column id="275" parent="255" name="chat_id">
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>2910</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="276" parent="255" name="enable_sending_messages">
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>2843</StateNumber>
+      <StateNumber>2910</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="266" parent="254" name="timer_message">
+    <column id="277" parent="255" name="timer_message">
       <DataType>time(6)|0s</DataType>
       <Position>3</Position>
-      <StateNumber>2843</StateNumber>
+      <StateNumber>2910</StateNumber>
       <TypeId>1083</TypeId>
     </column>
-    <index id="267" parent="254" name="scheduled_message_table_pkey">
+    <index id="278" parent="255" name="scheduled_message_table_pkey">
       <ColNames>chat_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>18269</ObjectId>
+      <ObjectId>18323</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>2843</StateNumber>
+      <StateNumber>2910</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="268" parent="254" name="scheduled_message_table_pkey">
+    <key id="279" parent="255" name="scheduled_message_table_pkey">
       <ColNames>chat_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>18270</ObjectId>
+      <ObjectId>18324</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>2843</StateNumber>
-      <UnderlyingIndexId>18269</UnderlyingIndexId>
+      <StateNumber>2910</StateNumber>
+      <UnderlyingIndexId>18323</UnderlyingIndexId>
     </key>
-    <column id="269" parent="255" name="chat_id">
+    <column id="280" parent="256" name="chat_id">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>2844</StateNumber>
+      <StateNumber>2911</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="270" parent="255" name="last_message_id">
+    <column id="281" parent="256" name="last_message_id">
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>2844</StateNumber>
+      <StateNumber>2911</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="271" parent="255" name="last_project_id">
+    <column id="282" parent="256" name="last_project_id">
       <DataType>varchar(255)|0s</DataType>
       <Position>3</Position>
-      <StateNumber>2844</StateNumber>
+      <StateNumber>2911</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="272" parent="255" name="messages_ids_to_delete">
+    <column id="283" parent="256" name="messages_ids_to_delete">
       <DataType>varchar(255)|0s</DataType>
       <Position>4</Position>
-      <StateNumber>2844</StateNumber>
+      <StateNumber>2911</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="273" parent="255" name="temp_data_table_pkey">
+    <index id="284" parent="256" name="temp_data_table_pkey">
       <ColNames>chat_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>18277</ObjectId>
+      <ObjectId>18331</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>2844</StateNumber>
+      <StateNumber>2911</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="274" parent="255" name="temp_data_table_pkey">
+    <key id="285" parent="256" name="temp_data_table_pkey">
       <ColNames>chat_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>18278</ObjectId>
+      <ObjectId>18332</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>2844</StateNumber>
-      <UnderlyingIndexId>18277</UnderlyingIndexId>
+      <StateNumber>2911</StateNumber>
+      <UnderlyingIndexId>18331</UnderlyingIndexId>
     </key>
-    <column id="275" parent="256" name="chat_id">
+    <column id="286" parent="257" name="chat_id">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>2845</StateNumber>
+      <StateNumber>2912</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="276" parent="256" name="ip">
+    <column id="287" parent="257" name="ip">
       <DataType>varchar(255)|0s</DataType>
       <Position>2</Position>
-      <StateNumber>2845</StateNumber>
+      <StateNumber>2912</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="277" parent="256" name="projects_count">
+    <column id="288" parent="257" name="projects_count">
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StateNumber>2845</StateNumber>
+      <StateNumber>2912</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="278" parent="256" name="projects_page">
+    <column id="289" parent="257" name="projects_page">
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>2845</StateNumber>
+      <StateNumber>2912</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="279" parent="256" name="registered_at">
+    <column id="290" parent="257" name="registered_at">
       <DataType>timestamp(6)|0s</DataType>
       <Position>5</Position>
-      <StateNumber>2845</StateNumber>
+      <StateNumber>2912</StateNumber>
       <TypeId>1114</TypeId>
     </column>
-    <column id="280" parent="256" name="time_difference_in_minutes">
+    <column id="291" parent="257" name="time_difference_in_minutes">
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>2845</StateNumber>
+      <StateNumber>2912</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="281" parent="256" name="user_name">
+    <column id="292" parent="257" name="user_name">
       <DataType>varchar(255)|0s</DataType>
       <Position>7</Position>
-      <StateNumber>2845</StateNumber>
+      <StateNumber>2912</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="282" parent="256" name="user_state">
+    <column id="293" parent="257" name="user_state">
       <DataType>varchar(255)|0s</DataType>
       <Position>8</Position>
-      <StateNumber>2845</StateNumber>
+      <StateNumber>2912</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="283" parent="256" name="users_table_pkey">
+    <index id="294" parent="257" name="users_table_pkey">
       <ColNames>chat_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>18285</ObjectId>
+      <ObjectId>18339</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>2845</StateNumber>
+      <StateNumber>2912</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="284" parent="256" name="users_table_pkey">
+    <key id="295" parent="257" name="users_table_pkey">
       <ColNames>chat_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>18286</ObjectId>
+      <ObjectId>18340</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>2845</StateNumber>
-      <UnderlyingIndexId>18285</UnderlyingIndexId>
+      <StateNumber>2912</StateNumber>
+      <UnderlyingIndexId>18339</UnderlyingIndexId>
     </key>
-    <column id="285" parent="257" name="project_id">
+    <column id="296" parent="258" name="project_id">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>2846</StateNumber>
+      <StateNumber>2913</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="286" parent="257" name="chat_id">
+    <column id="297" parent="258" name="chat_id">
       <DataType>varchar(255)|0s</DataType>
       <Position>2</Position>
-      <StateNumber>2846</StateNumber>
+      <StateNumber>2913</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="287" parent="257" name="yandex_login">
+    <column id="298" parent="258" name="yandex_login">
       <DataType>varchar(255)|0s</DataType>
       <Position>3</Position>
-      <StateNumber>2846</StateNumber>
+      <StateNumber>2913</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="288" parent="257" name="yandex_token">
+    <column id="299" parent="258" name="yandex_token">
       <DataType>varchar(255)|0s</DataType>
       <Position>4</Position>
-      <StateNumber>2846</StateNumber>
+      <StateNumber>2913</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="289" parent="257" name="yandex_table_pkey">
+    <index id="300" parent="258" name="yandex_table_pkey">
       <ColNames>project_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>18293</ObjectId>
+      <ObjectId>18347</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>2846</StateNumber>
+      <StateNumber>2913</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
       <CollationNames>default</CollationNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="290" parent="257" name="yandex_table_pkey">
+    <key id="301" parent="258" name="yandex_table_pkey">
       <ColNames>project_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>18294</ObjectId>
+      <ObjectId>18348</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>2846</StateNumber>
-      <UnderlyingIndexId>18293</UnderlyingIndexId>
+      <StateNumber>2913</StateNumber>
+      <UnderlyingIndexId>18347</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

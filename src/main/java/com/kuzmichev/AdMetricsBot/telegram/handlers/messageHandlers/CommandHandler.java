@@ -10,7 +10,9 @@ import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
+import com.kuzmichev.AdMetricsBot.service.MetricsMessageBuilder;
 import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMainRequest;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.CloseButtonKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.SettingsKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.StartRegistrationKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.TimeZoneKeyboard;
@@ -34,11 +36,11 @@ public class CommandHandler {
     SettingsKeyboard settingsKeyboard;
     MessageWithoutReturn messageWithoutReturn;
     MessageWithReturn messageWithReturn;
-    TempDataRepository tempDataRepository;
-    BitrixMainRequest bitrixMainRequest;
     StartRegistrationKeyboard startRegistrationKeyboard;
     Registration registration;
     TimeZoneKeyboard timeZoneKeyboard;
+    MetricsMessageBuilder metricsMessageBuilder;
+    CloseButtonKeyboard closeButtonKeyboard;
 
     public BotApiMethod<?> handleUserCommand(Message message, String userState) {
         String chatId = message.getChatId().toString();
@@ -75,9 +77,11 @@ public class CommandHandler {
                             null);
                 }
                 case TEST -> {
-//                    Тест битрикса
-//                    String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
-//                    return new SendMessage(chatId, "ЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫ: " + bitrixMainRequest.mainBitrixRequest(projectId));
+                    return messageWithReturn.sendMessage(
+                            chatId,
+                            metricsMessageBuilder.getMessage(chatId),
+                            closeButtonKeyboard.closeButtonKeyboard(),
+                            null);
                 }
                 default -> {
                     messageWithoutReturn.sendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());

@@ -16,7 +16,7 @@ public class IpToTimeZone {
     public IpToTimeZone(@Value("${IPGeolocationAPI}") String api_key) {
         this.api_key = api_key;
     }
-    @PostConstruct
+    @PostConstruct                                                                          // Зачем тут это??? ВСЕ ПЕРЕДЕЛАТЬ
     private void init() {
         api = new IPGeolocationAPI(api_key);
     }

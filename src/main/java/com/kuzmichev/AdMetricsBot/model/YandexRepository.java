@@ -13,4 +13,6 @@ public interface YandexRepository extends CrudRepository<Yandex,String> {
 
     boolean existsByProjectId (String projectId);
 
+    Yandex findByProjectId(String projectId);
+
 }
