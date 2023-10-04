@@ -14,9 +14,12 @@ import org.springframework.stereotype.Service;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import static java.lang.Thread.sleep;
 
 @Slf4j
 @Service
@@ -35,12 +38,19 @@ public class ScheduledMessageSender {
         scheduler.scheduleAtFixedRate(() -> {
             LocalTime now = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
             List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(now);
+
+            // Создаем пул потоков
+            ExecutorService executorService = Executors.newFixedThreadPool(scheduledMessages.size());
+
             for (ScheduledMessage scheduledMessage : scheduledMessages) {
                 String chatId = scheduledMessage.getChatId();
-                messageWithoutReturn.sendMessage(
-                        chatId,
-                        metricsMessageBuilder.getMessage(chatId),
-                        closeButtonKeyboard.closeButtonKeyboard());
+
+                executorService.submit(() ->
+                    messageWithoutReturn.sendMessage(
+                            chatId,
+                            metricsMessageBuilder.getMessage(chatId),
+                            closeButtonKeyboard.closeButtonKeyboard())
+                );
             }
         }, 0, 1, TimeUnit.MINUTES);
     }

@@ -19,8 +19,6 @@ public class ProjectManager {
     TempDataRepository tempDataRepository;
     UserRepository userRepository;
 
-
-        // Добавляем проект в базу
     public void projectCreate(String chatId, String messageText) {
 
         int projectsCount = userRepository.getProjectsCountByChatId(chatId) + 1;
@@ -36,11 +34,10 @@ public class ProjectManager {
         projectRepository.save(project);
 
         Optional<User> userOptional = userRepository.findByChatId(chatId);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setProjectsCount(projectsCount);
-            userRepository.save(user);
-        }
+        User user = userOptional.orElseGet(User::new);
+        user.setChatId(chatId);
+        user.setProjectsCount(projectsCount);
+        userRepository.save(user);
 
         TempData tempData = new TempData();
         tempData.setLastProjectId(projectId);

@@ -20,11 +20,11 @@ public class MessageWithoutReturn {
     ApplicationEventPublisher eventPublisher;
     UserStateEditor stateEditor;
 
-    public void sendMessage(SendMessage sendMessage) {
-        eventPublisher.publishEvent(sendMessage);
-    }
-    public void editMessage(EditMessageText sendMessage) { eventPublisher.publishEvent(sendMessage);
-    }
+//    public void sendMessage(SendMessage sendMessage) {
+//        eventPublisher.publishEvent(sendMessage);
+//    }
+//    public void editMessage(EditMessageText sendMessage) { eventPublisher.publishEvent(sendMessage);
+//    }
 
     public void editMessage(
             String chatId,
@@ -48,13 +48,13 @@ public class MessageWithoutReturn {
 
     public void sendMessage(String chatId, String textToSend) {
         SendMessage message = new SendMessage();
-        message.setChatId(String.valueOf(chatId));
+        message.setChatId(chatId);
         message.setText(textToSend);
         eventPublisher.publishEvent(message);
     }
     public void sendMessage(String chatId, String textToSend, InlineKeyboardMarkup keyboard) {
         SendMessage message = new SendMessage();
-        message.setChatId(String.valueOf(chatId));
+        message.setChatId(chatId);
         message.setText(textToSend);
         message.setReplyMarkup(keyboard);
         eventPublisher.publishEvent(message);
@@ -62,7 +62,7 @@ public class MessageWithoutReturn {
 
     public void deleteMessage(String chatId, Integer messageId) {
         DeleteMessage deleteMessage = new DeleteMessage();
-        deleteMessage.setChatId(String.valueOf(chatId));
+        deleteMessage.setChatId(chatId);
         deleteMessage.setMessageId(messageId);
         eventPublisher.publishEvent(deleteMessage);
     }

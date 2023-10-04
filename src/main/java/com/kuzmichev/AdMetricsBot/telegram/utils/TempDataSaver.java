@@ -2,7 +2,6 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 
 import com.kuzmichev.AdMetricsBot.model.TempData;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
-import com.kuzmichev.AdMetricsBot.model.User;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -23,20 +22,6 @@ public class TempDataSaver {
         TempData tempData = tempDataOptional.orElseGet(TempData::new);
         tempData.setChatId(chatId);
         tempData.setLastMessageId(messageId);
-        tempDataRepository.save(tempData);
-    }
-
-    public void tempMessagesIdsToDelete(String chatId, String messagesIdsToDelete) {
-    TempData tempData = new TempData();
-                tempData.setChatId(chatId);
-                tempData.setMessagesIdsToDelete(messagesIdsToDelete);
-                tempDataRepository.save(tempData);
-    }
-
-    public void tempProjectId(String chatId, String projectId) {
-        TempData tempData = new TempData();
-        tempData.setChatId(chatId);
-        tempData.setLastProjectId(projectId);
         tempDataRepository.save(tempData);
     }
 }

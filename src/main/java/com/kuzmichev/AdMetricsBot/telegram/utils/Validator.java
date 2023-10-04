@@ -29,14 +29,8 @@ public class Validator {
     }
 
     public boolean validateBitrixDomain(String bitrixDomain) {
-//        // Допустимые символы для доменных имен
-//        String validCharacters = "a-zA-Zа-яА-ЯёЁ0-9\\-";
-//
-//        // Регулярное выражение для проверки доменного имени
-//        String regex = "^[" + validCharacters + "]+(\\." + validCharacters + "+)+$";
-//
-//        return bitrixDomain.matches(regex);
 
+        // Допустимые символы для доменных имен
         String regex = "^(?:[a-zA-Z0-9\\-]+\\.)+[a-zA-Z0-9\\-]+\\.[a-zA-Zа-яА-ЯёЁ\\-]+(?:\\.[a-zA-Zа-яА-ЯёЁ]+)?$";
         return bitrixDomain.matches(regex);
     }

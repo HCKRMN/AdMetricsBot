@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
 import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalButtonEnum;
-import com.kuzmichev.AdMetricsBot.telegram.utils.AddBitrix;
+import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixAuthUrl;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -15,7 +15,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 @RequiredArgsConstructor
 public class BitrixAddKeyboard {
     InlineKeyboardMaker inlineKeyboardMaker;
-    AddBitrix addBitrix;
+    BitrixAuthUrl bitrixAuthUrl;
     BackAndExitKeyboard backAndExitKeyboard;
     public InlineKeyboardMarkup bitrixLinkMenu(String chatId, String projectId, String userState) {
         return inlineKeyboardMaker.addMarkup(
@@ -24,7 +24,7 @@ public class BitrixAddKeyboard {
                                 inlineKeyboardMaker.addButton(
                                         UniversalButtonEnum.LINK_BUTTON.getButtonName(),
                                         null,
-                                        addBitrix.getBitrixAuthorizationUrl(chatId, projectId, userState)
+                                        bitrixAuthUrl.getBitrixAuthorizationUrl(chatId, projectId, userState)
                                 )
                         ),
                         backAndExitKeyboard.backAndExitMenuButtons(userState)

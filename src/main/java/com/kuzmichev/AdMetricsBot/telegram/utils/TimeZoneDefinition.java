@@ -22,18 +22,14 @@ public class TimeZoneDefinition {
 
     public void manualTimeZone(String chatId, String messageText) {
         LocalTime timerMessage = LocalTime.parse(messageText.replace(" ", ":"));
-        System.out.println("Время из сообщения: " + timerMessage);
         LocalTime timeZone = LocalTime.parse(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
-        System.out.println("Время сейчас: " + timeZone);
 
         int timeDifferenceInMinutes = Integer.parseInt(String.valueOf(Duration.between(timeZone, timerMessage).toMinutes()));
-        System.out.println("Разница: " + timeDifferenceInMinutes);
 
         Optional<User> userOptional = userRepository.findById(chatId);
-        if(userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setTimeDifferenceInMinutes(timeDifferenceInMinutes);
-            userRepository.save(user);
-        }
+        User user = userOptional.orElseGet(User::new);
+        user.setChatId(chatId);
+        user.setTimeDifferenceInMinutes(timeDifferenceInMinutes);
+        userRepository.save(user);
     }
 }

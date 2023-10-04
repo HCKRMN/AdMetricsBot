@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
-import com.kuzmichev.AdMetricsBot.telegram.utils.AddYandex;
+import com.kuzmichev.AdMetricsBot.service.yandex.YandexAuthUrl;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -15,7 +15,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 @RequiredArgsConstructor
 public class YandexAddKeyboard {
     InlineKeyboardMaker inlineKeyboardMaker;
-    AddYandex addYandex;
+    YandexAuthUrl yandexAuthUrl;
     BackAndExitKeyboard backAndExitKeyboard;
 
     public InlineKeyboardMarkup addYandexMenu(String chatId, String userState) {
@@ -24,7 +24,7 @@ public class YandexAddKeyboard {
                                 inlineKeyboardMaker.addButton(
                                         SettingsButtonEnum.YANDEX_ADD_TOKEN_LINK_BUTTON.getButtonName(),
                                         null,
-                                        addYandex.getYandexAuthorizationUrl(chatId, userState)
+                                        yandexAuthUrl.getYandexAuthorizationUrl(chatId, userState)
                                 )
 //                                        на всякий случай оставлю кнопку получения доступа к апи, вроде как ненужно, но пусть будет
 //                                        ,

@@ -1,4 +1,4 @@
-package com.kuzmichev.AdMetricsBot.service;
+package com.kuzmichev.AdMetricsBot.service.yandex;
 
 import com.kuzmichev.AdMetricsBot.model.Yandex;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 public class YandexMainRequest {
     YandexRepository yandexRepository;
+
     public int yandexMainRequest(String projectId){
         Yandex yandex = yandexRepository.findByProjectId(projectId);
         String bearer = yandex.getYandexToken();
@@ -34,13 +35,9 @@ public class YandexMainRequest {
         HttpPost request = new HttpPost("https://api.direct.yandex.com/json/v5/reports");
         request.addHeader("Authorization", "Bearer " + bearer);
         request.addHeader("Accept-Language", "en");
-//        request.addHeader("Client-Login", "kauhax");
         request.addHeader("method", "post");
         request.addHeader("content-type", "application/json; charset=utf-8");
         request.addHeader("returnMoneyInMicros", "false");
-//        request.addHeader("skipReportHeader", "true");
-//        request.addHeader("skipColumnHeader", "true");
-//        request.addHeader("skipReportSummary", "true");
         StringEntity entity;
         String requestBody;
         String responseBody;
@@ -68,8 +65,7 @@ public class YandexMainRequest {
             HttpEntity entityResponse = response.getEntity();
             responseBody = EntityUtils.toString(entityResponse);
 
-    //        Отладочная информация
-            HttpEntity entity2 = request.getEntity();
+            HttpEntity entity2 = request.getEntity(); //????
             requestBody = EntityUtils.toString(entity2);
 
             int statusCode = response.getStatusLine().getStatusCode();

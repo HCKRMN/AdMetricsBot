@@ -1,13 +1,10 @@
 package com.kuzmichev.AdMetricsBot.service.bitrix;
 
-import com.kuzmichev.AdMetricsBot.model.Bitrix;
-import com.kuzmichev.AdMetricsBot.model.BitrixRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,9 +24,9 @@ public class CountRecordsRequest {
         String dateFrom = yesterday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'00:00:00"));
         String dateTo = yesterday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'23:59:59"));
 
-        String crmTypeLink = crmTypeRequest.crmTypeRequest(accessToken, domain, chatId) == 1 ? "crm.lead.list" : "crm.deal.list";
+        String crmType = crmTypeRequest.crmTypeRequest(accessToken, domain, chatId) == 1 ? "crm.lead.list" : "crm.deal.list";
         String url = String.format("https://%s/rest/%s?filter[>DATE_CREATE]=%s&filter[<DATE_CREATE]=%s&auth=%s",
-                domain, crmTypeLink, dateFrom, dateTo, accessToken);
+                domain, crmType, dateFrom, dateTo, accessToken);
 
         JSONObject json = bitrixApiService.makeBitrixApiRequest(url, chatId);
         if (json != null) {

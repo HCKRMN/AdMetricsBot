@@ -28,22 +28,22 @@ public class AddInputsKeyboard {
                                         null
                                 )
                         ),
-                        inlineKeyboardMaker.addRow(
-                                // Кнопка добавления VK
-                                inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.ADD_VK_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.ADD_VK_CALLBACK.getCallBackName(),
-                                        null
-                                )
-                        ),
-                        inlineKeyboardMaker.addRow(
-                                // Кнопка добавления MyTarget
-                                inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.ADD_MYTARGET_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.ADD_MYTARGET_CALLBACK.getCallBackName(),
-                                        null
-                                )
-                        ),
+//                        inlineKeyboardMaker.addRow(
+//                                // Кнопка добавления VK
+//                                inlineKeyboardMaker.addButton(
+//                                        SettingsButtonEnum.ADD_VK_BUTTON.getButtonName(),
+//                                        SettingsCallBackEnum.ADD_VK_CALLBACK.getCallBackName(),
+//                                        null
+//                                )
+//                        ),
+//                        inlineKeyboardMaker.addRow(
+//                                // Кнопка добавления MyTarget
+//                                inlineKeyboardMaker.addButton(
+//                                        SettingsButtonEnum.ADD_MYTARGET_BUTTON.getButtonName(),
+//                                        SettingsCallBackEnum.ADD_MYTARGET_CALLBACK.getCallBackName(),
+//                                        null
+//                                )
+//                        ),
                         inlineKeyboardMaker.addRow(
                                 // Кнопка добавления Bitrix
                                 inlineKeyboardMaker.addButton(
@@ -52,22 +52,22 @@ public class AddInputsKeyboard {
                                         null
                                 )
                         ),
-                        inlineKeyboardMaker.addRow(
-                                // Кнопка добавления AmoCRM
-                                inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.ADD_AMOCRM_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.ADD_AMOCRM_CALLBACK.getCallBackName(),
-                                        null
-                                )
-                        ),
-                        inlineKeyboardMaker.addRow(
-                                // Кнопка добавления Yclients
-                                inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.ADD_YCLIENTS_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.ADD_YCLIENTS_CALLBACK.getCallBackName(),
-                                        null
-                                )
-                        ),
+//                        inlineKeyboardMaker.addRow(
+//                                // Кнопка добавления AmoCRM
+//                                inlineKeyboardMaker.addButton(
+//                                        SettingsButtonEnum.ADD_AMOCRM_BUTTON.getButtonName(),
+//                                        SettingsCallBackEnum.ADD_AMOCRM_CALLBACK.getCallBackName(),
+//                                        null
+//                                )
+//                        ),
+//                        inlineKeyboardMaker.addRow(
+//                                // Кнопка добавления Yclients
+//                                inlineKeyboardMaker.addButton(
+//                                        SettingsButtonEnum.ADD_YCLIENTS_BUTTON.getButtonName(),
+//                                        SettingsCallBackEnum.ADD_YCLIENTS_CALLBACK.getCallBackName(),
+//                                        null
+//                                )
+//                        ),
                         backAndExitKeyboard.backAndExitMenuButtons(userState)
         );
     }

@@ -1,7 +1,6 @@
-package com.kuzmichev.AdMetricsBot.telegram.utils;
+package com.kuzmichev.AdMetricsBot.service.bitrix;
 
 import com.kuzmichev.AdMetricsBot.model.BitrixRepository;
-import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -13,8 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class AddBitrix {
-
+public class BitrixAuthUrl {
     final BitrixRepository bitrixRepository;
     @Value("${bitrixClientID}")
     String clientId;

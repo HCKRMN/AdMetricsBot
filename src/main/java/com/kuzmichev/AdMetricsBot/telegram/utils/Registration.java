@@ -21,9 +21,7 @@ public class Registration{
     UserRepository userRepository;
 
     public void registerUser(String chatId, String userName) {
-        if (
-//                userRepository.findById(chatId).isEmpty() &&
-                scheduledMessageRepository.findById(chatId).isEmpty()) {
+        if (scheduledMessageRepository.findById(chatId).isEmpty()) {
             ScheduledMessage scheduledMessage = new ScheduledMessage();
             scheduledMessage.setChatId(chatId);
             scheduledMessage.setEnableSendingMessages(false);
@@ -38,7 +36,7 @@ public class Registration{
             user.setProjectsPage(0);
             userRepository.save(user);
 
-            log.info("user saved: " + user);
+            log.info("Пользователь {} сохранен: {}" , chatId, user);
         }
     }
 }

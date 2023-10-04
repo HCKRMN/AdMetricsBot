@@ -17,24 +17,19 @@ import java.util.Optional;
 public class NotificationController {
     ScheduledMessageRepository scheduledMessageRepository;
 
-    // Включает уведомления
     public void enableNotifications(String chatId) {
         Optional<ScheduledMessage> scheduledMessageOptional = scheduledMessageRepository.findByChatId(chatId);
-        if (scheduledMessageOptional.isPresent()) {
-            ScheduledMessage scheduledMessage = scheduledMessageOptional.get();
-            scheduledMessage.setEnableSendingMessages(true);
-            scheduledMessageRepository.save(scheduledMessage);
-        }
+        ScheduledMessage scheduledMessage = scheduledMessageOptional.orElseGet(ScheduledMessage::new);
+        scheduledMessage.setEnableSendingMessages(true);
+        scheduledMessageRepository.save(scheduledMessage);
+
     }
 
-    // Выключает уведомления
     public void disableNotifications(String chatId) {
         Optional<ScheduledMessage> scheduledMessageOptional = scheduledMessageRepository.findByChatId(chatId);
-        if (scheduledMessageOptional.isPresent()) {
-            ScheduledMessage scheduledMessage = scheduledMessageOptional.get();
-            scheduledMessage.setEnableSendingMessages(false);
-            scheduledMessageRepository.save(scheduledMessage);
-        }
+        ScheduledMessage scheduledMessage = scheduledMessageOptional.orElseGet(ScheduledMessage::new);
+        scheduledMessage.setEnableSendingMessages(false);
+        scheduledMessageRepository.save(scheduledMessage);
     }
 
 }

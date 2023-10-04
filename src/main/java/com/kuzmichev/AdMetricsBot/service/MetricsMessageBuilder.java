@@ -1,10 +1,9 @@
 package com.kuzmichev.AdMetricsBot.service;
 
-import com.kuzmichev.AdMetricsBot.model.Bitrix;
 import com.kuzmichev.AdMetricsBot.model.Project;
 import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
 import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMainRequest;
-import com.kuzmichev.AdMetricsBot.telegram.utils.AddYandex;
+import com.kuzmichev.AdMetricsBot.service.yandex.YandexTestMessage;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,7 +19,7 @@ import java.util.List;
 public class MetricsMessageBuilder {
     ProjectRepository projectRepository;
     BitrixMainRequest bitrixMainRequest;
-    AddYandex addYandex;
+    YandexTestMessage yandexTestMessage;
 
     public String getMessage(String chatId) {
         StringBuilder message = new StringBuilder();
@@ -33,7 +32,7 @@ public class MetricsMessageBuilder {
                     .append(lineBreak)
                     .append(bitrixMainRequest.bitrixMainRequest(project.getProjectId()))
                     .append(lineBreak)
-                    .append(addYandex.testYandex(project.getProjectId()))
+                    .append(yandexTestMessage.getYandexTestMessage(project.getProjectId()))
                     .append(lineBreak)
                     .append(lineBreak);
         }

@@ -1,6 +1,5 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils.Messages;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.utils.UserStateEditor;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
