@@ -15,16 +15,17 @@ public class YandexTestMessage {
     YandexMainRequest yandexMainRequest;
 
     public String getYandexTestMessage(String chatId) {
-        try {
-            int result = yandexMainRequest.yandexMainRequest(chatId);
-            if (result == -1) {
-                return SettingsMessageEnum.YANDEX_ERROR_GET_RESULT_MESSAGE.getMessage();
-            } else {
-                return SettingsMessageEnum.YANDEX_RESULT_MESSAGE.getMessage() + result;
-            }
-        } catch (Exception e) {
-            log.error(e.toString());
-            return SettingsMessageEnum.YANDEX_ERROR_GET_TOKEN_MESSAGE.getMessage();
-        }
+//        try {
+//            int result = yandexMainRequest.yandexMainRequest(chatId);
+//            if (result == -1) {
+//                return SettingsMessageEnum.YANDEX_ERROR_GET_RESULT_MESSAGE.getMessage();
+//            } else {
+//                return SettingsMessageEnum.YANDEX_RESULT_MESSAGE.getMessage() + result;
+//            }
+//        } catch (Exception e) {
+//            log.error(e.toString());
+//            return SettingsMessageEnum.YANDEX_ERROR_GET_TOKEN_MESSAGE.getMessage();
+//        }
+        return "test";
     }
 }

@@ -1,6 +1,7 @@
 package com.kuzmichev.AdMetricsBot.service.yandex;
 
 import com.kuzmichev.AdMetricsBot.model.Yandex;
+import com.kuzmichev.AdMetricsBot.model.YandexData;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Slf4j
 @Service
@@ -27,7 +26,7 @@ import java.util.regex.Pattern;
 public class YandexMainRequest {
     YandexRepository yandexRepository;
 
-    public int yandexMainRequest(String projectId){
+    public YandexData yandexMainRequest(String projectId){
         Yandex yandex = yandexRepository.findByProjectId(projectId);
         String bearer = yandex.getYandexToken();
 
@@ -38,8 +37,8 @@ public class YandexMainRequest {
         request.addHeader("method", "post");
         request.addHeader("content-type", "application/json; charset=utf-8");
         request.addHeader("returnMoneyInMicros", "false");
+        request.addHeader("skipReportHeader", "true");
         StringEntity entity;
-        String requestBody;
         String responseBody;
         try {
             entity = new StringEntity("""
@@ -47,7 +46,7 @@ public class YandexMainRequest {
                             "params": {
                               "SelectionCriteria": {
                               },
-                              "FieldNames": [ "Date", "Cost" ],\s
+                              "FieldNames": [ "Date", "Impressions", "Ctr", "Clicks", "AvgCpc", "Conversions", "CostPerConversion", "Cost" ],\s
                               "OrderBy": [{
                                 "Field": "Date"
                               }],
@@ -59,37 +58,50 @@ public class YandexMainRequest {
                               "IncludeDiscount": "YES"
                             }
                           }""");
+
+            // Указываем тело запроса и отправляем
             request.setEntity(entity);
             HttpResponse response = httpClient.execute(request);
 
+            // Получаем ответ
             HttpEntity entityResponse = response.getEntity();
             responseBody = EntityUtils.toString(entityResponse);
-
-            HttpEntity entity2 = request.getEntity(); //????
-            requestBody = EntityUtils.toString(entity2);
-
             int statusCode = response.getStatusLine().getStatusCode();
 
-            String pattern = "\\s(\\d+\\.\\d+)";
-            Pattern r = Pattern.compile(pattern);
-            Matcher m = r.matcher(responseBody);
+            YandexData yandexData = new YandexData();
+            yandexData.setProjectId(projectId);
 
-            if (m.find()) {
-                String result = m.group(1);
-                double value = Double.parseDouble(result);
-                return (int) value;
-            } else if(statusCode == 200 && responseBody.contains("Total rows: 0")) {
-                return 0;
+            // Проверяем есть-ли строка с данными
+            if (responseBody.contains("Total rows: 1")) {
+                // Разбиваем текст на строки
+                String[] lines = responseBody.split("\\n");
+
+                // Выбираем строку с данными
+                String line = lines[1];
+
+                // Разбиваем строку на значения по символу табуляции
+                String[] values = line.split("\t");
+
+                yandexData.setImpressions(Integer.parseInt(values[1]));
+                yandexData.setCtr(Double.parseDouble(values[2]));
+                yandexData.setClicks(Integer.parseInt(values[3]));
+                yandexData.setAvgCpc(Double.parseDouble(values[4]));
+                yandexData.setConversions(Integer.parseInt(values[5]));
+                yandexData.setCostPerConversion(Double.parseDouble(values[6]));
+                yandexData.setCost(Double.parseDouble(values[7]));
+            }
+
+            if (statusCode == 200) {
+                return yandexData;
             } else {
                 log.error("Ответ не содержал данных");
                 log.info("Request: {}", request);
                 log.info("Request Headers: {}", Arrays.toString(request.getAllHeaders()));
-                log.info("Request Body: {}", requestBody);
+                log.info("Request Body: {}", EntityUtils.toString(entity));
                 log.info("Response: {}", response);
                 log.info("Response Status Line: {}", response.getStatusLine());
                 log.info("Response Body: {}", responseBody);
-
-                return -1;
+                return null;
             }
         } catch (IOException e) {
             log.error("У пользователя " + yandex.getChatId() + " произошла ошибка: " + e.getMessage());

@@ -52,11 +52,19 @@ public class MessageWithoutReturn {
         message.setText(textToSend);
         eventPublisher.publishEvent(message);
     }
+//    public void sendMessage(String chatId, String textToSend, InlineKeyboardMarkup keyboard) {
+//        SendMessage message = new SendMessage();
+//        message.setChatId(chatId);
+//        message.setText(textToSend);
+//        message.setReplyMarkup(keyboard);
+//        eventPublisher.publishEvent(message);
+//    }
     public void sendMessage(String chatId, String textToSend, InlineKeyboardMarkup keyboard) {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(textToSend);
         message.setReplyMarkup(keyboard);
+        message.setParseMode("MarkdownV2");
         eventPublisher.publishEvent(message);
     }
 
