@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
-@ToString(of = {"projectId", "impressions", "ctr", "clicks", "avgCpc", "conversions", "costPerConversion", "cost"})
+@ToString(of = {"projectId", "impressions", "ctr", "clicks", "avgCpc", "conversions", "costPerConversion", "cost", "requestStatus"})
 @Component
 public class YandexData {
     private String projectId;
@@ -18,4 +18,5 @@ public class YandexData {
     private int conversions;
     private double costPerConversion;
     private double cost;
+    private int requestStatus;
 }

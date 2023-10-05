@@ -47,6 +47,7 @@ public class MessageWithReturn {
         editMessage.setChatId(chatId);
         editMessage.setMessageId(messageId);
         editMessage.setText(text);
+        editMessage.setParseMode("HTML");
         if (state != null) {
             userStateEditor.editState(chatId, state);
         }

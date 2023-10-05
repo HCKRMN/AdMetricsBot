@@ -32,9 +32,9 @@ public class TestConnectionRequest {
         int responseCode = con.getResponseCode();
 
         if (responseCode == 200) {
-            log.info("User " + bitrix.getChatId() + ". Тестовый запрос к bitrix успешен, responseCode: " + responseCode);
+            log.info("Пользователь " + bitrix.getChatId() + ". Тестовый запрос к bitrix успешен, responseCode: " + responseCode);
         } else {
-            log.error("User " + bitrix.getChatId() + ". Ошибка в запросе к bitrix : " + responseCode);
+            log.warn("Пользователь " + bitrix.getChatId() + ". Тестовый запрос к bitrix не прошел, responseCode: " + responseCode);
         }
         return responseCode;
     }

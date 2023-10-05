@@ -14,14 +14,15 @@ import java.time.format.DateTimeFormatter;
 @Service
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class CountRecordsRequest {
+public class CountAllCreateRecordsRequest {
     BitrixApiService bitrixApiService;
     CrmTypeRequest crmTypeRequest;
 
     public int countRecordsRequest(String accessToken, String domain, String chatId) {
 
-        LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
-        String dateFrom = yesterday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'00:00:00"));
+        LocalDateTime yesterday = LocalDateTime.now().minusDays(0);
+        LocalDateTime lastSevenDay = LocalDateTime.now().minusDays(8);
+        String dateFrom = lastSevenDay.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'00:00:00"));
         String dateTo = yesterday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'23:59:59"));
 
         String crmType = crmTypeRequest.crmTypeRequest(accessToken, domain, chatId) == 1 ? "crm.lead.list" : "crm.deal.list";
@@ -32,7 +33,7 @@ public class CountRecordsRequest {
         if (json != null) {
             return json.getInt("total");
         } else {
-            log.error("User " + chatId + ". Ошибка при получении типа срм bitrix: json == null");
+            log.error("User " + chatId + ". Ошибка при получении типа срм bitrix: json == null. url: " + url);
             return -1;
         }
 

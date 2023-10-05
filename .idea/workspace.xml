@@ -4,14 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a2360ef-aa09-42a0-805e-aa78730c3294" name="Changes" comment="Прикрутил многопоточность к шедулеру + мелкие правки">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/YandexData.java" afterDir="false" />
+    <list default="true" id="8a2360ef-aa09-42a0-805e-aa78730c3294" name="Changes" comment="Переделал получение данных с яндекса, добавил больше параметров, сделал первую версию форматирования сообщения с данными">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/BitrixData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMessageBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/CountFailedDealsRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/CountSuccessDealsRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMessageBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/YandexData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/YandexData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/MetricsMessageBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/MetricsMessageBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixApiService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixApiService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMainRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMainRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/CountRecordsRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/CountAllCreateRecordsRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/TestConnectionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/TestConnectionRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexTestMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexTestMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/Messages/MessageWithoutReturn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/Messages/MessageWithoutReturn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/BitrixCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/BitrixCallbackHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/Messages/MessageWithReturn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/Messages/MessageWithReturn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
@@ -89,6 +99,8 @@
       <recent name="C:\GitHub\AdMetricsBot\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.kuzmichev.AdMetricsBot.service.yandex" />
+      <recent name="com.kuzmichev.AdMetricsBot.model" />
       <recent name="com.kuzmichev.AdMetricsBot.service.bitrix" />
       <recent name="com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards" />
     </key>
@@ -229,7 +241,8 @@
       <workItem from="1695726443594" duration="9820000" />
       <workItem from="1695818149850" duration="295000" />
       <workItem from="1695899308060" duration="7779000" />
-      <workItem from="1696391055929" duration="25275000" />
+      <workItem from="1696391055929" duration="25367000" />
+      <workItem from="1696479397719" duration="9649000" />
     </task>
     <task id="LOCAL-00001" summary="Вернул обратно шедулер, но оставил кеш базы">
       <created>1685169464728</created>
@@ -420,7 +433,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696406171664</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Переделал получение данных с яндекса, добавил больше параметров, сделал первую версию форматирования сообщения с данными">
+      <created>1696434485603</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1696434485603</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -438,7 +458,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Закончил с директом, сделал возврат нуля" />
     <MESSAGE value="Сделал меню настроек с динамическими кнопками" />
     <MESSAGE value="Добавил обработку колбеков для меню, добавил статусы обработки времени" />
     <MESSAGE value="Прикрутил удаление данных юзера, исправил запрос в яндекс(там зачем то был фильтр на конверсии)" />
@@ -463,7 +482,8 @@
     <MESSAGE value="доработка подключения битрикса при регистрации и в меню + вывод данных" />
     <MESSAGE value="Почти рабочая версия. Починил шедулер, сделал меседжбилдер первой версии" />
     <MESSAGE value="Прикрутил многопоточность к шедулеру + мелкие правки" />
-    <option name="LAST_COMMIT_MESSAGE" value="Прикрутил многопоточность к шедулеру + мелкие правки" />
+    <MESSAGE value="Переделал получение данных с яндекса, добавил больше параметров, сделал первую версию форматирования сообщения с данными" />
+    <option name="LAST_COMMIT_MESSAGE" value="Переделал получение данных с яндекса, добавил больше параметров, сделал первую версию форматирования сообщения с данными" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

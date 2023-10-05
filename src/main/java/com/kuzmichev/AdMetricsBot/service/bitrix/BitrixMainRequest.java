@@ -2,6 +2,7 @@ package com.kuzmichev.AdMetricsBot.service.bitrix;
 
 import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalMessageEnum;
 import com.kuzmichev.AdMetricsBot.model.Bitrix;
+import com.kuzmichev.AdMetricsBot.model.BitrixData;
 import com.kuzmichev.AdMetricsBot.model.BitrixRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -17,27 +18,36 @@ import org.springframework.stereotype.Service;
 public class BitrixMainRequest {
     BitrixRepository bitrixRepository;
     TestConnectionRequest testConnectionRequest;
-    CountRecordsRequest countRecordsRequest;
+    CountAllCreateRecordsRequest countAllCreateRecordsRequest;
     RefreshTokenRequest refreshTokenRequest;
+    CountFailedDealsRequest countFailedDealsRequest;
+    CountSuccessDealsRequest countSuccessDealsRequest;
     @SneakyThrows
-    public String bitrixMainRequest(String projectId){
+    public BitrixData bitrixMainRequest(String projectId){
         Bitrix bitrix = bitrixRepository.findBitrixByProjectId(projectId);
         String accessToken = bitrix.getAccessToken();
         String domain = bitrix.getBitrixDomain();
         String chatId = bitrix.getChatId();
         int responseCode = testConnectionRequest.testConnectionRequest(bitrix);
+        BitrixData bitrixData = new BitrixData();
+        bitrixData.setProjectId(projectId);
 
          if (responseCode == 200){
-            int leadCount = countRecordsRequest.countRecordsRequest(accessToken, domain, chatId);
-            return UniversalMessageEnum.BITRIX_LEADS_COUNT_MESSAGE.getMessage() + leadCount;
+             bitrixData.setNewLeads(countAllCreateRecordsRequest.countRecordsRequest(accessToken, domain, chatId));
+             bitrixData.setFailedDeals(countFailedDealsRequest.countFailedDealsRequest(accessToken, domain, chatId));
+             bitrixData.setSuccessDeals(countSuccessDealsRequest.countSuccessDealsRequest(accessToken, domain, chatId));
+             bitrixData.setRequestStatus(1);
          } else if (responseCode == 401){
-            log.info("User " + bitrix.getChatId() + ". Выполняю обновление токена bitrix");
-            accessToken = refreshTokenRequest.refreshTokenRequest(bitrix);
-            int leadCount = countRecordsRequest.countRecordsRequest(accessToken, domain, chatId);
-            return UniversalMessageEnum.BITRIX_LEADS_COUNT_MESSAGE.getMessage() + leadCount;
+             log.info("User " + bitrix.getChatId() + ". Выполняю обновление токена bitrix");
+             accessToken = refreshTokenRequest.refreshTokenRequest(bitrix);
+             bitrixData.setNewLeads(countAllCreateRecordsRequest.countRecordsRequest(accessToken, domain, chatId));
+             bitrixData.setFailedDeals(countFailedDealsRequest.countFailedDealsRequest(accessToken, domain, chatId));
+             bitrixData.setSuccessDeals(countSuccessDealsRequest.countSuccessDealsRequest(accessToken, domain, chatId));
+             bitrixData.setRequestStatus(1);
         } else {
-            log.error("User " + bitrix.getChatId() + ". Не удалось обновить токен bitrix, но тестовый запрос пройден");
-            return UniversalMessageEnum.BITRIX_ERROR_MESSAGE.getMessage() + responseCode;
+             bitrixData.setRequestStatus(-1);
+             log.error("User " + bitrix.getChatId() + ". Не удалось обновить токен bitrix, но тестовый запрос пройден");
         }
+        return bitrixData;
     }
 }

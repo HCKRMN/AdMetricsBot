@@ -20,8 +20,7 @@ public class BitrixApiService {
         if (responseEntity.getStatusCode().is2xxSuccessful()) {
             return new JSONObject(responseEntity.getBody());
         } else {
-            log.error("User: " + chatId + " Ошибка при получении типа срм bitrix: json == null");
-            log.error("Ошибка в запросе: " + responseEntity.getStatusCode());
+            log.error("User: " + chatId + " Ошибка при получении типа срм bitrix: json == null " + responseEntity.getStatusCode());
             return null;
         }
     }

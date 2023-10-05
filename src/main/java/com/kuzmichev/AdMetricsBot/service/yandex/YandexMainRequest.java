@@ -71,29 +71,30 @@ public class YandexMainRequest {
             YandexData yandexData = new YandexData();
             yandexData.setProjectId(projectId);
 
-            // Проверяем есть-ли строка с данными
-            if (responseBody.contains("Total rows: 1")) {
-                // Разбиваем текст на строки
-                String[] lines = responseBody.split("\\n");
-
-                // Выбираем строку с данными
-                String line = lines[1];
-
-                // Разбиваем строку на значения по символу табуляции
-                String[] values = line.split("\t");
-
-                yandexData.setImpressions(Integer.parseInt(values[1]));
-                yandexData.setCtr(Double.parseDouble(values[2]));
-                yandexData.setClicks(Integer.parseInt(values[3]));
-                yandexData.setAvgCpc(Double.parseDouble(values[4]));
-                yandexData.setConversions(Integer.parseInt(values[5]));
-                yandexData.setCostPerConversion(Double.parseDouble(values[6]));
-                yandexData.setCost(Double.parseDouble(values[7]));
-            }
-
             if (statusCode == 200) {
-                return yandexData;
+                yandexData.setRequestStatus(1);
+                // Проверяем есть-ли строка с данными, если есть - заполняем, нет - оставляем дефолтные значения
+                // Если в ответе яндекса нет строки с результатами, но статус 200 это значит что расходов и статистики за этот период нет
+                 if (responseBody.contains("Total rows: 1")) {
+                    // Разбиваем текст на строки
+                    String[] lines = responseBody.split("\\n");
+
+                    // Выбираем строку с данными
+                    String line = lines[1];
+
+                    // Разбиваем строку на значения по символу табуляции
+                    String[] values = line.split("\t");
+
+                    yandexData.setImpressions(Integer.parseInt(values[1]));
+                    yandexData.setCtr(Double.parseDouble(values[2]));
+                    yandexData.setClicks(Integer.parseInt(values[3]));
+                    yandexData.setAvgCpc(Double.parseDouble(values[4]));
+                    yandexData.setConversions(Integer.parseInt(values[5]));
+                    yandexData.setCostPerConversion(Double.parseDouble(values[6]));
+                    yandexData.setCost(Double.parseDouble(values[7]));
+                }
             } else {
+                yandexData.setRequestStatus(-1);
                 log.error("Ответ не содержал данных");
                 log.info("Request: {}", request);
                 log.info("Request Headers: {}", Arrays.toString(request.getAllHeaders()));
@@ -101,8 +102,9 @@ public class YandexMainRequest {
                 log.info("Response: {}", response);
                 log.info("Response Status Line: {}", response.getStatusLine());
                 log.info("Response Body: {}", responseBody);
-                return null;
             }
+            return yandexData;
+
         } catch (IOException e) {
             log.error("У пользователя " + yandex.getChatId() + " произошла ошибка: " + e.getMessage());
             throw new RuntimeException(e);
