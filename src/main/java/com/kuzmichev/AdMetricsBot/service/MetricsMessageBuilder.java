@@ -1,11 +1,8 @@
 package com.kuzmichev.AdMetricsBot.service;
 
 import com.kuzmichev.AdMetricsBot.model.*;
-import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMainRequest;
 import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMessageBuilder;
-import com.kuzmichev.AdMetricsBot.service.yandex.YandexMainRequest;
 import com.kuzmichev.AdMetricsBot.service.yandex.YandexMessageBuilder;
-import com.kuzmichev.AdMetricsBot.service.yandex.YandexTestMessage;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

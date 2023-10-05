@@ -6,6 +6,7 @@ import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
 import com.kuzmichev.AdMetricsBot.model.BitrixData;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMainRequest;
+import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMessageBuilder;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BitrixTestKeyboard;
@@ -30,7 +31,7 @@ public class BitrixCallbackHandler implements CallbackHandler {
     MessageWithReturn messageWithReturn;
     BackAndExitKeyboard backAndExitKeyboard;
     TempDataRepository tempDataRepository;
-    BitrixMainRequest bitrixMainRequest;
+    BitrixMessageBuilder bitrixMessageBuilder;
     BitrixTestKeyboard bitrixTestKeyboard;
 
     @Override
@@ -55,21 +56,11 @@ public class BitrixCallbackHandler implements CallbackHandler {
         }
         if (Objects.equals(data, SettingsCallBackEnum.TEST_BITRIX_CALLBACK.getCallBackName())) {
             String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
-            BitrixData bitrixData = bitrixMainRequest.bitrixMainRequest(projectId);
-            StringBuilder messageText = new StringBuilder();
-            if (bitrixData.getRequestStatus() == 1) {
-                messageText
-                        .append("<code>Новых лидов:              </code>").append(bitrixData.getNewLeads()).append("\n")
-                        .append("<code>Успешные сделки:          </code>").append(bitrixData.getSuccessDeals()).append("\n")
-                        .append("<code>Проваленные сделки:       </code>").append(bitrixData.getFailedDeals()).append("\n");
-            } else {
-                messageText
-                        .append("Ошибка получения данных");
-            }
+
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    messageText.toString(),
+                    bitrixMessageBuilder.getMessage(projectId),
                     null,
                     bitrixTestKeyboard.bitrixTestMenu(userState));
         }

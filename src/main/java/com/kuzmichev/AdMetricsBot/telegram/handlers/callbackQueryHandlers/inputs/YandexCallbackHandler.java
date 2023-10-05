@@ -4,7 +4,7 @@ import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
-import com.kuzmichev.AdMetricsBot.service.yandex.YandexTestMessage;
+import com.kuzmichev.AdMetricsBot.service.yandex.YandexMessageBuilder;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.YandexAddKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.YandexTestKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
@@ -29,7 +29,7 @@ public class YandexCallbackHandler implements CallbackHandler {
     TempDataSaver tempDataSaver;
     MessageWithReturn messageWithReturn;
     YandexTestKeyboard yandexTestKeyboard;
-    YandexTestMessage yandexTestMessage;
+    YandexMessageBuilder yandexMessageBuilder;
     YandexAddKeyboard yandexAddKeyboard;
     TempDataRepository tempDataRepository;
 
@@ -58,7 +58,7 @@ public class YandexCallbackHandler implements CallbackHandler {
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    yandexTestMessage.getYandexTestMessage(projectId),
+                    yandexMessageBuilder.getMessage(projectId),
                     SettingsStateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE.getStateName(),
                     yandexTestKeyboard.yandexTestMenu(userState));
         }
