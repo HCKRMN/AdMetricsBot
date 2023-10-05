@@ -20,9 +20,8 @@ public class CountAllCreateRecordsRequest {
 
     public int countRecordsRequest(String accessToken, String domain, String chatId) {
 
-        LocalDateTime yesterday = LocalDateTime.now().minusDays(0);
-        LocalDateTime lastSevenDay = LocalDateTime.now().minusDays(8);
-        String dateFrom = lastSevenDay.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'00:00:00"));
+        LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
+        String dateFrom = yesterday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'00:00:00"));
         String dateTo = yesterday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'23:59:59"));
 
         String crmType = crmTypeRequest.crmTypeRequest(accessToken, domain, chatId) == 1 ? "crm.lead.list" : "crm.deal.list";

@@ -19,8 +19,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import static java.lang.Thread.sleep;
-
 @Slf4j
 @Service
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
@@ -38,19 +36,24 @@ public class ScheduledMessageSender {
         scheduler.scheduleAtFixedRate(() -> {
             LocalTime now = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
             List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(now);
+            int userCount = scheduledMessages.size();
 
-            // Создаем пул потоков
-            ExecutorService executorService = Executors.newFixedThreadPool(scheduledMessages.size());
+            if (userCount > 0) {
+                // Создаем пул потоков
+                ExecutorService executorService = Executors.newFixedThreadPool(scheduledMessages.size());
 
-            for (ScheduledMessage scheduledMessage : scheduledMessages) {
-                String chatId = scheduledMessage.getChatId();
+                for (ScheduledMessage scheduledMessage : scheduledMessages) {
+                    String chatId = scheduledMessage.getChatId();
 
-                executorService.submit(() ->
-                    messageWithoutReturn.sendMessage(
-                            chatId,
-                            metricsMessageBuilder.getMessage(chatId),
-                            closeButtonKeyboard.closeButtonKeyboard())
-                );
+                    executorService.submit(() ->
+                            messageWithoutReturn.sendMessage(
+                                    chatId,
+                                    metricsMessageBuilder.getMessage(chatId),
+                                    closeButtonKeyboard.closeButtonKeyboard())
+                    );
+                }
+                // Завершаем работу пула потоков после выполнения всех задач
+                executorService.shutdown();
             }
         }, 0, 1, TimeUnit.MINUTES);
     }

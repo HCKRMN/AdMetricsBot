@@ -20,12 +20,6 @@ public class MessageWithoutReturn {
     ApplicationEventPublisher eventPublisher;
     UserStateEditor stateEditor;
 
-//    public void sendMessage(SendMessage sendMessage) {
-//        eventPublisher.publishEvent(sendMessage);
-//    }
-//    public void editMessage(EditMessageText sendMessage) { eventPublisher.publishEvent(sendMessage);
-//    }
-
     public void editMessage(
             String chatId,
             int messageId,
@@ -52,19 +46,13 @@ public class MessageWithoutReturn {
         message.setText(textToSend);
         eventPublisher.publishEvent(message);
     }
-//    public void sendMessage(String chatId, String textToSend, InlineKeyboardMarkup keyboard) {
-//        SendMessage message = new SendMessage();
-//        message.setChatId(chatId);
-//        message.setText(textToSend);
-//        message.setReplyMarkup(keyboard);
-//        eventPublisher.publishEvent(message);
-//    }
+
     public void sendMessage(String chatId, String textToSend, InlineKeyboardMarkup keyboard) {
         SendMessage message = new SendMessage();
         message.setChatId(chatId);
         message.setText(textToSend);
         message.setReplyMarkup(keyboard);
-        message.setParseMode("MarkdownV2");
+        message.setParseMode("HTML");
         eventPublisher.publishEvent(message);
     }
 

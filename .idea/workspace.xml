@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a2360ef-aa09-42a0-805e-aa78730c3294" name="Changes" comment="Доработал получение данных с битрикса, добавил получение успешных и проваленных сделок">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/MetricsMessageBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/MetricsMessageBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexTestMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/BitrixCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/BitrixCallbackHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/YandexCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/YandexCallbackHandler.java" afterDir="false" />
+    <list default="true" id="8a2360ef-aa09-42a0-805e-aa78730c3294" name="Changes" comment="Исправил несколько багов из-за внедрения меседж билдеров">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/ScheduledMessageSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/ScheduledMessageSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/Messages/MessageWithoutReturn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/Messages/MessageWithoutReturn.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,7 +227,7 @@
       <workItem from="1695818149850" duration="295000" />
       <workItem from="1695899308060" duration="7779000" />
       <workItem from="1696391055929" duration="25367000" />
-      <workItem from="1696479397719" duration="10239000" />
+      <workItem from="1696479397719" duration="12319000" />
     </task>
     <task id="LOCAL-00001" summary="Вернул обратно шедулер, но оставил кеш базы">
       <created>1685169464728</created>
@@ -432,7 +432,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696493142496</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Исправил несколько багов из-за внедрения меседж билдеров">
+      <created>1696493429048</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1696493429048</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -450,7 +457,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Добавил обработку колбеков для меню, добавил статусы обработки времени" />
     <MESSAGE value="Прикрутил удаление данных юзера, исправил запрос в яндекс(там зачем то был фильтр на конверсии)" />
     <MESSAGE value="Сделал отправку сообщений без return, начал формировать меню проектов, добавил модельи репозиторий проектов" />
     <MESSAGE value="убрал хардкод из хендлеров, добавил свич на обработку состояний юзера" />
@@ -475,7 +481,8 @@
     <MESSAGE value="Прикрутил многопоточность к шедулеру + мелкие правки" />
     <MESSAGE value="Переделал получение данных с яндекса, добавил больше параметров, сделал первую версию форматирования сообщения с данными" />
     <MESSAGE value="Доработал получение данных с битрикса, добавил получение успешных и проваленных сделок" />
-    <option name="LAST_COMMIT_MESSAGE" value="Доработал получение данных с битрикса, добавил получение успешных и проваленных сделок" />
+    <MESSAGE value="Исправил несколько багов из-за внедрения меседж билдеров" />
+    <option name="LAST_COMMIT_MESSAGE" value="Исправил несколько багов из-за внедрения меседж билдеров" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
