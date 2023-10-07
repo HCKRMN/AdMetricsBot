@@ -4,30 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a2360ef-aa09-42a0-805e-aa78730c3294" name="Changes" comment="Исправил баги с шедулером">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/EulaController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/PrivacyController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/eula.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/privacy.html" afterDir="false" />
+    <list default="true" id="8a2360ef-aa09-42a0-805e-aa78730c3294" name="Changes" comment="Исправил баги регистрации, добавил обработку нескольких ошибок от яндекса и битрикса">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/BitrixController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/BitrixController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YaController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMainRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMainRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMessageBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMessageBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/TestConnectionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/TestConnectionRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/BitrixCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/BitrixCallbackHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/BitrixDomainStateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/BitrixDomainStateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMessageBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMessageBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.kuzmichev.AdMetricsBot.AdMetricsBotApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.kuzmichev.AdMetricsBot.AdMetricsBotApplicationTests.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.kuzmichev.AdMetricsBot.AdMetricsBotApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.kuzmichev.AdMetricsBot.AdMetricsBotApplicationTests.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,6 +236,7 @@
       <workItem from="1696391055929" duration="25367000" />
       <workItem from="1696479397719" duration="12604000" />
       <workItem from="1696648701460" duration="13836000" />
+      <workItem from="1696674724014" duration="1524000" />
     </task>
     <task id="LOCAL-00001" summary="Вернул обратно шедулер, но оставил кеш базы">
       <created>1685169464728</created>
@@ -466,7 +455,21 @@
       <option name="project" value="LOCAL" />
       <updated>1696495998640</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Исправил баги регистрации, добавил обработку нескольких ошибок от яндекса и битрикса">
+      <created>1696674795827</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1696674795827</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Исправил баги регистрации, добавил обработку нескольких ошибок от яндекса и битрикса">
+      <created>1696674810304</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1696674810304</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -514,7 +517,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Сделал отправку сообщений без return, начал формировать меню проектов, добавил модельи репозиторий проектов" />
     <MESSAGE value="убрал хардкод из хендлеров, добавил свич на обработку состояний юзера" />
     <MESSAGE value="Исправил обработку комманд, переделал этап регистрации с учетом создания проектов" />
     <MESSAGE value="Сделал редактор и удалятор сообщений, начал переделывать и расширять меню" />
@@ -539,7 +541,8 @@
     <MESSAGE value="Доработал получение данных с битрикса, добавил получение успешных и проваленных сделок" />
     <MESSAGE value="Исправил несколько багов из-за внедрения меседж билдеров" />
     <MESSAGE value="Исправил баги с шедулером" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исправил баги с шедулером" />
+    <MESSAGE value="Исправил баги регистрации, добавил обработку нескольких ошибок от яндекса и битрикса" />
+    <option name="LAST_COMMIT_MESSAGE" value="Исправил баги регистрации, добавил обработку нескольких ошибок от яндекса и битрикса" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

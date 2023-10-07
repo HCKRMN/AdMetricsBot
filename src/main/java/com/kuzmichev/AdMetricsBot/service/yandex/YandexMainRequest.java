@@ -73,7 +73,7 @@ public class YandexMainRequest {
             yandexData.setProjectId(projectId);
 
             if (statusCode == 200) {
-                yandexData.setRequestStatus(1);
+                yandexData.setRequestStatus(200);
                 // Проверяем есть-ли строка с данными, если есть - заполняем, нет - оставляем дефолтные значения
                 // Если в ответе яндекса нет строки с результатами, но статус 200 это значит что расходов и статистики за этот период нет
                  if (responseBody.contains("Total rows: 1")) {
@@ -104,7 +104,7 @@ public class YandexMainRequest {
 
                 }
             } else {
-                yandexData.setRequestStatus(-1);
+                yandexData.setRequestStatus(statusCode);
                 log.error("Ответ не содержал данных");
                 log.info("Request: {}", request);
                 log.info("Request Headers: {}", Arrays.toString(request.getAllHeaders()));

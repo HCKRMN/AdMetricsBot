@@ -36,7 +36,7 @@ public class BitrixMainRequest {
              bitrixData.setNewLeads(countAllCreateRecordsRequest.countRecordsRequest(accessToken, domain, chatId));
              bitrixData.setFailedDeals(countFailedDealsRequest.countFailedDealsRequest(accessToken, domain, chatId));
              bitrixData.setSuccessDeals(countSuccessDealsRequest.countSuccessDealsRequest(accessToken, domain, chatId));
-             bitrixData.setRequestStatus(1);
+             bitrixData.setRequestStatus(200);
 
          } else if (responseCode == 401){
              log.info("User " + bitrix.getChatId() + ". Выполняю обновление токена bitrix");
@@ -44,13 +44,9 @@ public class BitrixMainRequest {
              bitrixData.setNewLeads(countAllCreateRecordsRequest.countRecordsRequest(accessToken, domain, chatId));
              bitrixData.setFailedDeals(countFailedDealsRequest.countFailedDealsRequest(accessToken, domain, chatId));
              bitrixData.setSuccessDeals(countSuccessDealsRequest.countSuccessDealsRequest(accessToken, domain, chatId));
-             bitrixData.setRequestStatus(1);
-        } else if (responseCode == 402){
-             bitrixData.setRequestStatus(-402);
-             log.error("User " + bitrix.getChatId() + ". Не оплатил битрикс");
+             bitrixData.setRequestStatus(200);
         } else {
-             bitrixData.setRequestStatus(-1);
-             log.error("User " + bitrix.getChatId() + ". Не удалось обновить токен bitrix, но тестовый запрос пройден");
+             bitrixData.setRequestStatus(responseCode);
         }
         return bitrixData;
     }

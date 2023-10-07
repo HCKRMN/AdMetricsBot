@@ -26,9 +26,10 @@ public class YandexMessageBuilder {
         int conversions = yandexData.getConversions();
         double costPerConversion = yandexData.getCostPerConversion();
         double cost = yandexData.getCost();
+        int requestStatus = yandexData.getRequestStatus();
 
         message.append("Яндекс").append("\n");
-        if (yandexData.getRequestStatus() == 1) {
+        if (requestStatus == 200) {
             message
                     .append("<code>Показы:             </code>").append(impressions).append("\n")
                     .append("<code>Клики:              </code>").append(clicks).append("\n")
@@ -37,6 +38,9 @@ public class YandexMessageBuilder {
                     .append("<code>Конверсии:          </code>").append(conversions).append("\n")
                     .append("<code>CPC:                </code>").append(costPerConversion).append("\n")
                     .append("<code>Расход:             </code>").append(cost).append("\n");
+        } else if(requestStatus == 513) {
+            message
+                    .append("Необходимо закончить регистрацию в Яндекс Директ").append("\n");
         } else {
             message
                     .append("Ошибка получения данных от Яндекса").append("\n");

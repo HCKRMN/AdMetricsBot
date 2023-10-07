@@ -21,7 +21,6 @@ import java.net.URL;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class TestConnectionRequest {
-    BitrixApiService bitrixApiService;
     public int testConnectionRequest(Bitrix bitrix, String chatId) throws Exception {
 
         String domain = bitrix.getBitrixDomain();
@@ -58,7 +57,7 @@ public class TestConnectionRequest {
                 }
             }
         } else {
-            log.warn("Пользователь " + bitrix.getChatId() + ". Тестовый запрос к bitrix не прошел, responseCode: " + responseCode);
+            log.warn("Пользователь " + chatId + ". Тестовый запрос к bitrix не прошел, responseCode: " + responseCode);
         }
         return responseCode;
     }

@@ -29,12 +29,12 @@ public class BitrixMessageBuilder {
                     .append("<code>Новых лидов:        </code>").append(newLeads).append("\n")
                     .append("<code>Успешные сделки:    </code>").append(successDeals).append("\n")
                     .append("<code>Проваленные сделки: </code>").append(failedDeals).append("\n");
-        } else if (requestStatus == -1) {
-            message
-                    .append("Ошибка получения данных от битрикса").append("\n");
-        } else if (requestStatus == -402) {
+        } else if (requestStatus == 402) {
             message
                     .append("Чтобы получить данные от битрикс, необходимо продлить платный тариф в вашей срм").append("\n");
+        } else {
+            message
+                    .append("Ошибка получения данных от битрикса").append("\n");
         }
 
         return message.toString();
