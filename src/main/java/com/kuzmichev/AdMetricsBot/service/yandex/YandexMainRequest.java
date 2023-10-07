@@ -61,6 +61,7 @@ public class YandexMainRequest {
 
             // Указываем тело запроса и отправляем
             request.setEntity(entity);
+
             HttpResponse response = httpClient.execute(request);
 
             // Получаем ответ
@@ -85,6 +86,14 @@ public class YandexMainRequest {
                     // Разбиваем строку на значения по символу табуляции
                     String[] values = line.split("\t");
 
+                    // В некоторых значениях яндекс вместо "0" возвращает "--",
+                    // поэтому обработаем эти значения
+                    for (int i = 0; i < values.length; i++) {
+                       if (values[i].contains("--")) {
+                           values[i] = "0";
+                       }
+                    }
+
                     yandexData.setImpressions(Integer.parseInt(values[1]));
                     yandexData.setCtr(Double.parseDouble(values[2]));
                     yandexData.setClicks(Integer.parseInt(values[3]));
@@ -92,6 +101,7 @@ public class YandexMainRequest {
                     yandexData.setConversions(Integer.parseInt(values[5]));
                     yandexData.setCostPerConversion(Double.parseDouble(values[6]));
                     yandexData.setCost(Double.parseDouble(values[7]));
+
                 }
             } else {
                 yandexData.setRequestStatus(-1);

@@ -28,7 +28,7 @@ public class BitrixMainRequest {
         String accessToken = bitrix.getAccessToken();
         String domain = bitrix.getBitrixDomain();
         String chatId = bitrix.getChatId();
-        int responseCode = testConnectionRequest.testConnectionRequest(bitrix);
+        int responseCode = testConnectionRequest.testConnectionRequest(bitrix, chatId);
         BitrixData bitrixData = new BitrixData();
         bitrixData.setProjectId(projectId);
 
@@ -37,6 +37,7 @@ public class BitrixMainRequest {
              bitrixData.setFailedDeals(countFailedDealsRequest.countFailedDealsRequest(accessToken, domain, chatId));
              bitrixData.setSuccessDeals(countSuccessDealsRequest.countSuccessDealsRequest(accessToken, domain, chatId));
              bitrixData.setRequestStatus(1);
+
          } else if (responseCode == 401){
              log.info("User " + bitrix.getChatId() + ". Выполняю обновление токена bitrix");
              accessToken = refreshTokenRequest.refreshTokenRequest(bitrix);
@@ -44,6 +45,9 @@ public class BitrixMainRequest {
              bitrixData.setFailedDeals(countFailedDealsRequest.countFailedDealsRequest(accessToken, domain, chatId));
              bitrixData.setSuccessDeals(countSuccessDealsRequest.countSuccessDealsRequest(accessToken, domain, chatId));
              bitrixData.setRequestStatus(1);
+        } else if (responseCode == 402){
+             bitrixData.setRequestStatus(-402);
+             log.error("User " + bitrix.getChatId() + ". Не оплатил битрикс");
         } else {
              bitrixData.setRequestStatus(-1);
              log.error("User " + bitrix.getChatId() + ". Не удалось обновить токен bitrix, но тестовый запрос пройден");

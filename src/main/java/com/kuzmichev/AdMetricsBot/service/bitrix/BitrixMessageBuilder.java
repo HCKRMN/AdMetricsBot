@@ -21,16 +21,20 @@ public class BitrixMessageBuilder {
         int newLeads = bitrixData.getNewLeads();
         int successDeals = bitrixData.getSuccessDeals();
         int failedDeals = bitrixData.getFailedDeals();
+        int requestStatus = bitrixData.getRequestStatus();
 
         message.append("Битрикс").append("\n");
-        if (bitrixData.getRequestStatus() == 1) {
+        if (requestStatus == 1) {
             message
                     .append("<code>Новых лидов:        </code>").append(newLeads).append("\n")
                     .append("<code>Успешные сделки:    </code>").append(successDeals).append("\n")
                     .append("<code>Проваленные сделки: </code>").append(failedDeals).append("\n");
-        } else {
+        } else if (requestStatus == -1) {
             message
                     .append("Ошибка получения данных от битрикса").append("\n");
+        } else if (requestStatus == -402) {
+            message
+                    .append("Чтобы получить данные от битрикс, необходимо продлить платный тариф в вашей срм").append("\n");
         }
 
         return message.toString();

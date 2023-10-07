@@ -42,11 +42,6 @@ public class BitrixController {
     @Value("${bitrixOauthURL}")
     String tokenUrl;
 
-
-//    public BitrixController(BitrixRepository bitrixRepository) {
-//        this.bitrixRepository = bitrixRepository;
-//    }
-
     @RequestMapping(value = "/bitrix")
     public String getBitrixToken(@RequestParam(name = "code") String code,
                                  @RequestParam(name = "state") String state,

@@ -82,8 +82,12 @@
 79) При обновлении токена битрикс он два раза берет одно и то же из базы. Нужно сделать чтобы он перекидывал в метод токен
 80) Убрать запрос в базу при использовании страниц в списке проектов
 81) Подумать над счетчиком проектов в базе
-82) Добавить обработку ошибки битрикс: org.springframework.web.client.HttpClientErrorException$Unauthorized: 401 Unauthorized: "{"error":"ACCESS_DENIED","error_description":"REST is available only on commercial plans."}"
+82) ~~Добавить обработку ошибки битрикс: org.springframework.web.client.HttpClientErrorException$Unauthorized: 401 Unauthorized: "{"error":"ACCESS_DENIED","error_description":"REST is available only on commercial plans."}"~~
 83) ERROR_OAUTH: Application not installed туда же
 84) Убрать возвращение null в стейт хендлере. Сделать метод с ретурном также как без него
 85) Разобраться с паролями и гитом
-86) Пить пиво
+86) При нажатии кнопки настроек без регистрации происходит ошибка, нужно чтобы он зарегался
+87) 2023-10-07T13:06:18.836+07:00 ERROR 16636 --- [nio-8080-exec-1] c.k.AdMetricsBot.telegram.AdMetricsBot   : java.lang.NullPointerException: Cannot invoke "String.contains(java.lang.CharSequence)" because "userState" is null
+88) ~~2023-10-07T14:17:01.611+07:00 ERROR 15940 --- [nio-8080-exec-8] c.k.A.t.u.Messages.MessageEventHandler   : ERROR_TEXTError executing org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage query: [400] Bad Request: message identifier is not specified возникает при вводе домена битрикса~~
+89) Проверить лишние изменения состояния юзера в коллбеках
+90) Пить пиво

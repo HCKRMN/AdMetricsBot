@@ -1,5 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.inputs;
 
+import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationStateEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
@@ -33,6 +34,7 @@ public class BitrixCallbackHandler implements CallbackHandler {
     TempDataRepository tempDataRepository;
     BitrixMessageBuilder bitrixMessageBuilder;
     BitrixTestKeyboard bitrixTestKeyboard;
+    TempDataSaver tempDataSaver;
 
     @Override
     public boolean canHandle(String data) {
@@ -47,11 +49,12 @@ public class BitrixCallbackHandler implements CallbackHandler {
         int messageId = buttonQuery.getMessage().getMessageId();
 
         if (Objects.equals(data, SettingsCallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName())) {
+            tempDataSaver.tempLastMessageId(chatId, messageId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
                     SettingsMessageEnum.ADD_BITRIX_STEP_1_MESSAGE.getMessage(),
-                    SettingsStateEnum.SETTINGS_PROJECT_ADD_BITRIX_STATE.getStateName(),
+                    null,
                     backAndExitKeyboard.backAndExitMenu(userState));
         }
         if (Objects.equals(data, SettingsCallBackEnum.TEST_BITRIX_CALLBACK.getCallBackName())) {

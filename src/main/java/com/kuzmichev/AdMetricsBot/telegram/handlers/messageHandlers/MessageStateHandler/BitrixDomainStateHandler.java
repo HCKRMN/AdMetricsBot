@@ -1,5 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers.MessageStateHandler;
 
+import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationStateEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
 import com.kuzmichev.AdMetricsBot.model.Bitrix;
@@ -30,11 +31,11 @@ public class BitrixDomainStateHandler implements StateHandler {
     BackAndExitKeyboard backAndExitKeyboard;
     BitrixRepository bitrixRepository;
     TempDataRepository tempDataRepository;
-    MessageWithReturn messageWithReturn;
 
     @Override
     public boolean canHandle(String userStateEnum) {
-        return Objects.equals(userStateEnum, SettingsStateEnum.SETTINGS_PROJECT_ADD_BITRIX_STATE.getStateName());
+        return Objects.equals(userStateEnum, SettingsStateEnum.SETTINGS_PROJECT_ADD_BITRIX_STATE.getStateName())
+                || Objects.equals(userStateEnum, RegistrationStateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName());
     }
 
     @Override

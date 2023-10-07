@@ -6,8 +6,13 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -16,7 +21,8 @@ import java.net.URL;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class TestConnectionRequest {
-    public int testConnectionRequest(Bitrix bitrix) throws Exception {
+    BitrixApiService bitrixApiService;
+    public int testConnectionRequest(Bitrix bitrix, String chatId) throws Exception {
 
         String domain = bitrix.getBitrixDomain();
         String accessToken = bitrix.getAccessToken();
@@ -31,8 +37,26 @@ public class TestConnectionRequest {
 
         int responseCode = con.getResponseCode();
 
+
         if (responseCode == 200) {
             log.info("Пользователь " + bitrix.getChatId() + ". Тестовый запрос к bitrix успешен, responseCode: " + responseCode);
+        } else if(responseCode == 401){
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getErrorStream()))) {
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+
+                // Разбираем JSON-ответ
+                JSONObject jsonResponse = new JSONObject(response.toString());
+                String errorDescription = jsonResponse.getString("error_description");
+
+                if (errorDescription.contains("commercial plans")) {
+                    responseCode = 402;
+                }
+            }
         } else {
             log.warn("Пользователь " + bitrix.getChatId() + ". Тестовый запрос к bitrix не прошел, responseCode: " + responseCode);
         }
