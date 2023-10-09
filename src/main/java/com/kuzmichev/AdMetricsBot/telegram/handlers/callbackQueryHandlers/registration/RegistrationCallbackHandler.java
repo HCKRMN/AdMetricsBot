@@ -1,9 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.registration;
 
-import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationCallbackEnum;
-import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.TimeZoneKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
@@ -32,7 +30,7 @@ public class RegistrationCallbackHandler implements CallbackHandler {
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, RegistrationCallbackEnum.START_REGISTRATION_CALLBACK.getCallBackName());
+        return Objects.equals(data, CallBackEnum.START_REGISTRATION_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -42,17 +40,17 @@ public class RegistrationCallbackHandler implements CallbackHandler {
         String userName = buttonQuery.getMessage().getFrom().getUserName();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        if (Objects.equals(data, RegistrationCallbackEnum.START_REGISTRATION_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.START_REGISTRATION_CALLBACK.getCallBackName())) {
             registration.registerUser(chatId, userName);
             tempDataSaver.tempLastMessageId(chatId, messageId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    UniversalMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
+                    MessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
                     null,
                     timeZoneKeyboard.timeZoneKeyboard(chatId, userState)
             );
         }
-        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

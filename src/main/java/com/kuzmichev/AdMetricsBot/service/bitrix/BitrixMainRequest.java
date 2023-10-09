@@ -1,6 +1,5 @@
 package com.kuzmichev.AdMetricsBot.service.bitrix;
 
-import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalMessageEnum;
 import com.kuzmichev.AdMetricsBot.model.Bitrix;
 import com.kuzmichev.AdMetricsBot.model.BitrixData;
 import com.kuzmichev.AdMetricsBot.model.BitrixRepository;
@@ -46,6 +45,7 @@ public class BitrixMainRequest {
              bitrixData.setSuccessDeals(countSuccessDealsRequest.countSuccessDealsRequest(accessToken, domain, chatId));
              bitrixData.setRequestStatus(200);
         } else {
+             bitrixData.setChatId(chatId);
              bitrixData.setRequestStatus(responseCode);
         }
         return bitrixData;

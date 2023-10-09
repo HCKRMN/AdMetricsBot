@@ -1,8 +1,8 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.projects;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project.ProjectsKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
@@ -29,7 +29,7 @@ public class ProjectsMenuCallbackHandlers  implements CallbackHandler{
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, SettingsCallBackEnum.PROJECTS_CALLBACK.getCallBackName());
+        return Objects.equals(data, CallBackEnum.PROJECTS_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -38,15 +38,15 @@ public class ProjectsMenuCallbackHandlers  implements CallbackHandler{
         String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        if (Objects.equals(data, SettingsCallBackEnum.PROJECTS_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.PROJECTS_CALLBACK.getCallBackName())) {
             tempDataSaver.tempLastMessageId(chatId, messageId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    SettingsMessageEnum.PROJECT_MENU_MESSAGE.getMessage(),
-                    SettingsStateEnum.SETTINGS_PROJECTS_STATE.getStateName(),
+                    MessageEnum.PROJECT_MENU_MESSAGE.getMessage(),
+                    StateEnum.SETTINGS_PROJECTS_STATE.getStateName(),
                     projectsKeyboard.projectsMenu(chatId, userState));
         }
-        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

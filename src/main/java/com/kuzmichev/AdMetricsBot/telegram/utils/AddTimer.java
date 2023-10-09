@@ -1,8 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
-import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.DoneButtonKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.TimeZoneKeyboard;
@@ -52,19 +51,19 @@ public class AddTimer {
             scheduledMessageRepository.save(scheduledMessage);
 
             // Изменяем статус юзера на рабочий
-            userStateEditor.editState(chatId, SettingsStateEnum.WORKING_STATE.getStateName());
+            userStateEditor.editState(chatId, StateEnum.WORKING_STATE.getStateName());
 
             log.info("Пользователь {} установил таймер на " + timerMessage, chatId);
             return messageWithReturn.sendMessage(
                     chatId,
-                    SettingsMessageEnum.TIMER_ADDED_MESSAGE.getMessage() + messageText.replace(" ", ":"),
+                    MessageEnum.TIMER_ADDED_MESSAGE.getMessage() + messageText.replace(" ", ":"),
                     doneButtonKeyboard.doneButtonMenu(),
-                    SettingsStateEnum.WORKING_STATE.getStateName());
+                    StateEnum.WORKING_STATE.getStateName());
 
         }
         return messageWithReturn.sendMessage(
                 chatId,
-                UniversalMessageEnum.TIMER_ADD_ERROR_MESSAGE.getMessage(),
+                MessageEnum.TIMER_ADD_ERROR_MESSAGE.getMessage(),
                 timeZoneKeyboard.timeZoneKeyboard(chatId, userState),
                 null
         );

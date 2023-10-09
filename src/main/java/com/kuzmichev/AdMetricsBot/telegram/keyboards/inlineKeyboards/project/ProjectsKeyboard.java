@@ -1,9 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalButtonEnum;
-import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalCallbackEnum;
+import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.InlineKeyboardMaker;
@@ -31,8 +29,8 @@ public class ProjectsKeyboard {
         // Кнопка получения списка проектов
         List<InlineKeyboardButton> projectsButton = inlineKeyboardMaker.addRow(
                 inlineKeyboardMaker.addButton(
-                        SettingsButtonEnum.PROJECTS_GET_LIST_BUTTON.getButtonName(),
-                        SettingsCallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName(),
+                        ButtonEnum.PROJECTS_GET_LIST_BUTTON.getButtonName(),
+                        CallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName(),
                         null
                 )
         );
@@ -43,8 +41,8 @@ public class ProjectsKeyboard {
         return inlineKeyboardMaker.addMarkup(
                     inlineKeyboardMaker.addRow(
                             inlineKeyboardMaker.addButton(
-                                    UniversalButtonEnum.PROJECT_CREATE_BUTTON.getButtonName(),
-                                    UniversalCallbackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName(),
+                                    ButtonEnum.PROJECT_CREATE_BUTTON.getButtonName(),
+                                    CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName(),
                                     null
                             )
 

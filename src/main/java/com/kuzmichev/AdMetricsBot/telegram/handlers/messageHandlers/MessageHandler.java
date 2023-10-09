@@ -1,8 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers;
 
 import com.kuzmichev.AdMetricsBot.config.TelegramConfig;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers.MessageStateHandler.StateHandler;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers.MessageStateHandler.StateHandlersList;
@@ -62,6 +61,6 @@ public class MessageHandler {
                 }
             }
         }
-        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

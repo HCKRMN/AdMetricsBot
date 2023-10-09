@@ -1,6 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.InputsEnum;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.telegram.utils.InputsManager;
@@ -35,7 +35,7 @@ public class DeleteInputsKeyboard {
                     inlineKeyboardMaker.addRow(
                             inlineKeyboardMaker.addButton(
                                     input.getInputName(),
-                                    SettingsCallBackEnum.INPUT_CALLBACK.getCallBackName() + input.getInputName(),
+                                    CallBackEnum.INPUT_CALLBACK.getCallBackName() + input.getInputName(),
                                     null
                             )
                     )

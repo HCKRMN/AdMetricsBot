@@ -1,7 +1,15 @@
-package com.kuzmichev.AdMetricsBot.constants.settingsEnums;
+package com.kuzmichev.AdMetricsBot.constants;
 
-public enum SettingsButtonEnum {
+public enum ButtonEnum {
     REGISTRATION_BUTTON("Регистрация"),
+
+
+    LINK_BUTTON("ССЫЛКА"),
+    PROJECT_CREATE_BUTTON("Создать проект"),
+    UNIVERSAL_CONTINUE_BUTTON("Продолжить"),
+    TEST_INPUTS_BUTTON("Тестовый запрос"),
+
+
     YANDEX_ADD_TOKEN_LINK_BUTTON("Добавить токен Яндекс"),
     DELETE_USER_DATA_BUTTON("Да, удалить"),
     NOT_DELETE_USER_DATA_BUTTON("Нет, продолжить"),
@@ -12,10 +20,6 @@ public enum SettingsButtonEnum {
     ADD_AMOCRM_BUTTON("AmoCRM"),
     ADD_YCLIENTS_BUTTON("Yclients"),
     ADD_BITRIX_BUTTON("Bitrix24"),
-
-    YES_ADD_BUTTON("Да, добавить"),
-    CONTINUE_BUTTON("Продолжить"),
-    NO_CONTINUE_BUTTON("Нет, продолжить"),
     SETTINGS_ENABLE_NOTIFICATIONS_BUTTON("Вкл. уведомления"),
     SETTINGS_DISABLE_NOTIFICATIONS_BUTTON("Откл. уведомления"),
     SETTINGS_EDIT_TIMEZONE_BUTTON("Часовой пояс"),
@@ -26,9 +30,7 @@ public enum SettingsButtonEnum {
     SETTINGS_EXIT_BUTTON("Выйти из меню"),
     SETTINGS_BACK_BUTTON("Назад"),
     PROJECTS_BUTTON("Проекты"),
-    PROJECTS_EDIT_BUTTON("Редактировать проекты"),
     PROJECTS_GET_LIST_BUTTON("Мои проекты"),
-    PROJECT_EDIT_BUTTON("Изменить"),
     PROJECT_ADD_TOKEN_BUTTON("Добавить источник"),
     PROJECT_DELETE_TOKEN_BUTTON("Удалить источник"),
     PROJECT_GET_INFO_BUTTON("Получить данные"),
@@ -45,7 +47,7 @@ public enum SettingsButtonEnum {
 
     private final String buttonName;
 
-    SettingsButtonEnum(String buttonName) {
+    ButtonEnum(String buttonName) {
         this.buttonName = buttonName;
     }
 

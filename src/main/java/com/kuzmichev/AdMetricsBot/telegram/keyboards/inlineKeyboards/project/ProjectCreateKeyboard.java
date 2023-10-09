@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project;
 
-import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalButtonEnum;
-import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalCallbackEnum;
+import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
@@ -23,8 +23,8 @@ public class ProjectCreateKeyboard {
         return inlineKeyboardMaker.addMarkup(
                 inlineKeyboardMaker.addRow(
                         inlineKeyboardMaker.addButton(
-                                UniversalButtonEnum.PROJECT_CREATE_BUTTON.getButtonName(),
-                                UniversalCallbackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName(),
+                                ButtonEnum.PROJECT_CREATE_BUTTON.getButtonName(),
+                                CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName(),
                                 null
                         )
                 ), backAndExitKeyboard.backAndExitMenuButtons(userState)

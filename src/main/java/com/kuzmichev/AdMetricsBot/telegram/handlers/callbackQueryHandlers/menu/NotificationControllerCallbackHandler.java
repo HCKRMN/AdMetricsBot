@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.menu;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.SettingsKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
@@ -28,8 +28,8 @@ public class NotificationControllerCallbackHandler implements CallbackHandler {
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, SettingsCallBackEnum.ENABLE_NOTIFICATIONS_CALLBACK.getCallBackName()) ||
-                Objects.equals(data, SettingsCallBackEnum.DISABLE_NOTIFICATIONS_CALLBACK.getCallBackName());
+        return Objects.equals(data, CallBackEnum.ENABLE_NOTIFICATIONS_CALLBACK.getCallBackName()) ||
+                Objects.equals(data, CallBackEnum.DISABLE_NOTIFICATIONS_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -38,23 +38,23 @@ public class NotificationControllerCallbackHandler implements CallbackHandler {
             String data = buttonQuery.getData();
             int messageId = buttonQuery.getMessage().getMessageId();
 
-            if (Objects.equals(data, SettingsCallBackEnum.ENABLE_NOTIFICATIONS_CALLBACK.getCallBackName())) {
+            if (Objects.equals(data, CallBackEnum.ENABLE_NOTIFICATIONS_CALLBACK.getCallBackName())) {
                 notificationController.enableNotifications(chatId);
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,
-                        SettingsMessageEnum.SETTINGS_MENU_MESSAGE.getMessage(),
+                        MessageEnum.SETTINGS_MENU_MESSAGE.getMessage(),
                         null,
                         settingsKeyboard.settingsMenu(chatId));
-            } else if (Objects.equals(data, SettingsCallBackEnum.DISABLE_NOTIFICATIONS_CALLBACK.getCallBackName())) {
+            } else if (Objects.equals(data, CallBackEnum.DISABLE_NOTIFICATIONS_CALLBACK.getCallBackName())) {
                 notificationController.disableNotifications(chatId);
                 return messageWithReturn.editMessage(
                         chatId,
                         messageId,
-                        SettingsMessageEnum.SETTINGS_MENU_MESSAGE.getMessage(),
+                        MessageEnum.SETTINGS_MENU_MESSAGE.getMessage(),
                         null,
                         settingsKeyboard.settingsMenu(chatId));
             }
-            return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+            return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
         }
     }

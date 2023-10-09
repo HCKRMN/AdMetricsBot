@@ -1,8 +1,8 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -23,28 +23,28 @@ public class BackAndExitKeyboard {
 
         if(userState.contains("SETTINGS")) {
             String backButtonSettingsCallBackEnum;
-            switch (SettingsStateEnum.valueOf(userState)) {
+            switch (StateEnum.valueOf(userState)) {
                 case SETTINGS_EDIT_STATE,
-                        SETTINGS_EDIT_TIMER_STATE,
+                        EDIT_TIMER_STATE,
                         SETTINGS_PROJECTS_STATE,
-                        SETTINGS_EDIT_TIMEZONE_STATE -> backButtonSettingsCallBackEnum = SettingsCallBackEnum.SETTINGS_BACK_CALLBACK.getCallBackName();
+                        SETTINGS_EDIT_TIMEZONE_STATE -> backButtonSettingsCallBackEnum = CallBackEnum.SETTINGS_BACK_CALLBACK.getCallBackName();
 
                 case SETTINGS_PROJECT_CREATE_STATE,
-                        SETTINGS_PROJECT_ADD_TOKENS_STATE -> backButtonSettingsCallBackEnum = SettingsCallBackEnum.PROJECTS_CALLBACK.getCallBackName();
+                        SETTINGS_PROJECT_ADD_TOKENS_STATE -> backButtonSettingsCallBackEnum = CallBackEnum.PROJECTS_CALLBACK.getCallBackName();
 
-                default -> backButtonSettingsCallBackEnum = SettingsCallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName();
+                default -> backButtonSettingsCallBackEnum = CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName();
             }
             return inlineKeyboardMaker.addRow(
                     // Кнопка назад
                     inlineKeyboardMaker.addButton(
-                            SettingsButtonEnum.SETTINGS_BACK_BUTTON.getButtonName(),
+                            ButtonEnum.SETTINGS_BACK_BUTTON.getButtonName(),
                             backButtonSettingsCallBackEnum,
                             null
                     ),
                     // Кнопка выход
                     inlineKeyboardMaker.addButton(
-                            SettingsButtonEnum.SETTINGS_EXIT_BUTTON.getButtonName(),
-                            SettingsCallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
+                            ButtonEnum.SETTINGS_EXIT_BUTTON.getButtonName(),
+                            CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
                             null
                     )
             );

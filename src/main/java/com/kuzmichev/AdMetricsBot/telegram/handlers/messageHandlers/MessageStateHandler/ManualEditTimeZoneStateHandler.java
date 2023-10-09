@@ -1,9 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers.MessageStateHandler;
 
-import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationStateEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.DoneButtonKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project.ProjectCreateKeyboard;
@@ -35,8 +33,8 @@ public class ManualEditTimeZoneStateHandler implements StateHandler {
 
     @Override
     public boolean canHandle(String userStateEnum) {
-        return Objects.equals(userStateEnum, SettingsStateEnum.SETTINGS_EDIT_TIMEZONE_MANUAL_STATE.getStateName())
-                || Objects.equals(userStateEnum, RegistrationStateEnum.REGISTRATION_EDIT_TIMEZONE_MANUAL_STATE.getStateName());
+        return Objects.equals(userStateEnum, StateEnum.SETTINGS_EDIT_TIMEZONE_MANUAL_STATE.getStateName())
+                || Objects.equals(userStateEnum, StateEnum.REGISTRATION_EDIT_TIMEZONE_MANUAL_STATE.getStateName());
     }
 
     @Override
@@ -45,24 +43,24 @@ public class ManualEditTimeZoneStateHandler implements StateHandler {
         if (validator.validateTime(messageText)) {
             timeZoneDefinition.manualTimeZone(chatId, messageText);
 
-            if(Objects.equals(userState, RegistrationStateEnum.REGISTRATION_EDIT_TIMEZONE_MANUAL_STATE.getStateName())){
+            if(Objects.equals(userState, StateEnum.REGISTRATION_EDIT_TIMEZONE_MANUAL_STATE.getStateName())){
                 return messageWithReturn.sendMessage(
                         chatId,
-                        RegistrationMessageEnum.REGISTRATION_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
+                        MessageEnum.REGISTRATION_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
                         projectCreateKeyboard.projectCreateKeyboard(userState),
-                        RegistrationStateEnum.REGISTRATION_STATE.getStateName());
+                        StateEnum.REGISTRATION_STATE.getStateName());
             } else {
 
                 return messageWithReturn.sendMessage(
                         chatId,
-                        SettingsMessageEnum.SETTINGS_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
+                        MessageEnum.SETTINGS_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
                         doneButtonKeyboard.doneButtonMenu(),
-                        SettingsStateEnum.WORKING_STATE.getStateName());
+                        StateEnum.WORKING_STATE.getStateName());
             }
         } else {
             messageWithoutReturn.sendMessage(
                     chatId,
-                    SettingsMessageEnum.INVALID_TIME_MESSAGE.getMessage(),
+                    MessageEnum.INVALID_TIME_MESSAGE.getMessage(),
                     backAndExitKeyboard.backAndExitMenu(userState));
             return null;
         }

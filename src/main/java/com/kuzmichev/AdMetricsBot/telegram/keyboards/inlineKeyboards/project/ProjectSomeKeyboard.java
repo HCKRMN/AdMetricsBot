@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
@@ -22,29 +22,29 @@ public class ProjectSomeKeyboard {
         return inlineKeyboardMaker.addMarkup(
                         inlineKeyboardMaker.addRow(
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.PROJECT_ADD_TOKEN_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.ADD_INPUTS_CALLBACK.getCallBackName(),
+                                        ButtonEnum.PROJECT_ADD_TOKEN_BUTTON.getButtonName(),
+                                        CallBackEnum.ADD_INPUTS_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
                         inlineKeyboardMaker.addRow(
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.PROJECT_DELETE_TOKEN_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName(),
+                                        ButtonEnum.PROJECT_DELETE_TOKEN_BUTTON.getButtonName(),
+                                        CallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
                         inlineKeyboardMaker.addRow(
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.PROJECT_GET_INFO_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.PROJECT_GET_INFO_CALLBACK.getCallBackName(),
+                                        ButtonEnum.PROJECT_GET_INFO_BUTTON.getButtonName(),
+                                        CallBackEnum.PROJECT_GET_INFO_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
                         inlineKeyboardMaker.addRow(
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.PROJECT_DELETE_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.PROJECT_DELETE_STEP_1_CALLBACK.getCallBackName(),
+                                        ButtonEnum.PROJECT_DELETE_BUTTON.getButtonName(),
+                                        CallBackEnum.PROJECT_DELETE_STEP_1_CALLBACK.getCallBackName(),
                                         null
 
                                 )

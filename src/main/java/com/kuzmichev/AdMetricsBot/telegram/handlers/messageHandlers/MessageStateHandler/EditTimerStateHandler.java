@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers.MessageStateHandler;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.AddTimer;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
@@ -27,7 +27,7 @@ public class EditTimerStateHandler implements StateHandler {
 
     @Override
     public boolean canHandle(String userStateEnum) {
-        return Objects.equals(userStateEnum, SettingsStateEnum.SETTINGS_EDIT_TIMER_STATE.getStateName());
+        return Objects.equals(userStateEnum, StateEnum.EDIT_TIMER_STATE.getStateName());
     }
 
     @Override
@@ -38,7 +38,7 @@ public class EditTimerStateHandler implements StateHandler {
         } else {
             messageWithoutReturn.sendMessage(
                     chatId,
-                    SettingsMessageEnum.INVALID_TIME_MESSAGE.getMessage(),
+                    MessageEnum.INVALID_TIME_MESSAGE.getMessage(),
                     backAndExitKeyboard.backAndExitMenu(userState));
             return null;
         }

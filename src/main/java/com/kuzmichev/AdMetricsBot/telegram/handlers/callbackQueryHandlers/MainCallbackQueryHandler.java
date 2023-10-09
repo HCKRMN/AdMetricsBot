@@ -1,6 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
-import org.telegram.telegrambots.meta.api.objects.User;
 
 @Slf4j
 @Component
@@ -38,6 +37,6 @@ public class MainCallbackQueryHandler {
     // Обработка неизвестного колбэка
     private BotApiMethod<?> handleUnknownCallback(CallbackQuery buttonQuery) {
         String chatId = buttonQuery.getMessage().getChatId().toString();
-        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

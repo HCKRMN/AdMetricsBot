@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,8 +20,8 @@ public class CloseButtonKeyboard {
         return inlineKeyboardMaker.addMarkup(
                     inlineKeyboardMaker.addRow(
                             inlineKeyboardMaker.addButton(
-                                    SettingsButtonEnum.CLOSE_BUTTON.getButtonName(),
-                                    SettingsCallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
+                                    ButtonEnum.CLOSE_BUTTON.getButtonName(),
+                                    CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
                                     null
                             )
                     )

@@ -1,8 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
-import com.kuzmichev.AdMetricsBot.model.UserRepository;
+import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -23,48 +22,48 @@ public class AddInputsKeyboard {
                         inlineKeyboardMaker.addRow(
                                 // Кнопка добавления Яндекс
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.ADD_YANDEX_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.ADD_YANDEX_CALLBACK.getCallBackName(),
+                                        ButtonEnum.ADD_YANDEX_BUTTON.getButtonName(),
+                                        CallBackEnum.ADD_YANDEX_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
 //                        inlineKeyboardMaker.addRow(
 //                                // Кнопка добавления VK
 //                                inlineKeyboardMaker.addButton(
-//                                        SettingsButtonEnum.ADD_VK_BUTTON.getButtonName(),
-//                                        SettingsCallBackEnum.ADD_VK_CALLBACK.getCallBackName(),
+//                                        ButtonEnum.ADD_VK_BUTTON.getButtonName(),
+//                                        CallBackEnum.ADD_VK_CALLBACK.getCallBackName(),
 //                                        null
 //                                )
 //                        ),
 //                        inlineKeyboardMaker.addRow(
 //                                // Кнопка добавления MyTarget
 //                                inlineKeyboardMaker.addButton(
-//                                        SettingsButtonEnum.ADD_MYTARGET_BUTTON.getButtonName(),
-//                                        SettingsCallBackEnum.ADD_MYTARGET_CALLBACK.getCallBackName(),
+//                                        ButtonEnum.ADD_MYTARGET_BUTTON.getButtonName(),
+//                                        CallBackEnum.ADD_MYTARGET_CALLBACK.getCallBackName(),
 //                                        null
 //                                )
 //                        ),
                         inlineKeyboardMaker.addRow(
                                 // Кнопка добавления Bitrix
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.ADD_BITRIX_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName(),
+                                        ButtonEnum.ADD_BITRIX_BUTTON.getButtonName(),
+                                        CallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
 //                        inlineKeyboardMaker.addRow(
 //                                // Кнопка добавления AmoCRM
 //                                inlineKeyboardMaker.addButton(
-//                                        SettingsButtonEnum.ADD_AMOCRM_BUTTON.getButtonName(),
-//                                        SettingsCallBackEnum.ADD_AMOCRM_CALLBACK.getCallBackName(),
+//                                        ButtonEnum.ADD_AMOCRM_BUTTON.getButtonName(),
+//                                        CallBackEnum.ADD_AMOCRM_CALLBACK.getCallBackName(),
 //                                        null
 //                                )
 //                        ),
 //                        inlineKeyboardMaker.addRow(
 //                                // Кнопка добавления Yclients
 //                                inlineKeyboardMaker.addButton(
-//                                        SettingsButtonEnum.ADD_YCLIENTS_BUTTON.getButtonName(),
-//                                        SettingsCallBackEnum.ADD_YCLIENTS_CALLBACK.getCallBackName(),
+//                                        ButtonEnum.ADD_YCLIENTS_BUTTON.getButtonName(),
+//                                        CallBackEnum.ADD_YCLIENTS_CALLBACK.getCallBackName(),
 //                                        null
 //                                )
 //                        ),

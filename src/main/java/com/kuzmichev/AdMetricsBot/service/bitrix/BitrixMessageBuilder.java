@@ -24,7 +24,7 @@ public class BitrixMessageBuilder {
         int requestStatus = bitrixData.getRequestStatus();
 
         message.append("Битрикс").append("\n");
-        if (requestStatus == 1) {
+        if (requestStatus == 200) {
             message
                     .append("<code>Новых лидов:        </code>").append(newLeads).append("\n")
                     .append("<code>Успешные сделки:    </code>").append(successDeals).append("\n")
@@ -35,6 +35,7 @@ public class BitrixMessageBuilder {
         } else {
             message
                     .append("Ошибка получения данных от битрикса").append("\n");
+            log.error("У пользователя {} возникла ошибка при получении данных от битрикса", bitrixData.getChatId());
         }
 
         return message.toString();

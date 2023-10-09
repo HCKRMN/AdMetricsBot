@@ -3,9 +3,8 @@ package com.kuzmichev.AdMetricsBot.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationStateEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BitrixTestKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
@@ -105,16 +104,16 @@ public class BitrixController {
         messageManagementService.putMessageToQueue(chatId, messageId);
         messageManagementService.deleteMessage(chatId);
 
-        if (userState.equals(RegistrationStateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName())) {
+        if (userState.equals(StateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName())) {
             messageWithoutReturn.sendMessage(
                     chatId,
-                    RegistrationMessageEnum.REGISTRATION_TEST_INPUTS_MESSAGE.getMessage(),
+                    MessageEnum.REGISTRATION_TEST_INPUTS_MESSAGE.getMessage(),
                     bitrixTestKeyboard.bitrixTestMenu(userState));
 
         } else {
             messageWithoutReturn.sendMessage(
                     chatId,
-                    SettingsMessageEnum.INPUT_TEST_MESSAGE.getMessage(),
+                    MessageEnum.INPUT_TEST_MESSAGE.getMessage(),
                     bitrixTestKeyboard.bitrixTestMenu(userState));
         }
         log.info("Пользователь {} добавил аккаунт Bitrix", chatId);

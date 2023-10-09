@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.projects;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.model.User;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project.ProjectListKeyboard;
@@ -32,7 +32,7 @@ public class ProjectListCallBackHandler implements CallbackHandler {
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, SettingsCallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName())
+        return Objects.equals(data, CallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName())
                || data.contains("page_");
     }
 
@@ -47,10 +47,10 @@ public class ProjectListCallBackHandler implements CallbackHandler {
         Map<String, String> pageData = DynamicCallback.handleDynamicCallback(data, regexPage, "page_");
         if (!pageData.isEmpty()) {
             currentPage = Integer.parseInt(pageData.get("value"));
-            data = SettingsCallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName();
+            data = CallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName();
         }
 
-        if (Objects.equals(data, SettingsCallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName())) {
             Optional<User> userOptional = userRepository.findByChatId(chatId);
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
@@ -60,11 +60,11 @@ public class ProjectListCallBackHandler implements CallbackHandler {
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    SettingsMessageEnum.SETTINGS_PROJECTS_LIST_MENU_MESSAGE.getMessage(),
+                    MessageEnum.SETTINGS_PROJECTS_LIST_MENU_MESSAGE.getMessage(),
                     null,
                     projectListKeyboard.projectListMenu(chatId, userState));
         }
-        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }
 

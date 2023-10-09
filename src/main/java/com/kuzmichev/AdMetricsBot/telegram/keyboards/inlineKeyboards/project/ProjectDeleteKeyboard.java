@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.InlineKeyboardMaker;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -20,13 +20,13 @@ public class ProjectDeleteKeyboard {
         return inlineKeyboardMaker.addMarkup(
                     inlineKeyboardMaker.addRow(
                             inlineKeyboardMaker.addButton(
-                                    SettingsButtonEnum.DELETE_PROJECT_BUTTON.getButtonName(),
-                                    SettingsCallBackEnum.PROJECT_DELETE_STEP_2_CALLBACK.getCallBackName(),
+                                    ButtonEnum.DELETE_PROJECT_BUTTON.getButtonName(),
+                                    CallBackEnum.PROJECT_DELETE_STEP_2_CALLBACK.getCallBackName(),
                                     null
                             ),
                             inlineKeyboardMaker.addButton(
-                                    SettingsButtonEnum.CANCEL_BUTTON.getButtonName(),
-                                    SettingsCallBackEnum.NOT_DELETE_PROJECT_CALLBACK.getCallBackName(),
+                                    ButtonEnum.CANCEL_BUTTON.getButtonName(),
+                                    CallBackEnum.NOT_DELETE_PROJECT_CALLBACK.getCallBackName(),
                                     null
                             )
                     )

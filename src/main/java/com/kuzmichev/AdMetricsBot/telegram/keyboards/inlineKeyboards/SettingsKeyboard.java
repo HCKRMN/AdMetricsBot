@@ -1,8 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalCallbackEnum;
+import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,14 +21,14 @@ public class SettingsKeyboard {
     public InlineKeyboardMarkup settingsMenu(String chatId) {
 
         String launchButton;
-        SettingsCallBackEnum launchCallback;
+        CallBackEnum launchCallback;
         boolean state = scheduledMessageRepository.findEnableSendingMessagesByChatId(chatId);
         if (state) {
-            launchButton = SettingsButtonEnum.SETTINGS_DISABLE_NOTIFICATIONS_BUTTON.getButtonName();
-            launchCallback = SettingsCallBackEnum.DISABLE_NOTIFICATIONS_CALLBACK;
+            launchButton = ButtonEnum.SETTINGS_DISABLE_NOTIFICATIONS_BUTTON.getButtonName();
+            launchCallback = CallBackEnum.DISABLE_NOTIFICATIONS_CALLBACK;
         } else {
-            launchButton = SettingsButtonEnum.SETTINGS_ENABLE_NOTIFICATIONS_BUTTON.getButtonName();
-            launchCallback = SettingsCallBackEnum.ENABLE_NOTIFICATIONS_CALLBACK;
+            launchButton = ButtonEnum.SETTINGS_ENABLE_NOTIFICATIONS_BUTTON.getButtonName();
+            launchCallback = CallBackEnum.ENABLE_NOTIFICATIONS_CALLBACK;
         }
 
 
@@ -37,8 +36,8 @@ public class SettingsKeyboard {
                         inlineKeyboardMaker.addRow(
                                 // Кнопка управления проектами
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.PROJECTS_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.PROJECTS_CALLBACK.getCallBackName(),
+                                        ButtonEnum.PROJECTS_BUTTON.getButtonName(),
+                                        CallBackEnum.PROJECTS_CALLBACK.getCallBackName(),
                                         null
                                 ),
                                 // Кнопка включения/выключения рассылки
@@ -51,36 +50,36 @@ public class SettingsKeyboard {
                         inlineKeyboardMaker.addRow(
                                 // Кнопка настроек часового пояса
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.SETTINGS_EDIT_TIMEZONE_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.EDIT_TIMEZONE_LINK_CALLBACK.getCallBackName(),
+                                        ButtonEnum.SETTINGS_EDIT_TIMEZONE_BUTTON.getButtonName(),
+                                        CallBackEnum.EDIT_TIMEZONE_LINK_CALLBACK.getCallBackName(),
                                         null
                                 ),
                                 // Кнопка настроек таймера
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.SETTINGS_EDIT_TIMER_BUTTON.getButtonName(),
-                                        UniversalCallbackEnum.UNIVERSAL_EDIT_TIMER_CALLBACK.getCallBackName(),
+                                        ButtonEnum.SETTINGS_EDIT_TIMER_BUTTON.getButtonName(),
+                                        CallBackEnum.UNIVERSAL_EDIT_TIMER_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
                         inlineKeyboardMaker.addRow(
                                 // Кнопка настроек языка
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.SETTINGS_EDIT_LANGUAGE_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.EDIT_LANGUAGE_CALLBACK.getCallBackName(),
+                                        ButtonEnum.SETTINGS_EDIT_LANGUAGE_BUTTON.getButtonName(),
+                                        CallBackEnum.EDIT_LANGUAGE_CALLBACK.getCallBackName(),
                                         null
                                 ),
                                 // Кнопка удаления данных пользователя
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.SETTINGS_DELETE_USER_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.DELETE_USER_STEP_1_CALLBACK.getCallBackName(),
+                                        ButtonEnum.SETTINGS_DELETE_USER_BUTTON.getButtonName(),
+                                        CallBackEnum.DELETE_USER_STEP_1_CALLBACK.getCallBackName(),
                                         null
                                 )
                         ),
                         inlineKeyboardMaker.addRow(
                                 // Кнопка выхода из меню
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.SETTINGS_EXIT_BUTTON.getButtonName(),
-                                        SettingsCallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
+                                        ButtonEnum.SETTINGS_EXIT_BUTTON.getButtonName(),
+                                        CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
                                         null
                                 )
                         )

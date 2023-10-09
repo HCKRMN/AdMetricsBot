@@ -1,10 +1,8 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.projects;
 
-import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationStateEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
-import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalCallbackEnum;
-import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
@@ -34,7 +32,7 @@ public class ProjectCreateCallbackHandler implements CallbackHandler {
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, UniversalCallbackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName());
+        return Objects.equals(data, CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -44,22 +42,22 @@ public class ProjectCreateCallbackHandler implements CallbackHandler {
         int messageId = buttonQuery.getMessage().getMessageId();
 
         InlineKeyboardMarkup backAndExitButtons = backAndExitKeyboard.backAndExitMenu(userState);
-        String state = SettingsStateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE.getStateName();
+        String state = StateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE.getStateName();
 
-        if(userState.equals(RegistrationStateEnum.REGISTRATION_STATE.getStateName())){
+        if(userState.equals(StateEnum.REGISTRATION_STATE.getStateName())){
             backAndExitButtons = null;
-            state = RegistrationStateEnum.REGISTRATION_PROJECT_CREATE_ASK_NAME_STATE.getStateName();
+            state = StateEnum.REGISTRATION_PROJECT_CREATE_ASK_NAME_STATE.getStateName();
         }
 
-        if (Objects.equals(data, UniversalCallbackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName())) {
             tempDataSaver.tempLastMessageId(chatId, messageId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    UniversalMessageEnum.PROJECT_CREATE_ASK_NAME_MESSAGE.getMessage(),
+                    MessageEnum.PROJECT_CREATE_ASK_NAME_MESSAGE.getMessage(),
                     state,
                     backAndExitButtons);
         }
-        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

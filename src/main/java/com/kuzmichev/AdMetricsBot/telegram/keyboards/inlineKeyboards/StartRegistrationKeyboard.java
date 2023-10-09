@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
-import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationButtonEnum;
-import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationCallbackEnum;
+import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,8 +20,8 @@ public class StartRegistrationKeyboard {
         return inlineKeyboardMaker.addMarkup(
                         inlineKeyboardMaker.addRow(
                                 inlineKeyboardMaker.addButton(
-                                        RegistrationButtonEnum.REGISTRATION_BUTTON.getButtonName(),
-                                        RegistrationCallbackEnum.START_REGISTRATION_CALLBACK.getCallBackName(),
+                                        ButtonEnum.REGISTRATION_BUTTON.getButtonName(),
+                                        CallBackEnum.START_REGISTRATION_CALLBACK.getCallBackName(),
                                         null
                                 )
                         )

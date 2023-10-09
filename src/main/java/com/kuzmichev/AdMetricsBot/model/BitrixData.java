@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BitrixData {
     private String projectId;
+    private String chatId;
     private int newLeads;
     private int successDeals;
     private int failedDeals;

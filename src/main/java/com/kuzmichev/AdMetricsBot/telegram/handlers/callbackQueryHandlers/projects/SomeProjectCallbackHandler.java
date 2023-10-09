@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.projects;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project.ProjectSomeKeyboard;
@@ -47,10 +47,10 @@ public class SomeProjectCallbackHandler  implements CallbackHandler {
         if (!projectData.isEmpty()) {
             projectId = projectData.get("value");
             tempDataSaver.findLastProjectIdByChatId(chatId);
-            data = SettingsCallBackEnum.SOME_PROJECT_CALLBACK.getCallBackName();
+            data = CallBackEnum.SOME_PROJECT_CALLBACK.getCallBackName();
         }
 
-        if (Objects.equals(data, SettingsCallBackEnum.SOME_PROJECT_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.SOME_PROJECT_CALLBACK.getCallBackName())) {
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
@@ -58,6 +58,6 @@ public class SomeProjectCallbackHandler  implements CallbackHandler {
                     null,
                     projectSomeKeyboard.someProjectMenu(userState));
         }
-        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

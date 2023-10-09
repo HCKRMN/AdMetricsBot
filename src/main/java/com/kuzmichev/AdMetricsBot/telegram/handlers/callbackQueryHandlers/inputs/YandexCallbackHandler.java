@@ -1,8 +1,8 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.inputs;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.service.yandex.YandexMessageBuilder;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.YandexAddKeyboard;
@@ -35,8 +35,8 @@ public class YandexCallbackHandler implements CallbackHandler {
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, SettingsCallBackEnum.ADD_YANDEX_CALLBACK.getCallBackName())
-                || Objects.equals(data, SettingsCallBackEnum.TEST_YANDEX_CALLBACK.getCallBackName());
+        return Objects.equals(data, CallBackEnum.ADD_YANDEX_CALLBACK.getCallBackName())
+                || Objects.equals(data, CallBackEnum.TEST_YANDEX_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -45,23 +45,28 @@ public class YandexCallbackHandler implements CallbackHandler {
         String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        if (Objects.equals(data, SettingsCallBackEnum.ADD_YANDEX_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.ADD_YANDEX_CALLBACK.getCallBackName())) {
             tempDataSaver.tempLastMessageId(chatId, messageId);
+//            String newState = StateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE.getStateName();
+//            if (userState.equals(StateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName())) {
+//                newState = StateEnum.REGISTRATION_PROJECT_ADD_YANDEX_STATE.getStateName();
+//            }
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    SettingsMessageEnum.ADD_YANDEX_MESSAGE.getMessage(),
-                    SettingsStateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE.getStateName(),
+                    MessageEnum.ADD_YANDEX_MESSAGE.getMessage(),
+//                    newState
+                    null,
                     yandexAddKeyboard.addYandexMenu(chatId, userState));
-        } else if (Objects.equals(data, SettingsCallBackEnum.TEST_YANDEX_CALLBACK.getCallBackName())) {
+        } else if (Objects.equals(data, CallBackEnum.TEST_YANDEX_CALLBACK.getCallBackName())) {
             String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
                     yandexMessageBuilder.getMessage(projectId),
-                    SettingsStateEnum.SETTINGS_PROJECT_ADD_YANDEX_STATE.getStateName(),
+                    null,
                     yandexTestKeyboard.yandexTestMenu(userState));
         }
-        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.projects;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
@@ -34,9 +34,9 @@ public class DeleteProjectCallbackHandler implements CallbackHandler {
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, SettingsCallBackEnum.PROJECT_DELETE_STEP_1_CALLBACK.getCallBackName())
-                || Objects.equals(data, SettingsCallBackEnum.PROJECT_DELETE_STEP_2_CALLBACK.getCallBackName())
-                || Objects.equals(data, SettingsCallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName());
+        return Objects.equals(data, CallBackEnum.PROJECT_DELETE_STEP_1_CALLBACK.getCallBackName())
+                || Objects.equals(data, CallBackEnum.PROJECT_DELETE_STEP_2_CALLBACK.getCallBackName())
+                || Objects.equals(data, CallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -46,25 +46,25 @@ public class DeleteProjectCallbackHandler implements CallbackHandler {
         int messageId = buttonQuery.getMessage().getMessageId();
         String projectId;
 
-        if (Objects.equals(data, SettingsCallBackEnum.PROJECT_DELETE_STEP_1_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.PROJECT_DELETE_STEP_1_CALLBACK.getCallBackName())) {
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    SettingsMessageEnum.PROJECT_DELETE_STEP_1_MESSAGE.getMessage(),
+                    MessageEnum.PROJECT_DELETE_STEP_1_MESSAGE.getMessage(),
                     null,
                     projectDeleteKeyboard.deleteProjectMenu());
-        } else if(Objects.equals(data, SettingsCallBackEnum.PROJECT_DELETE_STEP_2_CALLBACK.getCallBackName())) {
+        } else if(Objects.equals(data, CallBackEnum.PROJECT_DELETE_STEP_2_CALLBACK.getCallBackName())) {
             projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
             projectRepository.removeProjectByProjectId(projectId);
             userRepository.decrementProjectsCount(chatId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    SettingsMessageEnum.PROJECT_DELETE_STEP_2_MESSAGE.getMessage(),
+                    MessageEnum.PROJECT_DELETE_STEP_2_MESSAGE.getMessage(),
                     null,
                     doneButtonKeyboard.doneButtonMenu()
             );
         }
-        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

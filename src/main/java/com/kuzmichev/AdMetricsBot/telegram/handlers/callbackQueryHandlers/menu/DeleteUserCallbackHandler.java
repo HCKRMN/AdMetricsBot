@@ -1,8 +1,8 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.menu;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.DeleteUserDataKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.DoneButtonKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
@@ -31,9 +31,9 @@ public class DeleteUserCallbackHandler implements CallbackHandler {
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, SettingsCallBackEnum.DELETE_USER_STEP_1_CALLBACK.getCallBackName())
-                || Objects.equals(data, SettingsCallBackEnum.DELETE_USER_STEP_2_CALLBACK.getCallBackName())
-                || Objects.equals(data, SettingsCallBackEnum.NOT_DELETE_USER_CALLBACK.getCallBackName());
+        return Objects.equals(data, CallBackEnum.DELETE_USER_STEP_1_CALLBACK.getCallBackName())
+                || Objects.equals(data, CallBackEnum.DELETE_USER_STEP_2_CALLBACK.getCallBackName())
+                || Objects.equals(data, CallBackEnum.NOT_DELETE_USER_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -42,29 +42,29 @@ public class DeleteUserCallbackHandler implements CallbackHandler {
         String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        if (Objects.equals(data, SettingsCallBackEnum.DELETE_USER_STEP_1_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.DELETE_USER_STEP_1_CALLBACK.getCallBackName())) {
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    SettingsMessageEnum.DELETE_USER_DATA_ASK_MESSAGE.getMessage(),
+                    MessageEnum.DELETE_USER_DATA_ASK_MESSAGE.getMessage(),
                     null,
                     deleteUserDataKeyboard.deleteUserDataMenu());
-        } else if(Objects.equals(data, SettingsCallBackEnum.DELETE_USER_STEP_2_CALLBACK.getCallBackName())) {
+        } else if(Objects.equals(data, CallBackEnum.DELETE_USER_STEP_2_CALLBACK.getCallBackName())) {
             deleteUserData.deleteUserData(chatId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    SettingsMessageEnum.DELETE_USER_DATA_ASK_MESSAGE.getMessage(),
+                    MessageEnum.DELETE_USER_DATA_ASK_MESSAGE.getMessage(),
                     null,
                     doneButtonKeyboard.doneButtonMenu());
-        } else if(Objects.equals(data, SettingsCallBackEnum.NOT_DELETE_USER_CALLBACK.getCallBackName())) {
+        } else if(Objects.equals(data, CallBackEnum.NOT_DELETE_USER_CALLBACK.getCallBackName())) {
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    SettingsMessageEnum.NOT_DELETE_USER_DATA_MESSAGE.getMessage(),
-                    SettingsStateEnum.WORKING_STATE.getStateName(),
+                    MessageEnum.NOT_DELETE_USER_DATA_MESSAGE.getMessage(),
+                    StateEnum.WORKING_STATE.getStateName(),
                     doneButtonKeyboard.doneButtonMenu());
         }
-        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

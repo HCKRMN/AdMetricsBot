@@ -1,10 +1,8 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.universal;
 
-import com.kuzmichev.AdMetricsBot.constants.registrationEnums.RegistrationStateEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsStateEnum;
-import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.TimeZoneKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
@@ -32,8 +30,8 @@ public class TimeZoneMenuCallbackHandler implements CallbackHandler {
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, SettingsCallBackEnum.EDIT_TIMEZONE_LINK_CALLBACK.getCallBackName())
-                || Objects.equals(data, SettingsCallBackEnum.EDIT_TIMEZONE_MANUAL_CALLBACK.getCallBackName());
+        return Objects.equals(data, CallBackEnum.EDIT_TIMEZONE_LINK_CALLBACK.getCallBackName())
+                || Objects.equals(data, CallBackEnum.EDIT_TIMEZONE_MANUAL_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -42,30 +40,30 @@ public class TimeZoneMenuCallbackHandler implements CallbackHandler {
         String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        if (Objects.equals(data, SettingsCallBackEnum.EDIT_TIMEZONE_LINK_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.EDIT_TIMEZONE_LINK_CALLBACK.getCallBackName())) {
             tempDataSaver.tempLastMessageId(chatId, messageId);
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    UniversalMessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
-                    SettingsStateEnum.SETTINGS_EDIT_TIMEZONE_STATE.getStateName(),
+                    MessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
+                    StateEnum.SETTINGS_EDIT_TIMEZONE_STATE.getStateName(),
                     timeZoneKeyboard.timeZoneKeyboard(chatId, userState));
 
-        } else if (Objects.equals(data, SettingsCallBackEnum.EDIT_TIMEZONE_MANUAL_CALLBACK.getCallBackName())) {
+        } else if (Objects.equals(data, CallBackEnum.EDIT_TIMEZONE_MANUAL_CALLBACK.getCallBackName())) {
             String newState;
             if(userState.contains("REGISTRATION")){
-                newState = RegistrationStateEnum.REGISTRATION_EDIT_TIMEZONE_MANUAL_STATE.getStateName();
+                newState = StateEnum.REGISTRATION_EDIT_TIMEZONE_MANUAL_STATE.getStateName();
             } else {
-                newState = SettingsStateEnum.SETTINGS_EDIT_TIMEZONE_MANUAL_STATE.getStateName();
+                newState = StateEnum.SETTINGS_EDIT_TIMEZONE_MANUAL_STATE.getStateName();
             }
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    SettingsMessageEnum.EDIT_TIMEZONE_MANUAL_MESSAGE.getMessage(),
+                    MessageEnum.EDIT_TIMEZONE_MANUAL_MESSAGE.getMessage(),
                     newState,
                     backAndExitKeyboard.backAndExitMenu(userState));
         }
 
-        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

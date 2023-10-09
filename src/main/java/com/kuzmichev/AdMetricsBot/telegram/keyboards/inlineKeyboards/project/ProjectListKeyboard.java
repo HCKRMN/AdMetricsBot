@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.Project;
 import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
 import com.kuzmichev.AdMetricsBot.model.UserRepository;
@@ -67,8 +67,8 @@ public class ProjectListKeyboard {
         if (currentPage > 1) {
             buttons.add(
                     inlineKeyboardMaker.addButton(
-                            SettingsButtonEnum.PROJECT_PREVIOUS_PAGE_BUTTON.getButtonName(),
-                            SettingsCallBackEnum.PROJECT_PAGE_CALLBACK.getCallBackName() + (currentPage - 1),
+                            ButtonEnum.PROJECT_PREVIOUS_PAGE_BUTTON.getButtonName(),
+                            CallBackEnum.PROJECT_PAGE_CALLBACK.getCallBackName() + (currentPage - 1),
                             null
                     )
             );
@@ -77,8 +77,8 @@ public class ProjectListKeyboard {
         if (currentPage <= totalPages ) {
             buttons.add(
                     inlineKeyboardMaker.addButton(
-                            SettingsButtonEnum.PROJECT_NEXT_PAGE_BUTTON.getButtonName(),
-                            SettingsCallBackEnum.PROJECT_PAGE_CALLBACK.getCallBackName() + (currentPage + 1),
+                            ButtonEnum.PROJECT_NEXT_PAGE_BUTTON.getButtonName(),
+                            CallBackEnum.PROJECT_PAGE_CALLBACK.getCallBackName() + (currentPage + 1),
                             null
                     )
             );

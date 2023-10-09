@@ -1,6 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
 import com.kuzmichev.AdMetricsBot.service.yandex.YandexAuthUrl;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,14 +22,14 @@ public class YandexAddKeyboard {
         return inlineKeyboardMaker.addMarkup(
                         inlineKeyboardMaker.addRow(
                                 inlineKeyboardMaker.addButton(
-                                        SettingsButtonEnum.YANDEX_ADD_TOKEN_LINK_BUTTON.getButtonName(),
+                                        ButtonEnum.YANDEX_ADD_TOKEN_LINK_BUTTON.getButtonName(),
                                         null,
                                         yandexAuthUrl.getYandexAuthorizationUrl(chatId, userState)
                                 )
 //                                        на всякий случай оставлю кнопку получения доступа к апи, вроде как ненужно, но пусть будет
 //                                        ,
 //                                        inlineKeyboardMaker.addButton(
-//                                                SettingsButtonEnum.YANDEX_API_SETTINGS_BUTTON.getButtonName(),
+//                                                ButtonEnum.YANDEX_API_SETTINGS_BUTTON.getButtonName(),
 //                                                null,
 //                                                addYandex.getApiSettingsUrl(chatId)
 //                                        )
@@ -37,8 +37,8 @@ public class YandexAddKeyboard {
                         //Старая кнопка тестового запроса, пока что убрана чтобы пользователь не мог нажать без регистрации
 //                        inlineKeyboardMaker.addRow(
 //                                inlineKeyboardMaker.addButton(
-//                                        SettingsButtonEnum.TEST_YANDEX_BUTTON.getButtonName(),
-//                                        SettingsCallBackEnum.TEST_MESSAGE_CALLBACK,
+//                                        ButtonEnum.TEST_YANDEX_BUTTON.getButtonName(),
+//                                        CallBackEnum.TEST_MESSAGE_CALLBACK,
 //                                        null
 //                                )
 //                        ),

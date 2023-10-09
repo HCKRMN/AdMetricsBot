@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.projects;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsCallBackEnum;
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.DeleteInputsKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
@@ -47,10 +47,10 @@ public class DeleteInputCallbackHandler implements CallbackHandler {
         Map<String, String> inputData = DynamicCallback.handleDynamicCallback(data, regexInput, "input_");
         if (!inputData.isEmpty()) {
             inputName = inputData.get("value");
-            data = SettingsCallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName();
+            data = CallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName();
         }
 
-        if (Objects.equals(data, SettingsCallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName())) {
             if (inputName != null){
                 projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
                 inputsManager.deleteInputs(projectId, inputName);
@@ -58,10 +58,10 @@ public class DeleteInputCallbackHandler implements CallbackHandler {
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    SettingsMessageEnum.PROJECT_INPUT_DELETE_MESSAGE.getMessage(),
+                    MessageEnum.PROJECT_INPUT_DELETE_MESSAGE.getMessage(),
                     null,
                     deleteInputsKeyboard.deleteInputsMenu(chatId, userState));
         }
-        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

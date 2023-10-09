@@ -1,6 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram;
 
-import com.kuzmichev.AdMetricsBot.constants.settingsEnums.SettingsMessageEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.MainCallbackQueryHandler;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers.MessageHandler;
 import lombok.AccessLevel;
@@ -39,11 +39,11 @@ public class AdMetricsBot extends SpringWebhookBot {
         } catch (IllegalArgumentException e) {
             log.error(e.getMessage());
             return new SendMessage(update.getMessage().getChatId().toString(),
-                    SettingsMessageEnum.EXCEPTION_ILLEGAL_MESSAGE.getMessage());
+                    MessageEnum.EXCEPTION_ILLEGAL_MESSAGE.getMessage());
         } catch (Exception e) {
             log.error(e.toString());
             return new SendMessage(update.getMessage().getChatId().toString(),
-                    SettingsMessageEnum.EXCEPTION_WHAT_THE_FUCK.getMessage());
+                    MessageEnum.EXCEPTION_WHAT_THE_FUCK.getMessage());
         }
     }
 
@@ -57,6 +57,6 @@ public class AdMetricsBot extends SpringWebhookBot {
             }
         }
         String chatId = update.getMessage().getChatId().toString();
-        return new SendMessage(chatId, SettingsMessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

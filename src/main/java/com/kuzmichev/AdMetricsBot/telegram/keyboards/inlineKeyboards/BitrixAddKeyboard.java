@@ -1,6 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
-import com.kuzmichev.AdMetricsBot.constants.universalEnums.UniversalButtonEnum;
+import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
 import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixAuthUrl;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class BitrixAddKeyboard {
                         inlineKeyboardMaker.addRow(
                                 // Ссылка на получения токена битрикс
                                 inlineKeyboardMaker.addButton(
-                                        UniversalButtonEnum.LINK_BUTTON.getButtonName(),
+                                        ButtonEnum.LINK_BUTTON.getButtonName(),
                                         null,
                                         bitrixAuthUrl.getBitrixAuthorizationUrl(chatId, projectId, userState)
                                 )
