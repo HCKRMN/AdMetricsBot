@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a2360ef-aa09-42a0-805e-aa78730c3294" name="Changes" comment="Исправил баги регистрации, добавил обработку нескольких ошибок от яндекса и битрикса">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c2390c35-1bb8-455b-9fff-483fdaf77c31/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+    <list default="true" id="8a2360ef-aa09-42a0-805e-aa78730c3294" name="Changes" comment="Доработал обработку ошибок от яндекса и битрикса">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMainRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMainRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMessageBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMessageBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/TestConnectionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/TestConnectionRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMessageBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMessageBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
@@ -236,7 +229,9 @@
       <workItem from="1696391055929" duration="25367000" />
       <workItem from="1696479397719" duration="12604000" />
       <workItem from="1696648701460" duration="13836000" />
-      <workItem from="1696674724014" duration="1524000" />
+      <workItem from="1696674724014" duration="1760000" />
+      <workItem from="1696676537966" duration="632000" />
+      <workItem from="1696846383743" duration="1254000" />
     </task>
     <task id="LOCAL-00001" summary="Вернул обратно шедулер, но оставил кеш базы">
       <created>1685169464728</created>
@@ -469,7 +464,14 @@
       <option name="project" value="LOCAL" />
       <updated>1696674810304</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Доработал обработку ошибок от яндекса и битрикса">
+      <created>1696676470596</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1696676470596</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -517,7 +519,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="убрал хардкод из хендлеров, добавил свич на обработку состояний юзера" />
     <MESSAGE value="Исправил обработку комманд, переделал этап регистрации с учетом создания проектов" />
     <MESSAGE value="Сделал редактор и удалятор сообщений, начал переделывать и расширять меню" />
     <MESSAGE value="Добавил регулярный удолятор сообщений, бесконечный поток который каждые 5 сек проверяет есть ли че удалить. если находит удаляет" />
@@ -542,7 +543,8 @@
     <MESSAGE value="Исправил несколько багов из-за внедрения меседж билдеров" />
     <MESSAGE value="Исправил баги с шедулером" />
     <MESSAGE value="Исправил баги регистрации, добавил обработку нескольких ошибок от яндекса и битрикса" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исправил баги регистрации, добавил обработку нескольких ошибок от яндекса и битрикса" />
+    <MESSAGE value="Доработал обработку ошибок от яндекса и битрикса" />
+    <option name="LAST_COMMIT_MESSAGE" value="Доработал обработку ошибок от яндекса и битрикса" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

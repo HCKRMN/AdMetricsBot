@@ -14,6 +14,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -28,6 +30,7 @@ public class YandexMainRequest {
 
     public YandexData yandexMainRequest(String projectId){
         Yandex yandex = yandexRepository.findByProjectId(projectId);
+        String chatId = yandex.getChatId();
         String bearer = yandex.getYandexToken();
 
         HttpClient httpClient = HttpClientBuilder.create().build();
@@ -101,11 +104,24 @@ public class YandexMainRequest {
                     yandexData.setConversions(Integer.parseInt(values[5]));
                     yandexData.setCostPerConversion(Double.parseDouble(values[6]));
                     yandexData.setCost(Double.parseDouble(values[7]));
-
                 }
+            } else if(statusCode == 400){
+                try {
+                    JSONObject jsonResponse = new JSONObject(responseBody);
+                    if (jsonResponse.has("error")) {
+                        JSONObject errorObject = jsonResponse.getJSONObject("error");
+                        if (errorObject.has("error_code")) {
+                            String errorCode = errorObject.getString("error_code");
+                            yandexData.setRequestStatus(Integer.parseInt(errorCode));
+                        }
+                    }
+                } catch (JSONException e) {
+                    log.error("Пользователь {}. Не удалось извлечь значение 'error_code' из JSON-ответа от Яндекса: {}", chatId, e.getMessage());
+                }
+
             } else {
                 yandexData.setRequestStatus(statusCode);
-                log.error("Ответ не содержал данных");
+                log.error("Пользователь {}. Ответ не содержал данных", chatId);
                 log.info("Request: {}", request);
                 log.info("Request Headers: {}", Arrays.toString(request.getAllHeaders()));
                 log.info("Request Body: {}", EntityUtils.toString(entity));
@@ -116,7 +132,7 @@ public class YandexMainRequest {
             return yandexData;
 
         } catch (IOException e) {
-            log.error("У пользователя " + yandex.getChatId() + " произошла ошибка: " + e.getMessage());
+            log.error("У пользователя {} произошла ошибка: {}", chatId, e.getMessage());
             throw new RuntimeException(e);
         }
     }
