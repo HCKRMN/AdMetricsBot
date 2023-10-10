@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="AdMetricsBot/Hibernate" uuid="c2390c35-1bb8-455b-9fff-483fdaf77c31">
+    <data-source source="LOCAL" name="postgres" uuid="227d7b00-6dde-4edc-866d-914a03938e83">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://95.163.241.160:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>

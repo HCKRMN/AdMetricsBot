@@ -4,7 +4,9 @@ import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.AddTimer;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Validator;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +23,10 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class EditTimerStateHandler implements StateHandler {
     Validator validator;
-    MessageWithoutReturn messageWithoutReturn;
     BackAndExitKeyboard backAndExitKeyboard;
     AddTimer addTimer;
+    TempDataSaver tempDataSaver;
+    MessageWithReturn messageWithReturn;
 
     @Override
     public boolean canHandle(String userStateEnum) {
@@ -31,16 +34,17 @@ public class EditTimerStateHandler implements StateHandler {
     }
 
     @Override
-    public BotApiMethod<?> handleState(String chatId, String messageText, String userState) {
+    public BotApiMethod<?> handleState(String chatId, String messageText, String userState, int messageId) {
 
         if (validator.validateTime(messageText)) {
             return addTimer.setTimerAndStart(chatId, messageText, userState);
         } else {
-            messageWithoutReturn.sendMessage(
+            tempDataSaver.tempLastMessageId(chatId, messageId-1);
+            return messageWithReturn.sendMessage(
                     chatId,
                     MessageEnum.INVALID_TIME_MESSAGE.getMessage(),
-                    backAndExitKeyboard.backAndExitMenu(userState));
-            return null;
+                    backAndExitKeyboard.backAndExitMenu(userState),
+                    null);
         }
     }
 }

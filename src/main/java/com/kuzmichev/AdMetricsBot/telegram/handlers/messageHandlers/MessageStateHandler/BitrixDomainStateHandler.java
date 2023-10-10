@@ -7,7 +7,9 @@ import com.kuzmichev.AdMetricsBot.model.BitrixRepository;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BitrixAddKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Validator;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -24,11 +26,12 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class BitrixDomainStateHandler implements StateHandler {
     Validator validator;
-    MessageWithoutReturn messageWithoutReturn;
     BitrixAddKeyboard bitrixAddKeyboard;
     BackAndExitKeyboard backAndExitKeyboard;
     BitrixRepository bitrixRepository;
     TempDataRepository tempDataRepository;
+    MessageWithReturn messageWithReturn;
+    TempDataSaver tempDataSaver;
 
     @Override
     public boolean canHandle(String userStateEnum) {
@@ -37,7 +40,8 @@ public class BitrixDomainStateHandler implements StateHandler {
     }
 
     @Override
-    public BotApiMethod<?> handleState(String chatId, String messageText, String userState) {
+    public BotApiMethod<?> handleState(String chatId, String messageText, String userState, int messageId) {
+        tempDataSaver.tempLastMessageId(chatId, messageId-1);
         if (validator.validateBitrixDomain(messageText)) {
             String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
             Bitrix bitrix = new Bitrix();
@@ -45,16 +49,17 @@ public class BitrixDomainStateHandler implements StateHandler {
             bitrix.setChatId(chatId);
             bitrix.setProjectId(projectId);
             bitrixRepository.save(bitrix);
-            messageWithoutReturn.sendMessage(
+            return messageWithReturn.sendMessage(
                     chatId,
                     MessageEnum.ADD_BITRIX_STEP_2_MESSAGE.getMessage(),
-                    bitrixAddKeyboard.bitrixLinkMenu(chatId, projectId, userState));
+                    bitrixAddKeyboard.bitrixLinkMenu(chatId, projectId, userState),
+                    null);
         } else {
-            messageWithoutReturn.sendMessage(
+            return messageWithReturn.sendMessage(
                     chatId,
                     MessageEnum.INVALID_BITRIXDOMAIN_MESSAGE.getMessage(),
-                    backAndExitKeyboard.backAndExitMenu(userState));
+                    backAndExitKeyboard.backAndExitMenu(userState),
+                    null);
         }
-        return null;
     }
 }

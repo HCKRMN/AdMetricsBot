@@ -3,6 +3,7 @@ package com.kuzmichev.AdMetricsBot.telegram;
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.MainCallbackQueryHandler;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers.MessageHandler;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,7 @@ public class AdMetricsBot extends SpringWebhookBot {
     String botToken;
     MessageHandler messageHandler;
     MainCallbackQueryHandler mainCallbackQueryHandler;
+    TempDataSaver tempDataSaver;
 
     public AdMetricsBot(SetWebhook setWebhook, MessageHandler messageHandler, MainCallbackQueryHandler mainCallbackQueryHandler) {
         super(setWebhook);

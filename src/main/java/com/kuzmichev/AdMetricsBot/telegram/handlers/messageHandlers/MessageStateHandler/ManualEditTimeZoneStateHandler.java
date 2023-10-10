@@ -7,6 +7,7 @@ import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.DoneButtonK
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project.ProjectCreateKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TimeZoneDefinition;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Validator;
 import lombok.AccessLevel;
@@ -24,12 +25,12 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class ManualEditTimeZoneStateHandler implements StateHandler {
     Validator validator;
-    MessageWithoutReturn messageWithoutReturn;
     BackAndExitKeyboard backAndExitKeyboard;
     TimeZoneDefinition timeZoneDefinition;
     MessageWithReturn messageWithReturn;
     DoneButtonKeyboard doneButtonKeyboard;
     ProjectCreateKeyboard projectCreateKeyboard;
+    TempDataSaver tempDataSaver;
 
     @Override
     public boolean canHandle(String userStateEnum) {
@@ -38,7 +39,7 @@ public class ManualEditTimeZoneStateHandler implements StateHandler {
     }
 
     @Override
-    public BotApiMethod<?> handleState(String chatId, String messageText, String userState) {
+    public BotApiMethod<?> handleState(String chatId, String messageText, String userState, int messageId) {
 
         if (validator.validateTime(messageText)) {
             timeZoneDefinition.manualTimeZone(chatId, messageText);
@@ -58,11 +59,12 @@ public class ManualEditTimeZoneStateHandler implements StateHandler {
                         StateEnum.WORKING_STATE.getStateName());
             }
         } else {
-            messageWithoutReturn.sendMessage(
+            tempDataSaver.tempLastMessageId(chatId, messageId-1);
+            return messageWithReturn.sendMessage(
                     chatId,
                     MessageEnum.INVALID_TIME_MESSAGE.getMessage(),
-                    backAndExitKeyboard.backAndExitMenu(userState));
-            return null;
+                    backAndExitKeyboard.backAndExitMenu(userState),
+                    null);
         }
     }
 }

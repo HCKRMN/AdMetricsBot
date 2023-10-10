@@ -6,6 +6,7 @@ import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExit
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.ProjectManager;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import com.kuzmichev.AdMetricsBot.telegram.utils.UserStateEditor;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Validator;
 import lombok.AccessLevel;
@@ -26,10 +27,10 @@ public class AskProjectNameStateHandler implements StateHandler {
     Validator validator;
     UserStateEditor userStateEditor;
     ProjectManager projectManager;
-    MessageWithoutReturn messageWithoutReturn;
     MessageWithReturn messageWithReturn;
     BackAndExitKeyboard backAndExitKeyboard;
     AddInputsKeyboard addInputsKeyboard;
+    TempDataSaver tempDataSaver;
 
     @Override
     public boolean canHandle(String userStateEnum) {
@@ -38,7 +39,7 @@ public class AskProjectNameStateHandler implements StateHandler {
     }
 
     @Override
-    public BotApiMethod<?> handleState(String chatId, String messageText, String userState) {
+    public BotApiMethod<?> handleState(String chatId, String messageText, String userState, int messageId) {
 
         if (validator.validateProjectName(messageText)) {
             if(Objects.equals(userState, StateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE.getStateName())){
@@ -54,11 +55,12 @@ public class AskProjectNameStateHandler implements StateHandler {
                     addInputsKeyboard.addTokensMenu(userState),
                     null);
         } else {
-            messageWithoutReturn.sendMessage(
+            tempDataSaver.tempLastMessageId(chatId, messageId-1);
+            return messageWithReturn.sendMessage(
                     chatId,
                     MessageEnum.PROJECT_NAME_INVALID_MESSAGE.getMessage(),
-                    backAndExitKeyboard.backAndExitMenu(userState));
-            return null;
+                    backAndExitKeyboard.backAndExitMenu(userState),
+                    null);
         }
     }
 }
