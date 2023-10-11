@@ -36,13 +36,18 @@ public class AddInputsCallbackHandler implements CallbackHandler {
         String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
 
+        String newState = StateEnum.SETTINGS_PROJECT_ADD_BITRIX_STATE.getStateName();
+
+        if (userState.equals(StateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName())) {
+            newState = userState;
+        }
+
         if (Objects.equals(data, CallBackEnum.ADD_INPUTS_CALLBACK.getCallBackName())) {
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
                     MessageEnum.ADD_TOKENS_MESSAGE.getMessage(),
-                    null,
-//                    StateEnum.SETTINGS_PROJECT_ADD_TOKENS_STATE.getStateName(),
+                    newState,
                     addInputsKeyboard.addTokensMenu(userState));
         }
         return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());

@@ -44,6 +44,7 @@ public class AdMetricsBot extends SpringWebhookBot {
                     MessageEnum.EXCEPTION_ILLEGAL_MESSAGE.getMessage());
         } catch (Exception e) {
             log.error(e.toString());
+            log.warn(update.toString());
             return new SendMessage(update.getMessage().getChatId().toString(),
                     MessageEnum.EXCEPTION_WHAT_THE_FUCK.getMessage());
         }
@@ -53,12 +54,12 @@ public class AdMetricsBot extends SpringWebhookBot {
         if (update.hasCallbackQuery()) {
             CallbackQuery callbackQuery = update.getCallbackQuery();
             return mainCallbackQueryHandler.processCallbackQuery(callbackQuery);
+        } else if (update.getMessage() != null) {
+            return messageHandler.answerMessage(update.getMessage());
         } else {
-            if (update.getMessage() != null) {
-                return messageHandler.answerMessage(update.getMessage());
-            }
+            log.warn(update.toString());
+            String chatId = update.getEditedMessage().getChatId().toString();
+            return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
         }
-        String chatId = update.getMessage().getChatId().toString();
-        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

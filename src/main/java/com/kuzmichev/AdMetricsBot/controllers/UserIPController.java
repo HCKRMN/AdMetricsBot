@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.net.UnknownHostException;
 import java.util.Optional;
 
 @Controller
@@ -33,7 +34,12 @@ public class UserIPController {
     public String getUserIp(HttpServletRequest request,
                             @RequestParam(name = "chatId") String chatId) {
         String ip = getIpAddress(request);
-        int timeZone = ipToTimeZone.convertIpToTimeZone(ip);
+        int timeZone = 0;
+        try {
+            timeZone = ipToTimeZone.convertIpToTimeZone(ip);
+        } catch (UnknownHostException e) {
+            throw new RuntimeException(e);
+        }
 
         int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
         messageManagementService.putMessageToQueue(chatId, messageId);

@@ -30,7 +30,7 @@ public class BackAndExitKeyboard {
                         SETTINGS_EDIT_TIMEZONE_STATE -> backButtonSettingsCallBackEnum = CallBackEnum.SETTINGS_BACK_CALLBACK.getCallBackName();
 
                 case SETTINGS_PROJECT_CREATE_STATE,
-                        SETTINGS_PROJECT_ADD_TOKENS_STATE -> backButtonSettingsCallBackEnum = CallBackEnum.PROJECTS_CALLBACK.getCallBackName();
+                        SETTINGS_ADD_INPUTS_STATE -> backButtonSettingsCallBackEnum = CallBackEnum.PROJECTS_CALLBACK.getCallBackName();
 
                 default -> backButtonSettingsCallBackEnum = CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName();
             }

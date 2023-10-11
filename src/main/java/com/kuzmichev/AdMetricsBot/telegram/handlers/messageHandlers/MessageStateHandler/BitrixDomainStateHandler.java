@@ -41,8 +41,11 @@ public class BitrixDomainStateHandler implements StateHandler {
 
     @Override
     public BotApiMethod<?> handleState(String chatId, String messageText, String userState, int messageId) {
-        tempDataSaver.tempLastMessageId(chatId, messageId-1);
+        tempDataSaver.tempLastMessageId(chatId, messageId);
         if (validator.validateBitrixDomain(messageText)) {
+//            int dfhs = messageId + 2;
+//            tempDataSaver.tempLastMessageId(chatId, dfhs);
+//            System.out.println("Сохраняем сообщение " + dfhs);
             String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
             Bitrix bitrix = new Bitrix();
             bitrix.setBitrixDomain(messageText);

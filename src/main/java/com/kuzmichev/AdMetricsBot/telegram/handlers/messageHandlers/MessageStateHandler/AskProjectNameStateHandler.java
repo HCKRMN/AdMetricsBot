@@ -4,7 +4,6 @@ import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.AddInputsKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.ProjectManager;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import com.kuzmichev.AdMetricsBot.telegram.utils.UserStateEditor;
@@ -43,7 +42,7 @@ public class AskProjectNameStateHandler implements StateHandler {
 
         if (validator.validateProjectName(messageText)) {
             if(Objects.equals(userState, StateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE.getStateName())){
-                userStateEditor.editState(chatId, StateEnum.SETTINGS_PROJECT_ADD_TOKENS_STATE.getStateName());
+                userStateEditor.editState(chatId, StateEnum.SETTINGS_ADD_INPUTS_STATE.getStateName());
             } else if(Objects.equals(userState, StateEnum.REGISTRATION_PROJECT_CREATE_ASK_NAME_STATE.getStateName())){
                 userStateEditor.editState(chatId, StateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName());
             } else userStateEditor.editState(chatId, StateEnum.WORKING_STATE.getStateName());

@@ -32,7 +32,7 @@ public class MetricsMessageBuilder {
         LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
         String date = yesterday.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
-        message.append(date).append(lineBreak).append(lineBreak);
+        message.append(date).append(lineBreak);
 
         for (Project project : userProjects) {
             String projectId = project.getProjectId();

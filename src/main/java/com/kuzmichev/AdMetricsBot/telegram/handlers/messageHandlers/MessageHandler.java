@@ -26,13 +26,12 @@ public class MessageHandler {
     CommandHandler commandHandler;
     StateHandlersList stateHandlersList;
     MessageManagementService messageManagementService;
+    TempDataRepository tempDataRepository;
 
     public BotApiMethod<?> answerMessage(Message message) {
         String chatId = message.getChatId().toString();
         String messageText = message.getText();
         String userState = userRepository.getUserStateByChatId(chatId);
-
-        int messageId = message.getMessageId();
 
         // Ловим команду отправки сообщения от админа
         if (messageText.contains("/send") && chatId.equals(config.getOwnerId())){
@@ -51,15 +50,11 @@ public class MessageHandler {
 
                     // Эта секция нужна для удаления старых сообщений
 
-                    // Получаем предыдущее сообщение
-                    // все id сообщения идут по порядку, вне зависимости кто его написал
-                    messageId--;
-                    // При повторном заходе добавляем в очередь старое сообщение
+                    // Удаляем старые сообщения
+                    int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
                     messageManagementService.putMessageToQueue(chatId, messageId);
-                    // Удаляем ВСЕ сообщения пользователя из очереди на удаление
-                    // Это нужно для того чтобы удалилось и сообщение добавленное при прошлой отправке
-                    // Оно добавляется в очередь в методе messageWithoutReturn
                     messageManagementService.deleteMessage(chatId);
+                    messageId = message.getMessageId() + 1;
 
                     return stateHandler.handleState(chatId, messageText, userState, messageId);
                 }

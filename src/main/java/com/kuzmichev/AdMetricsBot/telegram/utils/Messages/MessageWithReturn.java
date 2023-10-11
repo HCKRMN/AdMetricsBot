@@ -27,6 +27,7 @@ public class MessageWithReturn {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
         sendMessage.setText(text);
+        sendMessage.setParseMode("HTML");
         if (keyboard != null) {
             sendMessage.setReplyMarkup(keyboard);
         }

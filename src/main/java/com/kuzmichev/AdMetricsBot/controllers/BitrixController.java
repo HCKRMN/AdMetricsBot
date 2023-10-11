@@ -67,13 +67,11 @@ public class BitrixController {
         requestBody.add("code", code);
 
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
-        System.out.println("Request body: " + requestBody);
 
 
         ResponseEntity<String> response = restTemplate.exchange(tokenUrl, HttpMethod.POST, requestEntity, String.class);
 
         String responseBody = response.getBody();
-        System.out.println("Response from Bitrix server: " + responseBody);
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode;
         try {

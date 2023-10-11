@@ -42,7 +42,7 @@ public class AddTimer {
         if (user.isPresent()){
             int timeDifferenceInMinutes = user.get().getTimeDifferenceInMinutes(); // получаем разницу часовых поясов в минутах
             LocalTime timerMessage = LocalTime.parse(messageText.replace(" ", ":"))
-                .plusMinutes(timeDifferenceInMinutes); // добавляем разницу часовых поясов к таймеру
+                .minusMinutes(timeDifferenceInMinutes); // добавляем разницу часовых поясов к таймеру
 
             ScheduledMessage scheduledMessage = new ScheduledMessage();
             scheduledMessage.setTimerMessage(timerMessage);
