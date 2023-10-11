@@ -9,6 +9,8 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Slf4j
@@ -26,6 +28,11 @@ public class MetricsMessageBuilder {
         StringBuilder message = new StringBuilder();
         String lineBreak = "\n";
         List<Project> userProjects = projectRepository.findProjectsByChatId(chatId);
+
+        LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
+        String date = yesterday.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+
+        message.append(date).append(lineBreak).append(lineBreak);
 
         for (Project project : userProjects) {
             String projectId = project.getProjectId();
