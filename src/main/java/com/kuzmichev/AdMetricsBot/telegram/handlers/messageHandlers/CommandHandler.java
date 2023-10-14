@@ -20,6 +20,9 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
+import java.time.*;
+import java.time.temporal.ChronoUnit;
+
 @Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
@@ -70,11 +73,19 @@ public class CommandHandler {
                             null);
                 }
                 case TEST -> {
-                    return messageWithReturn.sendMessage(
-                            chatId,
-                            metricsMessageBuilder.getMessage(chatId),
-                            closeButtonKeyboard.closeButtonKeyboard(),
-                            null);
+
+                    Clock clock = Clock.system(ZoneId.of("Europe/Moscow"));
+                    LocalTime time = LocalTime.now(clock).truncatedTo(ChronoUnit.MINUTES);
+
+                    LocalTime now = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
+                    System.out.println("time: " + time);
+                    System.out.println("now: " + now);
+
+//                    return messageWithReturn.sendMessage(
+//                            chatId,
+//                            metricsMessageBuilder.getMessage(chatId),
+//                            closeButtonKeyboard.closeButtonKeyboard(),
+//                            null);
                 }
                 default -> {
                     messageWithoutReturn.sendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());

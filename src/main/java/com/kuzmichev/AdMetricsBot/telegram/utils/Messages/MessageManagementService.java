@@ -19,7 +19,6 @@ public class MessageManagementService{
     HashMap<String, List<Integer>> queueForDeletion = new HashMap<>();
 
     public void putMessageToQueue(String chatId, Integer messageId) {
-        System.out.println("Добавляем сообщение" + messageId);
         queueForDeletion.computeIfAbsent(chatId, k -> new ArrayList<>()).add(messageId);
     }
 
@@ -27,7 +26,6 @@ public class MessageManagementService{
         if(queueForDeletion.containsKey(chatId)) {
             List<Integer> messageIdList = queueForDeletion.get(chatId);
             for (Integer messageId : messageIdList) {
-                System.out.println("Удаляем сообщение" + messageId);
                 messageWithoutReturn.deleteMessage(chatId, messageId);
             }
             queueForDeletion.remove(chatId);

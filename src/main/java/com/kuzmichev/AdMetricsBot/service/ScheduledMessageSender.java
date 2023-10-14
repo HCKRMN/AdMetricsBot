@@ -11,7 +11,9 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -34,9 +36,13 @@ public class ScheduledMessageSender {
     @PostConstruct
     public void startScheduler() {
         scheduler.scheduleAtFixedRate(() -> {
-            LocalTime now = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
+            Clock clock = Clock.system(ZoneId.of("Europe/Moscow"));
+            LocalTime now = LocalTime.now(clock).truncatedTo(ChronoUnit.MINUTES);
+
             List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(now);
             int userCount = scheduledMessages.size();
+
+            log.info("Время: " + now + " Количество пользователей̆ для отправки: " + userCount);
 
             if (userCount > 0) {
                 // Создаем пул потоков
