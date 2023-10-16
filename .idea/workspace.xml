@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Настройка github actions">
       <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -243,14 +244,7 @@
       <workItem from="1697024370513" duration="13876000" />
       <workItem from="1697258901718" duration="9874000" />
       <workItem from="1697440530461" duration="6265000" />
-      <workItem from="1697460928434" duration="10306000" />
-    </task>
-    <task id="LOCAL-00008" summary="убрал хардкод из хендлеров, добавил свич на обработку состояний юзера">
-      <created>1688018933487</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1688018933487</updated>
+      <workItem from="1697460928434" duration="11037000" />
     </task>
     <task id="LOCAL-00009" summary="Исправил обработку комманд, переделал этап регистрации с учетом создания проектов">
       <created>1688026703536</created>
@@ -588,7 +582,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697471362211</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Настройка github actions">
+      <created>1697471614439</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1697471614439</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

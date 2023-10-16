@@ -22,7 +22,7 @@ jobs:
         run: mvn package
         # Сохраните JAR файл как артефакт
       - name: Save JAR artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: app-jar
           path: target/AdMetricsBot-1.jar
@@ -33,7 +33,7 @@ jobs:
       - name: Stop and remove container
         run: |
           docker stop admetricsbot
-          docker rm admetricsbot
+#          docker rm admetricsbot
       - name: Remove unused data
         run: docker system prune -a -f
 #  build:
@@ -57,7 +57,7 @@ jobs:
 
       # Скачиваем JAR артефакт
       - name: Download JAR artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: app-jar
 
