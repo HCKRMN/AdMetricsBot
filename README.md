@@ -1,5 +1,10 @@
 # AdMetricsBot
 
+[![Deploy buy runner](https://github.com/HCKRMN/AdMetricsBot/actions/workflows/deploy-job.yml/badge.svg?branch=WebHook)](https://github.com/HCKRMN/AdMetricsBot/actions/workflows/deploy-job.yml)
+
+
+
+
 Че надо сделать:
 1) ~~Прикрутить битрикс и покетное получение~~
 2) ~~Уйти с тестового апи директа~~
