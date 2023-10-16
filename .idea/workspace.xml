@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Исправил ошибку со временной зоной, сделал относительно региона">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/MessageEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/MessageEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/DeleteInputCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/DeleteInputCallbackHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/DeleteProjectCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/DeleteProjectCallbackHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Исправил ошибку с кнопкой удаления источников данных">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/ProjectGetInfoCallbackHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +81,7 @@
       <recent name="C:\GitHub\AdMetricsBot\src\main\resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.inputs" />
       <recent name="com.kuzmichev.AdMetricsBot.service.yandex" />
       <recent name="com.kuzmichev.AdMetricsBot.model" />
       <recent name="com.kuzmichev.AdMetricsBot.service.bitrix" />
@@ -238,7 +234,7 @@
       <workItem from="1697022375815" duration="1965000" />
       <workItem from="1697024370513" duration="13876000" />
       <workItem from="1697258901718" duration="9874000" />
-      <workItem from="1697440530461" duration="2373000" />
+      <workItem from="1697440530461" duration="2927000" />
     </task>
     <task id="LOCAL-00001" summary="Вернул обратно шедулер, но оставил кеш базы">
       <created>1685169464728</created>
@@ -506,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697272281189</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Исправил ошибку с кнопкой удаления источников данных">
+      <created>1697442951110</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1697442951110</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -554,7 +557,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Переделал меню подключения аккаунтов и создания проектов" />
     <MESSAGE value="Сделал выдачу проектов кнопками, исправил косяки" />
     <MESSAGE value="Закончил меню, начал рефакторить, сделал систему страниц для пользователей с кучей проектов, добавил кнопки страниц предыдущие и следующие.&#10;&#10;Исправил выдачу ответа при тесте яндекса без затрат. И добавил в условие с ошибкой запись логов" />
     <MESSAGE value="Нифига меню не закончено, нужно сделать несколько динамических кнопок.&#10;Пока сделал кнопку удаления источников" />
@@ -579,7 +581,8 @@
     <MESSAGE value="Переделал получение часового пояса относительно сервера" />
     <MESSAGE value="Переделал получение часового пояса относительно сервера + мелкие правки и фикс удаления старых сообщений" />
     <MESSAGE value="Исправил ошибку со временной зоной, сделал относительно региона" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исправил ошибку со временной зоной, сделал относительно региона" />
+    <MESSAGE value="Исправил ошибку с кнопкой удаления источников данных" />
+    <option name="LAST_COMMIT_MESSAGE" value="Исправил ошибку с кнопкой удаления источников данных" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

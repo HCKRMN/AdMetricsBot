@@ -21,6 +21,7 @@ public class ProjectCallbackHandlersList {
     ProjectsMenuCallbackHandlers projectsMenuCallbackHandlers;
     SomeProjectCallbackHandler someProjectCallbackHandler;
     ProjectCreateCallbackHandler projectCreateCallbackHandler;
+    ProjectGetInfoCallbackHandler projectGetInfoCallbackHandler;
 
     public List<CallbackHandler> getCallbackHandlers() {
         List<CallbackHandler> callbackHandlers = new ArrayList<>();
@@ -30,6 +31,7 @@ public class ProjectCallbackHandlersList {
         callbackHandlers.add(projectsMenuCallbackHandlers);
         callbackHandlers.add(someProjectCallbackHandler);
         callbackHandlers.add(projectCreateCallbackHandler);
+        callbackHandlers.add(projectGetInfoCallbackHandler);
         return callbackHandlers;
     }
 }
