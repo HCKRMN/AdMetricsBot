@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Настройка github actions" />
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Настройка github actions">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/DockerFile" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,6 +82,7 @@
       <recent name="C:\GitHub\AdMetricsBot\src\main\resources\templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\GitHub\AdMetricsBot" />
       <recent name="C:\GitHub\AdMetricsBot\.github\workflows" />
       <recent name="C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\_delete" />
       <recent name="C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\Delete" />
@@ -240,14 +245,7 @@
       <workItem from="1697024370513" duration="13876000" />
       <workItem from="1697258901718" duration="9874000" />
       <workItem from="1697440530461" duration="6265000" />
-      <workItem from="1697460928434" duration="4243000" />
-    </task>
-    <task id="LOCAL-00001" summary="Вернул обратно шедулер, но оставил кеш базы">
-      <created>1685169464728</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1685169464729</updated>
+      <workItem from="1697460928434" duration="6246000" />
     </task>
     <task id="LOCAL-00002" summary="Переписал инлайнкейбордмейкер">
       <created>1685438341153</created>
@@ -585,7 +583,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697464935323</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Настройка github actions">
+      <created>1697465270106</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1697465270106</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

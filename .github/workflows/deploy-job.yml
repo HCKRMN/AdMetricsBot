@@ -23,7 +23,9 @@ jobs:
     needs: test
     steps:
       - name: Stop and remove containers, networks
-        run: docker-compose down
+        run: |
+          cd /app/
+          docker-compose -f docker-compose.deploy.yml down
       - name: Remove unused data
         run: docker system prune -a -f
   deploy:
