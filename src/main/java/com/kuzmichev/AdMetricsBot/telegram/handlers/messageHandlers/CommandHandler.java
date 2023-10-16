@@ -76,7 +76,7 @@ public class CommandHandler {
                     return messageWithReturn.sendMessage(
                             chatId,
 //                            metricsMessageBuilder.getMessage(chatId),
-                            "TEST",
+                            "TEST1",
                             closeButtonKeyboard.closeButtonKeyboard(),
                             null);
                 }
