@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Исправил ошибку с кнопкой удаления источников данных">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/ProjectGetInfoCallbackHandler.java" afterDir="false" />
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Добавил действие к кнопке получения данных из настроек">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DockerFile" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +51,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
@@ -68,6 +72,9 @@
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
       &quot;postgresql&quot;
+    ],
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;yaml&quot;
     ]
   }
 }</component>
@@ -91,6 +98,8 @@
   <component name="RunManager" selected="Spring Boot.AdMetricsBotApplication">
     <configuration name="AdMetricsBotApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <option name="ACTIVE_PROFILES" />
+      <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../Program Files/Java/jdk-19" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <module name="AdMetricsBot" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.kuzmichev.AdMetricsBot.AdMetricsBotApplication" />
       <extension name="coverage">
@@ -234,7 +243,7 @@
       <workItem from="1697022375815" duration="1965000" />
       <workItem from="1697024370513" duration="13876000" />
       <workItem from="1697258901718" duration="9874000" />
-      <workItem from="1697440530461" duration="2927000" />
+      <workItem from="1697440530461" duration="6265000" />
     </task>
     <task id="LOCAL-00001" summary="Вернул обратно шедулер, но оставил кеш базы">
       <created>1685169464728</created>
@@ -509,7 +518,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697442951110</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Добавил действие к кнопке получения данных из настроек">
+      <created>1697443657021</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1697443657021</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -557,7 +573,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Сделал выдачу проектов кнопками, исправил косяки" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Закончил меню, начал рефакторить, сделал систему страниц для пользователей с кучей проектов, добавил кнопки страниц предыдущие и следующие.&#10;&#10;Исправил выдачу ответа при тесте яндекса без затрат. И добавил в условие с ошибкой запись логов" />
     <MESSAGE value="Нифига меню не закончено, нужно сделать несколько динамических кнопок.&#10;Пока сделал кнопку удаления источников" />
     <MESSAGE value="Сделал получение данных с битрикса, настроил обновление токена, нужно ещё потом будет подумать над обновлением самого рефреш токена" />
@@ -582,7 +598,8 @@
     <MESSAGE value="Переделал получение часового пояса относительно сервера + мелкие правки и фикс удаления старых сообщений" />
     <MESSAGE value="Исправил ошибку со временной зоной, сделал относительно региона" />
     <MESSAGE value="Исправил ошибку с кнопкой удаления источников данных" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исправил ошибку с кнопкой удаления источников данных" />
+    <MESSAGE value="Добавил действие к кнопке получения данных из настроек" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил действие к кнопке получения данных из настроек" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

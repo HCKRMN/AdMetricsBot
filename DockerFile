@@ -1,8 +1,7 @@
-FROM openjdk:17-alpine
+FROM openjdk:19
 
 WORKDIR /app
 
-#COPY ./AdMetricsBot-1.jar ./
 COPY ./target/AdMetricsBot-1.jar ./
 
 EXPOSE 8080
