@@ -32,7 +32,8 @@ public class DeleteInputCallbackHandler implements CallbackHandler {
 
     @Override
     public boolean canHandle(String data) {
-        return data.contains("input_");
+        return Objects.equals(data, CallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName())
+                || data.contains(CallBackEnum.INPUT_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -40,27 +41,35 @@ public class DeleteInputCallbackHandler implements CallbackHandler {
         String chatId = buttonQuery.getMessage().getChatId().toString();
         String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
-        String inputName = "";
-        String projectId;
-
-        String regexInput = "input_.+";
-        Map<String, String> inputData = DynamicCallback.handleDynamicCallback(data, regexInput, "input_");
-        if (!inputData.isEmpty()) {
-            inputName = inputData.get("value");
-            data = CallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName();
-        }
 
         if (Objects.equals(data, CallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName())) {
-            if (inputName != null){
-                projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
-                inputsManager.deleteInputs(projectId, inputName);
-            }
+
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
                     MessageEnum.PROJECT_INPUT_DELETE_MESSAGE.getMessage(),
                     null,
                     deleteInputsKeyboard.deleteInputsMenu(chatId, userState));
+        }
+
+        if (data.contains(CallBackEnum.INPUT_CALLBACK.getCallBackName())) {
+            String inputName;
+            String projectId;
+
+            String regexInput = "input_.+";
+            Map<String, String> inputData = DynamicCallback.handleDynamicCallback(data, regexInput, "input_");
+            if (!inputData.isEmpty()) {
+                inputName = inputData.get("value");
+                projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
+                inputsManager.deleteInputs(projectId, inputName);
+
+            return messageWithReturn.editMessage(
+                    chatId,
+                    messageId,
+                    MessageEnum.PROJECT_INPUT_DELETE_SUCCESS_MESSAGE.getMessage(),
+                    null,
+                    deleteInputsKeyboard.deleteInputsMenu(chatId, userState));
+            }
         }
         return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }

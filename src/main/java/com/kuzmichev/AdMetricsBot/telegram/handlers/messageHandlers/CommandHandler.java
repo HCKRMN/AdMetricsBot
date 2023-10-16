@@ -73,19 +73,11 @@ public class CommandHandler {
                             null);
                 }
                 case TEST -> {
-
-                    Clock clock = Clock.system(ZoneId.of("Europe/Moscow"));
-                    LocalTime time = LocalTime.now(clock).truncatedTo(ChronoUnit.MINUTES);
-
-                    LocalTime now = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
-                    System.out.println("time: " + time);
-                    System.out.println("now: " + now);
-
-//                    return messageWithReturn.sendMessage(
-//                            chatId,
-//                            metricsMessageBuilder.getMessage(chatId),
-//                            closeButtonKeyboard.closeButtonKeyboard(),
-//                            null);
+                    return messageWithReturn.sendMessage(
+                            chatId,
+                            metricsMessageBuilder.getMessage(chatId),
+                            closeButtonKeyboard.closeButtonKeyboard(),
+                            null);
                 }
                 default -> {
                     messageWithoutReturn.sendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());

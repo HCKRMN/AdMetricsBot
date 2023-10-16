@@ -35,8 +35,7 @@ public class DeleteProjectCallbackHandler implements CallbackHandler {
     @Override
     public boolean canHandle(String data) {
         return Objects.equals(data, CallBackEnum.PROJECT_DELETE_STEP_1_CALLBACK.getCallBackName())
-                || Objects.equals(data, CallBackEnum.PROJECT_DELETE_STEP_2_CALLBACK.getCallBackName())
-                || Objects.equals(data, CallBackEnum.PROJECT_INPUT_DELETE_CALLBACK.getCallBackName());
+                || Objects.equals(data, CallBackEnum.PROJECT_DELETE_STEP_2_CALLBACK.getCallBackName());
     }
 
     @Override

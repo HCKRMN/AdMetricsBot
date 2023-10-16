@@ -27,6 +27,7 @@ public enum MessageEnum {
     PROJECT_DELETE_STEP_1_MESSAGE("Вы уверены, что хотите удалить проект?"),
     PROJECT_DELETE_STEP_2_MESSAGE("Проект удалён"),
     PROJECT_INPUT_DELETE_MESSAGE("Выберите источник данных, который хотите удалить"),
+    PROJECT_INPUT_DELETE_SUCCESS_MESSAGE("Источник данных успешно удалён"),
 
 
     INVALID_TIME_MESSAGE("Неверный формат времени. \nВведите время в формате: \n«23 59», \n«00 00». \n\nБез кавычек!"),
