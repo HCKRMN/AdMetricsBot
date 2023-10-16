@@ -242,7 +242,7 @@
       <workItem from="1697024370513" duration="13876000" />
       <workItem from="1697258901718" duration="9874000" />
       <workItem from="1697440530461" duration="6265000" />
-      <workItem from="1697460928434" duration="712000" />
+      <workItem from="1697460928434" duration="1401000" />
     </task>
     <task id="LOCAL-00001" summary="Вернул обратно шедулер, но оставил кеш базы">
       <created>1685169464728</created>
@@ -538,7 +538,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697461186164</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Настройка github actions">
+      <created>1697461656559</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1697461656559</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

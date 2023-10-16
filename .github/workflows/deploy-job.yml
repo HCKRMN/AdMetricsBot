@@ -23,7 +23,9 @@ jobs:
     needs: test
     steps:
       - name: Stop and remove containers, networks
-        run: docker-compose down
+        run: |
+          cd /app/
+          docker-compose down
       - name: Remove unused data
         run: docker system prune -a -f
   deploy:
@@ -33,4 +35,6 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v3
       - name: docker-compose
-        run: docker-compose up -d
+        run: |
+          cd /app/
+          docker-compose up -d
