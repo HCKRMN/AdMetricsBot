@@ -18,6 +18,14 @@ jobs:
           cache: maven
       - name: run tests
         run: mvn test
+      - name: Build JAR
+        run: mvn package
+        # Сохраните JAR файл как артефакт
+      - name: Save JAR artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-jar
+          path: target/AdMetricsBot-1.jar
   prepare-environment:
     runs-on: self-hosted
     needs: test
@@ -28,21 +36,21 @@ jobs:
           docker rm admetricsbot
       - name: Remove unused data
         run: docker system prune -a -f
-  build:
-    runs-on: self-hosted
-    needs: prepare-environment
-    steps:
-      - name: Build JAR
-        run: mvn package
-          # Сохраните JAR файл как артефакт
-      - name: Save JAR artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-jar
-          path: target/AdMetricsBot-1.jar
+#  build:
+#    runs-on: self-hosted
+#    needs: prepare-environment
+#    steps:
+#      - name: Build JAR
+#        run: mvn package
+#          # Сохраните JAR файл как артефакт
+#      - name: Save JAR artifact
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: app-jar
+#          path: target/AdMetricsBot-1.jar
   deploy:
     runs-on: self-hosted
-    needs: build
+    needs: prepare-environment
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
