@@ -25,8 +25,8 @@ services:
 
   admetricsbot:
     build:
-      context: .
-      dockerfile: DockerFile
+      context: ../..
+      dockerfile: ../../DockerFile
     container_name: admetricsbot
     ports:
       - "8080:8080"
@@ -48,5 +48,3 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=RjV54jCkYzhw
       - POSTGRES_DB=postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data

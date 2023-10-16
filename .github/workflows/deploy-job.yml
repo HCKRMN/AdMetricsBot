@@ -13,7 +13,7 @@ jobs:
       - name: set up Java and Maven
         uses: actions/setup-java@v3
         with:
-          java-version: '19'
+          java-version: '11'
           distribution: 'temurin'
           cache: maven
       - name: run tests
@@ -23,9 +23,7 @@ jobs:
     needs: test
     steps:
       - name: Stop and remove containers, networks
-        run: |
-          cd /app/
-          docker-compose down
+        run: docker-compose down
       - name: Remove unused data
         run: docker system prune -a -f
   deploy:
@@ -35,6 +33,4 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v3
       - name: docker-compose
-        run: |
-          cd /app/
-          docker-compose up -d
+        run: docker-compose up -d
