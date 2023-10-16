@@ -28,9 +28,23 @@ jobs:
           docker rm admetricsbot
       - name: Remove unused data
         run: docker system prune -a -f
-  deploy:
+  build:
     runs-on: self-hosted
     needs: prepare-environment
+    steps:
+      - name: Build JAR
+        run: mvn package
+          # Сохраните JAR файл как артефакт
+      - name: Save JAR artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-jar
+          path: target/AdMetricsBot-1.jar
+
+
+  deploy:
+    runs-on: self-hosted
+    needs: build
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
@@ -47,7 +61,7 @@ jobs:
           cd /app/
 
           # Скопируйте скачанный JAR файл в рабочий каталог
-          cp $GITHUB_WORKSPACE/target/your-app.jar .
+          cp $GITHUB_WORKSPACE/target/AdMetricsBot-1.jar .
 
           # Сборка Docker-образа
           docker build -t admetricsbot .
