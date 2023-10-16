@@ -30,7 +30,6 @@ jobs:
         run: docker system prune -a -f
   build:
     runs-on: self-hosted
-    needs: prepare-environment
     steps:
       - name: Build JAR
         run: mvn package
@@ -40,8 +39,6 @@ jobs:
         with:
           name: app-jar
           path: target/AdMetricsBot-1.jar
-
-
   deploy:
     runs-on: self-hosted
     needs: build
