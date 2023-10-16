@@ -22,10 +22,10 @@ jobs:
     runs-on: self-hosted
     needs: test
     steps:
-      - name: Stop and remove containers, networks
+      - name: Stop and remove container
         run: |
-          cd /app/
-          docker-compose -f docker-compose.deploy.yml down
+          docker stop admetricsbot
+          docker rm admetricsbot
       - name: Remove unused data
         run: docker system prune -a -f
   deploy:
@@ -34,5 +34,23 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
-      - name: docker-compose
-        run: docker-compose up -d
+
+      # Скачиваем JAR артефакт
+      - name: Download JAR artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: app-jar
+
+      - name: Deploy
+        run: |
+          # Перейдите в каталог с Dockerfile
+          cd /app/
+
+          # Скопируйте скачанный JAR файл в рабочий каталог
+          cp $GITHUB_WORKSPACE/target/your-app.jar .
+
+          # Сборка Docker-образа
+          docker build -t admetricsbot .
+
+          # Запуск нового контейнера с обновленным приложением
+          docker run -d --name admetricsbot admetricsbot
