@@ -2,7 +2,7 @@ name: Deploy buy runner
 
 on:
   push:
-    branches: [ "master", "develop" ]
+    branches: [ "WebHook" ]
 
 jobs:
   test:
@@ -13,7 +13,7 @@ jobs:
       - name: set up Java and Maven
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: '19'
           distribution: 'temurin'
           cache: maven
       - name: run tests

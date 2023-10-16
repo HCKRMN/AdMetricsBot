@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Добавил действие к кнопке получения данных из настроек">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Настройка github actions">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DockerFile" beforeDir="false" afterPath="$PROJECT_DIR$/DockerFile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,6 +242,7 @@
       <workItem from="1697024370513" duration="13876000" />
       <workItem from="1697258901718" duration="9874000" />
       <workItem from="1697440530461" duration="6265000" />
+      <workItem from="1697460928434" duration="712000" />
     </task>
     <task id="LOCAL-00001" summary="Вернул обратно шедулер, но оставил кеш базы">
       <created>1685169464728</created>
@@ -525,7 +524,21 @@
       <option name="project" value="LOCAL" />
       <updated>1697443657021</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Настройка github actions">
+      <created>1697461035197</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1697461035197</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Настройка github actions">
+      <created>1697461186164</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1697461186164</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -574,7 +587,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Закончил меню, начал рефакторить, сделал систему страниц для пользователей с кучей проектов, добавил кнопки страниц предыдущие и следующие.&#10;&#10;Исправил выдачу ответа при тесте яндекса без затрат. И добавил в условие с ошибкой запись логов" />
     <MESSAGE value="Нифига меню не закончено, нужно сделать несколько динамических кнопок.&#10;Пока сделал кнопку удаления источников" />
     <MESSAGE value="Сделал получение данных с битрикса, настроил обновление токена, нужно ещё потом будет подумать над обновлением самого рефреш токена" />
     <MESSAGE value="РЕФААААКТОРИИИИНГ" />
@@ -599,7 +611,8 @@
     <MESSAGE value="Исправил ошибку со временной зоной, сделал относительно региона" />
     <MESSAGE value="Исправил ошибку с кнопкой удаления источников данных" />
     <MESSAGE value="Добавил действие к кнопке получения данных из настроек" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил действие к кнопке получения данных из настроек" />
+    <MESSAGE value="Настройка github actions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Настройка github actions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
