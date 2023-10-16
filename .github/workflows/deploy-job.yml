@@ -30,6 +30,7 @@ jobs:
         run: docker system prune -a -f
   build:
     runs-on: self-hosted
+    needs: prepare-environment
     steps:
       - name: Build JAR
         run: mvn package
