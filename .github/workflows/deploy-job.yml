@@ -51,5 +51,4 @@ jobs:
         run: |
           cd /app/
           cp $GITHUB_WORKSPACE/AdMetricsBot-1.jar .
-          docker build -t admetricsbot .
-          docker run -d --name admetricsbot admetricsbot
+          docker-compose up -d

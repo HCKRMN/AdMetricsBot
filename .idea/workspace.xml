@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Настройка github actions">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Настройка github actions" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -245,21 +242,7 @@
       <workItem from="1697258901718" duration="9874000" />
       <workItem from="1697440530461" duration="6265000" />
       <workItem from="1697460928434" duration="11740000" />
-      <workItem from="1697511159887" duration="1955000" />
-    </task>
-    <task id="LOCAL-00013" summary="Убрал включение таймера сразу по установке времени, а также проверку яндекса в этом же методе">
-      <created>1689135624885</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1689135624885</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Переделал меню подключения аккаунтов и создания проектов">
-      <created>1690031757121</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1690031757121</updated>
+      <workItem from="1697511159887" duration="2536000" />
     </task>
     <task id="LOCAL-00015" summary="Сделал выдачу проектов кнопками, исправил косяки">
       <created>1690180643812</created>
@@ -590,7 +573,21 @@
       <option name="project" value="LOCAL" />
       <updated>1697512513180</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Настройка github actions">
+      <created>1697513224910</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1697513224910</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Настройка github actions">
+      <created>1697513446332</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1697513446332</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
