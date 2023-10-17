@@ -54,6 +54,6 @@ jobs:
       - name: Deploy
         run: |
           cd /app/
-          cp $GITHUB_WORKSPACE/target/AdMetricsBot-1.jar .
+          cp $GITHUB_WORKSPACE/AdMetricsBot-1.jar .
           docker build -t admetricsbot .
           docker run -d --name admetricsbot admetricsbot
