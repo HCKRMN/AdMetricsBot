@@ -245,21 +245,7 @@
       <workItem from="1697258901718" duration="9874000" />
       <workItem from="1697440530461" duration="6265000" />
       <workItem from="1697460928434" duration="11740000" />
-      <workItem from="1697511159887" duration="1028000" />
-    </task>
-    <task id="LOCAL-00011" summary="Добавил регулярный удолятор сообщений, бесконечный поток который каждые 5 сек проверяет есть ли че удалить. если находит удаляет">
-      <created>1688882124307</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1688882124307</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Сделал ещё две ветки меню, настроил удаление старых сообщений при инвалидном сообщении">
-      <created>1689064061434</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1689064061434</updated>
+      <workItem from="1697511159887" duration="1955000" />
     </task>
     <task id="LOCAL-00013" summary="Убрал включение таймера сразу по установке времени, а также проверку яндекса в этом же методе">
       <created>1689135624885</created>
@@ -590,7 +576,21 @@
       <option name="project" value="LOCAL" />
       <updated>1697511610281</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Настройка github actions">
+      <created>1697512323956</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1697512323956</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Настройка github actions">
+      <created>1697512513180</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1697512513180</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
