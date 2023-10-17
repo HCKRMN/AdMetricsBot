@@ -22,7 +22,6 @@ jobs:
         run: mvn package
       - name: Build JAR
         run: mvn package
-            # Сохраните JAR файл как артефакт
       - name: Save JAR artifact
         uses: actions/upload-artifact@v3
         with:
