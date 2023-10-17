@@ -75,8 +75,7 @@ public class CommandHandler {
                 case TEST -> {
                     return messageWithReturn.sendMessage(
                             chatId,
-//                            metricsMessageBuilder.getMessage(chatId),
-                            "TEST1",
+                            metricsMessageBuilder.getMessage(chatId),
                             closeButtonKeyboard.closeButtonKeyboard(),
                             null);
                 }

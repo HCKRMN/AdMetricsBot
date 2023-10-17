@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Настройка github actions" />
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Настройка github actions">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -242,14 +244,9 @@
       <workItem from="1697258901718" duration="9874000" />
       <workItem from="1697440530461" duration="6265000" />
       <workItem from="1697460928434" duration="11740000" />
-      <workItem from="1697511159887" duration="2536000" />
-    </task>
-    <task id="LOCAL-00015" summary="Сделал выдачу проектов кнопками, исправил косяки">
-      <created>1690180643812</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1690180643812</updated>
+      <workItem from="1697511159887" duration="4058000" />
+      <workItem from="1697520769159" duration="594000" />
+      <workItem from="1697536544860" duration="594000" />
     </task>
     <task id="LOCAL-00016" summary="Закончил меню, начал рефакторить, сделал систему страниц для пользователей с кучей проектов, добавил кнопки страниц предыдущие и следующие.&#10;&#10;Исправил выдачу ответа при тесте яндекса без затрат. И добавил в условие с ошибкой запись логов">
       <created>1692109039542</created>
@@ -587,7 +584,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697513446332</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Настройка github actions">
+      <created>1697513931600</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1697513931600</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
