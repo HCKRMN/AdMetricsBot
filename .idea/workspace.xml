@@ -244,14 +244,8 @@
       <workItem from="1697024370513" duration="13876000" />
       <workItem from="1697258901718" duration="9874000" />
       <workItem from="1697440530461" duration="6265000" />
-      <workItem from="1697460928434" duration="11037000" />
-    </task>
-    <task id="LOCAL-00009" summary="Исправил обработку комманд, переделал этап регистрации с учетом создания проектов">
-      <created>1688026703536</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1688026703536</updated>
+      <workItem from="1697460928434" duration="11740000" />
+      <workItem from="1697511159887" duration="300000" />
     </task>
     <task id="LOCAL-00010" summary="Сделал редактор и удалятор сообщений, начал переделывать и расширять меню">
       <created>1688730800915</created>
@@ -589,7 +583,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697471614439</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Настройка github actions">
+      <created>1697472345628</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1697472345628</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
