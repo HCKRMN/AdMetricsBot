@@ -245,14 +245,7 @@
       <workItem from="1697258901718" duration="9874000" />
       <workItem from="1697440530461" duration="6265000" />
       <workItem from="1697460928434" duration="11740000" />
-      <workItem from="1697511159887" duration="300000" />
-    </task>
-    <task id="LOCAL-00010" summary="Сделал редактор и удалятор сообщений, начал переделывать и расширять меню">
-      <created>1688730800915</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1688730800915</updated>
+      <workItem from="1697511159887" duration="1028000" />
     </task>
     <task id="LOCAL-00011" summary="Добавил регулярный удолятор сообщений, бесконечный поток который каждые 5 сек проверяет есть ли че удалить. если находит удаляет">
       <created>1688882124307</created>
@@ -590,7 +583,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697472345628</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Настройка github actions">
+      <created>1697511610281</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1697511610281</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

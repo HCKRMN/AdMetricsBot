@@ -20,12 +20,14 @@ jobs:
         run: mvn test
       - name: Build JAR
         run: mvn package
+      - name: Build JAR
+        run: mvn package
+            # Сохраните JAR файл как артефакт
       - name: Save JAR artifact
         uses: actions/upload-artifact@v3
         with:
           name: app-jar
           path: target/AdMetricsBot-1.jar
-          archive-name: AdMetricsBot-1.jar
 
   prepare-environment:
     runs-on: self-hosted
@@ -47,18 +49,11 @@ jobs:
       - name: Download JAR artifact
         uses: actions/download-artifact@v3
         with:
-          name: AdMetricsBot-1.jar
+          name: app-jar
 
       - name: Deploy
         run: |
-          # Перейдите в каталог с Dockerfile
           cd /app/
-
-          # Скопируйте скачанный JAR файл в рабочий каталог
           cp $GITHUB_WORKSPACE/target/AdMetricsBot-1.jar .
-
-          # Сборка Docker-образа
           docker build -t admetricsbot .
-
-          # Запуск нового контейнера с обновленным приложением
           docker run -d --name admetricsbot admetricsbot
