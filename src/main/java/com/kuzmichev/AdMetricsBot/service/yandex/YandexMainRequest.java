@@ -23,17 +23,16 @@ import java.util.Arrays;
 
 @Slf4j
 @Service
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class YandexMainRequest {
-    YandexRepository yandexRepository;
+    private final YandexRepository yandexRepository;
+    protected HttpClient httpClient = HttpClientBuilder.create().build();
 
     public YandexData yandexMainRequest(String projectId){
         Yandex yandex = yandexRepository.findByProjectId(projectId);
         String chatId = yandex.getChatId();
         String bearer = yandex.getYandexToken();
 
-        HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost("https://api.direct.yandex.com/json/v5/reports");
         request.addHeader("Authorization", "Bearer " + bearer);
         request.addHeader("Accept-Language", "en");
@@ -71,6 +70,8 @@ public class YandexMainRequest {
             HttpEntity entityResponse = response.getEntity();
             responseBody = EntityUtils.toString(entityResponse);
             int statusCode = response.getStatusLine().getStatusCode();
+
+            System.out.println(responseBody);
 
             YandexData yandexData = new YandexData();
             yandexData.setProjectId(projectId);

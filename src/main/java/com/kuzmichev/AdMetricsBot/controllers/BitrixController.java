@@ -115,56 +115,7 @@ public class BitrixController {
                     bitrixTestKeyboard.bitrixTestMenu(userState));
         }
         log.info("Пользователь {} добавил аккаунт Bitrix", chatId);
-
-
-        // тут надо написать код вывода сообщения об успехе
-
-
         }
-
-
         return "bitrix";
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//@Controller
-//@Slf4j
-//public class BitrixController {
-//
-//
-//    @PostMapping(value = "/bitrix/callback", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-//    public String handleBitrixCallback(@RequestBody MultiValueMap<String, String> formData) {
-//        System.out.println("Received Bitrix callback POST request:");
-//
-//        // Print each parameter in the request
-//        formData.forEach((key, values) -> {
-//            System.out.println(key + ": " + String.join(", ", values));
-//        });
-////    }
-
-
-
-
-//    @RequestMapping(value = "/bitrix")
-//    public String getBitrixToken(@RequestParam(name = "code", required = false) String code) {
-//
-//        System.out.println(code + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-//
-//        return "bitrix";
-//    }
-//}

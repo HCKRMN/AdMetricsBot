@@ -41,6 +41,9 @@ public class YandexMessageBuilder {
         } else if(requestStatus == 513) {
             message
                     .append("Необходимо закончить регистрацию в Яндекс Директ").append("\n");
+        } else if(requestStatus == 53) {
+            message
+                    .append("Токен обращения к Яндекс Директ ошибочный. Необходимо заново выполнить подключение").append("\n");
         } else {
             message
                     .append("Ошибка получения данных от Яндекса").append("\n");
