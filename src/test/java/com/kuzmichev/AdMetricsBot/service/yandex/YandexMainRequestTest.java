@@ -38,7 +38,7 @@ public class YandexMainRequestTest {
 
     @BeforeEach
     public void setUp() {
-        // Мокирование данных, возвращаемых из репозитория
+        // РњРѕРєРёСЂРѕРІР°РЅРёРµ РґР°РЅРЅС‹С…, РІРѕР·РІСЂР°С‰Р°РµРјС‹С… РёР· СЂРµРїРѕР·РёС‚РѕСЂРёСЏ
         Yandex yandex = new Yandex();
         yandex.setChatId("testChatId");
         yandex.setYandexToken("testToken");
@@ -47,12 +47,12 @@ public class YandexMainRequestTest {
 
     @Test
     public void testYandexMainRequest_Success_rows_1() throws Exception {
-        // 1. Мокирование HTTP-клиента
+        // 1. РњРѕРєРёСЂРѕРІР°РЅРёРµ HTTP-РєР»РёРµРЅС‚Р°
         HttpClient mockHttpClient = mock(HttpClient.class);
         HttpResponse mockResponse = mock(HttpResponse.class);
         HttpEntity mockEntity = mock(HttpEntity.class);
 
-        // Успешный ответ содержит следующий JSON
+        // РЈСЃРїРµС€РЅС‹Р№ РѕС‚РІРµС‚ СЃРѕРґРµСЂР¶РёС‚ СЃР»РµРґСѓСЋС‰РёР№ JSON
         String mockResponseBody = """
                 Date\tImpressions\tCtr\tClicks\tAvgCpc\tConversions\tCostPerConversion\tCost
                 2023-10-17\t83\t7.23\t6\t135.76\t4\t203.64\t814.57
@@ -65,15 +65,15 @@ public class YandexMainRequestTest {
 
         YandexMainRequest yandexMainRequest = new YandexMainRequest(yandexRepository);
 
-        // Внедряем мокированный HTTP-клиент в yandexMainRequest
+        // Р’РЅРµРґСЂСЏРµРј РјРѕРєРёСЂРѕРІР°РЅРЅС‹Р№ HTTP-РєР»РёРµРЅС‚ РІ yandexMainRequest
         Field httpClientField = YandexMainRequest.class.getDeclaredField("httpClient");
         httpClientField.setAccessible(true);
         httpClientField.set(yandexMainRequest, mockHttpClient);
 
-        // 2. Вызов метода yandexMainRequest и проверка результата
+        // 2. Р’С‹Р·РѕРІ РјРµС‚РѕРґР° yandexMainRequest Рё РїСЂРѕРІРµСЂРєР° СЂРµР·СѓР»СЊС‚Р°С‚Р°
         YandexData result = yandexMainRequest.yandexMainRequest("test");
 
-        // Проверяем результат
+        // РџСЂРѕРІРµСЂСЏРµРј СЂРµР·СѓР»СЊС‚Р°С‚
         assertEquals(83 , result.getImpressions());
         assertEquals(7.23 , result.getCtr());
         assertEquals(6 , result.getClicks());
@@ -86,12 +86,12 @@ public class YandexMainRequestTest {
 
     @Test
     public void testYandexMainRequest_Success_rows_0() throws Exception {
-        // 1. Мокирование HTTP-клиента
+        // 1. РњРѕРєРёСЂРѕРІР°РЅРёРµ HTTP-РєР»РёРµРЅС‚Р°
         HttpClient mockHttpClient = mock(HttpClient.class);
         HttpResponse mockResponse = mock(HttpResponse.class);
         HttpEntity mockEntity = mock(HttpEntity.class);
 
-        // Успешный ответ содержит следующий JSON
+        // РЈСЃРїРµС€РЅС‹Р№ РѕС‚РІРµС‚ СЃРѕРґРµСЂР¶РёС‚ СЃР»РµРґСѓСЋС‰РёР№ JSON
         String mockResponseBody = """
                 Date\tImpressions\tCtr\tClicks\tAvgCpc\tConversions\tCostPerConversion\tCost
                 Total rows: 0""";
@@ -103,15 +103,15 @@ public class YandexMainRequestTest {
 
         YandexMainRequest yandexMainRequest = new YandexMainRequest(yandexRepository);
 
-        // Внедряем мокированный HTTP-клиент в yandexMainRequest
+        // Р’РЅРµРґСЂСЏРµРј РјРѕРєРёСЂРѕРІР°РЅРЅС‹Р№ HTTP-РєР»РёРµРЅС‚ РІ yandexMainRequest
         Field httpClientField = YandexMainRequest.class.getDeclaredField("httpClient");
         httpClientField.setAccessible(true);
         httpClientField.set(yandexMainRequest, mockHttpClient);
 
-        // 2. Вызов метода yandexMainRequest и проверка результата
+        // 2. Р’С‹Р·РѕРІ РјРµС‚РѕРґР° yandexMainRequest Рё РїСЂРѕРІРµСЂРєР° СЂРµР·СѓР»СЊС‚Р°С‚Р°
         YandexData result = yandexMainRequest.yandexMainRequest("test");
 
-        // Проверяем результат
+        // РџСЂРѕРІРµСЂСЏРµРј СЂРµР·СѓР»СЊС‚Р°С‚
         assertEquals(0 , result.getImpressions());
         assertEquals(0 , result.getCtr());
         assertEquals(0 , result.getClicks());
@@ -125,14 +125,14 @@ public class YandexMainRequestTest {
     @Test
     public void testYandexMainRequest_Error_Random_error_code() throws Exception {
 
-        // 1. Мокирование HTTP-клиента
+        // 1. РњРѕРєРёСЂРѕРІР°РЅРёРµ HTTP-РєР»РёРµРЅС‚Р°
         HttpClient mockHttpClient = mock(HttpClient.class);
         HttpResponse mockResponse = mock(HttpResponse.class);
         HttpEntity mockEntity = mock(HttpEntity.class);
 
         int errorCode = 1 + (int) (Math.random() * 999);
 
-        // Успешный ответ содержит следующий JSON
+        // РЈСЃРїРµС€РЅС‹Р№ РѕС‚РІРµС‚ СЃРѕРґРµСЂР¶РёС‚ СЃР»РµРґСѓСЋС‰РёР№ JSON
         String mockResponseBody = "{\"error\":{\"error_code\":\"" + errorCode +"\",\"error_string\":\"error\",\"error_detail\":\"Invalid\",\"request_id\":\"123\"}}";
 
         when(mockHttpClient.execute(any(HttpPost.class))).thenReturn(mockResponse);
@@ -142,15 +142,15 @@ public class YandexMainRequestTest {
 
         YandexMainRequest yandexMainRequest = new YandexMainRequest(yandexRepository);
 
-        // Внедряем мокированный HTTP-клиент в yandexMainRequest
+        // Р’РЅРµРґСЂСЏРµРј РјРѕРєРёСЂРѕРІР°РЅРЅС‹Р№ HTTP-РєР»РёРµРЅС‚ РІ yandexMainRequest
         Field httpClientField = YandexMainRequest.class.getDeclaredField("httpClient");
         httpClientField.setAccessible(true);
         httpClientField.set(yandexMainRequest, mockHttpClient);
 
-        // 2. Вызов метода yandexMainRequest и проверка результата
+        // 2. Р’С‹Р·РѕРІ РјРµС‚РѕРґР° yandexMainRequest Рё РїСЂРѕРІРµСЂРєР° СЂРµР·СѓР»СЊС‚Р°С‚Р°
         YandexData result = yandexMainRequest.yandexMainRequest("test");
 
-        // Проверяем результат
+        // РџСЂРѕРІРµСЂСЏРµРј СЂРµР·СѓР»СЊС‚Р°С‚
         assertEquals(0 , result.getImpressions());
         assertEquals(0 , result.getCtr());
         assertEquals(0 , result.getClicks());

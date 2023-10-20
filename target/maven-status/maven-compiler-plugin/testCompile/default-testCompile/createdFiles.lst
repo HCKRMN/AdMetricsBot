@@ -1,1 +1,4 @@
+com\kuzmichev\AdMetricsBot\service\yandex\YandexAuthUrlTest.class
 com\kuzmichev\AdMetricsBot\AdMetricsBotApplicationTests.class
+com\kuzmichev\AdMetricsBot\service\yandex\YandexMainRequestTest.class
+com\kuzmichev\AdMetricsBot\service\yandex\YandexMessageBuilderTest.class

@@ -26,12 +26,14 @@ com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\project\ProjectCre
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\YandexAddKeyboard.class
 com\kuzmichev\AdMetricsBot\telegram\TelegramApiClient.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\projects\DeleteInputCallbackHandler.class
+com\kuzmichev\AdMetricsBot\telegram\SetWebHookURL.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\menu\EditTimerCallbackHandler.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\AddInputsKeyboard.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\BackAndExitKeyboard.class
 com\kuzmichev\AdMetricsBot\telegram\utils\Messages\MessageEventHandler.class
 com\kuzmichev\AdMetricsBot\service\bitrix\CountAllCreateRecordsRequest.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\YandexTestKeyboard.class
+com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\projects\ProjectGetInfoCallbackHandler.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\messageHandlers\CommandHandler$1.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\universal\TimeZoneMenuCallbackHandler.class
 com\kuzmichev\AdMetricsBot\model\TempData.class
@@ -111,7 +113,6 @@ com\kuzmichev\AdMetricsBot\telegram\utils\AddTimer.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\messageHandlers\MessageStateHandler\EditTimerStateHandler.class
 com\kuzmichev\AdMetricsBot\model\YandexData.class
 com\kuzmichev\AdMetricsBot\model\ScheduledMessageRepository.class
-com\kuzmichev\AdMetricsBot\controllers\TestController.class
 com\kuzmichev\AdMetricsBot\model\Project.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\messageHandlers\MessageStateHandler\ManualEditTimeZoneStateHandler.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\BitrixTestKeyboard.class

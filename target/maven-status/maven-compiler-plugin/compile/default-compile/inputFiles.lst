@@ -22,7 +22,6 @@ C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\User.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\constants\CommandEnum.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\SettingsKeyboard.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\yandex\YandexMainRequest.java
-C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\controllers\TestController.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\ScheduledMessage.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\inputs\YandexCallbackHandler.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\ScheduledMessageSender.java
@@ -36,6 +35,7 @@ C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\keyboar
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\MetricsMessageBuilder.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\Validator.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\BitrixRepository.java
+C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\SetWebHookURL.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\menu\BackAndExitCallbackHandler.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\bitrix\RefreshTokenRequest.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\BitrixData.java
@@ -85,6 +85,7 @@ C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\bitrix\B
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\Yandex.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\bitrix\CountFailedDealsRequest.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\ProjectManager.java
+C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\projects\ProjectGetInfoCallbackHandler.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\NotificationController.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\menu\EditTimerCallbackHandler.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\universal\TimeZoneMenuCallbackHandler.java

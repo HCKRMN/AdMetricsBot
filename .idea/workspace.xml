@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Воркфлоууу">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequestTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequestTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,8 +116,8 @@
       <recent name="com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.AdMetricsBotApplication">
-    <configuration name="YandexMainRequestTest.testYandexMainRequest_Error_Random_error_code" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.YandexMainRequestTest.testYandexMainRequest_Success_rows_0">
+    <configuration name="YandexMainRequestTest.testYandexMainRequest_Success_rows_0" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AdMetricsBot" />
       <extension name="coverage">
         <pattern>
@@ -119,7 +127,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex" />
       <option name="MAIN_CLASS_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex.YandexMainRequestTest" />
-      <option name="METHOD_NAME" value="testYandexMainRequest_Error_Random_error_code" />
+      <option name="METHOD_NAME" value="testYandexMainRequest_Success_rows_0" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="YandexMainRequestTest.testYandexMainRequest_Success_rows_1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AdMetricsBot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.kuzmichev.AdMetricsBot.service.yandex.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex" />
+      <option name="MAIN_CLASS_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex.YandexMainRequestTest" />
+      <option name="METHOD_NAME" value="testYandexMainRequest_Success_rows_1" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -173,22 +197,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="YandexMessageBuilderTest.testGetMessage_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AdMetricsBot" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.kuzmichev.AdMetricsBot.service.yandex.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex" />
-      <option name="MAIN_CLASS_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex.YandexMessageBuilderTest" />
-      <option name="METHOD_NAME" value="testGetMessage_Success" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="AdMetricsBotApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="ACTIVE_PROFILES" />
       <module name="AdMetricsBot" />
@@ -214,21 +222,21 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Success_rows_0" />
+      <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Success_rows_1" />
       <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_513" />
       <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_53" />
       <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_Random_error_code" />
-      <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Error_Random_error_code" />
-      <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Success" />
       <item itemvalue="Ngrok.Ngrok Run" />
       <item itemvalue="Spring Boot.AdMetricsBotApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Success_rows_0" />
+        <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Success_rows_1" />
         <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_Random_error_code" />
         <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_53" />
         <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_513" />
-        <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Success" />
-        <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Error_Random_error_code" />
       </list>
     </recent_temporary>
   </component>
@@ -360,14 +368,7 @@
       <workItem from="1697718764279" duration="594000" />
       <workItem from="1697780861821" duration="487000" />
       <workItem from="1697781592369" duration="2358000" />
-      <workItem from="1697785651501" duration="12481000" />
-    </task>
-    <task id="LOCAL-00026" summary="Почти рабочая версия. Починил шедулер, сделал меседжбилдер первой версии">
-      <created>1695909042159</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1695909042159</updated>
+      <workItem from="1697785651501" duration="13666000" />
     </task>
     <task id="LOCAL-00027" summary="Прикрутил многопоточность к шедулеру + мелкие правки">
       <created>1696406171664</created>
@@ -705,7 +706,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697811992094</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="Воркфлоууу">
+      <created>1697812397788</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1697812397788</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
