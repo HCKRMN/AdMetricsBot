@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v3">
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v5">
       <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -360,21 +360,7 @@
       <workItem from="1697718764279" duration="594000" />
       <workItem from="1697780861821" duration="487000" />
       <workItem from="1697781592369" duration="2358000" />
-      <workItem from="1697785651501" duration="11662000" />
-    </task>
-    <task id="LOCAL-00023" summary="Исправил ошибки при записи в базу в разных случаях + разные мелкие ошибки">
-      <created>1695197357077</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1695197357077</updated>
-    </task>
-    <task id="LOCAL-00024" summary="переделал установку временной зоны и таймера">
-      <created>1695647094908</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1695647094908</updated>
+      <workItem from="1697785651501" duration="12080000" />
     </task>
     <task id="LOCAL-00025" summary="доработка подключения битрикса при регистрации и в меню + вывод данных">
       <created>1695818318228</created>
@@ -705,7 +691,21 @@
       <option name="project" value="LOCAL" />
       <updated>1697803172546</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v4">
+      <created>1697811571442</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1697811571442</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v5">
+      <created>1697811775527</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1697811775527</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -754,8 +754,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="переделал установку временной зоны и таймера" />
-    <MESSAGE value="доработка подключения битрикса при регистрации и в меню + вывод данных" />
     <MESSAGE value="Почти рабочая версия. Починил шедулер, сделал меседжбилдер первой версии" />
     <MESSAGE value="Прикрутил многопоточность к шедулеру + мелкие правки" />
     <MESSAGE value="Переделал получение данных с яндекса, добавил больше параметров, сделал первую версию форматирования сообщения с данными" />
@@ -779,7 +777,9 @@
     <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v1" />
     <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v2" />
     <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v3" />
+    <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v4" />
+    <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v5" />
+    <option name="LAST_COMMIT_MESSAGE" value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v5" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
