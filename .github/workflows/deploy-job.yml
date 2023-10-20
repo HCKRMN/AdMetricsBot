@@ -6,7 +6,7 @@ on:
 
 jobs:
 
-  build-env:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -36,44 +36,10 @@ jobs:
           java-version: '19'
           distribution: 'temurin'
           cache: maven
-
-      - name: run tests
-        run: mvn test
-#  test:
-#    runs-on: ubuntu-latest
-#    needs: build-env
-#    steps:
-#      - name: checkout repo
-#        uses: actions/checkout@v3
-#      - name: set up Java and Maven
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: '19'
-#          distribution: 'temurin'
-#          cache: maven
-#      - name: Copy .env file to root directory
-#        run: cp .env $GITHUB_WORKSPACE/
+#
 #      - name: run tests
 #        run: mvn test
 
-
-      - name: Archive .env file
-        uses: actions/upload-artifact@v3
-        with:
-          name: env-file
-          path: .env
-
-  build-JAR:
-    runs-on: ubuntu-latest
-    needs: build-env
-    steps:
-      - name: checkout repo
-        uses: actions/checkout@v3
-      - name: set up Java
-        uses: actions/setup-java@v3
-        with:
-          java-version: '19'
-          distribution: 'temurin'
       - name: Build JAR
         run: mvn package
       - name: Save JAR artifact
@@ -82,9 +48,34 @@ jobs:
           name: app-jar
           path: target/AdMetricsBot-1.jar
 
+      - name: Archive .env file
+        uses: actions/upload-artifact@v3
+        with:
+          name: env-file
+          path: .env
+
+#  build-JAR:
+#    runs-on: ubuntu-latest
+#    needs: build-env
+#    steps:
+#      - name: checkout repo
+#        uses: actions/checkout@v3
+#      - name: set up Java
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: '19'
+#          distribution: 'temurin'
+#      - name: Build JAR
+#        run: mvn package
+#      - name: Save JAR artifact
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: app-jar
+#          path: target/AdMetricsBot-1.jar
+
   cleanup:
     runs-on: self-hosted
-    needs: build-JAR
+    needs: build
     steps:
       - name: Stop and remove container
         run: |
