@@ -18,7 +18,7 @@ public class BitrixAuthUrl {
     String clientId;
     @Value("${telegram.webhook-path}")
     String link;
-    @Value("${bitrixRedirectURI}")
+    @Value("${bitrixRedirectURL}")
     String redirectUri;
 
     public String getBitrixAuthorizationUrl(String chatId, String projectId, String userState) {

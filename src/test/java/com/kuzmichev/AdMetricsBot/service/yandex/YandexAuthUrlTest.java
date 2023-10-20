@@ -22,7 +22,7 @@ public class YandexAuthUrlTest {
     @Value("${telegram.webhook-path}")
     private String link;
 
-    @Value("${yandexRedirectURI}")
+    @Value("${yandexRedirectURL}")
     private String redirectUri;
 
     @Test

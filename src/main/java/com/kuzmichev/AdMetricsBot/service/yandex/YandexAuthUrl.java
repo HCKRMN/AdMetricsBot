@@ -16,7 +16,7 @@ public class YandexAuthUrl {
     String clientId;
     @Value("${telegram.webhook-path}")
     String link;
-    @Value("${yandexRedirectURI}")
+    @Value("${yandexRedirectURL}")
     String redirectUri;
 
     public String getYandexAuthorizationUrl(String chatId, String userState) {

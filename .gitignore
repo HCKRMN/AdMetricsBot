@@ -23,5 +23,4 @@
 hs_err_pid*
 
 # Passwords and Secrets
-/secrets.properties
 *.env

@@ -71,8 +71,6 @@ public class YandexMainRequest {
             responseBody = EntityUtils.toString(entityResponse);
             int statusCode = response.getStatusLine().getStatusCode();
 
-            System.out.println(responseBody);
-
             YandexData yandexData = new YandexData();
             yandexData.setProjectId(projectId);
 

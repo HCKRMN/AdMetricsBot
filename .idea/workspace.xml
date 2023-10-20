@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Добавил тесты">
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Вынес все пароли в отдельные файлы">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/AdMetricsBotApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/AdMetricsBotApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixAuthUrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixAuthUrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexAuthUrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexAuthUrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/secrets.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexAuthUrlTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexAuthUrlTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,8 +200,19 @@
       </method>
     </configuration>
     <configuration name="AdMetricsBotApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
       <module name="AdMetricsBot" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.kuzmichev.AdMetricsBot.AdMetricsBotApplication" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -349,14 +369,8 @@
       <workItem from="1697688275671" duration="2154000" />
       <workItem from="1697718764279" duration="594000" />
       <workItem from="1697780861821" duration="487000" />
-      <workItem from="1697781592369" duration="1089000" />
-    </task>
-    <task id="LOCAL-00019" summary="РЕФААААКТОРИИИИНГ">
-      <created>1694074204540</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1694074204540</updated>
+      <workItem from="1697781592369" duration="2358000" />
+      <workItem from="1697785651501" duration="10054000" />
     </task>
     <task id="LOCAL-00020" summary="РЕФААААКТОРИИИИНГ&#10;Разобрал обработчик команд из сообщений">
       <created>1694436795851</created>
@@ -694,7 +708,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697781341026</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Вынес все пароли в отдельные файлы">
+      <created>1697784215716</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1697784215717</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -743,7 +764,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="РЕФААААКТОРИИИИНГ&#10;Разобрал обработчик команд из сообщений" />
     <MESSAGE value="РЕФААААКТОРИИИИНГ&#10;Разобрал инлайн кнопки" />
     <MESSAGE value="Переработал и оптимизировал клавиатуры" />
     <MESSAGE value="Исправил ошибки при записи в базу в разных случаях + разные мелкие ошибки" />
@@ -768,7 +788,8 @@
     <MESSAGE value="Вернул на место тестовое сообщение" />
     <MESSAGE value="Добавил тесты для некоторых запросов, добавил класс который обновляет ссылку api telegram" />
     <MESSAGE value="Добавил тесты" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил тесты" />
+    <MESSAGE value="Вынес все пароли в отдельные файлы" />
+    <option name="LAST_COMMIT_MESSAGE" value="Вынес все пароли в отдельные файлы" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
