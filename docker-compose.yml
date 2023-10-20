@@ -35,8 +35,8 @@ services:
       - DB_HOST=db
       - DB_PORT=5432
       - DB_NAME=postgres
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=RjV54jCkYzhw
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
   db:
     image: postgres:13.3-alpine
     container_name: admetricsbot-db
@@ -44,6 +44,6 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=RjV54jCkYzhw
-      - POSTGRES_DB=postgres
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
