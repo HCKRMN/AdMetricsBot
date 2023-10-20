@@ -40,8 +40,11 @@ jobs:
           java-version: '19'
           distribution: 'temurin'
           cache: maven
+      - name: Copy .env file to root directory
+        run: cp .env $GITHUB_WORKSPACE/
       - name: run tests
         run: mvn test
+
 
       - name: Archive .env file
         uses: actions/upload-artifact@v3
