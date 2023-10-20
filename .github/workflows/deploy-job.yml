@@ -26,8 +26,8 @@ jobs:
           echo "SPRING_DATASOURCE_URL=${{ secrets.SPRING_DATASOURCE_URL }}" >> .env
           echo "TELEGRAM_BOT_OWNER_ID=${{ secrets.TELEGRAM_BOT_OWNER_ID }}" >> .env
           echo "TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}" >> .env
-          echo "TELEGRAM_WEBHOOK_PATH=${{ env.TELEGRAM_WEBHOOK_PATH }}" >> .env
-          echo "TELEGRAM_BOT_NAME=${{ env.TELEGRAM_BOT_NAME }}" >> .env
+          echo "TELEGRAM_WEBHOOK_PATH=${{TELEGRAM_WEBHOOK_PATH }}" >> .env
+          echo "TELEGRAM_BOT_NAME=${{TELEGRAM_BOT_NAME }}" >> .env
           echo "YANDEX_CLIENT_ID=${{ secrets.YANDEX_CLIENT_ID }}" >> .env
 
       - name: set up Java and Maven
@@ -36,9 +36,6 @@ jobs:
           java-version: '19'
           distribution: 'temurin'
           cache: maven
-#
-#      - name: run tests
-#        run: mvn test
 
       - name: Build JAR
         run: mvn package
@@ -53,25 +50,6 @@ jobs:
         with:
           name: env-file
           path: .env
-
-#  build-JAR:
-#    runs-on: ubuntu-latest
-#    needs: build-env
-#    steps:
-#      - name: checkout repo
-#        uses: actions/checkout@v3
-#      - name: set up Java
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: '19'
-#          distribution: 'temurin'
-#      - name: Build JAR
-#        run: mvn package
-#      - name: Save JAR artifact
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: app-jar
-#          path: target/AdMetricsBot-1.jar
 
   cleanup:
     runs-on: self-hosted

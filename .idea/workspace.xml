@@ -360,14 +360,7 @@
       <workItem from="1697780861821" duration="487000" />
       <workItem from="1697781592369" duration="2358000" />
       <workItem from="1697785651501" duration="16292000" />
-      <workItem from="1697816250574" duration="413000" />
-    </task>
-    <task id="LOCAL-00037" summary="Переделал получение часового пояса относительно сервера + мелкие правки и фикс удаления старых сообщений">
-      <created>1697038807266</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1697038807266</updated>
+      <workItem from="1697816250574" duration="843000" />
     </task>
     <task id="LOCAL-00038" summary="Исправил ошибку со временной зоной, сделал относительно региона">
       <created>1697272281189</created>
@@ -705,7 +698,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697816521643</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="Воркфлоууу">
+      <created>1697816906522</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1697816906522</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
