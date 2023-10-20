@@ -4,17 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Вернул на место тестовое сообщение">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/SetWebHookURL.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexAuthUrlTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequestTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Добавил тесты для некоторых запросов, добавил класс который обновляет ссылку api telegram">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/secrets.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMessageBuilderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/BitrixController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/BitrixController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/TestController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/MessageEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/MessageEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMessageBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMessageBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/registration/RegistrationCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/registration/RegistrationCallbackHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
@@ -30,8 +28,8 @@
         <option value="HTML File" />
         <option value="Interface" />
         <option value="Enum" />
-        <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -58,40 +56,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
-    "database.data.extractors.current.id": "Comma-separated (CSV)_id",
-    "last.edited.regexp": "Sample Text",
-    "last_opened_file_path": "C:/Users/kauha/Desktop/база/postgres_public_users_table.csv",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "spring.configuration.checksum": "7fb271e9b6c3c1e2b748a2e4662cab55"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ToolWindowByte Code Viewer.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;last.edited.regexp&quot;: &quot;Sample Text&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/kauha/Desktop/база/postgres_public_users_table.csv&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;7fb271e9b6c3c1e2b748a2e4662cab55&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ],
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "yaml"
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;yaml&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\GitHub\AdMetricsBot\src\main\resources\templates" />
@@ -119,54 +118,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.AdMetricsBotApplication">
-    <configuration name="YandexAuthUrlTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AdMetricsBot" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.kuzmichev.AdMetricsBot.service.yandex.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex" />
-      <option name="MAIN_CLASS_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex.YandexAuthUrlTest" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="YandexMainRequestTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AdMetricsBot" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.kuzmichev.AdMetricsBot.service.yandex.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex" />
-      <option name="MAIN_CLASS_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex.YandexMainRequestTest" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="YandexMainRequestTest.testYandexMainRequest_Error_53" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="AdMetricsBot" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.kuzmichev.AdMetricsBot.service.yandex.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex" />
-      <option name="MAIN_CLASS_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex.YandexMainRequestTest" />
-      <option name="METHOD_NAME" value="testYandexMainRequest_Error_53" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="YandexMainRequestTest.testYandexMainRequest_Error_Random_error_code" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AdMetricsBot" />
       <extension name="coverage">
@@ -183,7 +134,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="YandexMainRequestTest.testYandexMainRequest_Success_rows_0" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="YandexMessageBuilderTest.testGetMessage_Error_513" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AdMetricsBot" />
       <extension name="coverage">
         <pattern>
@@ -192,8 +143,56 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex" />
-      <option name="MAIN_CLASS_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex.YandexMainRequestTest" />
-      <option name="METHOD_NAME" value="testYandexMainRequest_Success_rows_0" />
+      <option name="MAIN_CLASS_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex.YandexMessageBuilderTest" />
+      <option name="METHOD_NAME" value="testGetMessage_Error_513" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="YandexMessageBuilderTest.testGetMessage_Error_53" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AdMetricsBot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.kuzmichev.AdMetricsBot.service.yandex.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex" />
+      <option name="MAIN_CLASS_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex.YandexMessageBuilderTest" />
+      <option name="METHOD_NAME" value="testGetMessage_Error_53" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="YandexMessageBuilderTest.testGetMessage_Error_Random_error_code" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AdMetricsBot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.kuzmichev.AdMetricsBot.service.yandex.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex" />
+      <option name="MAIN_CLASS_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex.YandexMessageBuilderTest" />
+      <option name="METHOD_NAME" value="testGetMessage_Error_Random_error_code" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="YandexMessageBuilderTest.testGetMessage_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="AdMetricsBot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.kuzmichev.AdMetricsBot.service.yandex.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex" />
+      <option name="MAIN_CLASS_NAME" value="com.kuzmichev.AdMetricsBot.service.yandex.YandexMessageBuilderTest" />
+      <option name="METHOD_NAME" value="testGetMessage_Success" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -213,21 +212,21 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Error_53" />
+      <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_513" />
+      <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_53" />
+      <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_Random_error_code" />
       <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Error_Random_error_code" />
-      <item itemvalue="JUnit.YandexAuthUrlTest" />
-      <item itemvalue="JUnit.YandexMainRequestTest" />
-      <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Success_rows_0" />
+      <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Success" />
       <item itemvalue="Ngrok.Ngrok Run" />
       <item itemvalue="Spring Boot.AdMetricsBotApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_Random_error_code" />
+        <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_53" />
+        <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_513" />
+        <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Success" />
         <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Error_Random_error_code" />
-        <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Error_53" />
-        <item itemvalue="JUnit.YandexMainRequestTest" />
-        <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Success_rows_0" />
-        <item itemvalue="JUnit.YandexAuthUrlTest" />
       </list>
     </recent_temporary>
   </component>
@@ -351,14 +350,13 @@
       <workItem from="1697511159887" duration="4058000" />
       <workItem from="1697520769159" duration="594000" />
       <workItem from="1697536544860" duration="7202000" />
-      <workItem from="1697600745428" duration="14858000" />
-    </task>
-    <task id="LOCAL-00017" summary="Нифига меню не закончено, нужно сделать несколько динамических кнопок.&#10;Пока сделал кнопку удаления источников">
-      <created>1692280812197</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1692280812197</updated>
+      <workItem from="1697600745428" duration="16745000" />
+      <workItem from="1697624011896" duration="79000" />
+      <workItem from="1697624102021" duration="3261000" />
+      <workItem from="1697634692653" duration="888000" />
+      <workItem from="1697688275671" duration="2154000" />
+      <workItem from="1697718764279" duration="594000" />
+      <workItem from="1697780861821" duration="448000" />
     </task>
     <task id="LOCAL-00018" summary="Сделал получение данных с битрикса, настроил обновление токена, нужно ещё потом будет подумать над обновлением самого рефреш токена">
       <created>1693483043771</created>
@@ -696,7 +694,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697537682037</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Добавил тесты для некоторых запросов, добавил класс который обновляет ссылку api telegram">
+      <created>1697616540149</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1697616540149</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -745,7 +750,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Сделал получение данных с битрикса, настроил обновление токена, нужно ещё потом будет подумать над обновлением самого рефреш токена" />
     <MESSAGE value="РЕФААААКТОРИИИИНГ" />
     <MESSAGE value="РЕФААААКТОРИИИИНГ&#10;Разобрал обработчик команд из сообщений" />
     <MESSAGE value="РЕФААААКТОРИИИИНГ&#10;Разобрал инлайн кнопки" />
@@ -770,7 +774,8 @@
     <MESSAGE value="Добавил действие к кнопке получения данных из настроек" />
     <MESSAGE value="Настройка github actions" />
     <MESSAGE value="Вернул на место тестовое сообщение" />
-    <option name="LAST_COMMIT_MESSAGE" value="Вернул на место тестовое сообщение" />
+    <MESSAGE value="Добавил тесты для некоторых запросов, добавил класс который обновляет ссылку api telegram" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил тесты для некоторых запросов, добавил класс который обновляет ссылку api telegram" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -783,8 +788,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/AdMetricsBot$AdMetricsBotApplication.ic" NAME="AdMetricsBotApplication Coverage Results" MODIFIED="1697540042523" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.kuzmichev.AdMetricsBot.*</FILTER>
-    </SUITE>
+    <SUITE FILE_PATH="coverage/AdMetricsBot$AdMetricsBotApplication.ic" NAME="AdMetricsBotApplication Coverage Results" MODIFIED="1697630469417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

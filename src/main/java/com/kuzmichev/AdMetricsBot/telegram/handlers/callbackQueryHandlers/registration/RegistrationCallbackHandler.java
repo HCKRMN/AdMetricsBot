@@ -37,7 +37,7 @@ public class RegistrationCallbackHandler implements CallbackHandler {
     public BotApiMethod<?> handleCallback(CallbackQuery buttonQuery, String userState) {
         String chatId = buttonQuery.getMessage().getChatId().toString();
         String data = buttonQuery.getData();
-        String userName = buttonQuery.getMessage().getFrom().getUserName();
+        String userName = buttonQuery.getFrom().getUserName();
         int messageId = buttonQuery.getMessage().getMessageId();
 
         if (Objects.equals(data, CallBackEnum.START_REGISTRATION_CALLBACK.getCallBackName())) {

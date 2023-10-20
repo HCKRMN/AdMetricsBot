@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.service.yandex;
 
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.model.YandexData;
-import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMainRequest;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -39,14 +39,13 @@ public class YandexMessageBuilder {
                     .append("<code>CPA:                </code>").append(costPerConversion).append("\n")
                     .append("<code>Расход:             </code>").append(cost).append("\n");
         } else if(requestStatus == 513) {
-            message
-                    .append("Необходимо закончить регистрацию в Яндекс Директ").append("\n");
+            message.append(MessageEnum.YANDEX_ERROR_513_MESSAGE.getMessage()).append("\n");
+
         } else if(requestStatus == 53) {
-            message
-                    .append("Токен обращения к Яндекс Директ ошибочный. Необходимо заново выполнить подключение").append("\n");
+            message.append(MessageEnum.YANDEX_ERROR_53_MESSAGE.getMessage()).append("\n");
+
         } else {
-            message
-                    .append("Ошибка получения данных от Яндекса").append("\n");
+            message.append(MessageEnum.YANDEX_ERROR_UNKNOWN_MESSAGE.getMessage()).append("\n");
         }
 
         return message.toString();
