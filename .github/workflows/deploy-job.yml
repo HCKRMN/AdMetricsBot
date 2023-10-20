@@ -28,22 +28,31 @@ jobs:
           echo "TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}" >> .env
           echo "YANDEX_CLIENT_ID=${{ secrets.YANDEX_CLIENT_ID }}" >> .env
 
-  test:
-    runs-on: ubuntu-latest
-    needs: build-env
-    steps:
-      - name: checkout repo
-        uses: actions/checkout@v3
       - name: set up Java and Maven
         uses: actions/setup-java@v3
         with:
           java-version: '19'
           distribution: 'temurin'
           cache: maven
-      - name: Copy .env file to root directory
-        run: cp .env $GITHUB_WORKSPACE/
+
       - name: run tests
         run: mvn test
+#  test:
+#    runs-on: ubuntu-latest
+#    needs: build-env
+#    steps:
+#      - name: checkout repo
+#        uses: actions/checkout@v3
+#      - name: set up Java and Maven
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: '19'
+#          distribution: 'temurin'
+#          cache: maven
+#      - name: Copy .env file to root directory
+#        run: cp .env $GITHUB_WORKSPACE/
+#      - name: run tests
+#        run: mvn test
 
 
       - name: Archive .env file
@@ -54,7 +63,7 @@ jobs:
 
   build-JAR:
     runs-on: ubuntu-latest
-    needs: test
+    needs: build-env
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
