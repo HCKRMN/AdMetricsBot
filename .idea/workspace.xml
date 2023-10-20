@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Воркфлоууу" />
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Воркфлоууу">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -358,14 +360,7 @@
       <workItem from="1697718764279" duration="594000" />
       <workItem from="1697780861821" duration="487000" />
       <workItem from="1697781592369" duration="2358000" />
-      <workItem from="1697785651501" duration="14537000" />
-    </task>
-    <task id="LOCAL-00031" summary="Исправил баги с шедулером">
-      <created>1696495998640</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1696495998640</updated>
+      <workItem from="1697785651501" duration="14901000" />
     </task>
     <task id="LOCAL-00032" summary="Исправил баги регистрации, добавил обработку нескольких ошибок от яндекса и битрикса">
       <created>1696674795827</created>
@@ -703,7 +698,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697814275243</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="Воркфлоууу">
+      <created>1697814678426</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1697814678426</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

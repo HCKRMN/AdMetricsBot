@@ -26,7 +26,7 @@ jobs:
           echo "SPRING_DATASOURCE_URL=${{ secrets.SPRING_DATASOURCE_URL }}" >> .env
           echo "TELEGRAM_BOT_OWNER_ID=${{ secrets.TELEGRAM_BOT_OWNER_ID }}" >> .env
           echo "TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}" >> .env
-          echo "TELEGRAM_WEBHOOK_PATH=${{ variables.TELEGRAM_WEBHOOK_PATH }}" >> .env
+          echo "TELEGRAM_WEBHOOK_PATH=${{ env.TELEGRAM_WEBHOOK_PATH }}" >> .env
           echo "YANDEX_CLIENT_ID=${{ secrets.YANDEX_CLIENT_ID }}" >> .env
 
       - name: set up Java and Maven
