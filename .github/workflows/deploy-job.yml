@@ -53,13 +53,13 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
-    - name: Build JAR
-      run: mvn package
-    - name: Save JAR artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: app-jar
-        path: target/AdMetricsBot-1.jar
+      - name: Build JAR
+        run: mvn package
+      - name: Save JAR artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-jar
+          path: target/AdMetricsBot-1.jar
 
   cleanup:
     runs-on: self-hosted
@@ -87,7 +87,7 @@ jobs:
           name: env-file
       - name: Deploy
         run: |
+          cp $GITHUB_WORKSPACE/.env /app/
+          cp $GITHUB_WORKSPACE/AdMetricsBot-1.jar /app/
           cd /app/
-          cp $GITHUB_WORKSPACE/.env
-          cp $GITHUB_WORKSPACE/AdMetricsBot-1.jar .
           docker-compose up -d

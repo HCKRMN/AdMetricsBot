@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Вынес все пароли в отдельные файлы">
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v1">
       <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/AdMetricsBotApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/AdMetricsBotApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixAuthUrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixAuthUrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexAuthUrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexAuthUrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMainRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/secrets.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexAuthUrlTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexAuthUrlTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -370,14 +360,7 @@
       <workItem from="1697718764279" duration="594000" />
       <workItem from="1697780861821" duration="487000" />
       <workItem from="1697781592369" duration="2358000" />
-      <workItem from="1697785651501" duration="10054000" />
-    </task>
-    <task id="LOCAL-00020" summary="РЕФААААКТОРИИИИНГ&#10;Разобрал обработчик команд из сообщений">
-      <created>1694436795851</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1694436795851</updated>
+      <workItem from="1697785651501" duration="10403000" />
     </task>
     <task id="LOCAL-00021" summary="РЕФААААКТОРИИИИНГ&#10;Разобрал инлайн кнопки">
       <created>1694529488610</created>
@@ -715,7 +698,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697784215717</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v1">
+      <created>1697802826682</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1697802826682</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -764,7 +754,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="РЕФААААКТОРИИИИНГ&#10;Разобрал инлайн кнопки" />
     <MESSAGE value="Переработал и оптимизировал клавиатуры" />
     <MESSAGE value="Исправил ошибки при записи в базу в разных случаях + разные мелкие ошибки" />
     <MESSAGE value="переделал установку временной зоны и таймера" />
@@ -789,7 +778,8 @@
     <MESSAGE value="Добавил тесты для некоторых запросов, добавил класс который обновляет ссылку api telegram" />
     <MESSAGE value="Добавил тесты" />
     <MESSAGE value="Вынес все пароли в отдельные файлы" />
-    <option name="LAST_COMMIT_MESSAGE" value="Вынес все пароли в отдельные файлы" />
+    <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
