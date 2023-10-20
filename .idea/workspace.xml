@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Воркфлоууу">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -360,21 +360,7 @@
       <workItem from="1697718764279" duration="594000" />
       <workItem from="1697780861821" duration="487000" />
       <workItem from="1697781592369" duration="2358000" />
-      <workItem from="1697785651501" duration="14901000" />
-    </task>
-    <task id="LOCAL-00032" summary="Исправил баги регистрации, добавил обработку нескольких ошибок от яндекса и битрикса">
-      <created>1696674795827</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1696674795827</updated>
-    </task>
-    <task id="LOCAL-00033" summary="Исправил баги регистрации, добавил обработку нескольких ошибок от яндекса и битрикса">
-      <created>1696674810304</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1696674810304</updated>
+      <workItem from="1697785651501" duration="15728000" />
     </task>
     <task id="LOCAL-00034" summary="Доработал обработку ошибок от яндекса и битрикса">
       <created>1696676470596</created>
@@ -705,7 +691,21 @@
       <option name="project" value="LOCAL" />
       <updated>1697814678426</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="Воркфлоууу">
+      <created>1697814839605</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1697814839605</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Воркфлоууу">
+      <created>1697815131542</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1697815131542</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
