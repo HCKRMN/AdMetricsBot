@@ -14,7 +14,7 @@
 	<name>AdMetricsBot</name>
 	<description>Бот для получения статистики</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>19</java.version>
 		<telegram.version>6.8.0</telegram.version>
 	</properties>
 	<dependencies>
