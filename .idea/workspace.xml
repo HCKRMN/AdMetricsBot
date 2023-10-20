@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v5">
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Воркфлоууу">
       <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -360,14 +360,7 @@
       <workItem from="1697718764279" duration="594000" />
       <workItem from="1697780861821" duration="487000" />
       <workItem from="1697781592369" duration="2358000" />
-      <workItem from="1697785651501" duration="12080000" />
-    </task>
-    <task id="LOCAL-00025" summary="доработка подключения битрикса при регистрации и в меню + вывод данных">
-      <created>1695818318228</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1695818318228</updated>
+      <workItem from="1697785651501" duration="12481000" />
     </task>
     <task id="LOCAL-00026" summary="Почти рабочая версия. Починил шедулер, сделал меседжбилдер первой версии">
       <created>1695909042159</created>
@@ -705,7 +698,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697811775527</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="Воркфлоууу">
+      <created>1697811992094</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1697811992094</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -754,7 +754,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Почти рабочая версия. Починил шедулер, сделал меседжбилдер первой версии" />
     <MESSAGE value="Прикрутил многопоточность к шедулеру + мелкие правки" />
     <MESSAGE value="Переделал получение данных с яндекса, добавил больше параметров, сделал первую версию форматирования сообщения с данными" />
     <MESSAGE value="Доработал получение данных с битрикса, добавил получение успешных и проваленных сделок" />
@@ -779,7 +778,8 @@
     <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v3" />
     <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v4" />
     <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v5" />
-    <option name="LAST_COMMIT_MESSAGE" value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v5" />
+    <MESSAGE value="Воркфлоууу" />
+    <option name="LAST_COMMIT_MESSAGE" value="Воркфлоууу" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
