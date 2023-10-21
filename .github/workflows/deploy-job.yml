@@ -56,7 +56,7 @@ jobs:
       - name: Stop and remove container
         run: |
           docker stop admetricsbot
-      - name: Remove unused data
+      - name: Remove container
         run: docker system prune -a -f
 
   deploy:
@@ -79,3 +79,5 @@ jobs:
           cp $GITHUB_WORKSPACE/AdMetricsBot-1.jar /app/
           cd /app/
           docker-compose up -d
+      - name: Remove unused data
+        run: docker system prune -a -f
