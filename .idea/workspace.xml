@@ -4,19 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Воркфлоууу">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Закончил с джобай, убрал пароли и все токены из всех файлов">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/Yclients.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DockerFile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/AdMetricsBotApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/AdMetricsBotApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -25,8 +28,8 @@
         <option value="HTML File" />
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -229,11 +232,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Success_rows_0" />
-        <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Success_rows_1" />
         <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_Random_error_code" />
         <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_53" />
         <item itemvalue="JUnit.YandexMessageBuilderTest.testGetMessage_Error_513" />
+        <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Success_rows_1" />
+        <item itemvalue="JUnit.YandexMainRequestTest.testYandexMainRequest_Success_rows_0" />
       </list>
     </recent_temporary>
   </component>
@@ -367,14 +370,8 @@
       <workItem from="1697781592369" duration="2358000" />
       <workItem from="1697785651501" duration="16292000" />
       <workItem from="1697816250574" duration="1470000" />
-      <workItem from="1697860412529" duration="2835000" />
-    </task>
-    <task id="LOCAL-00040" summary="Добавил действие к кнопке получения данных из настроек">
-      <created>1697443657021</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1697443657021</updated>
+      <workItem from="1697860412529" duration="10058000" />
+      <workItem from="1697945966228" duration="3962000" />
     </task>
     <task id="LOCAL-00041" summary="Настройка github actions">
       <created>1697461035197</created>
@@ -712,7 +709,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697817439309</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="Закончил с джобай, убрал пароли и все токены из всех файлов">
+      <created>1697863469305</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1697863469306</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -761,7 +765,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Прикрутил многопоточность к шедулеру + мелкие правки" />
     <MESSAGE value="Переделал получение данных с яндекса, добавил больше параметров, сделал первую версию форматирования сообщения с данными" />
     <MESSAGE value="Доработал получение данных с битрикса, добавил получение успешных и проваленных сделок" />
     <MESSAGE value="Исправил несколько багов из-за внедрения меседж билдеров" />
@@ -786,7 +789,8 @@
     <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v4" />
     <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v5" />
     <MESSAGE value="Воркфлоууу" />
-    <option name="LAST_COMMIT_MESSAGE" value="Воркфлоууу" />
+    <MESSAGE value="Закончил с джобай, убрал пароли и все токены из всех файлов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Закончил с джобай, убрал пароли и все токены из всех файлов" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

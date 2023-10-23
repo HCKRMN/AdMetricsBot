@@ -1,7 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers;
 
-import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.CommandEnum;
+import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.service.MetricsMessageBuilder;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.CloseButtonKeyboard;
@@ -19,9 +19,6 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
-
-import java.time.*;
-import java.time.temporal.ChronoUnit;
 
 @Slf4j
 @Component
@@ -73,11 +70,26 @@ public class CommandHandler {
                             null);
                 }
                 case TEST -> {
-                    return messageWithReturn.sendMessage(
-                            chatId,
-                            metricsMessageBuilder.getMessage(chatId),
-                            closeButtonKeyboard.closeButtonKeyboard(),
-                            null);
+
+
+//                    try {
+//                        yclients.getNumberOfRecordsForDate();
+//                    } catch (IOException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                    try {
+//                        int numberOfRecords = yclients.getNumberOfRecordsForDate(LocalDateTime.now());
+//                    System.out.println("ЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫ " + numberOfRecords);
+//                    } catch (IOException e) {
+//                        System.out.println("ЫЫЫЫ ЫЫЫЫЫЫЫЫЫ ЫЫЫЫЫЫЫЫЫЫЫЫЫ ЫЫЫЫЫЫЫЫЫЫЫЫЫ ЫЫЫЫЫЫЫЫЫЫ");
+//                        throw new RuntimeException(e);
+//                    }
+
+//                    return messageWithReturn.sendMessage(
+//                            chatId,
+//                            metricsMessageBuilder.getMessage(chatId),
+//                            closeButtonKeyboard.closeButtonKeyboard(),
+//                            null);
                 }
                 default -> {
                     messageWithoutReturn.sendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
