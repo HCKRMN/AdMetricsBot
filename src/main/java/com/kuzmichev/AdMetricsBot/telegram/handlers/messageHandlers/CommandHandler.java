@@ -71,18 +71,11 @@ public class CommandHandler {
                             null);
                 }
                 case TEST -> {
-
                     return messageWithReturn.sendMessage(
                             chatId,
-                            yclientsMessageBuilder.getMessage("1251f7cf-1ab1-41df-ad79-35c1fc4fbf02"),
+                            metricsMessageBuilder.getMessage(chatId),
                             closeButtonKeyboard.closeButtonKeyboard(),
                             null);
-
-//                    return messageWithReturn.sendMessage(
-//                            chatId,
-//                            metricsMessageBuilder.getMessage(chatId),
-//                            closeButtonKeyboard.closeButtonKeyboard(),
-//                            null);
                 }
                 default -> {
                     messageWithoutReturn.sendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
