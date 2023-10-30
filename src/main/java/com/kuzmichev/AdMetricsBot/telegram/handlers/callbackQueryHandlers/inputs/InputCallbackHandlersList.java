@@ -18,12 +18,14 @@ public class InputCallbackHandlersList {
     YandexCallbackHandler yandexCallbackHandler;
     BitrixCallbackHandler bitrixCallbackHandler;
     AddInputsCallbackHandler addInputsCallbackHandler;
+    YclientsCallbackHandler yclientsCallbackHandler;
 
     public List<CallbackHandler> getCallbackHandlers() {
         List<CallbackHandler> callbackHandlers = new ArrayList<>();
         callbackHandlers.add(yandexCallbackHandler);
         callbackHandlers.add(bitrixCallbackHandler);
         callbackHandlers.add(addInputsCallbackHandler);
+        callbackHandlers.add(yclientsCallbackHandler);
         return callbackHandlers;
     }
 }

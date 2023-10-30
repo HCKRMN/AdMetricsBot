@@ -18,14 +18,19 @@ public class DeleteUserData {
     YandexRepository yandexRepository;
     ProjectRepository projectRepository;
     TempDataRepository tempDataRepository;
+    YclientsRepository yclientsRepository;
 
     public void deleteUserData(String chatId) {
         userRepository.removeUserByChatId(chatId);
-        bitrixRepository.removeBitrixByChatId(chatId);
         scheduledMessageRepository.removeScheduledMessageByChatId(chatId);
-        yandexRepository.removeYandexByChatId(chatId);
-        projectRepository.removeProjectsByChatId(chatId);
         tempDataRepository.removeTempDataByChatId(chatId);
+
+        projectRepository.removeProjectsByChatId(chatId);
+
+        bitrixRepository.removeBitrixByChatId(chatId);
+        yandexRepository.removeYandexByChatId(chatId);
+        yclientsRepository.removeYclientsByChatId(chatId);
+
         log.info("Пользователь с id: {} удален", chatId);
     }
 }

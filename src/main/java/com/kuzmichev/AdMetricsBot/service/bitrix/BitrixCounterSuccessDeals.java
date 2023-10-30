@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 @Service
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class CountSuccessDealsRequest {
+public class BitrixCounterSuccessDeals {
     BitrixApiService bitrixApiService;
 
     public int countSuccessDealsRequest(String accessToken, String domain, String chatId) {

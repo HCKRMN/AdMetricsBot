@@ -8,7 +8,6 @@ import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BitrixAddKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Validator;
 import lombok.AccessLevel;
@@ -36,16 +35,13 @@ public class BitrixDomainStateHandler implements StateHandler {
     @Override
     public boolean canHandle(String userStateEnum) {
         return Objects.equals(userStateEnum, StateEnum.SETTINGS_PROJECT_ADD_BITRIX_STATE.getStateName())
-                || Objects.equals(userStateEnum, StateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName());
+                || Objects.equals(userStateEnum, StateEnum.REGISTRATION_ADD_BITRIX_STATE.getStateName());
     }
 
     @Override
     public BotApiMethod<?> handleState(String chatId, String messageText, String userState, int messageId) {
         tempDataSaver.tempLastMessageId(chatId, messageId);
         if (validator.validateBitrixDomain(messageText)) {
-//            int dfhs = messageId + 2;
-//            tempDataSaver.tempLastMessageId(chatId, dfhs);
-//            System.out.println("Сохраняем сообщение " + dfhs);
             String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
             Bitrix bitrix = new Bitrix();
             bitrix.setBitrixDomain(messageText);

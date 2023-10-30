@@ -59,14 +59,14 @@ public class AddInputsKeyboard {
 //                                        null
 //                                )
 //                        ),
-//                        inlineKeyboardMaker.addRow(
-//                                // Кнопка добавления Yclients
-//                                inlineKeyboardMaker.addButton(
-//                                        ButtonEnum.ADD_YCLIENTS_BUTTON.getButtonName(),
-//                                        CallBackEnum.ADD_YCLIENTS_CALLBACK.getCallBackName(),
-//                                        null
-//                                )
-//                        ),
+                        inlineKeyboardMaker.addRow(
+                                // Кнопка добавления Yclients
+                                inlineKeyboardMaker.addButton(
+                                        ButtonEnum.ADD_YCLIENTS_BUTTON.getButtonName(),
+                                        CallBackEnum.ADD_YCLIENTS_CALLBACK.getCallBackName(),
+                                        null
+                                )
+                        ),
                         backAndExitKeyboard.backAndExitMenuButtons(userState)
         );
     }

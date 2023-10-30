@@ -4,10 +4,12 @@ import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
-import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMessageBuilder;
+import com.kuzmichev.AdMetricsBot.service.yclients.YclientsMessageBuilder;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BitrixTestKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.YclientsTestKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.replyKeyboards.ReplyKeyboardMaker;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
@@ -25,18 +27,20 @@ import java.util.Objects;
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class BitrixCallbackHandler implements CallbackHandler {
+public class YclientsCallbackHandler implements CallbackHandler {
     MessageWithReturn messageWithReturn;
     BackAndExitKeyboard backAndExitKeyboard;
     TempDataRepository tempDataRepository;
-    BitrixMessageBuilder bitrixMessageBuilder;
-    BitrixTestKeyboard bitrixTestKeyboard;
+    YclientsMessageBuilder yclientsMessageBuilder;
+    YclientsTestKeyboard yclientsTestKeyboard;
     TempDataSaver tempDataSaver;
+    ReplyKeyboardMaker replyKeyboardMaker;
+    MessageManagementService messageManagementService;
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, CallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName())
-                || Objects.equals(data, CallBackEnum.TEST_BITRIX_CALLBACK.getCallBackName());
+        return Objects.equals(data, CallBackEnum.ADD_YCLIENTS_CALLBACK.getCallBackName())
+                || Objects.equals(data, CallBackEnum.TEST_YCLIENTS_CALLBACK.getCallBackName());
     }
 
     @Override
@@ -45,30 +49,34 @@ public class BitrixCallbackHandler implements CallbackHandler {
         String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        if (Objects.equals(data, CallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName())) {
+        if (Objects.equals(data, CallBackEnum.ADD_YCLIENTS_CALLBACK.getCallBackName())) {
 
-            String newState = StateEnum.SETTINGS_PROJECT_ADD_BITRIX_STATE.getStateName();
+            String newState = StateEnum.SETTINGS_PROJECT_ADD_YCLIENTS_STATE.getStateName();
             if(userState.equals(StateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName())) {
-                newState = StateEnum.REGISTRATION_ADD_BITRIX_STATE.getStateName();
+                newState = StateEnum.REGISTRATION_ADD_YCLIENTS_STATE.getStateName();
             }
 
+            messageManagementService.putMessageToQueue(chatId, messageId);
+            messageManagementService.deleteMessage(chatId);
+
             tempDataSaver.tempLastMessageId(chatId, messageId);
-            return messageWithReturn.editMessage(
+            return messageWithReturn.sendMessage(
                     chatId,
-                    messageId,
-                    MessageEnum.ADD_BITRIX_STEP_1_MESSAGE.getMessage(),
-                    newState,
-                    backAndExitKeyboard.backAndExitMenu(userState));
+                    MessageEnum.ADD_YCLIENTS_STEP_1_MESSAGE.getMessage(),
+                    backAndExitKeyboard.backAndExitMenu(userState),
+                    replyKeyboardMaker.getContactKeyboard(),
+                    newState);
         }
-        if (Objects.equals(data, CallBackEnum.TEST_BITRIX_CALLBACK.getCallBackName())) {
+
+        if (Objects.equals(data, CallBackEnum.TEST_YCLIENTS_CALLBACK.getCallBackName())) {
             String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
 
             return messageWithReturn.editMessage(
                     chatId,
                     messageId,
-                    bitrixMessageBuilder.getMessage(projectId),
+                    yclientsMessageBuilder.getMessage(projectId),
                     null,
-                    bitrixTestKeyboard.bitrixTestMenu(userState));
+                    yclientsTestKeyboard.yclientsTestMenu(userState));
         }
 
         return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());

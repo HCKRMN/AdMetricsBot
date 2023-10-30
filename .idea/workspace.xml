@@ -4,12 +4,65 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Закончил с джобай, убрал пароли и все токены из всех файлов">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/Yclients.java" afterDir="false" />
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Начал подключать yclients, ждем модерацию в их маркете">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YclientsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/Yclients.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/YclientsData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/YclientsRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterCanceledEntries.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterNewEntries.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterSuccessEntries.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsMainRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsMessageBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsTestConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/YclientsCallbackHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/YclientsStateHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/YclientsAddKeyboard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/YclientsTestKeyboard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/yclients.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/yclientsError.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/yclientsUserNotFound.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-job.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/ButtonEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/ButtonEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/CallBackEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/CallBackEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/InputsEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/InputsEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/MessageEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/MessageEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/StateEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/StateEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/BitrixController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/BitrixController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YandexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YaController2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YandexController2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMainRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMainRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/CountAllCreateRecordsRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixCounterNewEntries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/CountFailedDealsRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixCounterFailedDeals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/CountSuccessDealsRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixCounterSuccessDeals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/Yclients.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/BitrixCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/BitrixCallbackHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/InputCallbackHandlersList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/InputCallbackHandlersList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/DeleteProjectCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/DeleteProjectCallbackHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/ProjectCreateCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/ProjectCreateCallbackHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/SomeProjectCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/projects/SomeProjectCallbackHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/BitrixDomainStateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/BitrixDomainStateHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/StateHandlersList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/StateHandlersList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/SendAllUsersHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/SendAllUsersHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/AddInputsKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/AddInputsKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectListKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectListKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/replyKeyboards/ReplyKeyboardMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/replyKeyboards/ReplyKeyboardMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/DeleteUserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/DeleteUserData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/Messages/MessageWithReturn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/Messages/MessageWithReturn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/ProjectManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/ProjectManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/Registration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/Registration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/TempDataSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/TempDataSaver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
@@ -73,7 +126,7 @@
     &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
     &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
     &quot;last.edited.regexp&quot;: &quot;Sample Text&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kauha/Desktop/база/postgres_public_users_table.csv&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/GitHub/AdMetricsBot/src/main/resources/templates&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
@@ -109,11 +162,11 @@
       <recent name="com.kuzmichev.AdMetricsBot.controllers" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.inputs" />
-      <recent name="com.kuzmichev.AdMetricsBot.service.yandex" />
-      <recent name="com.kuzmichev.AdMetricsBot.model" />
-      <recent name="com.kuzmichev.AdMetricsBot.service.bitrix" />
       <recent name="com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards" />
+      <recent name="com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers.MessageStateHandler" />
+      <recent name="com.kuzmichev.AdMetricsBot.service.yclients" />
+      <recent name="com.kuzmichev.AdMetricsBot.model" />
+      <recent name="com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.inputs" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.AdMetricsBotApplication">
@@ -372,13 +425,16 @@
       <workItem from="1697816250574" duration="1470000" />
       <workItem from="1697860412529" duration="10058000" />
       <workItem from="1697945966228" duration="3962000" />
-    </task>
-    <task id="LOCAL-00041" summary="Настройка github actions">
-      <created>1697461035197</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1697461035197</updated>
+      <workItem from="1698032416251" duration="290000" />
+      <workItem from="1698234431474" duration="12117000" />
+      <workItem from="1698289998587" duration="1932000" />
+      <workItem from="1698293474643" duration="9826000" />
+      <workItem from="1698316933792" duration="2073000" />
+      <workItem from="1698378219645" duration="21203000" />
+      <workItem from="1698410581784" duration="99000" />
+      <workItem from="1698467348801" duration="12405000" />
+      <workItem from="1698551725546" duration="14661000" />
+      <workItem from="1698638418019" duration="3619000" />
     </task>
     <task id="LOCAL-00042" summary="Настройка github actions">
       <created>1697461186164</created>
@@ -716,7 +772,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697863469306</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="Начал подключать yclients, ждем модерацию в их маркете">
+      <created>1698032685842</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1698032685842</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -765,7 +828,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Переделал получение данных с яндекса, добавил больше параметров, сделал первую версию форматирования сообщения с данными" />
     <MESSAGE value="Доработал получение данных с битрикса, добавил получение успешных и проваленных сделок" />
     <MESSAGE value="Исправил несколько багов из-за внедрения меседж билдеров" />
     <MESSAGE value="Исправил баги с шедулером" />
@@ -790,7 +852,8 @@
     <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v5" />
     <MESSAGE value="Воркфлоууу" />
     <MESSAGE value="Закончил с джобай, убрал пароли и все токены из всех файлов" />
-    <option name="LAST_COMMIT_MESSAGE" value="Закончил с джобай, убрал пароли и все токены из всех файлов" />
+    <MESSAGE value="Начал подключать yclients, ждем модерацию в их маркете" />
+    <option name="LAST_COMMIT_MESSAGE" value="Начал подключать yclients, ждем модерацию в их маркете" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -798,6 +861,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="2" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.springframework.web.reactive.function.client.WebClientResponseException$NotFound" package="org.springframework.web.reactive.function.client" />
+          <option name="timeStamp" value="3" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -24,4 +24,12 @@ public class TempDataSaver {
         tempData.setLastMessageId(messageId);
         tempDataRepository.save(tempData);
     }
+
+    public void tempLastProjectId(String chatId, String projectId) {
+        Optional<TempData> tempDataOptional = tempDataRepository.findByChatId(chatId);
+        TempData tempData = tempDataOptional.orElseGet(TempData::new);
+        tempData.setChatId(chatId);
+        tempData.setLastProjectId(projectId);
+        tempDataRepository.save(tempData);
+    }
 }

@@ -3,9 +3,8 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.proje
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
-import com.kuzmichev.AdMetricsBot.model.UserRepository;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
@@ -27,7 +26,6 @@ import java.util.Objects;
 public class ProjectCreateCallbackHandler implements CallbackHandler {
     MessageWithReturn messageWithReturn;
     TempDataSaver tempDataSaver;
-    UserRepository userRepository;
     BackAndExitKeyboard backAndExitKeyboard;
 
     @Override

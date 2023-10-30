@@ -2,9 +2,7 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.proje
 
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
-import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
-import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
-import com.kuzmichev.AdMetricsBot.model.UserRepository;
+import com.kuzmichev.AdMetricsBot.model.*;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project.ProjectDeleteKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.DoneButtonKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
@@ -29,6 +27,9 @@ public class DeleteProjectCallbackHandler implements CallbackHandler {
     ProjectDeleteKeyboard projectDeleteKeyboard;
     TempDataRepository tempDataRepository;
     ProjectRepository projectRepository;
+    YandexRepository yandexRepository;
+    BitrixRepository bitrixRepository;
+    YclientsRepository yclientsRepository;
     UserRepository userRepository;
     DoneButtonKeyboard doneButtonKeyboard;
 
@@ -55,6 +56,10 @@ public class DeleteProjectCallbackHandler implements CallbackHandler {
         } else if(Objects.equals(data, CallBackEnum.PROJECT_DELETE_STEP_2_CALLBACK.getCallBackName())) {
             projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
             projectRepository.removeProjectByProjectId(projectId);
+            yandexRepository.removeYandexByProjectId(projectId);
+            bitrixRepository.removeBitrixByProjectId(projectId);
+            yclientsRepository.removeYclientsByProjectId(projectId);
+
             userRepository.decrementProjectsCount(chatId);
             return messageWithReturn.editMessage(
                     chatId,

@@ -34,6 +34,10 @@ public class ProjectListKeyboard {
         int projectsPerPage = 5;
         int currentPage = userRepository.getProjectsPageByChatId(chatId);
 
+        if (currentPage == 0) {
+            currentPage = 1;
+        }
+
         List<Project> projects = projectRepository.findProjectsByChatId(chatId);
 
         int startIndex = currentPage * projectsPerPage - projectsPerPage;

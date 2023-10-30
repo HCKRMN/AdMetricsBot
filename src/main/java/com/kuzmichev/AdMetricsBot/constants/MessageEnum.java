@@ -29,6 +29,8 @@ public enum MessageEnum {
     PROJECT_INPUT_DELETE_MESSAGE("Выберите источник данных, который хотите удалить"),
     PROJECT_INPUT_DELETE_SUCCESS_MESSAGE("Источник данных успешно удалён"),
 
+    CONTACT_SAVE_MESSAGE("Контакт успешно сохранен"),
+
 
     INVALID_TIME_MESSAGE("Неверный формат времени. \nВведите время в формате: \n«23 59», \n«00 00». \n\nБез кавычек!"),
     INVALID_BITRIXDOMAIN_MESSAGE("""
@@ -80,8 +82,13 @@ public enum MessageEnum {
 
     NON_COMMAND_MESSAGE("Вы ввели неизвестную команду"),
 
+    YCLIENTS_NON_PROJECTS_MESSAGE("Перед тем как установить приложение в маркете Yclients необходимо создать проект. " +
+            "Удалите приложение из маркета, создайте проект в боте и следуйте дальнейшим инструкциям."),
+    YCLIENTS_ERROR_DECODE_MESSAGE("Ошибка декодирования данных"),
 
-
+    ADD_YCLIENTS_STEP_1_MESSAGE("Чтобы подключить Yclients необходимо указать свой номер телефона. \n" +
+            "Нажмите кнопку «Отправить» для подтверждения номера"),
+    ADD_YCLIENTS_STEP_2_MESSAGE("Теперь перейдите по ссылке и установите приложение из маркета Yclients"),
 
     ;
     private final String message;

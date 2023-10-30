@@ -7,7 +7,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -21,7 +20,10 @@ public class ProjectManager {
 
     public void projectCreate(String chatId, String messageText) {
 
-        int projectsCount = userRepository.getProjectsCountByChatId(chatId) + 1;
+        User user = userRepository.findByChatId(chatId).orElseGet(User::new);
+
+        long nextProjectNumber = user.getLastProjectNumber() + 1;
+        long projectCount = user.getProjectsCount() + 1;
 
         // Генерируем UUID и переводим в текст
         String projectId = UUID.randomUUID().toString();
@@ -30,13 +32,12 @@ public class ProjectManager {
         project.setProjectName(messageText);
         project.setChatId(chatId);
         project.setProjectId(projectId);
-        project.setProjectNumber(projectsCount);
+        project.setProjectNumber(nextProjectNumber);
         projectRepository.save(project);
 
-        Optional<User> userOptional = userRepository.findByChatId(chatId);
-        User user = userOptional.orElseGet(User::new);
         user.setChatId(chatId);
-        user.setProjectsCount(projectsCount);
+        user.setProjectsCount(projectCount);
+        user.setLastProjectNumber(nextProjectNumber);
         userRepository.save(user);
 
         TempData tempData = new TempData();

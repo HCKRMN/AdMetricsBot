@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
-public class YaController2 {
+public class YandexController2 {
     private final YandexRepository yandexRepository;
     private final TempDataRepository tempDataRepository;
     private final MessageWithoutReturn messageWithoutReturn;
     private final YandexTestKeyboard yandexTestKeyboard;
     private final MessageManagementService messageManagementService;
 
-    public YaController2(YandexRepository yandexRepository,
-                         TempDataRepository tempDataRepository,
-                         MessageWithoutReturn messageWithoutReturn,
-                         YandexTestKeyboard yandexTestKeyboard,
-                         MessageManagementService messageManagementService) {
+    public YandexController2(YandexRepository yandexRepository,
+                             TempDataRepository tempDataRepository,
+                             MessageWithoutReturn messageWithoutReturn,
+                             YandexTestKeyboard yandexTestKeyboard,
+                             MessageManagementService messageManagementService) {
         this.yandexRepository = yandexRepository;
         this.tempDataRepository = tempDataRepository;
         this.messageWithoutReturn = messageWithoutReturn;

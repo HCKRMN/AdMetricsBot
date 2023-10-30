@@ -10,8 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.sql.Timestamp;
 @Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
@@ -31,7 +29,6 @@ public class Registration{
             user.setChatId(chatId);
             user.setUserName(userName);
             user.setUserState(StateEnum.REGISTRATION_STATE.getStateName());
-            user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
             user.setProjectsCount(0);
             user.setProjectsPage(0);
             userRepository.save(user);

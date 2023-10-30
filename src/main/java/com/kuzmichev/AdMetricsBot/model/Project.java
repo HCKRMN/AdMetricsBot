@@ -15,5 +15,5 @@ public class Project {
     private String projectId;
     private String projectName;
     private String chatId;
-    private int projectNumber;
+    private long projectNumber;
 }

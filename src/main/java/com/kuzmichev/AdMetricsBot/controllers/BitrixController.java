@@ -68,7 +68,6 @@ public class BitrixController {
 
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
 
-
         ResponseEntity<String> response = restTemplate.exchange(tokenUrl, HttpMethod.POST, requestEntity, String.class);
 
         String responseBody = response.getBody();

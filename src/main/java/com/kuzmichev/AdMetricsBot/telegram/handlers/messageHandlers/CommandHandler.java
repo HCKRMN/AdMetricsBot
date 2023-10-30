@@ -4,6 +4,7 @@ import com.kuzmichev.AdMetricsBot.constants.CommandEnum;
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.service.MetricsMessageBuilder;
+import com.kuzmichev.AdMetricsBot.service.yclients.YclientsMessageBuilder;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.CloseButtonKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.SettingsKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.StartRegistrationKeyboard;
@@ -31,6 +32,7 @@ public class CommandHandler {
     StartRegistrationKeyboard startRegistrationKeyboard;
     Registration registration;
     TimeZoneKeyboard timeZoneKeyboard;
+    YclientsMessageBuilder yclientsMessageBuilder;
     MetricsMessageBuilder metricsMessageBuilder;
     CloseButtonKeyboard closeButtonKeyboard;
 
@@ -39,7 +41,6 @@ public class CommandHandler {
         String messageText = message.getText();
         String userName = message.getFrom().getUserName();
         CommandEnum commandEnum = CommandEnum.fromCommand(messageText);
-
 
         if (commandEnum != null) {
             switch (commandEnum) {
@@ -71,19 +72,11 @@ public class CommandHandler {
                 }
                 case TEST -> {
 
-
-//                    try {
-//                        yclients.getNumberOfRecordsForDate();
-//                    } catch (IOException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                    try {
-//                        int numberOfRecords = yclients.getNumberOfRecordsForDate(LocalDateTime.now());
-//                    System.out.println("ЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫЫ " + numberOfRecords);
-//                    } catch (IOException e) {
-//                        System.out.println("ЫЫЫЫ ЫЫЫЫЫЫЫЫЫ ЫЫЫЫЫЫЫЫЫЫЫЫЫ ЫЫЫЫЫЫЫЫЫЫЫЫЫ ЫЫЫЫЫЫЫЫЫЫ");
-//                        throw new RuntimeException(e);
-//                    }
+                    return messageWithReturn.sendMessage(
+                            chatId,
+                            yclientsMessageBuilder.getMessage("1251f7cf-1ab1-41df-ad79-35c1fc4fbf02"),
+                            closeButtonKeyboard.closeButtonKeyboard(),
+                            null);
 
 //                    return messageWithReturn.sendMessage(
 //                            chatId,

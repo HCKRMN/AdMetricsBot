@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
 public class BitrixMainRequest {
     BitrixRepository bitrixRepository;
     TestConnectionRequest testConnectionRequest;
-    CountAllCreateRecordsRequest countAllCreateRecordsRequest;
+    BitrixCounterNewEntries bitrixCounterNewEntries;
     RefreshTokenRequest refreshTokenRequest;
-    CountFailedDealsRequest countFailedDealsRequest;
-    CountSuccessDealsRequest countSuccessDealsRequest;
+    BitrixCounterFailedDeals bitrixCounterFailedDeals;
+    BitrixCounterSuccessDeals bitrixCounterSuccessDeals;
     @SneakyThrows
     public BitrixData bitrixMainRequest(String projectId){
         Bitrix bitrix = bitrixRepository.findBitrixByProjectId(projectId);
@@ -32,17 +32,17 @@ public class BitrixMainRequest {
         bitrixData.setProjectId(projectId);
 
          if (responseCode == 200){
-             bitrixData.setNewLeads(countAllCreateRecordsRequest.countRecordsRequest(accessToken, domain, chatId));
-             bitrixData.setFailedDeals(countFailedDealsRequest.countFailedDealsRequest(accessToken, domain, chatId));
-             bitrixData.setSuccessDeals(countSuccessDealsRequest.countSuccessDealsRequest(accessToken, domain, chatId));
+             bitrixData.setNewLeads(bitrixCounterNewEntries.countRecordsRequest(accessToken, domain, chatId));
+             bitrixData.setFailedDeals(bitrixCounterFailedDeals.countFailedDealsRequest(accessToken, domain, chatId));
+             bitrixData.setSuccessDeals(bitrixCounterSuccessDeals.countSuccessDealsRequest(accessToken, domain, chatId));
              bitrixData.setRequestStatus(200);
 
          } else if (responseCode == 401){
              log.info("User " + bitrix.getChatId() + ". Выполняю обновление токена bitrix");
              accessToken = refreshTokenRequest.refreshTokenRequest(bitrix);
-             bitrixData.setNewLeads(countAllCreateRecordsRequest.countRecordsRequest(accessToken, domain, chatId));
-             bitrixData.setFailedDeals(countFailedDealsRequest.countFailedDealsRequest(accessToken, domain, chatId));
-             bitrixData.setSuccessDeals(countSuccessDealsRequest.countSuccessDealsRequest(accessToken, domain, chatId));
+             bitrixData.setNewLeads(bitrixCounterNewEntries.countRecordsRequest(accessToken, domain, chatId));
+             bitrixData.setFailedDeals(bitrixCounterFailedDeals.countFailedDealsRequest(accessToken, domain, chatId));
+             bitrixData.setSuccessDeals(bitrixCounterSuccessDeals.countSuccessDealsRequest(accessToken, domain, chatId));
              bitrixData.setRequestStatus(200);
         } else {
              bitrixData.setChatId(chatId);

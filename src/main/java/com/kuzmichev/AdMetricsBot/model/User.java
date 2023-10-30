@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Timestamp;
-
 @Entity(name = "usersTable")
 @Getter
 @Setter
@@ -18,11 +16,12 @@ public class User {
     @Id
     private String chatId;
     private String userName;
-    private Timestamp registeredAt;
     private int timeDifferenceInMinutes;
     private String ip;
+    private long phoneNumber;
     private String userState;
-    private int projectsCount;
+    private long projectsCount;
     private int projectsPage;
+    private long lastProjectNumber;
 
 }

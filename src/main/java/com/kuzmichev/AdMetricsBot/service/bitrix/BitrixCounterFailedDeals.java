@@ -14,19 +14,17 @@ import java.time.format.DateTimeFormatter;
 @Service
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class CountAllCreateRecordsRequest {
+public class BitrixCounterFailedDeals {
     BitrixApiService bitrixApiService;
-    CrmTypeRequest crmTypeRequest;
 
-    public int countRecordsRequest(String accessToken, String domain, String chatId) {
+    public int countFailedDealsRequest(String accessToken, String domain, String chatId) {
 
         LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
         String dateFrom = yesterday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'00:00:00"));
         String dateTo = yesterday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'23:59:59"));
 
-        String crmType = crmTypeRequest.crmTypeRequest(accessToken, domain, chatId) == 1 ? "crm.lead.list" : "crm.deal.list";
-        String url = String.format("https://%s/rest/%s?filter[>DATE_CREATE]=%s&filter[<DATE_CREATE]=%s&auth=%s",
-                domain, crmType, dateFrom, dateTo, accessToken);
+        String url = String.format("https://%s/rest/crm.deal.list?filter[>DATE_MODIFY]=%s&filter[<DATE_MODIFY]=%s&filter[STAGE_SEMANTIC_ID]=F&auth=%s",
+                domain, dateFrom, dateTo, accessToken);
 
         JSONObject json = bitrixApiService.makeBitrixApiRequest(url, chatId);
         if (json != null) {

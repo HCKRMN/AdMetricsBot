@@ -21,7 +21,6 @@ public class SendAllUsersHandler {
     public BotApiMethod<?> handleAdminCommand(String chatId, String messageText) {
         String textToSend = messageText.substring(messageText.indexOf(" "));
         var users = userRepository.findAll();
-        System.out.println(users);
         for (User user : users) {
             messageWithoutReturn.sendMessage(user.getChatId(), textToSend);
         }

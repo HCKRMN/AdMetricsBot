@@ -8,6 +8,7 @@ import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project.Pro
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.DynamicCallback;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -28,7 +29,8 @@ public class SomeProjectCallbackHandler  implements CallbackHandler {
     MessageWithReturn messageWithReturn;
     ProjectSomeKeyboard projectSomeKeyboard;
     ProjectRepository projectRepository;
-    TempDataRepository tempDataSaver;
+    TempDataRepository tempDataRepository;
+    TempDataSaver tempDataSaver;
 
     @Override
     public boolean canHandle(String data) {
@@ -46,9 +48,10 @@ public class SomeProjectCallbackHandler  implements CallbackHandler {
         Map<String, String> projectData = DynamicCallback.handleDynamicCallback(data, regexProject, "project_");
         if (!projectData.isEmpty()) {
             projectId = projectData.get("value");
-            tempDataSaver.findLastProjectIdByChatId(chatId);
+            tempDataRepository.findLastProjectIdByChatId(chatId);
             data = CallBackEnum.SOME_PROJECT_CALLBACK.getCallBackName();
         }
+        tempDataSaver.tempLastProjectId(chatId, projectId);
 
         if (Objects.equals(data, CallBackEnum.SOME_PROJECT_CALLBACK.getCallBackName())) {
             return messageWithReturn.editMessage(

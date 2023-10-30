@@ -3,6 +3,8 @@ package com.kuzmichev.AdMetricsBot.constants;
 public enum ButtonEnum {
     REGISTRATION_BUTTON("Регистрация"),
 
+    GET_PHONE_NUMBER_BUTTON("Отправить"),
+
 
     LINK_BUTTON("ССЫЛКА"),
     PROJECT_CREATE_BUTTON("Создать проект"),

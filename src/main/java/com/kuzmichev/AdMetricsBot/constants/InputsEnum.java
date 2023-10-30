@@ -6,7 +6,7 @@ public enum InputsEnum {
     MyTarget("MyTarget"),
     Bitrix24("Bitrix24"),
     AmoCRM("AmoCRM"),
-    Yclients("Yclients"),;
+    Yclients("YclientsCounterNewEntries"),;
 
     private final String inputName;
 
