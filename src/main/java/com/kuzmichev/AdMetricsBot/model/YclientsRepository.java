@@ -14,4 +14,6 @@ public interface YclientsRepository extends CrudRepository<Yclients,String> {
     void removeYclientsByProjectId(String projectId);
 
     Yclients findYclientsByProjectId(String projectId);
+
+    boolean existsByProjectId (String projectId);
 }

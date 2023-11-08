@@ -26,9 +26,9 @@ public class BitrixMessageBuilder {
         message.append("Битрикс").append("\n");
         if (requestStatus == 200) {
             message
-                    .append("<code>Новых лидов:        </code>").append(newLeads).append("\n")
-                    .append("<code>Успешные сделки:    </code>").append(successDeals).append("\n")
-                    .append("<code>Проваленные сделки: </code>").append(failedDeals).append("\n");
+                    .append("<code>Новых лидов:          </code>").append(newLeads).append("\n")
+                    .append("<code>Успешные сделки:      </code>").append(successDeals).append("\n")
+                    .append("<code>Проваленные сделки:   </code>").append(failedDeals).append("\n");
         } else if (requestStatus == 402) {
             message
                     .append("Чтобы получить данные от битрикс, необходимо продлить платный тариф в вашей срм").append("\n");

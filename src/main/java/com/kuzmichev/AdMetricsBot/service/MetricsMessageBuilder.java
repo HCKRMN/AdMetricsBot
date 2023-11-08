@@ -3,6 +3,7 @@ package com.kuzmichev.AdMetricsBot.service;
 import com.kuzmichev.AdMetricsBot.model.*;
 import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMessageBuilder;
 import com.kuzmichev.AdMetricsBot.service.yandex.YandexMessageBuilder;
+import com.kuzmichev.AdMetricsBot.service.yclients.YclientsMessageBuilder;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -23,6 +24,8 @@ public class MetricsMessageBuilder {
     YandexMessageBuilder yandexMessageBuilder;
     YandexRepository yandexRepository;
     BitrixRepository bitrixRepository;
+    YclientsRepository yclientsRepository;
+    YclientsMessageBuilder yclientsMessageBuilder;
 
     public String getMessage(String chatId) {
         StringBuilder message = new StringBuilder();
@@ -46,6 +49,9 @@ public class MetricsMessageBuilder {
             }
             if(bitrixRepository.existsByProjectId(projectId)){
                 message.append(bitrixMessageBuilder.getMessage(projectId)).append(lineBreak);
+            }
+            if(yclientsRepository.existsByProjectId(projectId)){
+                message.append(yclientsMessageBuilder.getMessage(projectId)).append(lineBreak);
             }
             message
                     .append(lineBreak)

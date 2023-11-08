@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="опять забыл тестовый запрос">
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Мелкие правки Yclients">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YclientsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YclientsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterCanceledEntries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterCanceledEntries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterSuccessEntries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterSuccessEntries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsTestConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsTestConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/yclients.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/yclients.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/YclientsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/YclientsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/MetricsMessageBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/MetricsMessageBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMessageBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/bitrix/BitrixMessageBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMessageBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMessageBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsMessageBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsMessageBuilder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -383,14 +383,7 @@
       <workItem from="1698638418019" duration="5271000" />
       <workItem from="1698656231559" duration="162000" />
       <workItem from="1698744680952" duration="11000" />
-      <workItem from="1699438800915" duration="2074000" />
-    </task>
-    <task id="LOCAL-00045" summary="Настройка github actions">
-      <created>1697463060981</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1697463060981</updated>
+      <workItem from="1699438800915" duration="4293000" />
     </task>
     <task id="LOCAL-00046" summary="Настройка github actions">
       <created>1697463200956</created>
@@ -728,7 +721,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698643723760</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="Мелкие правки Yclients">
+      <created>1699441674966</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1699441674967</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -777,7 +777,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Исправил баги регистрации, добавил обработку нескольких ошибок от яндекса и битрикса" />
     <MESSAGE value="Доработал обработку ошибок от яндекса и битрикса" />
     <MESSAGE value="Исправил обработку ошибок от яндекса" />
     <MESSAGE value="Добавил дату в сообщения + мелкие правки" />
@@ -802,7 +801,8 @@
     <MESSAGE value="Устранил баги с менеджментом проектов, с добавлением, удалением и подсчетом количества. &#10;Сделал первую версию подключения Yclients." />
     <MESSAGE value="Исправил бд и ссылку вебхука" />
     <MESSAGE value="опять забыл тестовый запрос" />
-    <option name="LAST_COMMIT_MESSAGE" value="опять забыл тестовый запрос" />
+    <MESSAGE value="Мелкие правки Yclients" />
+    <option name="LAST_COMMIT_MESSAGE" value="Мелкие правки Yclients" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
