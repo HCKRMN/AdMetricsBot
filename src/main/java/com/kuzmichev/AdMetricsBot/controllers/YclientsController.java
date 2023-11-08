@@ -165,6 +165,7 @@ public class YclientsController {
         }
 
         // Пользователь не найден
+        log.error("Пользователь с номером {} не найден. {}", phoneNumber, decodedUserData);
         return "yclientsUserNotFound";
     }
 

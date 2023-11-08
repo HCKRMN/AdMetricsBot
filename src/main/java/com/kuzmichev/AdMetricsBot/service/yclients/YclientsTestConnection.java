@@ -54,9 +54,9 @@ public class YclientsTestConnection {
 
         if (statusCode != 200) {
             JSONObject jsonResponse = new JSONObject(responseBody);
+            log.error("Ошибка при выполнении тестового запроса Yclients в салоне {} : {}, {}", salonId, statusCode, responseBody);
             return jsonResponse.getJSONObject("meta").getString("message");
         }
-        log.error("Ошибка при получении количества новых записей̆ Yclients в салоне {} : {}", salonId, responseBody);
         return "200";
     }
 }

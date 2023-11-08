@@ -64,7 +64,7 @@ public class YclientsCounterSuccessEntries {
             JSONObject jsonResponse = new JSONObject(responseBody);
             return jsonResponse.getJSONObject("meta").getInt("total_count");
         }
-        log.error("Ошибка при получении количества новых записей̆ Yclients в салоне {} : {}", salonId, responseBody);
+        log.error("Ошибка при получении количества состоявшихся записей̆ Yclients в салоне {} : {}", salonId, responseBody);
         return -1;
     }
 }

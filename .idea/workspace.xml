@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Исправил бд и ссылку вебхука">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" afterDir="false" />
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="опять забыл тестовый запрос">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YclientsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YclientsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterCanceledEntries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterCanceledEntries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterSuccessEntries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterSuccessEntries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsTestConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsTestConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/yclients.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/yclients.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -375,14 +380,10 @@
       <workItem from="1698410581784" duration="99000" />
       <workItem from="1698467348801" duration="12405000" />
       <workItem from="1698551725546" duration="14661000" />
-      <workItem from="1698638418019" duration="5236000" />
-    </task>
-    <task id="LOCAL-00044" summary="Настройка github actions">
-      <created>1697462429168</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1697462429168</updated>
+      <workItem from="1698638418019" duration="5271000" />
+      <workItem from="1698656231559" duration="162000" />
+      <workItem from="1698744680952" duration="11000" />
+      <workItem from="1699438800915" duration="2074000" />
     </task>
     <task id="LOCAL-00045" summary="Настройка github actions">
       <created>1697463060981</created>
@@ -720,7 +721,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698643153832</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="опять забыл тестовый запрос">
+      <created>1698643723760</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1698643723760</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -769,7 +777,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Исправил баги с шедулером" />
     <MESSAGE value="Исправил баги регистрации, добавил обработку нескольких ошибок от яндекса и битрикса" />
     <MESSAGE value="Доработал обработку ошибок от яндекса и битрикса" />
     <MESSAGE value="Исправил обработку ошибок от яндекса" />
@@ -794,7 +801,8 @@
     <MESSAGE value="Начал подключать yclients, ждем модерацию в их маркете" />
     <MESSAGE value="Устранил баги с менеджментом проектов, с добавлением, удалением и подсчетом количества. &#10;Сделал первую версию подключения Yclients." />
     <MESSAGE value="Исправил бд и ссылку вебхука" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исправил бд и ссылку вебхука" />
+    <MESSAGE value="опять забыл тестовый запрос" />
+    <option name="LAST_COMMIT_MESSAGE" value="опять забыл тестовый запрос" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
