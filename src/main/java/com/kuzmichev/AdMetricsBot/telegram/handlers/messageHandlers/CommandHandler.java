@@ -9,7 +9,6 @@ import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.SettingsKey
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.StartRegistrationKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.TimeZoneKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Registration;
-import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.ProjectsDataTempKeeper;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +31,6 @@ public class CommandHandler {
     MetricsMessageBuilder metricsMessageBuilder;
     UserStateKeeper userStateKeeper;
     CloseButtonKeyboard closeButtonKeyboard;
-    ProjectsDataTempKeeper projectsDataTempKeeper;
 
     public BotApiMethod<?> handleUserCommand(Message message, String userState) {
         String chatId = message.getChatId().toString();
