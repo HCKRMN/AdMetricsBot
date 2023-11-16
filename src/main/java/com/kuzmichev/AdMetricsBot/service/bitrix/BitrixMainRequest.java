@@ -24,6 +24,11 @@ public class BitrixMainRequest {
     @SneakyThrows
     public BitrixData bitrixMainRequest(String projectId){
         Bitrix bitrix = bitrixRepository.findBitrixByProjectId(projectId);
+
+        if (bitrix == null){
+            return null;
+        }
+
         String accessToken = bitrix.getAccessToken();
         String domain = bitrix.getBitrixDomain();
         String chatId = bitrix.getChatId();

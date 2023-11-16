@@ -2,10 +2,13 @@ package com.kuzmichev.AdMetricsBot.telegram.utils;
 
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
-import com.kuzmichev.AdMetricsBot.model.*;
+import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
+import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
+import com.kuzmichev.AdMetricsBot.model.User;
+import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.DoneButtonKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.TimeZoneKeyboard;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -23,8 +26,7 @@ import java.util.Optional;
 public class AddTimer {
     UserRepository userRepository;
     ScheduledMessageRepository scheduledMessageRepository;
-    UserStateEditor userStateEditor;
-    MessageWithReturn messageWithReturn;
+    UserStateKeeper userStateKeeper;
     TimeZoneKeyboard timeZoneKeyboard;
     DoneButtonKeyboard doneButtonKeyboard;
 
@@ -36,7 +38,7 @@ public class AddTimer {
      * @return сообщение о добавлении таймера
      */
 
-    public SendMessage setTimerAndStart(String chatId, String messageText, String userState) {
+    public SendMessage setTimerAndStart(String chatId, String messageText, String state) {
         // Если юзер найден
         Optional<User> user = userRepository.findById(chatId);
         if (user.isPresent()){
@@ -51,22 +53,22 @@ public class AddTimer {
             scheduledMessageRepository.save(scheduledMessage);
 
             // Изменяем статус юзера на рабочий
-            userStateEditor.editState(chatId, StateEnum.WORKING_STATE.getStateName());
+            userStateKeeper.setState(chatId, StateEnum.WORKING_STATE.getStateName());
 
             log.info("Пользователь {} установил таймер на " + timerMessage, chatId);
-            return messageWithReturn.sendMessage(
-                    chatId,
-                    MessageEnum.TIMER_ADDED_MESSAGE.getMessage() + messageText.replace(" ", ":"),
-                    doneButtonKeyboard.doneButtonMenu(),
-                    StateEnum.WORKING_STATE.getStateName());
+
+            return SendMessage.builder()
+                    .chatId(chatId)
+                    .text(MessageEnum.TIMER_ADDED_MESSAGE.getMessage() + messageText.replace(" ", ":"))
+                    .replyMarkup(doneButtonKeyboard.getKeyboard(state, chatId))
+                    .build();
 
         }
-        return messageWithReturn.sendMessage(
-                chatId,
-                MessageEnum.TIMER_ADD_ERROR_MESSAGE.getMessage(),
-                timeZoneKeyboard.timeZoneKeyboard(chatId, userState),
-                null
-        );
-    }
 
+        return SendMessage.builder()
+                .chatId(chatId)
+                .text(MessageEnum.TIMER_ADD_ERROR_MESSAGE.getMessage())
+                .replyMarkup(timeZoneKeyboard.getKeyboard(state, chatId))
+                .build();
+    }
 }

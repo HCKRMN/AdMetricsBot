@@ -18,16 +18,14 @@ import java.util.List;
 public class InputsManager {
     YandexRepository yandexRepository;
     BitrixRepository bitrixRepository;
+    YclientsRepository yclientsRepository;
 
     public void deleteInputs(String projectId, String inputName) {
 
         switch (InputsEnum.valueOf(inputName)) {
-            case Yandex -> {
-                yandexRepository.removeYandexByProjectId(projectId);
-            }
-            case Bitrix24 -> {
-                bitrixRepository.removeBitrixByProjectId(projectId);
-            }
+            case Yandex -> yandexRepository.removeYandexByProjectId(projectId);
+            case Bitrix24 -> bitrixRepository.removeBitrixByProjectId(projectId);
+            case Yclients -> yclientsRepository.removeYclientsByProjectId(projectId);
         }
 
     }
@@ -40,6 +38,9 @@ public class InputsManager {
         }
         if(bitrixRepository.existsByProjectId(projectId)) {
             inputs.add(InputsEnum.Bitrix24);
+        }
+        if(yclientsRepository.existsByProjectId(projectId)) {
+            inputs.add(InputsEnum.Yclients);
         }
 
         return inputs;

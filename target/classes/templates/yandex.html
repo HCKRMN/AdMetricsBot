@@ -10,8 +10,7 @@
 
 <script>
     if (window.location.href.indexOf('#') !== -1) {
-        const newUrl = window.location.href.replace('yandex', 'yandex-r').replace('#', '?');
-        window.location.href = newUrl;
+        window.location.href = window.location.href.replace('yandex', 'yandex-r').replace('#', '?');
     }
 </script>
 </body>

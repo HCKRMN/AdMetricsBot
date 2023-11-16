@@ -8,26 +8,24 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+
+import java.util.List;
 
 @Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class BitrixAddKeyboard {
-    InlineKeyboardMaker inlineKeyboardMaker;
     BitrixAuthUrl bitrixAuthUrl;
     BackAndExitKeyboard backAndExitKeyboard;
     public InlineKeyboardMarkup bitrixLinkMenu(String chatId, String projectId, String userState) {
-        return inlineKeyboardMaker.addMarkup(
-                        inlineKeyboardMaker.addRow(
-                                // Ссылка на получения токена битрикс
-                                inlineKeyboardMaker.addButton(
-                                        ButtonEnum.LINK_BUTTON.getButtonName(),
-                                        null,
-                                        bitrixAuthUrl.getBitrixAuthorizationUrl(chatId, projectId, userState)
-                                )
-                        ),
-                        backAndExitKeyboard.backAndExitMenuButtons(userState)
-        );
+        return InlineKeyboardMarkup.builder()
+                .keyboardRow(List.of(InlineKeyboardButton.builder()
+                                .text(ButtonEnum.LINK_BUTTON.getButtonName())
+                                .url(bitrixAuthUrl.getBitrixAuthorizationUrl(chatId, projectId, userState))
+                        .build()))
+                .keyboardRow(backAndExitKeyboard.getButtons(userState))
+                .build();
     }
 }

@@ -15,9 +15,13 @@ public class YclientsMessageBuilder {
     YclientsMainRequest yclientsMainRequest;
 
     public String getMessage(String projectId) {
-
         StringBuilder message = new StringBuilder();
         YclientsData yclientsData = yclientsMainRequest.yclientsMainRequest(projectId);
+
+        if (yclientsData == null) {
+            return "";
+        }
+
         int requestStatus = yclientsData.getRequestStatus();
 
         message.append("Yclients").append("\n");

@@ -1,6 +1,5 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
-import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessage;
 import com.kuzmichev.AdMetricsBot.model.ScheduledMessageRepository;
 import com.kuzmichev.AdMetricsBot.model.User;
@@ -28,12 +27,12 @@ public class Registration{
             User user = new User();
             user.setChatId(chatId);
             user.setUserName(userName);
-            user.setUserState(StateEnum.REGISTRATION_STATE.getStateName());
-            user.setProjectsCount(0);
-            user.setProjectsPage(0);
             userRepository.save(user);
 
-            log.info("Пользователь {} сохранен: {}" , chatId, user);
+            log.info("Пользователь {} сохранен" , chatId);
+
+        } else {
+            log.info("Пользователь {} уже зарегистрирован" , chatId);
         }
     }
 }

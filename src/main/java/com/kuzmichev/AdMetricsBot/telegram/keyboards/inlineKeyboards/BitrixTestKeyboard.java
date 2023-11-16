@@ -9,46 +9,35 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+
+import java.util.List;
 
 @Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class BitrixTestKeyboard {
-    InlineKeyboardMaker inlineKeyboardMaker;
 
     public InlineKeyboardMarkup bitrixTestMenu(String userState) {
         String callBack = CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName();
-        if (userState.equals(StateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName())) {
-            callBack = CallBackEnum.UNIVERSAL_EDIT_TIMER_CALLBACK.getCallBackName();
+        if (userState.contains(StateEnum.REGISTRATION.getStateName())) {
+            callBack = CallBackEnum.EDIT_TIMER_CALLBACK.getCallBackName();
         }
 
-        return inlineKeyboardMaker.addMarkup(
-                        //Кнопка тестового запроса
-                        inlineKeyboardMaker.addRow(
-                                inlineKeyboardMaker.addButton(
-                                        ButtonEnum.TEST_INPUTS_BUTTON.getButtonName(),
-                                        CallBackEnum.TEST_BITRIX_CALLBACK.getCallBackName(),
-                                        null
-                                )
-                        ),
-                        //Кнопка добавить другие токены
-                        inlineKeyboardMaker.addRow(
-                                inlineKeyboardMaker.addButton(
-                                        ButtonEnum.SETTINGS_ADD_ACCOUNTS_BUTTON.getButtonName(),
-                                        CallBackEnum.ADD_INPUTS_CALLBACK.getCallBackName(),
-                                        null
-                                )
-                        ),
-                        //Кнопка продолжить
-                        inlineKeyboardMaker.addRow(
-                                inlineKeyboardMaker.addButton(
-                                        ButtonEnum.UNIVERSAL_CONTINUE_BUTTON.getButtonName(),
-                                        callBack,
-                                        null
-                                )
-                        )
-
-        );
+        return InlineKeyboardMarkup.builder()
+                .keyboardRow(List.of(InlineKeyboardButton.builder()
+                        .text(ButtonEnum.TEST_INPUTS_BUTTON.getButtonName())
+                        .callbackData(CallBackEnum.TEST_BITRIX_CALLBACK.getCallBackName())
+                        .build()))
+                .keyboardRow(List.of(InlineKeyboardButton.builder()
+                        .text(ButtonEnum.SETTINGS_ADD_ACCOUNTS_BUTTON.getButtonName())
+                        .callbackData(CallBackEnum.ADD_INPUTS_CALLBACK.getCallBackName())
+                        .build()))
+                .keyboardRow(List.of(InlineKeyboardButton.builder()
+                        .text(ButtonEnum.CONTINUE_BUTTON.getButtonName())
+                        .callbackData(callBack)
+                        .build()))
+                .build();
     }
 }

@@ -2,8 +2,8 @@ package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards;
 
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.InputsEnum;
-import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
 import com.kuzmichev.AdMetricsBot.telegram.utils.InputsManager;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.ProjectsDataTempKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,28 +20,25 @@ import java.util.List;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class DeleteInputsKeyboard {
-    InlineKeyboardMaker inlineKeyboardMaker;
-    TempDataRepository tempDataRepository;
     BackAndExitKeyboard backAndExitKeyboard;
     InputsManager inputsManager;
+    ProjectsDataTempKeeper projectsDataTempKeeper;
     public InlineKeyboardMarkup deleteInputsMenu(String chatId, String userState) {
-        String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
+        String projectId = projectsDataTempKeeper.getLastProjectId(chatId);
         List<InputsEnum> inputs = inputsManager.getInputsByProjectId(projectId);
 
         List<List<InlineKeyboardButton>> rows = new ArrayList<>();
 
         for (InputsEnum input : inputs) {
-            rows.add(
-                    inlineKeyboardMaker.addRow(
-                            inlineKeyboardMaker.addButton(
-                                    input.getInputName(),
-                                    CallBackEnum.INPUT_CALLBACK.getCallBackName() + input.getInputName(),
-                                    null
-                            )
-                    )
-            );
+            rows.add(List.of(InlineKeyboardButton.builder()
+                    .text(input.getInputName())
+                    .callbackData(CallBackEnum.INPUT_CALLBACK.getCallBackName() + input.getInputName())
+                    .build()));
         }
-        rows.add(backAndExitKeyboard.backAndExitMenuButtons(userState));
-        return inlineKeyboardMaker.addMarkup(rows);
+        rows.add(backAndExitKeyboard.getButtons(userState));
+
+        return InlineKeyboardMarkup.builder()
+                .keyboard(rows)
+                .build();
     }
 }

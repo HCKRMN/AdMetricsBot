@@ -9,6 +9,7 @@ import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.CloseButton
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.YclientsTestKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.ProjectsDataTempKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -37,7 +38,7 @@ public class YclientsController {
 
     final YclientsRepository yclientsRepository;
     final UserRepository userRepository;
-    final TempDataRepository tempDataRepository;
+    final ProjectsDataTempKeeper projectsDataTempKeeper;
     final MessageWithoutReturn messageWithoutReturn;
     final CloseButtonKeyboard closeButtonKeyboard;
     final MessageManagementService messageManagementService;
@@ -68,11 +69,11 @@ public class YclientsController {
 
         if (user != null) {
             String chatId = user.getChatId();
-            String userState = user.getUserState();
+            String userState = "";
+//                    user.getUserState();
 
             // Получение временных данных пользователя
-            TempData tempData = tempDataRepository.getByChatId(chatId);
-            String projectId = tempData.getLastProjectId();
+            String projectId = projectsDataTempKeeper.getLastProjectId(chatId);
 
             if (projectId == null) {
                 // Отправка сообщения, если проект не найден
@@ -107,8 +108,10 @@ public class YclientsController {
             HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
 
             // Удаление предыдущих сообщений и отправка нового
-            int messageId = tempData.getLastMessageId();
-            messageManagementService.putMessageToQueue(chatId, messageId+3);
+//            int messageId = tempData.getLastMessageId();
+//            messageManagementService.putMessageToQueue(chatId, messageId+3);
+//            int lastMessageId = messageManagementService.getLastMessageId(chatId);
+//            messageManagementService.putMessageToQueue(chatId, lastMessageId-1);
             messageManagementService.deleteMessage(chatId);
 
             try {
@@ -127,12 +130,12 @@ public class YclientsController {
                     messageWithoutReturn.sendMessage(
                             chatId,
                             MessageEnum.REGISTRATION_TEST_INPUTS_MESSAGE.getMessage(),
-                            yclientsTestKeyboard.yclientsTestMenu(userState));
+                            yclientsTestKeyboard.getKeyboard(userState, chatId));
                 } else {
                     messageWithoutReturn.sendMessage(
                             chatId,
                             MessageEnum.INPUT_TEST_MESSAGE.getMessage(),
-                            yclientsTestKeyboard.yclientsTestMenu(userState));
+                            yclientsTestKeyboard.getKeyboard(userState, chatId));
                 }
 
                 log.info("Пользователь {} добавил Yclients", chatId);

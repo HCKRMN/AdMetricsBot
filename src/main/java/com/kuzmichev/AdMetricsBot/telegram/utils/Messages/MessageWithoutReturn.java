@@ -1,6 +1,5 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils.Messages;
 
-import com.kuzmichev.AdMetricsBot.telegram.utils.UserStateEditor;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -9,7 +8,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
 @Slf4j
@@ -18,27 +16,27 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 @RequiredArgsConstructor
 public class MessageWithoutReturn {
     ApplicationEventPublisher eventPublisher;
-    UserStateEditor stateEditor;
+//    UserStateKeeper stateEditor;
 
-    public void editMessage(
-            String chatId,
-            int messageId,
-            String text,
-            String state,
-            InlineKeyboardMarkup keyboard) {
-
-        EditMessageText message = new EditMessageText();
-        message.setChatId(chatId);
-        message.setMessageId(messageId);
-        message.setText(text);
-        if (state != null) {
-            stateEditor.editState(chatId, state);
-        }
-        if (keyboard != null) {
-            message.setReplyMarkup(keyboard);
-        }
-        eventPublisher.publishEvent(message);
-    }
+//    public void editMessage(
+//            String chatId,
+//            int messageId,
+//            String text,
+//            String state,
+//            InlineKeyboardMarkup keyboard) {
+//
+//        EditMessageText message = new EditMessageText();
+//        message.setChatId(chatId);
+//        message.setMessageId(messageId);
+//        message.setText(text);
+//        if (state != null) {
+//            stateEditor.setState(chatId, state);
+//        }
+//        if (keyboard != null) {
+//            message.setReplyMarkup(keyboard);
+//        }
+//        eventPublisher.publishEvent(message);
+//    }
 
     public void sendMessage(String chatId, String textToSend) {
         SendMessage message = new SendMessage();

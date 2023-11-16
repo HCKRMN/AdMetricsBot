@@ -2,9 +2,9 @@ package com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project;
 
 import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
-import com.kuzmichev.AdMetricsBot.model.UserRepository;
+import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.InlineKeyboardMaker;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.InlineKeyboard;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -19,36 +19,27 @@ import java.util.List;
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class ProjectsKeyboard {
-    UserRepository userRepository;
-    InlineKeyboardMaker inlineKeyboardMaker;
+public class ProjectsKeyboard implements InlineKeyboard {
     BackAndExitKeyboard backAndExitKeyboard;
-    public InlineKeyboardMarkup projectsMenu(String chatId, String userState) {
+    ProjectRepository projectRepository;
 
-
+    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
         // Кнопка получения списка проектов
-        List<InlineKeyboardButton> projectsButton = inlineKeyboardMaker.addRow(
-                inlineKeyboardMaker.addButton(
-                        ButtonEnum.PROJECTS_GET_LIST_BUTTON.getButtonName(),
-                        CallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName(),
-                        null
-                )
-        );
-        if (userRepository.getProjectsCountByChatId(chatId) == 0) {
+        List<InlineKeyboardButton> projectsButton = List.of(InlineKeyboardButton.builder()
+                .text(ButtonEnum.PROJECTS_GET_LIST_BUTTON.getButtonName())
+                .callbackData(CallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName())
+                .build());
+
+        if (projectRepository.findProjectsCountByChatId(chatId) == 0) {
             projectsButton = null;
         }
-
-        return inlineKeyboardMaker.addMarkup(
-                    inlineKeyboardMaker.addRow(
-                            inlineKeyboardMaker.addButton(
-                                    ButtonEnum.PROJECT_CREATE_BUTTON.getButtonName(),
-                                    CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName(),
-                                    null
-                            )
-
-                )
-                        ,projectsButton
-                        ,backAndExitKeyboard.backAndExitMenuButtons(userState)
-        );
+        return InlineKeyboardMarkup.builder()
+                .keyboardRow(List.of(InlineKeyboardButton.builder()
+                        .text(ButtonEnum.PROJECT_CREATE_BUTTON.getButtonName())
+                        .callbackData(CallBackEnum.PROJECT_CREATE_ASK_NAME_CALLBACK.getCallBackName())
+                        .build()))
+                .keyboardRow(projectsButton)
+                .keyboardRow(backAndExitKeyboard.getButtons(userState))
+                .build();
     }
 }

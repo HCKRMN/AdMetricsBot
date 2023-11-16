@@ -18,6 +18,10 @@ public class BitrixMessageBuilder {
         StringBuilder message = new StringBuilder();
         BitrixData bitrixData = bitrixMainRequest.bitrixMainRequest(projectId);
 
+        if(bitrixData == null){
+            return "";
+        }
+
         int newLeads = bitrixData.getNewLeads();
         int successDeals = bitrixData.getSuccessDeals();
         int failedDeals = bitrixData.getFailedDeals();

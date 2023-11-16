@@ -3,9 +3,7 @@ package com.kuzmichev.AdMetricsBot.service.yandex;
 import com.kuzmichev.AdMetricsBot.model.Yandex;
 import com.kuzmichev.AdMetricsBot.model.YandexData;
 import com.kuzmichev.AdMetricsBot.model.YandexRepository;
-import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -30,6 +28,11 @@ public class YandexMainRequest {
 
     public YandexData yandexMainRequest(String projectId){
         Yandex yandex = yandexRepository.findByProjectId(projectId);
+
+        if (yandex == null) {
+            return null;
+        }
+
         String chatId = yandex.getChatId();
         String bearer = yandex.getYandexToken();
 

@@ -3,34 +3,32 @@ package com.kuzmichev.AdMetricsBot.controllers;
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.model.*;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.CloseButtonKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.YandexTestKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.ProjectsDataTempKeeper;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
 @Slf4j
+@Controller
+@AllArgsConstructor
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 public class YandexController2 {
-    private final YandexRepository yandexRepository;
-    private final TempDataRepository tempDataRepository;
-    private final MessageWithoutReturn messageWithoutReturn;
-    private final YandexTestKeyboard yandexTestKeyboard;
-    private final MessageManagementService messageManagementService;
-
-    public YandexController2(YandexRepository yandexRepository,
-                             TempDataRepository tempDataRepository,
-                             MessageWithoutReturn messageWithoutReturn,
-                             YandexTestKeyboard yandexTestKeyboard,
-                             MessageManagementService messageManagementService) {
-        this.yandexRepository = yandexRepository;
-        this.tempDataRepository = tempDataRepository;
-        this.messageWithoutReturn = messageWithoutReturn;
-        this.yandexTestKeyboard = yandexTestKeyboard;
-        this.messageManagementService = messageManagementService;
-    }
+    YandexRepository yandexRepository;
+    ProjectsDataTempKeeper projectsDataTempKeeper;
+    MessageWithoutReturn messageWithoutReturn;
+    YandexTestKeyboard yandexTestKeyboard;
+    MessageManagementService messageManagementService;
+    UserStateKeeper userStateKeeper;
+    CloseButtonKeyboard closeButtonKeyboard;
 
     @RequestMapping(value = "/yandex-r")
     public String getYaToken(@RequestParam(name = "access_token") String yaToken,
@@ -44,37 +42,45 @@ public class YandexController2 {
             chatId = parts[0];
             userState = parts[1];
 
-            TempData tempData = tempDataRepository.getByChatId(chatId);
+            String projectId = projectsDataTempKeeper.getLastProjectId(chatId);
 
-            String projectId = tempData.getLastProjectId();
+            if(projectId == null) {
+                messageWithoutReturn.sendMessage(
+                        chatId,
+                        MessageEnum.ERROR_PROJECT_ID_NULL_MESSAGE.getMessage(),
+                        closeButtonKeyboard.closeButtonKeyboard());
+                return "yandexError";
+            }
+
             Yandex yandex = new Yandex();
             yandex.setChatId(chatId);
             yandex.setYandexToken(yaToken);
             yandex.setProjectId(projectId);
             yandexRepository.save(yandex);
 
-            int messageId = tempData.getLastMessageId();
-            messageManagementService.putMessageToQueue(chatId, messageId);
             messageManagementService.deleteMessage(chatId);
 
-            if (userState.equals(StateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName())) {
+            if (userState.contains(StateEnum.REGISTRATION.getStateName())) {
+                String newState = StateEnum.REGISTRATION_ADD_YANDEX_TEST_STATE.getStateName();
+                userStateKeeper.setState(chatId, newState);
                 messageWithoutReturn.sendMessage(
                         chatId,
                         MessageEnum.REGISTRATION_TEST_INPUTS_MESSAGE.getMessage(),
-                        yandexTestKeyboard.yandexTestMenu(userState));
+                        yandexTestKeyboard.getKeyboard(newState, chatId));
 
             } else {
+                String newState = StateEnum.SETTINGS_ADD_YANDEX_TEST_STATE.getStateName();
+                userStateKeeper.setState(chatId, newState);
                 messageWithoutReturn.sendMessage(
                         chatId,
                         MessageEnum.INPUT_TEST_MESSAGE.getMessage(),
-                        yandexTestKeyboard.yandexTestMenu(userState));
+                        yandexTestKeyboard.getKeyboard(newState, chatId));
             }
             log.info("Пользователь {} добавил аккаунт Yandex", chatId);
-
         }
         else {
             log.info("Ошибка обработки chatId_userState: {}", chatId_userState);
         }
-        return "bitrix";
+        return "yandex-r";
     }
 }

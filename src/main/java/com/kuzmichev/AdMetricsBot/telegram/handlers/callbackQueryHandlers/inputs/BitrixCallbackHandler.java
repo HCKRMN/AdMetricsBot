@@ -3,74 +3,49 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.input
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
-import com.kuzmichev.AdMetricsBot.model.TempDataRepository;
-import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMessageBuilder;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BitrixTestKeyboard;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
-import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
-
-import java.util.Objects;
 
 @Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class BitrixCallbackHandler implements CallbackHandler {
-    MessageWithReturn messageWithReturn;
     BackAndExitKeyboard backAndExitKeyboard;
-    TempDataRepository tempDataRepository;
-    BitrixMessageBuilder bitrixMessageBuilder;
-    BitrixTestKeyboard bitrixTestKeyboard;
-    TempDataSaver tempDataSaver;
+    UserStateKeeper userStateKeeper;
 
     @Override
     public boolean canHandle(String data) {
-        return Objects.equals(data, CallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName())
-                || Objects.equals(data, CallBackEnum.TEST_BITRIX_CALLBACK.getCallBackName());
+        return data.equals(CallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName());
     }
 
     @Override
     public BotApiMethod<?> handleCallback(CallbackQuery buttonQuery, String userState) {
         String chatId = buttonQuery.getMessage().getChatId().toString();
-        String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        if (Objects.equals(data, CallBackEnum.ADD_BITRIX_STEP_1_CALLBACK.getCallBackName())) {
-
-            String newState = StateEnum.SETTINGS_PROJECT_ADD_BITRIX_STATE.getStateName();
-            if(userState.equals(StateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName())) {
-                newState = StateEnum.REGISTRATION_ADD_BITRIX_STATE.getStateName();
-            }
-
-            tempDataSaver.tempLastMessageId(chatId, messageId);
-            return messageWithReturn.editMessage(
-                    chatId,
-                    messageId,
-                    MessageEnum.ADD_BITRIX_STEP_1_MESSAGE.getMessage(),
-                    newState,
-                    backAndExitKeyboard.backAndExitMenu(userState));
+        String newState;
+        if (userState.contains(StateEnum.REGISTRATION.getStateName())) {
+            newState = StateEnum.REGISTRATION_ADD_BITRIX_STATE.getStateName();
+        } else {
+            newState = StateEnum.SETTINGS_ADD_BITRIX_STATE.getStateName();
         }
-        if (Objects.equals(data, CallBackEnum.TEST_BITRIX_CALLBACK.getCallBackName())) {
-            String projectId = tempDataRepository.findLastProjectIdByChatId(chatId);
+        userStateKeeper.setState(chatId, newState);
 
-            return messageWithReturn.editMessage(
-                    chatId,
-                    messageId,
-                    bitrixMessageBuilder.getMessage(projectId),
-                    null,
-                    bitrixTestKeyboard.bitrixTestMenu(userState));
-        }
-
-        return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
+        return EditMessageText.builder()
+                .chatId(chatId)
+                .messageId(messageId)
+                .text(MessageEnum.ADD_BITRIX_STEP_1_MESSAGE.getMessage())
+                .replyMarkup(backAndExitKeyboard.getKeyboard(newState, chatId))
+                .build();
     }
 }

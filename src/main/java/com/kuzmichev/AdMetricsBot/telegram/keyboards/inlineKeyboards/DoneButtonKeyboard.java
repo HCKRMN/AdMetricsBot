@@ -8,23 +8,22 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+
+import java.util.List;
 
 @Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class DoneButtonKeyboard {
-    InlineKeyboardMaker inlineKeyboardMaker;
+public class DoneButtonKeyboard implements InlineKeyboard{
     // Кнопка Готово
-    public InlineKeyboardMarkup doneButtonMenu() {
-        return inlineKeyboardMaker.addMarkup(
-                    inlineKeyboardMaker.addRow(
-                            inlineKeyboardMaker.addButton(
-                                    ButtonEnum.DONE_BUTTON.getButtonName(),
-                                    CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
-                                    null
-                            )
-                    )
-        );
+    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
+        return InlineKeyboardMarkup.builder()
+                .keyboardRow(List.of(InlineKeyboardButton.builder()
+                        .text(ButtonEnum.DONE_BUTTON.getButtonName())
+                        .callbackData(CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName())
+                        .build()))
+                .build();
     }
 }

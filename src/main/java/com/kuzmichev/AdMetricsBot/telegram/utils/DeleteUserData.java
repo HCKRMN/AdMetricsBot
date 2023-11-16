@@ -17,13 +17,11 @@ public class DeleteUserData {
     UserRepository userRepository;
     YandexRepository yandexRepository;
     ProjectRepository projectRepository;
-    TempDataRepository tempDataRepository;
     YclientsRepository yclientsRepository;
 
     public void deleteUserData(String chatId) {
         userRepository.removeUserByChatId(chatId);
         scheduledMessageRepository.removeScheduledMessageByChatId(chatId);
-        tempDataRepository.removeTempDataByChatId(chatId);
 
         projectRepository.removeProjectsByChatId(chatId);
 

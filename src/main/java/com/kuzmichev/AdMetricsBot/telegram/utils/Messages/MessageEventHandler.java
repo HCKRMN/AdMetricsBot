@@ -1,7 +1,6 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils.Messages;
 
 import com.kuzmichev.AdMetricsBot.telegram.AdMetricsBot;
-import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,14 +17,14 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @RequiredArgsConstructor
 public class MessageEventHandler {
     AdMetricsBot adMetricsBot;
-    TempDataSaver tempDataSaver;
+    MessageManagementService messageManagementService;
 
     @EventListener
     public void handleSendMessageEvent(SendMessage message) {
         try {
             int messageId = adMetricsBot.execute(message).getMessageId();
             String chatId = message.getChatId();
-            tempDataSaver.tempLastMessageId(chatId, messageId);
+            messageManagementService.putMessageToQueue(chatId, messageId);
         } catch (TelegramApiException e) {
             log.error("ERROR_TEXT" + e.getMessage());
         }

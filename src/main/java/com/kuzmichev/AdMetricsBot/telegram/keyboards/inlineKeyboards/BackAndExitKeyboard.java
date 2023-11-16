@@ -17,47 +17,39 @@ import java.util.List;
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class BackAndExitKeyboard {
-    InlineKeyboardMaker inlineKeyboardMaker;
-    public List<InlineKeyboardButton> backAndExitMenuButtons(String userState) {
-
-        if(userState.contains("SETTINGS")) {
-            String backButtonSettingsCallBackEnum;
-            switch (StateEnum.valueOf(userState)) {
-                case SETTINGS_EDIT_STATE,
-                        EDIT_TIMER_STATE,
-                        SETTINGS_PROJECTS_STATE,
-                        SETTINGS_EDIT_TIMEZONE_STATE -> backButtonSettingsCallBackEnum = CallBackEnum.SETTINGS_BACK_CALLBACK.getCallBackName();
-
-                case SETTINGS_PROJECT_CREATE_STATE,
-                        SETTINGS_ADD_INPUTS_STATE -> backButtonSettingsCallBackEnum = CallBackEnum.PROJECTS_CALLBACK.getCallBackName();
-
-                default -> backButtonSettingsCallBackEnum = CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName();
-            }
-            return inlineKeyboardMaker.addRow(
-                    // Кнопка назад
-                    inlineKeyboardMaker.addButton(
-                            ButtonEnum.SETTINGS_BACK_BUTTON.getButtonName(),
-                            backButtonSettingsCallBackEnum,
-                            null
-                    ),
-                    // Кнопка выход
-                    inlineKeyboardMaker.addButton(
-                            ButtonEnum.SETTINGS_EXIT_BUTTON.getButtonName(),
-                            CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName(),
-                            null
-                    )
-            );
-        } else {
-//          Возвращаем null потому что в этом случае кнопки нам ненужны
-            return null;
+public class BackAndExitKeyboard implements InlineKeyboard {
+    public List<InlineKeyboardButton> getButtons(String userState) {
+            // Возвращаем пустой лист так как при регистрации пользователь не может выйти
+        if (userState.contains(StateEnum.REGISTRATION.getStateName())) {
+            return List.of();
         }
 
+        String backButtonSettingsCallBackEnum;
+        switch (StateEnum.valueOf(userState)) {
+            case SETTINGS_STATE,
+                    SETTINGS_EDIT_TIMER_STATE,
+                    SETTINGS_PROJECTS_STATE,
+                    SETTINGS_EDIT_TIMEZONE_STATE -> backButtonSettingsCallBackEnum = CallBackEnum.SETTINGS_BACK_CALLBACK.getCallBackName();
+
+            case SETTINGS_PROJECT_CREATE_STATE,
+                    SETTINGS_ADD_INPUTS_STATE -> backButtonSettingsCallBackEnum = CallBackEnum.PROJECTS_CALLBACK.getCallBackName();
+
+            default -> backButtonSettingsCallBackEnum = CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName();
+        }
+
+        return List.of(InlineKeyboardButton.builder()
+                        .text(ButtonEnum.SETTINGS_BACK_BUTTON.getButtonName())
+                        .callbackData(backButtonSettingsCallBackEnum)
+                        .build(),
+                InlineKeyboardButton.builder()
+                        .text(ButtonEnum.SETTINGS_EXIT_BUTTON.getButtonName())
+                        .callbackData(CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName())
+                        .build());
     }
+
     // Универсальное меню с двумя кнопками: Назад и Выход
-    public InlineKeyboardMarkup backAndExitMenu(String userState) {
-        return inlineKeyboardMaker.addMarkup(
-                        backAndExitMenuButtons(userState)
-        );
+    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
+        return InlineKeyboardMarkup.builder()
+                .keyboardRow(getButtons(userState)).build();
     }
 }

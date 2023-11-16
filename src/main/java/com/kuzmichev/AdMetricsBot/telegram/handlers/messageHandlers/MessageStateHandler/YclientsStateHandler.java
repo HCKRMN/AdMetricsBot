@@ -3,39 +3,41 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers.MessageStat
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.YclientsAddKeyboard;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
-import com.kuzmichev.AdMetricsBot.telegram.utils.TempDataSaver;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-
-import java.util.Objects;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 @Slf4j
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class YclientsStateHandler implements StateHandler {
-    MessageWithReturn messageWithReturn;
-    TempDataSaver tempDataSaver;
     YclientsAddKeyboard yclientsAddKeyboard;
 
     @Override
     public boolean canHandle(String userStateEnum) {
-        return Objects.equals(userStateEnum, StateEnum.SETTINGS_PROJECT_ADD_YCLIENTS_STATE.getStateName())
-                || Objects.equals(userStateEnum, StateEnum.REGISTRATION_ADD_YCLIENTS_STATE.getStateName());
+        return userStateEnum.equals(StateEnum.SETTINGS_ADD_YCLIENTS_STATE.getStateName())
+                || userStateEnum.equals(StateEnum.REGISTRATION_ADD_YCLIENTS_STATE.getStateName());
     }
 
     @Override
-    public BotApiMethod<?> handleState(String chatId, String messageText, String userState, int messageId) {
-        tempDataSaver.tempLastMessageId(chatId, messageId);
-        return messageWithReturn.sendMessage(
-                chatId,
-                MessageEnum.ADD_YCLIENTS_STEP_2_MESSAGE.getMessage(),
-                yclientsAddKeyboard.addYclientsMenu(chatId, userState),
-                null);
+    public BotApiMethod<?> handleState(String chatId, String messageText, String userState) {
+        if (messageText == null){
+            return SendMessage.builder()
+                    .chatId(chatId)
+                    .text(MessageEnum.ADD_YCLIENTS_STEP_2_MESSAGE.getMessage())
+                    .replyMarkup(yclientsAddKeyboard.getKeyboard(userState, chatId))
+                    .build();
+
+        } else {
+            return SendMessage.builder()
+                    .chatId(chatId)
+                    .text(MessageEnum.PHONE_INPUT_ERROR_MESSAGE.getMessage())
+                    .build();
+        }
     }
 }

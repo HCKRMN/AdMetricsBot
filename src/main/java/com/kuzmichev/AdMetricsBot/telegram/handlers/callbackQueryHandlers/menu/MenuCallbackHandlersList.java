@@ -1,14 +1,18 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.menu;
 
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
-import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.universal.TimeZoneMenuCallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.menu.deleteMenu.DeleteUserStepOneCallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.menu.deleteMenu.DeleteUserStepTwoCallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.menu.deleteMenu.NotDeleteUserCallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.menu.notifications.DisableNotificationsCallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.menu.notifications.EnableNotificationsCallbackHandler;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -16,21 +20,27 @@ import java.util.List;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class MenuCallbackHandlersList {
-    BackAndExitCallbackHandler backAndExitCallbackHandler;
-    DeleteUserCallbackHandler deleteUserCallbackHandler;
+    BackCallbackHandler backCallbackHandler;
+    DeleteUserStepOneCallbackHandler deleteUserStepOneCallbackHandler;
+    DeleteUserStepTwoCallbackHandler deleteUserStepTwoCallbackHandler;
+    NotDeleteUserCallbackHandler notDeleteUserCallbackHandler;
     EditLanguageCallbackHandler editLanguageCallbackHandler;
     EditTimerCallbackHandler editTimerCallbackHandler;
-    NotificationControllerCallbackHandler notificationControllerCallbackHandler;
-    TimeZoneMenuCallbackHandler timeZoneMenuCallbackHandler;
+    EnableNotificationsCallbackHandler enableNotificationsCallbackHandler;
+    ExitCallbackHandler exitCallbackHandler;
+    DisableNotificationsCallbackHandler disableNotificationsCallbackHandler;
 
     public List<CallbackHandler> getCallbackHandlers() {
-        List<CallbackHandler> callbackHandlers = new ArrayList<>();
-        callbackHandlers.add(backAndExitCallbackHandler);
-        callbackHandlers.add(deleteUserCallbackHandler);
-        callbackHandlers.add(editLanguageCallbackHandler);
-        callbackHandlers.add(editTimerCallbackHandler);
-        callbackHandlers.add(notificationControllerCallbackHandler);
-        callbackHandlers.add(timeZoneMenuCallbackHandler);
-        return callbackHandlers;
+        return Arrays.asList(
+                backCallbackHandler,
+                notDeleteUserCallbackHandler,
+                editLanguageCallbackHandler,
+                editTimerCallbackHandler,
+                enableNotificationsCallbackHandler,
+                disableNotificationsCallbackHandler,
+                exitCallbackHandler,
+                deleteUserStepOneCallbackHandler,
+                deleteUserStepTwoCallbackHandler
+        );
     }
 }

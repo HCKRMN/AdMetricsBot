@@ -19,6 +19,10 @@ public class YandexMessageBuilder {
         StringBuilder message = new StringBuilder();
         YandexData yandexData = yandexMainRequest.yandexMainRequest(projectId);
 
+        if (yandexData == null) {
+            return "";
+        }
+
         int impressions = yandexData.getImpressions();
         int clicks = yandexData.getClicks();
         double ctr = yandexData.getCtr();

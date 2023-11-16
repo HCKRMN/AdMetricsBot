@@ -1,6 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
 import com.kuzmichev.AdMetricsBot.model.*;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.ProjectsDataTempKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -15,15 +16,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ProjectManager {
     ProjectRepository projectRepository;
-    TempDataRepository tempDataRepository;
-    UserRepository userRepository;
+    ProjectsDataTempKeeper projectsDataTempKeeper;
 
     public void projectCreate(String chatId, String messageText) {
 
-        User user = userRepository.findByChatId(chatId).orElseGet(User::new);
-
-        long nextProjectNumber = user.getLastProjectNumber() + 1;
-        long projectCount = user.getProjectsCount() + 1;
+        long nextProjectNumber = projectRepository.findMaxProjectNumberByChatId(chatId) + 1;
 
         // Генерируем UUID и переводим в текст
         String projectId = UUID.randomUUID().toString();
@@ -35,15 +32,7 @@ public class ProjectManager {
         project.setProjectNumber(nextProjectNumber);
         projectRepository.save(project);
 
-        user.setChatId(chatId);
-        user.setProjectsCount(projectCount);
-        user.setLastProjectNumber(nextProjectNumber);
-        userRepository.save(user);
-
-        TempData tempData = new TempData();
-        tempData.setLastProjectId(projectId);
-        tempData.setChatId(chatId);
-        tempDataRepository.save(tempData);
+        projectsDataTempKeeper.setLastProjectId(chatId, projectId);
     }
 }
 

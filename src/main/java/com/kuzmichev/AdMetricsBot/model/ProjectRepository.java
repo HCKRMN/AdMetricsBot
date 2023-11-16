@@ -2,6 +2,7 @@ package com.kuzmichev.AdMetricsBot.model;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -17,5 +18,14 @@ public interface ProjectRepository extends CrudRepository<Project, String> {
 
     @Transactional
     void removeProjectByProjectId(String projectId);
+
+    @Query("SELECT COUNT(p) FROM projectTable p WHERE p.chatId = :chatId")
+    int findProjectsCountByChatId(@Param("chatId") String chatId);
+
+    @Query("SELECT COALESCE(MAX(p.projectNumber), 0) FROM projectTable p WHERE p.chatId = :chatId")
+    Long findMaxProjectNumberByChatId(@Param("chatId") String chatId);
+
+    Project findProjectByProjectId(String projectId);
+
 
 }

@@ -22,6 +22,11 @@ public class YclientsMainRequest {
 
     public YclientsData yclientsMainRequest(String projectId){
         Yclients yclients = yclientsRepository.findYclientsByProjectId(projectId);
+
+        if(yclients == null){
+            return null;
+        }
+
         String salonId = yclients.getSalonId();
         String testConnection = yclientsTestConnection.yclientsTestConnection(salonId);
         String chatId = yclients.getChatId();

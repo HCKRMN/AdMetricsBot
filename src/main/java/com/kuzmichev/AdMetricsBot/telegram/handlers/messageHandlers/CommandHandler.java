@@ -4,14 +4,13 @@ import com.kuzmichev.AdMetricsBot.constants.CommandEnum;
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.service.MetricsMessageBuilder;
-import com.kuzmichev.AdMetricsBot.service.yclients.YclientsMessageBuilder;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.CloseButtonKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.SettingsKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.StartRegistrationKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.TimeZoneKeyboard;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithReturn;
-import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Registration;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.ProjectsDataTempKeeper;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -27,14 +26,13 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 @RequiredArgsConstructor
 public class CommandHandler {
     SettingsKeyboard settingsKeyboard;
-    MessageWithoutReturn messageWithoutReturn;
-    MessageWithReturn messageWithReturn;
     StartRegistrationKeyboard startRegistrationKeyboard;
     Registration registration;
     TimeZoneKeyboard timeZoneKeyboard;
-    YclientsMessageBuilder yclientsMessageBuilder;
     MetricsMessageBuilder metricsMessageBuilder;
+    UserStateKeeper userStateKeeper;
     CloseButtonKeyboard closeButtonKeyboard;
+    ProjectsDataTempKeeper projectsDataTempKeeper;
 
     public BotApiMethod<?> handleUserCommand(Message message, String userState) {
         String chatId = message.getChatId().toString();
@@ -45,41 +43,51 @@ public class CommandHandler {
         if (commandEnum != null) {
             switch (commandEnum) {
                 case START -> {
-                    return messageWithReturn.sendMessage(
-                            chatId,
-                            MessageEnum.START_MESSAGE.getMessage(),
-                            startRegistrationKeyboard.startRegistrationKeyboard(),
-                            StateEnum.REGISTRATION_STATE.getStateName()
-                    );
+                    userStateKeeper.setState(chatId, StateEnum.REGISTRATION_STATE.getStateName());
+                    return SendMessage.builder()
+                            .chatId(chatId)
+                            .text(MessageEnum.START_MESSAGE.getMessage())
+                            .replyMarkup(startRegistrationKeyboard.getKeyboard(userState, chatId))
+                            .build();
                 }
+
                 case SETTINGS -> {
-                    return messageWithReturn.sendMessage(
-                            chatId,
-                            MessageEnum.SETTINGS_MENU_MESSAGE.getMessage(),
-                            settingsKeyboard.settingsMenu(chatId),
-                            StateEnum.SETTINGS_EDIT_STATE.getStateName());
+                    userStateKeeper.setState(chatId, StateEnum.SETTINGS_STATE.getStateName());
+                    return SendMessage.builder()
+                            .chatId(chatId)
+                            .text(MessageEnum.SETTINGS_MENU_MESSAGE.getMessage())
+                            .replyMarkup(settingsKeyboard.getKeyboard(userState, chatId))
+                            .build();
                 }
+
                 case HELP -> {
-                    return new SendMessage(chatId, MessageEnum.HELP_MESSAGE.getMessage());
+                    return SendMessage.builder()
+                            .chatId(chatId)
+                            .text(MessageEnum.HELP_MESSAGE.getMessage())
+                            .replyMarkup(closeButtonKeyboard.closeButtonKeyboard())
+                            .build();
                 }
+
                 case REGISTER -> {
                     registration.registerUser(chatId, userName);
-                    return messageWithReturn.sendMessage(
-                            chatId,
-                            MessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage(),
-                            timeZoneKeyboard.timeZoneKeyboard(chatId, userState),
-                            null);
+                    userStateKeeper.setState(chatId, StateEnum.REGISTRATION_EDIT_TIMEZONE_STATE.getStateName());
+                    return SendMessage.builder()
+                            .chatId(chatId)
+                            .text(MessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage())
+                            .replyMarkup(timeZoneKeyboard.getKeyboard(userState, chatId))
+                            .build();
                 }
+
                 case TEST -> {
-                    return messageWithReturn.sendMessage(
-                            chatId,
-                            metricsMessageBuilder.getMessage(chatId),
-                            closeButtonKeyboard.closeButtonKeyboard(),
-                            null);
+                    return SendMessage.builder()
+                            .chatId(chatId)
+                            .text(metricsMessageBuilder.getAllProjectsMessage(chatId))
+                            .replyMarkup(closeButtonKeyboard.closeButtonKeyboard())
+                            .build();
                 }
+
                 default -> {
-                    messageWithoutReturn.sendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
-                    return new SendMessage(chatId, MessageEnum.HELP_MESSAGE.getMessage());
+                    return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
                 }
             }
         }

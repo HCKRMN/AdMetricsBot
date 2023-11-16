@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -19,13 +19,19 @@ public class InputCallbackHandlersList {
     BitrixCallbackHandler bitrixCallbackHandler;
     AddInputsCallbackHandler addInputsCallbackHandler;
     YclientsCallbackHandler yclientsCallbackHandler;
+    YandexTestCallbackHandler yandexTestCallbackHandler;
+    BitrixTestCallbackHandler bitrixTestCallbackHandler;
+    YclientsTestCallbackHandler yclientsTestCallbackHandler;
 
     public List<CallbackHandler> getCallbackHandlers() {
-        List<CallbackHandler> callbackHandlers = new ArrayList<>();
-        callbackHandlers.add(yandexCallbackHandler);
-        callbackHandlers.add(bitrixCallbackHandler);
-        callbackHandlers.add(addInputsCallbackHandler);
-        callbackHandlers.add(yclientsCallbackHandler);
-        return callbackHandlers;
+        return Arrays.asList(
+                yandexCallbackHandler,
+                bitrixCallbackHandler,
+                addInputsCallbackHandler,
+                yclientsCallbackHandler,
+                yandexTestCallbackHandler,
+                bitrixTestCallbackHandler,
+                yclientsTestCallbackHandler
+        );
     }
 }

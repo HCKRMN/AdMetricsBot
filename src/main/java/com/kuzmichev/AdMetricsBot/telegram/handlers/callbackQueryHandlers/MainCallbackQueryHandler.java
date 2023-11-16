@@ -1,7 +1,8 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers;
 
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
-import com.kuzmichev.AdMetricsBot.model.UserRepository;
+import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,26 +18,36 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 @RequiredArgsConstructor
 public class MainCallbackQueryHandler {
     CallbackHandlersList CallbackHandlersList;
-    UserRepository userRepository;
+    UserStateKeeper userStateKeeper;
+    MessageManagementService messageManagementService;
 
     public BotApiMethod<?> processCallbackQuery(CallbackQuery buttonQuery) {
         String data = buttonQuery.getData();
+        String chatId = buttonQuery.getMessage().getChatId().toString();
+
+
+        int messageId111 = buttonQuery.getMessage().getMessageId();
+
+        System.out.println(messageId111);
+        System.out.println(messageId111);
+        System.out.println(messageId111);
+        System.out.println(messageId111);
+        System.out.println(messageId111);
+        System.out.println(messageId111);
+
+
+        messageManagementService.putMessageToQueue(chatId, messageId111);
+
+
         // Найти подходящий обработчик по значению data
         for (CallbackHandler handler : CallbackHandlersList.getCallbackHandlers()) {
             if (handler.canHandle(data)) {
-                String chatId = buttonQuery.getMessage().getChatId().toString();
-                String userState = userRepository.getUserStateByChatId(chatId);
+                String userState = userStateKeeper.getState(chatId);
                 return handler.handleCallback(buttonQuery, userState);
             }
         }
 
         // Вернуть дефолтный ответ или обработать неизвестный колбэк
-        return handleUnknownCallback(buttonQuery);
-    }
-
-    // Обработка неизвестного колбэка
-    private BotApiMethod<?> handleUnknownCallback(CallbackQuery buttonQuery) {
-        String chatId = buttonQuery.getMessage().getChatId().toString();
         return new SendMessage(chatId, MessageEnum.NON_COMMAND_MESSAGE.getMessage());
     }
 }

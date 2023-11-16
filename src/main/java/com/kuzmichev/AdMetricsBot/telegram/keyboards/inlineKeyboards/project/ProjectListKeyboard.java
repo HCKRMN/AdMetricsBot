@@ -4,9 +4,9 @@ import com.kuzmichev.AdMetricsBot.constants.ButtonEnum;
 import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.model.Project;
 import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
-import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.InlineKeyboardMaker;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.InlineKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.ProjectsDataTempKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -22,26 +22,23 @@ import java.util.List;
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class ProjectListKeyboard {
-    InlineKeyboardMaker inlineKeyboardMaker;
-    UserRepository userRepository;
+public class ProjectListKeyboard implements InlineKeyboard {
+    ProjectsDataTempKeeper projectsDataTempKeeper;
     ProjectRepository projectRepository;
     BackAndExitKeyboard backAndExitKeyboard;
-    public InlineKeyboardMarkup projectListMenu(String chatId, String userState) {
+
+    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
         String projectName;
         String projectCallback;
 
         int projectsPerPage = 5;
-        int currentPage = userRepository.getProjectsPageByChatId(chatId);
-
-        if (currentPage == 0) {
-            currentPage = 1;
-        }
+        int currentPage = projectsDataTempKeeper.getPage(chatId);
 
         List<Project> projects = projectRepository.findProjectsByChatId(chatId);
+        int projectCount = projects.size();
 
         int startIndex = currentPage * projectsPerPage - projectsPerPage;
-        int endIndex = Math.min(startIndex + projectsPerPage, projects.size());
+        int endIndex = Math.min(startIndex + projectsPerPage, projectCount);
 
         List<Project> projectsForPage = projects.subList(startIndex, endIndex);
         List<List<InlineKeyboardButton>> rows = new ArrayList<>();
@@ -50,43 +47,38 @@ public class ProjectListKeyboard {
             projectName = project.getProjectName();
             projectCallback = "project_" + project.getProjectId();
             rows.add(
-                    inlineKeyboardMaker.addRow(
-                            inlineKeyboardMaker.addButton(
-                                    projectName,
-                                    projectCallback,
-                                    null
-                            )
-                    )
-            );
+                    List.of(InlineKeyboardButton.builder()
+                            .text(projectName)
+                            .callbackData(projectCallback)
+                            .build()));
         }
-        rows.add(paginationButtons(currentPage, projects.size() / projectsPerPage));
-        rows.add(backAndExitKeyboard.backAndExitMenuButtons(userState));
+        rows.add(paginationButtons(currentPage, projectCount / projectsPerPage, projectCount));
+        rows.add(backAndExitKeyboard.getButtons(userState));
 
-        return inlineKeyboardMaker.addMarkup(rows);
+        return InlineKeyboardMarkup.builder()
+                .keyboard(rows)
+                .build();
     }
 
-    private List<InlineKeyboardButton> paginationButtons(int currentPage, int totalPages) {
+    private List<InlineKeyboardButton> paginationButtons(int currentPage, int totalPages, int projectCount) {
         List<InlineKeyboardButton> buttons = new ArrayList<>();
 
         if (currentPage > 1) {
             buttons.add(
-                    inlineKeyboardMaker.addButton(
-                            ButtonEnum.PROJECT_PREVIOUS_PAGE_BUTTON.getButtonName(),
-                            CallBackEnum.PROJECT_PAGE_CALLBACK.getCallBackName() + (currentPage - 1),
-                            null
-                    )
-            );
+                    InlineKeyboardButton.builder()
+                            .text(ButtonEnum.PROJECT_PREVIOUS_PAGE_BUTTON.getButtonName())
+                            .callbackData(CallBackEnum.PROJECT_PAGE_CALLBACK.getCallBackName() + (currentPage - 1))
+                            .build());
+        }
+        
+        if (currentPage <= totalPages && projectCount != 5) {
+            buttons.add(
+                    InlineKeyboardButton.builder()
+                            .text(ButtonEnum.PROJECT_NEXT_PAGE_BUTTON.getButtonName())
+                            .callbackData(CallBackEnum.PROJECT_PAGE_CALLBACK.getCallBackName() + (currentPage + 1))
+                            .build());
         }
 
-        if (currentPage <= totalPages ) {
-            buttons.add(
-                    inlineKeyboardMaker.addButton(
-                            ButtonEnum.PROJECT_NEXT_PAGE_BUTTON.getButtonName(),
-                            CallBackEnum.PROJECT_PAGE_CALLBACK.getCallBackName() + (currentPage + 1),
-                            null
-                    )
-            );
-        }
         return buttons;
     }
 }

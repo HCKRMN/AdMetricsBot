@@ -54,7 +54,7 @@ public class ScheduledMessageSender {
                     executorService.submit(() ->
                             messageWithoutReturn.sendMessage(
                                     chatId,
-                                    metricsMessageBuilder.getMessage(chatId),
+                                    metricsMessageBuilder.getAllProjectsMessage(chatId),
                                     closeButtonKeyboard.closeButtonKeyboard())
                     );
                 }

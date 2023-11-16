@@ -5,7 +5,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
-import com.kuzmichev.AdMetricsBot.model.*;
+import com.kuzmichev.AdMetricsBot.model.Bitrix;
+import com.kuzmichev.AdMetricsBot.model.BitrixRepository;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BitrixTestKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
@@ -18,9 +19,11 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Optional;
 
@@ -30,7 +33,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BitrixController {
     final BitrixRepository bitrixRepository;
-    final TempDataRepository tempDataRepository;
     final MessageManagementService messageManagementService;
     final MessageWithoutReturn messageWithoutReturn;
     final BitrixTestKeyboard bitrixTestKeyboard;
@@ -54,66 +56,84 @@ public class BitrixController {
             String projectId = parts[1];
             String userState = parts[2];
 
-//        // Второй шаг OAuth-авторизации
-        RestTemplate restTemplate = new RestTemplate();
+            // Второй шаг OAuth-авторизации
+            RestTemplate restTemplate = new RestTemplate();
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
-        requestBody.add("grant_type", "authorization_code");
-        requestBody.add("client_id", clientId);
-        requestBody.add("client_secret", clientSecret);
-        requestBody.add("code", code);
+            MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
+            requestBody.add("grant_type", "authorization_code");
+            requestBody.add("client_id", clientId);
+            requestBody.add("client_secret", clientSecret);
+            requestBody.add("code", code);
 
-        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
 
-        ResponseEntity<String> response = restTemplate.exchange(tokenUrl, HttpMethod.POST, requestEntity, String.class);
+            HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
+            try {
+                ResponseEntity<String> response = restTemplate.exchange(tokenUrl, HttpMethod.POST, requestEntity, String.class);
 
-        String responseBody = response.getBody();
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode;
-        try {
-            jsonNode = objectMapper.readTree(responseBody);
-        } catch (JsonProcessingException e) {
-            log.error(e.getMessage());
-            throw new RuntimeException(e);
-        }
 
-        String accessToken = jsonNode.get("access_token").asText();
-        String refreshToken = jsonNode.get("refresh_token").asText();
-        String userId = jsonNode.get("user_id").asText();
+                String responseBody = response.getBody();
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode jsonNode;
+                try {
+                    jsonNode = objectMapper.readTree(responseBody);
+                } catch (JsonProcessingException e) {
+                    log.error(e.getMessage());
+                    throw new RuntimeException(e);
+                }
 
-        Optional<Bitrix> bitrixOptional = bitrixRepository.findByProjectId(projectId);
-        if (bitrixOptional.isPresent()) {
-            Bitrix bitrix = bitrixOptional.get();
-            bitrix.setCode(code);
-            bitrix.setMemberId(memberId);
-            bitrix.setAccessToken(accessToken);
-            bitrix.setRefreshToken(refreshToken);
-            bitrix.setUserId(userId);
-            bitrixRepository.save(bitrix);
-        }
+                String accessToken = jsonNode.get("access_token").asText();
+                String refreshToken = jsonNode.get("refresh_token").asText();
+                String userId = jsonNode.get("user_id").asText();
 
-        TempData tempData = tempDataRepository.getByChatId(chatId);
+                Optional<Bitrix> bitrixOptional = bitrixRepository.findByProjectId(projectId);
+                if (bitrixOptional.isPresent()) {
+                    Bitrix bitrix = bitrixOptional.get();
+                    bitrix.setCode(code);
+                    bitrix.setMemberId(memberId);
+                    bitrix.setAccessToken(accessToken);
+                    bitrix.setRefreshToken(refreshToken);
+                    bitrix.setUserId(userId);
+                    bitrixRepository.save(bitrix);
+                }
 
-        int messageId = tempData.getLastMessageId();
-        messageManagementService.putMessageToQueue(chatId, messageId);
-        messageManagementService.deleteMessage(chatId);
+                messageManagementService.deleteMessage(chatId);
 
-        if (userState.equals(StateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName())) {
-            messageWithoutReturn.sendMessage(
-                    chatId,
-                    MessageEnum.REGISTRATION_TEST_INPUTS_MESSAGE.getMessage(),
-                    bitrixTestKeyboard.bitrixTestMenu(userState));
+                if (userState.contains(StateEnum.REGISTRATION.getStateName())) {
+                    messageWithoutReturn.sendMessage(
+                            chatId,
+                            MessageEnum.REGISTRATION_TEST_INPUTS_MESSAGE.getMessage(),
+                            bitrixTestKeyboard.bitrixTestMenu(userState));
 
-        } else {
-            messageWithoutReturn.sendMessage(
-                    chatId,
-                    MessageEnum.INPUT_TEST_MESSAGE.getMessage(),
-                    bitrixTestKeyboard.bitrixTestMenu(userState));
-        }
-        log.info("Пользователь {} добавил аккаунт Bitrix", chatId);
+                } else {
+                    messageWithoutReturn.sendMessage(
+                            chatId,
+                            MessageEnum.INPUT_TEST_MESSAGE.getMessage(),
+                            bitrixTestKeyboard.bitrixTestMenu(userState));
+                }
+                log.info("Пользователь {} добавил аккаунт Bitrix", chatId);
+
+            } catch (HttpClientErrorException e) {
+                // Обработка ошибки HttpClientErrorException
+                if (e.getStatusCode() == HttpStatus.UNAUTHORIZED) {
+                    // Обработка ошибки 401 Unauthorized
+                    log.warn("Ошибка аутентификации Битрикс: " + e.getMessage());
+                } else {
+                    // Обработка других HTTP ошибок
+                    log.warn("HTTP ошибка в Битрикс: " + e.getMessage());
+                }
+                return "bitrixError";
+            } catch (RestClientException e) {
+                // Обработка других ошибок RestClientException
+                log.warn("Ошибка клиента RestTemplate в Битрикс: " + e.getMessage());
+                return "bitrixError";
+            } catch (Exception e) {
+                // Обработка всех других исключений
+                log.warn("Неизвестная ошибка в Битрикс: " + e.getMessage());
+                return "bitrixError";
+            }
         }
         return "bitrix";
     }

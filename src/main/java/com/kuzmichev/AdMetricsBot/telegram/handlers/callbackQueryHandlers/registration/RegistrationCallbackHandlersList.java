@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -18,8 +18,8 @@ public class RegistrationCallbackHandlersList {
     RegistrationCallbackHandler registrationCallbackHandler;
 
     public List<CallbackHandler> getCallbackHandlers() {
-        List<CallbackHandler> callbackHandlers = new ArrayList<>();
-        callbackHandlers.add(registrationCallbackHandler);
-        return callbackHandlers;
+        return Arrays.asList(
+                registrationCallbackHandler
+        );
     }
 }

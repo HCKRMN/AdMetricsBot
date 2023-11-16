@@ -1,13 +1,17 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.projects;
 
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.projects.delete.DeleteInputCallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.projects.delete.DeleteProjectStepOneCallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.projects.delete.DeleteProjectStepTwoCallbackHandler;
+import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.projects.delete.DeleteSomeInputCallbackHandler;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -16,22 +20,26 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProjectCallbackHandlersList {
     DeleteInputCallbackHandler deleteInputCallbackHandler;
-    DeleteProjectCallbackHandler deleteProjectCallbackHandler;
+    DeleteProjectStepOneCallbackHandler deleteProjectStepOneCallbackHandler;
+    DeleteProjectStepTwoCallbackHandler deleteProjectStepTwoCallbackHandler;
     ProjectListCallBackHandler projectListCallBackHandler;
     ProjectsMenuCallbackHandlers projectsMenuCallbackHandlers;
     SomeProjectCallbackHandler someProjectCallbackHandler;
     ProjectCreateCallbackHandler projectCreateCallbackHandler;
     ProjectGetInfoCallbackHandler projectGetInfoCallbackHandler;
+    DeleteSomeInputCallbackHandler deleteSomeInputCallbackHandler;
 
     public List<CallbackHandler> getCallbackHandlers() {
-        List<CallbackHandler> callbackHandlers = new ArrayList<>();
-        callbackHandlers.add(deleteInputCallbackHandler);
-        callbackHandlers.add(deleteProjectCallbackHandler);
-        callbackHandlers.add(projectListCallBackHandler);
-        callbackHandlers.add(projectsMenuCallbackHandlers);
-        callbackHandlers.add(someProjectCallbackHandler);
-        callbackHandlers.add(projectCreateCallbackHandler);
-        callbackHandlers.add(projectGetInfoCallbackHandler);
-        return callbackHandlers;
+        return Arrays.asList(
+                deleteInputCallbackHandler,
+                deleteProjectStepOneCallbackHandler,
+                projectListCallBackHandler,
+                projectsMenuCallbackHandlers,
+                someProjectCallbackHandler,
+                projectCreateCallbackHandler,
+                projectGetInfoCallbackHandler,
+                deleteSomeInputCallbackHandler,
+                deleteProjectStepTwoCallbackHandler
+        );
     }
 }

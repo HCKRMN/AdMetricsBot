@@ -19,9 +19,9 @@ public class User {
     private int timeDifferenceInMinutes;
     private String ip;
     private long phoneNumber;
-    private String userState;
-    private long projectsCount;
-    private int projectsPage;
-    private long lastProjectNumber;
+//    private String userState;
+//    private long projectsCount;
+//    private int projectsPage;
+//    private long lastProjectNumber;
 
 }
