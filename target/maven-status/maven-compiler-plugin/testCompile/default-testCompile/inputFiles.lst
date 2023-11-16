@@ -1,4 +1,6 @@
 C:\GitHub\AdMetricsBot\src\test\java\com\kuzmichev\AdMetricsBot\AdMetricsBotApplicationTests.java
 C:\GitHub\AdMetricsBot\src\test\java\com\kuzmichev\AdMetricsBot\service\yandex\YandexMessageBuilderTest.java
 C:\GitHub\AdMetricsBot\src\test\java\com\kuzmichev\AdMetricsBot\service\yandex\YandexMainRequestTest.java
+C:\GitHub\AdMetricsBot\src\test\java\com\kuzmichev\AdMetricsBot\constants\StateEnumTest.java
 C:\GitHub\AdMetricsBot\src\test\java\com\kuzmichev\AdMetricsBot\service\yandex\YandexAuthUrlTest.java
+C:\GitHub\AdMetricsBot\src\test\java\com\kuzmichev\AdMetricsBot\constants\CallBackEnumTest.java

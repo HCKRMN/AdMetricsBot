@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Переделал отправку сообщений, убрал из базы временные данные и переместил их в локальные переменные, разделил колбеки, пофиксил мелкие баги, добавил тесты на проверку енамов, убрал кучу лишних запросов в базу">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Исправил тесты">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +116,7 @@
       <recent name="com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.universal" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.YandexMessageBuilderTest.testGetMessage_Success">
+  <component name="RunManager" selected="Spring Boot.AdMetricsBotApplication">
     <configuration name="CallBackEnumTest.testEnumNames" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AdMetricsBot" />
       <extension name="coverage">
@@ -388,14 +391,7 @@
       <workItem from="1699847744884" duration="16137000" />
       <workItem from="1699937488497" duration="8994000" />
       <workItem from="1700022381626" duration="13624000" />
-      <workItem from="1700108624049" duration="8517000" />
-    </task>
-    <task id="LOCAL-00048" summary="Настройка github actions">
-      <created>1697464857398</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1697464857398</updated>
+      <workItem from="1700108624049" duration="9217000" />
     </task>
     <task id="LOCAL-00049" summary="Настройка github actions">
       <created>1697464935323</created>
@@ -733,7 +729,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700118271596</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Исправил тесты">
+      <created>1700118710242</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1700118710242</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -782,7 +785,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Добавил дату в сообщения + мелкие правки" />
     <MESSAGE value="Переделал получение часового пояса относительно сервера" />
     <MESSAGE value="Переделал получение часового пояса относительно сервера + мелкие правки и фикс удаления старых сообщений" />
     <MESSAGE value="Исправил ошибку со временной зоной, сделал относительно региона" />
@@ -807,7 +809,8 @@
     <MESSAGE value="Мелкие правки Yclients" />
     <MESSAGE value="исправил месседж билдер" />
     <MESSAGE value="Переделал отправку сообщений, убрал из базы временные данные и переместил их в локальные переменные, разделил колбеки, пофиксил мелкие баги, добавил тесты на проверку енамов, убрал кучу лишних запросов в базу" />
-    <option name="LAST_COMMIT_MESSAGE" value="Переделал отправку сообщений, убрал из базы временные данные и переместил их в локальные переменные, разделил колбеки, пофиксил мелкие баги, добавил тесты на проверку енамов, убрал кучу лишних запросов в базу" />
+    <MESSAGE value="Исправил тесты" />
+    <option name="LAST_COMMIT_MESSAGE" value="Исправил тесты" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AdMetricsBot$AdMetricsBotApplication.ic" NAME="AdMetricsBotApplication Coverage Results" MODIFIED="1697630469417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

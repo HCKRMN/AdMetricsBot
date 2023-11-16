@@ -1,4 +1,6 @@
 com\kuzmichev\AdMetricsBot\service\yandex\YandexAuthUrlTest.class
 com\kuzmichev\AdMetricsBot\AdMetricsBotApplicationTests.class
+com\kuzmichev\AdMetricsBot\constants\StateEnumTest.class
 com\kuzmichev\AdMetricsBot\service\yandex\YandexMainRequestTest.class
+com\kuzmichev\AdMetricsBot\constants\CallBackEnumTest.class
 com\kuzmichev\AdMetricsBot\service\yandex\YandexMessageBuilderTest.class
