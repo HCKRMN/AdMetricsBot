@@ -12,7 +12,7 @@ public class StateEnumTest {
             String actualName = State.getStateName();
 
             assertEquals(expectedName, actualName,
-                    "Неправильный стейт: " + expectedName);
+                    "РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ СЃС‚РµР№С‚: " + expectedName);
         }
     }
 }

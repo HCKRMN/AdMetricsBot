@@ -36,13 +36,13 @@ public class YandexMessageBuilderTest {
 
         String expectedMessage = """
                 Яндекс
-                <code>Показы:             </code>83
-                <code>Клики:              </code>6
-                <code>CTR:                </code>7.23
-                <code>CPC:                </code>135.76
-                <code>Конверсии:          </code>4
-                <code>CPA:                </code>203.64
-                <code>Расход:             </code>814.57
+                <code>Показы:               </code>83
+                <code>Клики:                </code>6
+                <code>CTR:                  </code>7.23
+                <code>CPC:                  </code>135.76
+                <code>Конверсии:            </code>4
+                <code>CPA:                  </code>203.64
+                <code>Расход:               </code>814.57
                 """;
 
         String actualMessage = yandexMessageBuilder.getMessage("someProjectId");
