@@ -3,6 +3,7 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers.MessageStat
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.YclientsAddKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.replyKeyboards.ReplyKeyboardMaker;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -17,6 +18,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 @RequiredArgsConstructor
 public class YclientsStateHandler implements StateHandler {
     YclientsAddKeyboard yclientsAddKeyboard;
+    ReplyKeyboardMaker replyKeyboardMaker;
 
     @Override
     public boolean canHandle(String userStateEnum) {
@@ -37,6 +39,7 @@ public class YclientsStateHandler implements StateHandler {
             return SendMessage.builder()
                     .chatId(chatId)
                     .text(MessageEnum.PHONE_INPUT_ERROR_MESSAGE.getMessage())
+                    .replyMarkup(replyKeyboardMaker.getContactKeyboard())
                     .build();
         }
     }

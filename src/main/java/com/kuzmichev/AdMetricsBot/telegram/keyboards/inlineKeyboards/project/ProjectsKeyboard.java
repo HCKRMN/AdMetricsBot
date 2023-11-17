@@ -30,9 +30,11 @@ public class ProjectsKeyboard implements InlineKeyboard {
                 .callbackData(CallBackEnum.PROJECT_GET_LIST_CALLBACK.getCallBackName())
                 .build());
 
+        // Если нет проектов
         if (projectRepository.findProjectsCountByChatId(chatId) == 0) {
-            projectsButton = null;
+            projectsButton = List.of();
         }
+
         return InlineKeyboardMarkup.builder()
                 .keyboardRow(List.of(InlineKeyboardButton.builder()
                         .text(ButtonEnum.PROJECT_CREATE_BUTTON.getButtonName())
