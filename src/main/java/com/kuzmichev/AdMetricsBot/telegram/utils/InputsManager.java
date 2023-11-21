@@ -47,6 +47,12 @@ public class InputsManager {
 
     }
 
+    public boolean isExist(String projectId) {
+        return bitrixRepository.existsByProjectId(projectId) ||
+                yandexRepository.existsByProjectId(projectId) ||
+                yclientsRepository.existsByProjectId(projectId);
+
+    }
 
 
 

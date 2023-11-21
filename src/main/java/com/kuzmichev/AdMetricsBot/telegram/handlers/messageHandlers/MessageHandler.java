@@ -36,9 +36,10 @@ public class MessageHandler {
         String chatId = message.getChatId().toString();
         String messageText = message.getText();
         String userState = userStateKeeper.getState(chatId);
-        int messageId111 = message.getMessageId();
+        int messageIdFromUser = message.getMessageId();
 
-
+        System.out.println("Сообщение которое пришло:");
+        System.out.println(messageIdFromUser);
 
         // Ловим контакт пользователя
         if(message.hasContact()){
@@ -50,13 +51,16 @@ public class MessageHandler {
             userRepository.save(user);
 
             // Удаляем старые сообщения
-//            int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
-            int dfgbadfgh = messageId111-1;
-            System.out.println("Добавляем сообщение в очередь при обнаружении контакта: " + dfgbadfgh);
-            messageManagementService.putMessageToQueue(chatId, messageId111-1);
+            int lastSentMessageId = messageIdFromUser-1;
+            System.out.println("Добавляем сообщение в очередь до отправки контакта пользователем: " + lastSentMessageId);
+            messageManagementService.putMessageToQueue(chatId, lastSentMessageId);
 
             System.out.println("Удаляем сообщения при обнаружении контакта");
             messageManagementService.deleteMessage(chatId);
+
+            int nextMessageId = messageIdFromUser+1;
+            System.out.println("Добавляем сообщение со ссылкой yclients в очередь: " + nextMessageId);
+            messageManagementService.putMessageToQueue(chatId, nextMessageId);
 
             // Проверяем, есть ли текущее состояние у пользователя
             if (userState != null) {
@@ -72,33 +76,11 @@ public class MessageHandler {
                     .build();
         }
 
-
-
-
-
-
-        System.out.println("Сообщение которое пришло:");
-        System.out.println(messageId111);
-        System.out.println(messageId111);
-        System.out.println(messageId111);
-        System.out.println(messageId111);
-        System.out.println(messageId111);
-        System.out.println(messageId111);
-
         System.out.println("Удаляем сообщения из метода answerMessage");
         messageManagementService.deleteMessage(chatId);
-        int drgadfgasdf = messageId111+1;
-        System.out.println("Добавляем сообщение в очередь из метода answerMessage: " + drgadfgasdf);
-        messageManagementService.putMessageToQueue(chatId, messageId111+1);
-
-
-
-
-
-
-
-
-
+        int nextMessageId = messageIdFromUser+1;
+        System.out.println("Добавляем сообщение в очередь из метода answerMessage: " + nextMessageId);
+        messageManagementService.putMessageToQueue(chatId, nextMessageId);
 
         // Ловим команду отправки сообщения от админа
         if (messageText.contains("/send") && chatId.equals(config.getOwnerId())){
@@ -114,19 +96,7 @@ public class MessageHandler {
         if (userState != null) {
             for (StateHandler stateHandler : stateHandlersList.getStateHandlers()) {
                 if (stateHandler.canHandle(userState)) {
-
-                    // Эта секция нужна для удаления старых сообщений
-
-                    // Удаляем старые сообщения
-//                    int messageId = 0;
-//                    int messageId = tempDataRepository.findLastMessageIdByChatId(chatId);
-//                    messageManagementService.putMessageToQueue(chatId, messageId);
-//                    messageManagementService.deleteMessage(chatId);
-//                    messageId = message.getMessageId() + 1;
-
-                    return stateHandler.handleState(chatId, messageText, userState
-//                            , messageId
-                    );
+                    return stateHandler.handleState(chatId, messageText, userState);
                 }
             }
         }

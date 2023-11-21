@@ -10,6 +10,7 @@ import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.YclientsTes
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageWithoutReturn;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.ProjectsDataTempKeeper;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -43,6 +44,7 @@ public class YclientsController {
     final CloseButtonKeyboard closeButtonKeyboard;
     final MessageManagementService messageManagementService;
     final YclientsTestKeyboard yclientsTestKeyboard;
+    final UserStateKeeper userStateKeeper;
 
     @Value("${bearer-authentication}")
     String bearerAuthentication;
@@ -67,10 +69,12 @@ public class YclientsController {
         // Поиск пользователя по номеру телефона
         User user = userRepository.findByPhoneNumber(phoneNumber);
 
+
         if (user != null) {
             String chatId = user.getChatId();
-            String userState = "";
-//                    user.getUserState();
+            String userState = userStateKeeper.getState(chatId);
+
+            messageManagementService.deleteMessage(chatId);
 
             // Получение временных данных пользователя
             String projectId = projectsDataTempKeeper.getLastProjectId(chatId);
@@ -106,13 +110,6 @@ public class YclientsController {
             requestBody.add("application_id", applicationId);
 
             HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
-
-            // Удаление предыдущих сообщений и отправка нового
-//            int messageId = tempData.getLastMessageId();
-//            messageManagementService.putMessageToQueue(chatId, messageId+3);
-//            int lastMessageId = messageManagementService.getLastMessageId(chatId);
-//            messageManagementService.putMessageToQueue(chatId, lastMessageId-1);
-            messageManagementService.deleteMessage(chatId);
 
             try {
                 // Отправка HTTP-запроса и обработка успешного ответа
@@ -182,6 +179,6 @@ public class YclientsController {
         } catch (Exception ex) {
             log.error("Ошибка при извлечении сообщения из ответа: {}", ex.getMessage());
         }
-        return "";
+        return null;
     }
 }

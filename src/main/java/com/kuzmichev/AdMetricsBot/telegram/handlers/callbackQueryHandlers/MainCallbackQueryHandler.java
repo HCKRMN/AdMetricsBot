@@ -25,19 +25,12 @@ public class MainCallbackQueryHandler {
         String data = buttonQuery.getData();
         String chatId = buttonQuery.getMessage().getChatId().toString();
 
+        int messageIdFromButton = buttonQuery.getMessage().getMessageId();
 
-        int messageId111 = buttonQuery.getMessage().getMessageId();
+        System.out.println("Сообщение которое пришло:");
+        System.out.println(messageIdFromButton);
 
-        System.out.println(messageId111);
-        System.out.println(messageId111);
-        System.out.println(messageId111);
-        System.out.println(messageId111);
-        System.out.println(messageId111);
-        System.out.println(messageId111);
-
-
-        messageManagementService.putMessageToQueue(chatId, messageId111);
-
+        messageManagementService.putMessageToQueue(chatId, messageIdFromButton);
 
         // Найти подходящий обработчик по значению data
         for (CallbackHandler handler : CallbackHandlersList.getCallbackHandlers()) {

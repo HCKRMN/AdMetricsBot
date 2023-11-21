@@ -4,7 +4,7 @@ import com.kuzmichev.AdMetricsBot.model.*;
 import com.kuzmichev.AdMetricsBot.service.bitrix.BitrixMessageBuilder;
 import com.kuzmichev.AdMetricsBot.service.yandex.YandexMessageBuilder;
 import com.kuzmichev.AdMetricsBot.service.yclients.YclientsMessageBuilder;
-import com.kuzmichev.AdMetricsBot.telegram.utils.ExistInputsChecker;
+import com.kuzmichev.AdMetricsBot.telegram.utils.InputsManager;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -23,11 +23,8 @@ public class MetricsMessageBuilder {
     ProjectRepository projectRepository;
     BitrixMessageBuilder bitrixMessageBuilder;
     YandexMessageBuilder yandexMessageBuilder;
-    YandexRepository yandexRepository;
-    BitrixRepository bitrixRepository;
-    YclientsRepository yclientsRepository;
     YclientsMessageBuilder yclientsMessageBuilder;
-    ExistInputsChecker existInputsChecker;
+    InputsManager inputsManager;
 
     public String getAllProjectsMessage(String chatId) {
         StringBuilder message = new StringBuilder();
@@ -41,7 +38,7 @@ public class MetricsMessageBuilder {
 
 
         for (Project project : userProjects) {
-            if(existInputsChecker.isExist(project.getProjectId())){
+            if(inputsManager.isExist(project.getProjectId())){
                 String projectId = project.getProjectId();
                 String projectName = project.getProjectName();
 

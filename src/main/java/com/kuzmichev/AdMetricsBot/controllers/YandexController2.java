@@ -52,10 +52,11 @@ public class YandexController2 {
                 return "yandexError";
             }
 
-            Yandex yandex = new Yandex();
-            yandex.setChatId(chatId);
-            yandex.setYandexToken(yaToken);
-            yandex.setProjectId(projectId);
+            Yandex yandex = Yandex.builder()
+                    .chatId(chatId)
+                    .yandexToken(yaToken)
+                    .projectId(projectId)
+                    .build();
             yandexRepository.save(yandex);
 
             messageManagementService.deleteMessage(chatId);

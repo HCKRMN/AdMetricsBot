@@ -16,27 +16,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 @RequiredArgsConstructor
 public class MessageWithoutReturn {
     ApplicationEventPublisher eventPublisher;
-//    UserStateKeeper stateEditor;
-
-//    public void editMessage(
-//            String chatId,
-//            int messageId,
-//            String text,
-//            String state,
-//            InlineKeyboardMarkup keyboard) {
-//
-//        EditMessageText message = new EditMessageText();
-//        message.setChatId(chatId);
-//        message.setMessageId(messageId);
-//        message.setText(text);
-//        if (state != null) {
-//            stateEditor.setState(chatId, state);
-//        }
-//        if (keyboard != null) {
-//            message.setReplyMarkup(keyboard);
-//        }
-//        eventPublisher.publishEvent(message);
-//    }
 
     public void sendMessage(String chatId, String textToSend) {
         SendMessage message = new SendMessage();

@@ -4,12 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Исправил тесты">
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Пофиксил баги кнопки &quot;мои проекты&quot; и исправил отсутствие кнопки при подключении yclients">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/bitrixError.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/MessageEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/MessageEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/YclientsStateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/YclientsStateHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectsKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectsKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/InputsEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/InputsEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/BitrixController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/BitrixController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YandexController2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YandexController2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YclientsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YclientsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/TempData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/TempDataRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/Yandex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/Yandex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/MetricsMessageBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/MetricsMessageBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/MainCallbackQueryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/MainCallbackQueryHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectSomeKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/keyboards/inlineKeyboards/project/ProjectSomeKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/ExistInputsChecker.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/InputsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/InputsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/Messages/MessageWithoutReturn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/Messages/MessageWithoutReturn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/TempData/MessageDataTempKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/TempData/MessageDataTempKeeper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/TempDataSaver.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/yclientsUserNotFound.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/yclientsUserNotFound.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +86,7 @@
     &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
     &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
     &quot;last.edited.regexp&quot;: &quot;Sample Text&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kauha/Desktop/234624562456&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/GitHub/AdMetricsBot/src/main/resources/templates&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
@@ -392,14 +407,11 @@
       <workItem from="1700022381626" duration="13624000" />
       <workItem from="1700108624049" duration="10724000" />
       <workItem from="1700210230576" duration="68000" />
-      <workItem from="1700210308759" duration="1117000" />
-    </task>
-    <task id="LOCAL-00051" summary="Настройка github actions">
-      <created>1697467402876</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1697467402876</updated>
+      <workItem from="1700210308759" duration="1840000" />
+      <workItem from="1700358320598" duration="107000" />
+      <workItem from="1700358457555" duration="1046000" />
+      <workItem from="1700484365032" duration="2678000" />
+      <workItem from="1700569660926" duration="3378000" />
     </task>
     <task id="LOCAL-00052" summary="Настройка github actions">
       <created>1697467706458</created>
@@ -737,7 +749,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700119386814</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="Пофиксил баги кнопки &quot;мои проекты&quot; и исправил отсутствие кнопки при подключении yclients">
+      <created>1700211560282</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1700211560282</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -786,7 +805,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Переделал получение часового пояса относительно сервера" />
     <MESSAGE value="Переделал получение часового пояса относительно сервера + мелкие правки и фикс удаления старых сообщений" />
     <MESSAGE value="Исправил ошибку со временной зоной, сделал относительно региона" />
     <MESSAGE value="Исправил ошибку с кнопкой удаления источников данных" />
@@ -811,7 +829,8 @@
     <MESSAGE value="исправил месседж билдер" />
     <MESSAGE value="Переделал отправку сообщений, убрал из базы временные данные и переместил их в локальные переменные, разделил колбеки, пофиксил мелкие баги, добавил тесты на проверку енамов, убрал кучу лишних запросов в базу" />
     <MESSAGE value="Исправил тесты" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исправил тесты" />
+    <MESSAGE value="Пофиксил баги кнопки &quot;мои проекты&quot; и исправил отсутствие кнопки при подключении yclients" />
+    <option name="LAST_COMMIT_MESSAGE" value="Пофиксил баги кнопки &quot;мои проекты&quot; и исправил отсутствие кнопки при подключении yclients" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AdMetricsBot$AdMetricsBotApplication.ic" NAME="AdMetricsBotApplication Coverage Results" MODIFIED="1697630469417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
