@@ -21,7 +21,6 @@ C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handler
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\controllers\UserIPController.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\menu\deleteMenu\DeleteUserStepTwoCallbackHandler.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\yandex\YandexAuthUrl.java
-C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\TempDataSaver.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\BackAndExitKeyboard.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\User.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\constants\CommandEnum.java
@@ -67,7 +66,6 @@ C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handler
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\InputsManager.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\projects\delete\DeleteProjectStepTwoCallbackHandler.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\controllers\YandexController2.java
-C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\TempData.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\Yclients.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\bitrix\BitrixCounterNewEntries.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\menu\BackCallbackHandler.java
@@ -94,7 +92,6 @@ C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\controllers\Webh
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\inputs\YclientsTestCallbackHandler.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\bitrix\BitrixApiService.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\YandexAddKeyboard.java
-C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\TempDataRepository.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\YclientsData.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\yclients\YclientsCounterCanceledEntries.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\DynamicCallback.java
@@ -106,7 +103,6 @@ C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\constants\Inputs
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\messageHandlers\MessageStateHandler\ManualEditTimeZoneStateHandler.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\yclients\YclientsCounterSuccessEntries.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\constants\CallBackEnum.java
-C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\ExistInputsChecker.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\bitrix\BitrixMainRequest.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\Yandex.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\YclientsTestKeyboard.java

@@ -79,6 +79,7 @@ public class CommandHandler {
                 case TEST -> {
                     return SendMessage.builder()
                             .chatId(chatId)
+                            .parseMode("HTML")
                             .text(metricsMessageBuilder.getAllProjectsMessage(chatId))
                             .replyMarkup(closeButtonKeyboard.closeButtonKeyboard())
                             .build();

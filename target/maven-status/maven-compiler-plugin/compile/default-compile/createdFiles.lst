@@ -1,3 +1,4 @@
+com\kuzmichev\AdMetricsBot\model\Yandex$YandexBuilder.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\registration\RegistrationCallbackHandlersList.class
 com\kuzmichev\AdMetricsBot\model\User.class
 com\kuzmichev\AdMetricsBot\service\yandex\YandexAuthUrl.class
@@ -109,7 +110,6 @@ com\kuzmichev\AdMetricsBot\controllers\UserIPController.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\inputs\InputCallbackHandlersList.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\YclientsTestKeyboard.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\menu\deleteMenu\DeleteUserStepTwoCallbackHandler.class
-com\kuzmichev\AdMetricsBot\telegram\utils\TempData\MessageDataTempKeeper.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\menu\notifications\DisableNotificationsCallbackHandler.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\messageHandlers\MessageStateHandler\StateHandlersList.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\messageHandlers\MessageStateHandler\YclientsStateHandler.class
@@ -120,7 +120,6 @@ com\kuzmichev\AdMetricsBot\model\Yandex.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\messageHandlers\CommandHandler.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\TimeZoneKeyboard.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\inputs\BitrixCallbackHandler.class
-com\kuzmichev\AdMetricsBot\telegram\utils\ExistInputsChecker.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\DynamicCallback.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\inputs\YandexTestCallbackHandler.class
 com\kuzmichev\AdMetricsBot\model\YclientsRepository.class
