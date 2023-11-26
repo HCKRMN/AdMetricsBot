@@ -112,7 +112,6 @@ com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\YclientsTestKeyboa
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\menu\deleteMenu\DeleteUserStepTwoCallbackHandler.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\menu\notifications\DisableNotificationsCallbackHandler.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\messageHandlers\MessageStateHandler\StateHandlersList.class
-com\kuzmichev\AdMetricsBot\telegram\handlers\messageHandlers\MessageStateHandler\YclientsStateHandler.class
 com\kuzmichev\AdMetricsBot\model\YandexRepository.class
 com\kuzmichev\AdMetricsBot\telegram\AdMetricsBot.class
 com\kuzmichev\AdMetricsBot\controllers\YandexController.class

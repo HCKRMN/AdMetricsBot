@@ -93,13 +93,14 @@ public class YclientsController {
         } catch (HttpClientErrorException e) {
             // Обработка ошибок HTTP
             HttpStatus statusCode = (HttpStatus) e.getStatusCode();
+
+            model.addAttribute("error", 403);
             log.error("Произошла ошибка запроса при подключении Yclients, {}: {}", statusCode, e.getMessage());
-            model.addAttribute("error", e.getMessage());
 
         } catch (RestClientException e) {
             // Обработка других ошибок, не связанных с HTTP
+            model.addAttribute("error", 0);
             log.error("Произошла ошибка при подключении Yclients: {}", e.getMessage());
-            model.addAttribute("error", e.getMessage());
         }
         return "yclientsError";
     }

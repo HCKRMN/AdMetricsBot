@@ -32,7 +32,6 @@ C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handler
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\service\ScheduledMessageSender.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\UserRepository.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\CallbackHandlersList.java
-C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\TempData\MessageDataTempKeeper.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\AdMetricsBotApplication.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\projects\delete\DeleteSomeInputCallbackHandler.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\TimeZoneKeyboard.java
@@ -62,7 +61,6 @@ C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\model\YandexData
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\Registration.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\TelegramApiClient.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\projects\ProjectListCallBackHandler.java
-C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\messageHandlers\MessageStateHandler\YclientsStateHandler.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\utils\InputsManager.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\projects\delete\DeleteProjectStepTwoCallbackHandler.java
 C:\GitHub\AdMetricsBot\src\main\java\com\kuzmichev\AdMetricsBot\controllers\YandexController2.java

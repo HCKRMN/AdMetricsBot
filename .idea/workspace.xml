@@ -4,26 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Пофиксил мелкие баги, переделал ридми и туду">
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Переделал подключение Yclients">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/CommandEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/CommandEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/MessageEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/constants/MessageEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YclientsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/controllers/YclientsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/Yclients.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/Yclients.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/YclientsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/model/YclientsRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/YclientsCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/inputs/YclientsCallbackHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/CommandHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/StateHandlersList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/StateHandlersList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/YclientsStateHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/TempData/MessageDataTempKeeper.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/yclients.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/yclients.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/yclientsError.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/yclientsError.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/yclientsUserNotFound.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -417,14 +410,8 @@
       <workItem from="1700661626694" duration="52000" />
       <workItem from="1700744724764" duration="5488000" />
       <workItem from="1700899249957" duration="7100000" />
-      <workItem from="1700966604171" duration="3577000" />
-    </task>
-    <task id="LOCAL-00054" summary="Настройка github actions">
-      <created>1697471132133</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1697471132133</updated>
+      <workItem from="1700966604171" duration="4947000" />
+      <workItem from="1700971871764" duration="4969000" />
     </task>
     <task id="LOCAL-00055" summary="Настройка github actions">
       <created>1697471232561</created>
@@ -762,7 +749,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700661280293</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="Переделал подключение Yclients">
+      <created>1700970593501</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1700970593501</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -811,7 +805,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Исправил ошибку с кнопкой удаления источников данных" />
     <MESSAGE value="Добавил действие к кнопке получения данных из настроек" />
     <MESSAGE value="Настройка github actions" />
     <MESSAGE value="Вернул на место тестовое сообщение" />
@@ -836,7 +829,8 @@
     <MESSAGE value="Пофиксил баги кнопки &quot;мои проекты&quot; и исправил отсутствие кнопки при подключении yclients" />
     <MESSAGE value="Пофиксил мелкие баги" />
     <MESSAGE value="Пофиксил мелкие баги, переделал ридми и туду" />
-    <option name="LAST_COMMIT_MESSAGE" value="Пофиксил мелкие баги, переделал ридми и туду" />
+    <MESSAGE value="Переделал подключение Yclients" />
+    <option name="LAST_COMMIT_MESSAGE" value="Переделал подключение Yclients" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AdMetricsBot$AdMetricsBotApplication.ic" NAME="AdMetricsBotApplication Coverage Results" MODIFIED="1697630469417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

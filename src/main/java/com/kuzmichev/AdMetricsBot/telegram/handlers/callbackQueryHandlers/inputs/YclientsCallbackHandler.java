@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
 @Slf4j
@@ -33,6 +33,7 @@ public class YclientsCallbackHandler implements CallbackHandler {
     @Override
     public BotApiMethod<?> handleCallback(CallbackQuery buttonQuery, String userState) {
         String chatId = buttonQuery.getMessage().getChatId().toString();
+        int messageId = buttonQuery.getMessage().getMessageId();
 
         String newState;
         if(userState.equals(StateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName())) {
@@ -42,17 +43,9 @@ public class YclientsCallbackHandler implements CallbackHandler {
         }
         userStateKeeper.setState(chatId, newState);
 
-        System.out.println("Получаем последнее сообщение из YclientsCallbackHandler");
-        int lastMessageId = messageManagementService.getLastMessageId(chatId);
-
-        System.out.println("Удаляем сообщения из YclientsCallbackHandler");
-        messageManagementService.deleteMessage(chatId);
-        int nextMessageId = lastMessageId+1;
-        System.out.println("Кладем в очередь из YclientsCallbackHandler, которое сейчас отправится: " + nextMessageId);
-        messageManagementService.putMessageToQueue(chatId, nextMessageId);
-
-        return SendMessage.builder()
+        return EditMessageText.builder()
                 .chatId(chatId)
+                .messageId(messageId)
                 .text(MessageEnum.ADD_YCLIENTS_MESSAGE.getMessage())
                 .replyMarkup(yclientsAddKeyboard.getKeyboard(userState, chatId))
                 .build();

@@ -115,9 +115,11 @@ public class CommandHandler {
                 }
 
                 case ERROR -> {
+                    String text = startData.equals("403") ? MessageEnum.ERROR_403_MESSAGE.getMessage() : MessageEnum.UNKNOWN_ERROR_MESSAGE.getMessage();
+
                     return SendMessage.builder()
                             .chatId(chatId)
-                            .text(MessageEnum.ERROR_MESSAGE.getMessage() + startData)
+                            .text(text)
                             .replyMarkup(closeButtonKeyboard.closeButtonKeyboard())
                             .build();
                 }
