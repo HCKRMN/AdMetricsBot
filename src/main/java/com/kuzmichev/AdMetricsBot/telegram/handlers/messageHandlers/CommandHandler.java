@@ -1,14 +1,15 @@
 package com.kuzmichev.AdMetricsBot.telegram.handlers.messageHandlers;
 
 import com.kuzmichev.AdMetricsBot.constants.CommandEnum;
+import com.kuzmichev.AdMetricsBot.constants.InputsEnum;
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
+import com.kuzmichev.AdMetricsBot.model.Yclients;
+import com.kuzmichev.AdMetricsBot.model.YclientsRepository;
 import com.kuzmichev.AdMetricsBot.service.MetricsMessageBuilder;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.CloseButtonKeyboard;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.SettingsKeyboard;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.StartRegistrationKeyboard;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.TimeZoneKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.*;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Registration;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.ProjectsDataTempKeeper;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -31,13 +32,27 @@ public class CommandHandler {
     MetricsMessageBuilder metricsMessageBuilder;
     UserStateKeeper userStateKeeper;
     CloseButtonKeyboard closeButtonKeyboard;
+    YclientsRepository yclientsRepository;
+    ProjectsDataTempKeeper projectsDataTempKeeper;
+    YclientsTestKeyboard yclientsTestKeyboard;
 
     public BotApiMethod<?> handleUserCommand(Message message, String userState) {
         String chatId = message.getChatId().toString();
         String messageText = message.getText();
         String userName = message.getFrom().getUserName();
-        CommandEnum commandEnum = CommandEnum.fromCommand(messageText);
+        String startData = "";
 
+        if(messageText.contains(InputsEnum.Yclients.getInputName())){
+            startData = messageText.substring(messageText.indexOf('_') + 1);
+            messageText = CommandEnum.YCLIENTS.getCommand();
+        }
+
+        if(messageText.contains(" ")){
+            startData = messageText.substring(messageText.indexOf(' ') + 1);
+            messageText = CommandEnum.ERROR.getCommand();
+        }
+
+        CommandEnum commandEnum = CommandEnum.fromCommand(messageText);
         if (commandEnum != null) {
             switch (commandEnum) {
                 case START -> {
@@ -81,6 +96,28 @@ public class CommandHandler {
                             .chatId(chatId)
                             .parseMode("HTML")
                             .text(metricsMessageBuilder.getAllProjectsMessage(chatId))
+                            .replyMarkup(closeButtonKeyboard.closeButtonKeyboard())
+                            .build();
+                }
+
+                case YCLIENTS -> {
+                    Yclients yclients = yclientsRepository.findYclientsByYclientsId(startData);
+                    String projectId = projectsDataTempKeeper.getLastProjectId(chatId);
+                    yclients.setProjectId(projectId);
+                    yclients.setChatId(chatId);
+                    yclientsRepository.save(yclients);
+
+                    return SendMessage.builder()
+                            .chatId(chatId)
+                            .text(MessageEnum.INPUT_TEST_MESSAGE.getMessage())
+                            .replyMarkup(yclientsTestKeyboard.getKeyboard(userState, chatId))
+                            .build();
+                }
+
+                case ERROR -> {
+                    return SendMessage.builder()
+                            .chatId(chatId)
+                            .text(MessageEnum.ERROR_MESSAGE.getMessage() + startData)
                             .replyMarkup(closeButtonKeyboard.closeButtonKeyboard())
                             .build();
                 }

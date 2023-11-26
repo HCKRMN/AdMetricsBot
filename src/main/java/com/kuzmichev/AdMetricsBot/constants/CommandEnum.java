@@ -6,6 +6,9 @@ public enum CommandEnum {
     HELP("/help"),
     REGISTER("/register"),
     TEST("/test"),
+    YCLIENTS("/yclients"),
+    ERROR("/error"),
+
     ;
 
     private final String command;

@@ -18,15 +18,13 @@ public class StateHandlersList {
             AskProjectNameStateHandler askProjectNameStateHandler,
             BitrixDomainStateHandler bitrixDomainStateHandler,
             EditTimerStateHandler editTimerStateHandler,
-            ManualEditTimeZoneStateHandler manualEditTimeZoneStateHandler,
-            YclientsStateHandler yclientsStateHandler
+            ManualEditTimeZoneStateHandler manualEditTimeZoneStateHandler
     ) {
         stateHandlers = new ArrayList<>();
         stateHandlers.add(askProjectNameStateHandler);
         stateHandlers.add(bitrixDomainStateHandler);
         stateHandlers.add(editTimerStateHandler);
         stateHandlers.add(manualEditTimeZoneStateHandler);
-        stateHandlers.add(yclientsStateHandler);
     }
 
     public List<StateHandler> getStateHandlers() {

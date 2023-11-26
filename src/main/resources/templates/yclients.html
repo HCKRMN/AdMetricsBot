@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Данные успешно переданы</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300&display=swap" rel="stylesheet">
-    <meta http-equiv="refresh" content="2;URL=https://t.me/AdMetrics_Bot" />
+<!--    <meta http-equiv="refresh" content="2;URL=https://t.me/AdMetrics_Bot" />-->
 </head>
 
 <body>
@@ -29,6 +29,19 @@
 <div class="my-text">
     Готово, <br>переадресация...
 </div>
+
+<script th:inline="javascript">
+    window.onload = function() {
+        // Получение значения yclientsId из Thymeleaf
+        const yclientsId = [[${yclientsId}]];  // Здесь получаем значение из контроллера
+
+        // Создание задержки в 5 секунд перед перенаправлением пользователя
+        setTimeout(function() {
+            // Перенаправление на страницу в Telegram через 5 секунд
+            window.location.href = 'https://t.me/AdMetrics_Bot?start=Yclients_' + yclientsId;
+        }, 5000); // 5 секунд
+    }
+</script>
 
 </body>
 

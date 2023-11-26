@@ -8,13 +8,14 @@ import lombok.*;
 @Entity(name = "yclientsTable")
 @Getter
 @Setter
-@ToString(of = {"projectId", "chatId", "salonId", "salonName"})
+@ToString(of = {"yclientsId", "projectId", "chatId", "salonId", "salonName"})
 @Cacheable
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Yclients {
     @Id
+    private String yclientsId;
     private String projectId;
     private String chatId;
     private String salonId;

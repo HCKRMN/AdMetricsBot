@@ -4,8 +4,7 @@ import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.BackAndExitKeyboard;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.replyKeyboards.ReplyKeyboardMaker;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.YclientsAddKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
 import lombok.AccessLevel;
@@ -22,10 +21,9 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
 public class YclientsCallbackHandler implements CallbackHandler {
-    BackAndExitKeyboard backAndExitKeyboard;
-    ReplyKeyboardMaker replyKeyboardMaker;
     MessageManagementService messageManagementService;
     UserStateKeeper userStateKeeper;
+    YclientsAddKeyboard yclientsAddKeyboard;
 
     @Override
     public boolean canHandle(String data) {
@@ -44,7 +42,6 @@ public class YclientsCallbackHandler implements CallbackHandler {
         }
         userStateKeeper.setState(chatId, newState);
 
-
         System.out.println("Получаем последнее сообщение из YclientsCallbackHandler");
         int lastMessageId = messageManagementService.getLastMessageId(chatId);
 
@@ -54,22 +51,10 @@ public class YclientsCallbackHandler implements CallbackHandler {
         System.out.println("Кладем в очередь из YclientsCallbackHandler, которое сейчас отправится: " + nextMessageId);
         messageManagementService.putMessageToQueue(chatId, nextMessageId);
 
-
-
-//            messageManagementService.putMessageToQueue(chatId, messageId);
-//            messageManagementService.deleteMessage(chatId);
-//
-//            tempDataSaver.tempLastMessageId(chatId, messageId);
-
-        // сделать сендмесседж без ретурна и удаление сообщения по айди
-
-
-
         return SendMessage.builder()
                 .chatId(chatId)
-                .text(MessageEnum.ADD_YCLIENTS_STEP_1_MESSAGE.getMessage())
-                .replyMarkup(backAndExitKeyboard.getKeyboard(newState, chatId))
-                .replyMarkup(replyKeyboardMaker.getContactKeyboard())
+                .text(MessageEnum.ADD_YCLIENTS_MESSAGE.getMessage())
+                .replyMarkup(yclientsAddKeyboard.getKeyboard(userState, chatId))
                 .build();
     }
 }

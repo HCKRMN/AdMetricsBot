@@ -15,5 +15,7 @@ public interface YclientsRepository extends CrudRepository<Yclients,String> {
 
     Yclients findYclientsByProjectId(String projectId);
 
+    Yclients findYclientsByYclientsId(String yclientsId);
+
     boolean existsByProjectId (String projectId);
 }
