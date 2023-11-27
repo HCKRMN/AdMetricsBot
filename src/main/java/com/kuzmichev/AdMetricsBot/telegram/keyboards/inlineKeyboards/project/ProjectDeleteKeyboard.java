@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProjectDeleteKeyboard implements InlineKeyboard {
 
-    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
+    public InlineKeyboardMarkup getKeyboard(String chatId, String userState) {
         return InlineKeyboardMarkup.builder()
                 .keyboardRow(List.of(InlineKeyboardButton.builder()
                         .text(ButtonEnum.DELETE_PROJECT_BUTTON.getButtonName())

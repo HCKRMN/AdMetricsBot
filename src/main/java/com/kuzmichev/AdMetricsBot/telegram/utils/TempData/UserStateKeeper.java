@@ -16,9 +16,8 @@ import java.util.HashMap;
 public class UserStateKeeper {
     HashMap<String, String> userState = new HashMap<>();
     public void setState(String chatId, String state) {
+        log.info("Меняем состояние у юзера {}, состояние: {}", chatId, state);
         userState.put(chatId, state);
-        String userStateName = userState.get(chatId);
-        log.info("Теперь у юзера {} состояние: {}", chatId, userStateName);
     }
     public String getState(String chatId){
         if(userState.containsKey(chatId)){

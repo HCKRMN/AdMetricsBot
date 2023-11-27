@@ -39,12 +39,12 @@ public class ManualEditTimeZoneStateHandler implements StateHandler {
         if (validator.validateTime(messageText)) {
             timeZoneDefinition.manualTimeZone(chatId, messageText);
             if(userState.contains(StateEnum.REGISTRATION.getStateName())){
-                String newUserState = StateEnum.REGISTRATION_EDIT_TIMEZONE_COMPLETE_STATE.getStateName();
-                userStateKeeper.setState(chatId, newUserState);
+                userState = StateEnum.REGISTRATION_EDIT_TIMEZONE_COMPLETE_STATE.getStateName();
+                userStateKeeper.setState(chatId, userState);
                 return SendMessage.builder()
                         .chatId(chatId)
                         .text(MessageEnum.REGISTRATION_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage())
-                        .replyMarkup(projectCreateKeyboard.getKeyboard(newUserState, chatId))
+                        .replyMarkup(projectCreateKeyboard.getKeyboard(chatId, userState))
                         .build();
 
             } else {
@@ -52,7 +52,7 @@ public class ManualEditTimeZoneStateHandler implements StateHandler {
                 return SendMessage.builder()
                         .chatId(chatId)
                         .text(MessageEnum.SETTINGS_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage())
-                        .replyMarkup(doneButtonKeyboard.getKeyboard(userState, chatId))
+                        .replyMarkup(doneButtonKeyboard.getKeyboard(chatId, userState))
                         .build();
             }
 
@@ -60,7 +60,7 @@ public class ManualEditTimeZoneStateHandler implements StateHandler {
             return SendMessage.builder()
                     .chatId(chatId)
                     .text(MessageEnum.INVALID_TIME_MESSAGE.getMessage())
-                    .replyMarkup(backAndExitKeyboard.getKeyboard(userState, chatId))
+                    .replyMarkup(backAndExitKeyboard.getKeyboard(chatId, userState))
                     .build();
         }
     }

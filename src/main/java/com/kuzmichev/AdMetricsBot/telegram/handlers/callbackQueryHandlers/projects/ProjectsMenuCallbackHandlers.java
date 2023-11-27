@@ -40,7 +40,7 @@ public class ProjectsMenuCallbackHandlers  implements CallbackHandler{
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.PROJECT_MENU_MESSAGE.getMessage())
-                .replyMarkup(projectsKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(projectsKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

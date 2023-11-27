@@ -32,6 +32,7 @@ public class BackAndExitKeyboard implements InlineKeyboard {
                     SETTINGS_EDIT_TIMEZONE_STATE -> backButtonSettingsCallBackEnum = CallBackEnum.SETTINGS_BACK_CALLBACK.getCallBackName();
 
             case SETTINGS_PROJECT_CREATE_STATE,
+                    SETTINGS_ADD_YANDEX_STATE,
                     SETTINGS_ADD_INPUTS_STATE -> backButtonSettingsCallBackEnum = CallBackEnum.PROJECTS_CALLBACK.getCallBackName();
 
             default -> backButtonSettingsCallBackEnum = CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName();
@@ -48,7 +49,7 @@ public class BackAndExitKeyboard implements InlineKeyboard {
     }
 
     // Универсальное меню с двумя кнопками: Назад и Выход
-    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
+    public InlineKeyboardMarkup getKeyboard(String chatId, String userState) {
         return InlineKeyboardMarkup.builder()
                 .keyboardRow(getButtons(userState)).build();
     }

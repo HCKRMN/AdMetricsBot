@@ -38,25 +38,24 @@ public class AskProjectNameStateHandler implements StateHandler {
         if (validator.validateProjectName(messageText)) {
             projectManager.projectCreate(chatId, messageText);
 
-            String newUserState;
             if(userState.contains(StateEnum.REGISTRATION.getStateName())) {
-                newUserState = StateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName();
+                userState = StateEnum.REGISTRATION_ADD_INPUTS_STATE.getStateName();
             } else {
-                newUserState = StateEnum.SETTINGS_ADD_INPUTS_STATE.getStateName();
+                userState = StateEnum.SETTINGS_ADD_INPUTS_STATE.getStateName();
             }
-            userStateKeeper.setState(chatId, newUserState);
+            userStateKeeper.setState(chatId, userState);
 
             return SendMessage.builder()
                     .chatId(chatId)
                     .text(MessageEnum.ADD_TOKENS_MESSAGE.getMessage())
-                    .replyMarkup(addInputsKeyboard.getKeyboard(newUserState, chatId))
+                    .replyMarkup(addInputsKeyboard.getKeyboard(chatId, userState))
                     .build();
 
         } else {
             return SendMessage.builder()
                     .chatId(chatId)
                     .text(MessageEnum.PROJECT_NAME_INVALID_MESSAGE.getMessage())
-                    .replyMarkup(backAndExitKeyboard.getKeyboard(userState, chatId))
+                    .replyMarkup(backAndExitKeyboard.getKeyboard(chatId, userState))
                     .build();
         }
     }

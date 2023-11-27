@@ -37,7 +37,7 @@ public class DisableNotificationsCallbackHandler implements CallbackHandler {
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.SETTINGS_MENU_MESSAGE.getMessage())
-                .replyMarkup(settingsKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(settingsKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

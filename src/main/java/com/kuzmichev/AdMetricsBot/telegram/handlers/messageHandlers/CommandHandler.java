@@ -60,7 +60,7 @@ public class CommandHandler {
                     return SendMessage.builder()
                             .chatId(chatId)
                             .text(MessageEnum.START_MESSAGE.getMessage())
-                            .replyMarkup(startRegistrationKeyboard.getKeyboard(userState, chatId))
+                            .replyMarkup(startRegistrationKeyboard.getKeyboard(chatId, userState))
                             .build();
                 }
 
@@ -69,7 +69,7 @@ public class CommandHandler {
                     return SendMessage.builder()
                             .chatId(chatId)
                             .text(MessageEnum.SETTINGS_MENU_MESSAGE.getMessage())
-                            .replyMarkup(settingsKeyboard.getKeyboard(userState, chatId))
+                            .replyMarkup(settingsKeyboard.getKeyboard(chatId, userState))
                             .build();
                 }
 
@@ -87,7 +87,7 @@ public class CommandHandler {
                     return SendMessage.builder()
                             .chatId(chatId)
                             .text(MessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage())
-                            .replyMarkup(timeZoneKeyboard.getKeyboard(userState, chatId))
+                            .replyMarkup(timeZoneKeyboard.getKeyboard(chatId, userState))
                             .build();
                 }
 
@@ -110,7 +110,7 @@ public class CommandHandler {
                     return SendMessage.builder()
                             .chatId(chatId)
                             .text(MessageEnum.INPUT_TEST_MESSAGE.getMessage())
-                            .replyMarkup(yclientsTestKeyboard.getKeyboard(userState, chatId))
+                            .replyMarkup(yclientsTestKeyboard.getKeyboard(chatId, userState))
                             .build();
                 }
 

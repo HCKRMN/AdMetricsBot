@@ -49,7 +49,7 @@ public class SomeProjectCallbackHandler  implements CallbackHandler {
                     .chatId(chatId)
                     .messageId(messageId)
                     .text(projectRepository.findProjectNameByProjectId(projectId))
-                    .replyMarkup(projectSomeKeyboard.getKeyboard(userState, chatId))
+                    .replyMarkup(projectSomeKeyboard.getKeyboard(chatId, userState))
                     .build();
         }
 

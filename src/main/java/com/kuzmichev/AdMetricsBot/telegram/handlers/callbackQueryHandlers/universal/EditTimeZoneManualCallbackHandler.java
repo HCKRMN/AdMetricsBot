@@ -45,7 +45,7 @@ public class EditTimeZoneManualCallbackHandler implements CallbackHandler {
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.EDIT_TIMEZONE_MANUAL_MESSAGE.getMessage())
-                .replyMarkup(backAndExitKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(backAndExitKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

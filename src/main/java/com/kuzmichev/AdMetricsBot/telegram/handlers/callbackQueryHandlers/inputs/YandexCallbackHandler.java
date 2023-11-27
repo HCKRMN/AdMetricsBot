@@ -33,19 +33,18 @@ public class YandexCallbackHandler implements CallbackHandler {
         String chatId = buttonQuery.getMessage().getChatId().toString();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        String newState;
         if (userState.contains(StateEnum.REGISTRATION.getStateName())) {
-            newState = StateEnum.REGISTRATION_ADD_YANDEX_STATE.getStateName();
+            userState = StateEnum.REGISTRATION_ADD_YANDEX_STATE.getStateName();
         } else {
-            newState = StateEnum.SETTINGS_ADD_YANDEX_STATE.getStateName();
+            userState = StateEnum.SETTINGS_ADD_YANDEX_STATE.getStateName();
         }
-        userStateKeeper.setState(chatId, newState);
+        userStateKeeper.setState(chatId, userState);
 
         return EditMessageText.builder()
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.ADD_YANDEX_MESSAGE.getMessage())
-                .replyMarkup(yandexAddKeyboard.getKeyboard(newState, chatId))
+                .replyMarkup(yandexAddKeyboard.getKeyboard(chatId, userState))
                 .build();
         }
 }

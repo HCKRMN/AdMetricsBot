@@ -40,7 +40,7 @@ public class YandexTestCallbackHandler implements CallbackHandler {
                 .messageId(messageId)
                 .parseMode("HTML")
                 .text(yandexMessageBuilder.getMessage(projectId))
-                .replyMarkup(yandexTestKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(yandexTestKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

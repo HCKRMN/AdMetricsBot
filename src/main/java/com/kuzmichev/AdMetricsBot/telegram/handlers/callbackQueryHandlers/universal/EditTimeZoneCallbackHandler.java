@@ -44,7 +44,7 @@ public class EditTimeZoneCallbackHandler implements CallbackHandler {
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage())
-                .replyMarkup(timeZoneKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(timeZoneKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

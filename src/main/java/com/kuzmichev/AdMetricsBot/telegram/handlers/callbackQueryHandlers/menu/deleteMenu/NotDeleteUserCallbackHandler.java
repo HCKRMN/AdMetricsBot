@@ -34,7 +34,7 @@ public class NotDeleteUserCallbackHandler implements CallbackHandler {
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.NOT_DELETE_USER_DATA_MESSAGE.getMessage())
-                .replyMarkup(doneButtonKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(doneButtonKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

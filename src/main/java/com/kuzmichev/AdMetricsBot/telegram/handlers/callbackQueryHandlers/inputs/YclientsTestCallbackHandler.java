@@ -40,7 +40,7 @@ public class YclientsTestCallbackHandler implements CallbackHandler {
                 .messageId(messageId)
                 .parseMode("HTML")
                 .text(yclientsMessageBuilder.getMessage(projectId))
-                .replyMarkup(yclientsTestKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(yclientsTestKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

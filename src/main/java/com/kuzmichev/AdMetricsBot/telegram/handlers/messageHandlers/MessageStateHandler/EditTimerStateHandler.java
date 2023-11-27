@@ -40,7 +40,7 @@ public class EditTimerStateHandler implements StateHandler {
             return SendMessage.builder()
                     .chatId(chatId)
                     .text(MessageEnum.INVALID_TIME_MESSAGE.getMessage())
-                    .replyMarkup(backAndExitKeyboard.getKeyboard(userState, chatId))
+                    .replyMarkup(backAndExitKeyboard.getKeyboard(chatId, userState))
                     .build();
         }
     }

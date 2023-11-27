@@ -62,20 +62,20 @@ public class YandexController2 {
             messageManagementService.deleteMessage(chatId);
 
             if (userState.contains(StateEnum.REGISTRATION.getStateName())) {
-                String newState = StateEnum.REGISTRATION_ADD_YANDEX_TEST_STATE.getStateName();
-                userStateKeeper.setState(chatId, newState);
+                userState = StateEnum.REGISTRATION_ADD_YANDEX_TEST_STATE.getStateName();
+                userStateKeeper.setState(chatId, userState);
                 messageWithoutReturn.sendMessage(
                         chatId,
                         MessageEnum.REGISTRATION_TEST_INPUTS_MESSAGE.getMessage(),
-                        yandexTestKeyboard.getKeyboard(newState, chatId));
+                        yandexTestKeyboard.getKeyboard(chatId, userState));
 
             } else {
-                String newState = StateEnum.SETTINGS_ADD_YANDEX_TEST_STATE.getStateName();
-                userStateKeeper.setState(chatId, newState);
+                userState = StateEnum.SETTINGS_ADD_YANDEX_TEST_STATE.getStateName();
+                userStateKeeper.setState(chatId, userState);
                 messageWithoutReturn.sendMessage(
                         chatId,
                         MessageEnum.INPUT_TEST_MESSAGE.getMessage(),
-                        yandexTestKeyboard.getKeyboard(newState, chatId));
+                        yandexTestKeyboard.getKeyboard(chatId, userState));
             }
             log.info("Пользователь {} добавил аккаунт Yandex", chatId);
         }

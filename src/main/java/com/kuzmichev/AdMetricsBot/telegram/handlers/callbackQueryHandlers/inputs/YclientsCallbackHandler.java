@@ -47,7 +47,7 @@ public class YclientsCallbackHandler implements CallbackHandler {
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.ADD_YCLIENTS_MESSAGE.getMessage())
-                .replyMarkup(yclientsAddKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(yclientsAddKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

@@ -25,7 +25,8 @@ public class YandexAddKeyboard implements InlineKeyboard {
                 .keyboardRow(List.of(InlineKeyboardButton.builder()
                                 .text(ButtonEnum.YANDEX_ADD_TOKEN_LINK_BUTTON.getButtonName())
                                 .url(yandexAuthUrl.getYandexAuthorizationUrl(chatId, userState))
-//                                .build(),
+//                                .build()
+//                                ,
 //                                        на всякий случай оставлю кнопку получения доступа к апи, вроде как ненужно, но пусть будет
 //                        InlineKeyboardButton.builder()
 //                                .text(ButtonEnum.YANDEX_API_SETTINGS_BUTTON.getButtonName())

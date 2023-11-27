@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class YandexTestKeyboard implements InlineKeyboard {
 
-    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
+    public InlineKeyboardMarkup getKeyboard(String chatId, String userState) {
         String callBack;
         if (userState.contains(StateEnum.REGISTRATION.getStateName())) {
             callBack = CallBackEnum.EDIT_TIMER_CALLBACK.getCallBackName();

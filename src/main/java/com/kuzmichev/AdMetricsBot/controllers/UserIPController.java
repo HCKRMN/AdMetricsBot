@@ -61,14 +61,14 @@ public class UserIPController {
                 messageWithoutReturn.sendMessage(
                         chatId,
                         MessageEnum.REGISTRATION_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
-                        projectCreateKeyboard.getKeyboard(userState, chatId)
+                        projectCreateKeyboard.getKeyboard(chatId, userState)
                 );
             } else {
                 userStateKeeper.setState(chatId, StateEnum.WORKING_STATE.getStateName());
                 messageWithoutReturn.sendMessage(
                         chatId,
                         MessageEnum.SETTINGS_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
-                        doneButtonKeyboard.getKeyboard(userState, chatId)
+                        doneButtonKeyboard.getKeyboard(chatId, userState)
                 );
             }
         }

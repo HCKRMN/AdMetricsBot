@@ -45,7 +45,7 @@ public class EditTimerCallbackHandler implements CallbackHandler {
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.ASK_TIME_MESSAGE.getMessage())
-                .replyMarkup(backAndExitKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(backAndExitKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

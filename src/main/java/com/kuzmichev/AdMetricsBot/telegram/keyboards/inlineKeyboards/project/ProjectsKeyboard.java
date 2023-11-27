@@ -23,7 +23,7 @@ public class ProjectsKeyboard implements InlineKeyboard {
     BackAndExitKeyboard backAndExitKeyboard;
     ProjectRepository projectRepository;
 
-    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
+    public InlineKeyboardMarkup getKeyboard(String chatId, String userState) {
         // Кнопка получения списка проектов
         List<InlineKeyboardButton> projectsButton = List.of(InlineKeyboardButton.builder()
                 .text(ButtonEnum.PROJECTS_GET_LIST_BUTTON.getButtonName())

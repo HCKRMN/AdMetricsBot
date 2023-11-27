@@ -32,7 +32,7 @@ public class EditLanguageCallbackHandler  implements CallbackHandler {
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.IN_DEVELOPING_MESSAGE.getMessage())
-                .replyMarkup(settingsKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(settingsKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

@@ -34,7 +34,7 @@ public class DeleteProjectStepOneCallbackHandler implements CallbackHandler {
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.PROJECT_DELETE_STEP_1_MESSAGE.getMessage())
-                .replyMarkup(projectDeleteKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(projectDeleteKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

@@ -55,7 +55,7 @@ public class BitrixDomainStateHandler implements StateHandler {
             return SendMessage.builder()
                     .chatId(chatId)
                     .text(MessageEnum.INVALID_BITRIX_DOMAIN_MESSAGE.getMessage())
-                    .replyMarkup(backAndExitKeyboard.getKeyboard(userState, chatId))
+                    .replyMarkup(backAndExitKeyboard.getKeyboard(chatId, userState))
                     .build();
         }
     }

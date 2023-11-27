@@ -27,7 +27,7 @@ public class ProjectListKeyboard implements InlineKeyboard {
     ProjectRepository projectRepository;
     BackAndExitKeyboard backAndExitKeyboard;
 
-    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
+    public InlineKeyboardMarkup getKeyboard(String chatId, String userState) {
         String projectName;
         String projectCallback;
 

@@ -20,7 +20,7 @@ import java.util.List;
 public class SettingsKeyboard implements InlineKeyboard{
     ScheduledMessageRepository scheduledMessageRepository;
 
-    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
+    public InlineKeyboardMarkup getKeyboard(String chatId, String userState) {
 
         String launchButton;
         CallBackEnum launchCallback;

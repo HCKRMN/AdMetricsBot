@@ -50,7 +50,7 @@ public class DeleteProjectStepTwoCallbackHandler implements CallbackHandler {
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.PROJECT_DELETE_STEP_2_MESSAGE.getMessage())
-                .replyMarkup(doneButtonKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(doneButtonKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

@@ -22,7 +22,7 @@ public class YclientsAddKeyboard implements InlineKeyboard {
     @Value("${yclientsAppstoreURL}")
     String yclientsAppstoreURL;
 
-    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
+    public InlineKeyboardMarkup getKeyboard(String chatId, String userState) {
         return InlineKeyboardMarkup.builder()
                 .keyboardRow(List.of(InlineKeyboardButton.builder()
                                 .text(ButtonEnum.LINK_BUTTON.getButtonName())

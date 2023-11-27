@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DoneButtonKeyboard implements InlineKeyboard{
     // Кнопка Готово
-    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
+    public InlineKeyboardMarkup getKeyboard(String chatId, String userState) {
         return InlineKeyboardMarkup.builder()
                 .keyboardRow(List.of(InlineKeyboardButton.builder()
                         .text(ButtonEnum.DONE_BUTTON.getButtonName())

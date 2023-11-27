@@ -25,7 +25,7 @@ public class ProjectSomeKeyboard implements InlineKeyboard {
     BackAndExitKeyboard backAndExitKeyboard;
     ProjectsDataTempKeeper projectsDataTempKeeper;
     InputsManager inputsManager;
-    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
+    public InlineKeyboardMarkup getKeyboard(String chatId, String userState) {
 
         String projectId = projectsDataTempKeeper.getLastProjectId(chatId);
         List<List<InlineKeyboardButton>> deleteInputAndGetInfoButtons = new ArrayList<>();

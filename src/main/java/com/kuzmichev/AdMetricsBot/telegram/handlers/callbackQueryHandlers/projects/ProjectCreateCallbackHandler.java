@@ -33,19 +33,18 @@ public class ProjectCreateCallbackHandler implements CallbackHandler {
         String chatId = buttonQuery.getMessage().getChatId().toString();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        String newUserState;
         if(userState.contains(StateEnum.REGISTRATION.getStateName())){
-            newUserState = StateEnum.REGISTRATION_PROJECT_CREATE_ASK_NAME_STATE.getStateName();
+            userState = StateEnum.REGISTRATION_PROJECT_CREATE_ASK_NAME_STATE.getStateName();
         } else {
-            newUserState = StateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE.getStateName();
+            userState = StateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE.getStateName();
         }
-        userStateKeeper.setState(chatId, newUserState);
+        userStateKeeper.setState(chatId, userState);
 
         return EditMessageText.builder()
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.PROJECT_CREATE_ASK_NAME_MESSAGE.getMessage())
-                .replyMarkup(backAndExitKeyboard.getKeyboard(newUserState, chatId))
+                .replyMarkup(backAndExitKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

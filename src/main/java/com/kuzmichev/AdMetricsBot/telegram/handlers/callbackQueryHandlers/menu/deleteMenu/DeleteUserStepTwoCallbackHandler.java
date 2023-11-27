@@ -37,7 +37,7 @@ public class DeleteUserStepTwoCallbackHandler implements CallbackHandler {
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.DELETE_USER_DATA_SUCCESS_MESSAGE.getMessage())
-                .replyMarkup(doneButtonKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(doneButtonKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

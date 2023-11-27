@@ -39,7 +39,7 @@ public class ProjectGetInfoCallbackHandler implements CallbackHandler {
                 .messageId(messageId)
                 .parseMode("HTML")
                 .text(metricsMessageBuilder.getOneProjectMessage(projectId))
-                .replyMarkup(backAndExitKeyboard.getKeyboard(userState, chatId))
+                .replyMarkup(backAndExitKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

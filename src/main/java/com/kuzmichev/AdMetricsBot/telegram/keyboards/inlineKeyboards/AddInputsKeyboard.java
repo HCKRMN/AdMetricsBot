@@ -19,7 +19,7 @@ import java.util.List;
 public class AddInputsKeyboard implements InlineKeyboard {
     BackAndExitKeyboard backAndExitKeyboard;
 
-    public InlineKeyboardMarkup getKeyboard(String userState, String chatId) {
+    public InlineKeyboardMarkup getKeyboard(String chatId, String userState) {
 
         return InlineKeyboardMarkup.builder()
                 .keyboardRow(List.of(InlineKeyboardButton.builder()

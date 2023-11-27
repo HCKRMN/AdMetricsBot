@@ -33,19 +33,18 @@ public class BitrixCallbackHandler implements CallbackHandler {
         String chatId = buttonQuery.getMessage().getChatId().toString();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        String newState;
         if (userState.contains(StateEnum.REGISTRATION.getStateName())) {
-            newState = StateEnum.REGISTRATION_ADD_BITRIX_STATE.getStateName();
+            userState = StateEnum.REGISTRATION_ADD_BITRIX_STATE.getStateName();
         } else {
-            newState = StateEnum.SETTINGS_ADD_BITRIX_STATE.getStateName();
+            userState = StateEnum.SETTINGS_ADD_BITRIX_STATE.getStateName();
         }
-        userStateKeeper.setState(chatId, newState);
+        userStateKeeper.setState(chatId, userState);
 
         return EditMessageText.builder()
                 .chatId(chatId)
                 .messageId(messageId)
                 .text(MessageEnum.ADD_BITRIX_STEP_1_MESSAGE.getMessage())
-                .replyMarkup(backAndExitKeyboard.getKeyboard(newState, chatId))
+                .replyMarkup(backAndExitKeyboard.getKeyboard(chatId, userState))
                 .build();
     }
 }

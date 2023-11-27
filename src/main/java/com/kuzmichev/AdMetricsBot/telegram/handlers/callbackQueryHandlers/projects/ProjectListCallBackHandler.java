@@ -53,7 +53,7 @@ public class ProjectListCallBackHandler implements CallbackHandler {
                     .chatId(chatId)
                     .messageId(messageId)
                     .text(MessageEnum.SETTINGS_PROJECTS_LIST_MENU_MESSAGE.getMessage())
-                    .replyMarkup(projectListKeyboard.getKeyboard(userState, chatId))
+                    .replyMarkup(projectListKeyboard.getKeyboard(chatId, userState))
                     .build();
         }
 
