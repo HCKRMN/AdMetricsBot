@@ -39,7 +39,7 @@ public class ManualEditTimeZoneStateHandler implements StateHandler {
         if (validator.validateTime(messageText)) {
             timeZoneDefinition.manualTimeZone(chatId, messageText);
             if(userState.contains(StateEnum.REGISTRATION.getStateName())){
-                userState = StateEnum.REGISTRATION_EDIT_TIMEZONE_COMPLETE_STATE.getStateName();
+                userState = StateEnum.REGISTRATION_EDIT_TIMER_STATE.getStateName();
                 userStateKeeper.setState(chatId, userState);
                 return SendMessage.builder()
                         .chatId(chatId)

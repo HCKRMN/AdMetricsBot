@@ -20,9 +20,11 @@ import java.util.List;
 public class BitrixTestKeyboard {
 
     public InlineKeyboardMarkup bitrixTestMenu(String userState) {
-        String callBack = CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName();
+        String callBack;
         if (userState.contains(StateEnum.REGISTRATION.getStateName())) {
-            callBack = CallBackEnum.EDIT_TIMER_CALLBACK.getCallBackName();
+            callBack = CallBackEnum.EDIT_TIMEZONE_CALLBACK.getCallBackName();
+        } else {
+            callBack = CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName();
         }
 
         return InlineKeyboardMarkup.builder()

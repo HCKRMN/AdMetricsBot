@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @EnableJpaRepositories
 public interface YclientsRepository extends CrudRepository<Yclients,String> {
 
@@ -18,4 +20,6 @@ public interface YclientsRepository extends CrudRepository<Yclients,String> {
     Yclients findYclientsByYclientsId(String yclientsId);
 
     boolean existsByProjectId (String projectId);
+
+    Optional<Yclients> findYclientsByChatIdAndProjectIdIsNull(String chatId);
 }

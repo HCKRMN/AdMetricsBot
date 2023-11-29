@@ -5,6 +5,7 @@ import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.TimeZoneKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.ProjectsDataTempKeeper;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 public class EditTimeZoneCallbackHandler implements CallbackHandler {
     TimeZoneKeyboard timeZoneKeyboard;
     UserStateKeeper userStateKeeper;
+    ProjectsDataTempKeeper projectsDataTempKeeper;
 
     @Override
     public boolean canHandle(String data) {
@@ -32,13 +34,14 @@ public class EditTimeZoneCallbackHandler implements CallbackHandler {
         String chatId = buttonQuery.getMessage().getChatId().toString();
         int messageId = buttonQuery.getMessage().getMessageId();
 
-        String newState;
-        if (userState.contains("REGISTRATION")) {
-            newState = StateEnum.REGISTRATION_EDIT_TIMEZONE_STATE.getStateName();
+        if (userState.contains(StateEnum.REGISTRATION.getStateName())) {
+            userState = StateEnum.REGISTRATION_EDIT_TIMEZONE_STATE.getStateName();
         } else {
-            newState = StateEnum.SETTINGS_EDIT_TIMEZONE_STATE.getStateName();
+            userState = StateEnum.SETTINGS_EDIT_TIMEZONE_STATE.getStateName();
         }
-        userStateKeeper.setState(chatId, newState);
+
+        projectsDataTempKeeper.clearLastProjectId(chatId);
+        userStateKeeper.setState(chatId, userState);
 
         return EditMessageText.builder()
                 .chatId(chatId)

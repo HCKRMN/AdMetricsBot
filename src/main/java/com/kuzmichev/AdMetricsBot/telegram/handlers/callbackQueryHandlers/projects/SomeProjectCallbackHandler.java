@@ -2,9 +2,12 @@ package com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.proje
 
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
+import com.kuzmichev.AdMetricsBot.model.Yclients;
+import com.kuzmichev.AdMetricsBot.model.YclientsRepository;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.DynamicCallback;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.CloseButtonKeyboard;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.YclientsTestKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project.ProjectSomeKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.ProjectsDataTempKeeper;
 import lombok.AccessLevel;
@@ -17,6 +20,7 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -27,6 +31,8 @@ public class SomeProjectCallbackHandler  implements CallbackHandler {
     ProjectRepository projectRepository;
     ProjectsDataTempKeeper projectsDataTempKeeper;
     CloseButtonKeyboard closeButtonKeyboard;
+    YclientsRepository yclientsRepository;
+    YclientsTestKeyboard yclientsTestKeyboard;
 
     @Override
     public boolean canHandle(String data) {
@@ -39,11 +45,26 @@ public class SomeProjectCallbackHandler  implements CallbackHandler {
         String data = buttonQuery.getData();
         int messageId = buttonQuery.getMessage().getMessageId();
 
+
+
+
         String regexProject = "project_.+";
         Map<String, String> projectData = DynamicCallback.handleDynamicCallback(data, regexProject, "project_");
         if (!projectData.isEmpty()) {
             String projectId = projectData.get("value");
             projectsDataTempKeeper.setLastProjectId(chatId, projectId);
+
+            Optional<Yclients> yclients = yclientsRepository.findYclientsByChatIdAndProjectIdIsNull(chatId);
+            if (yclients.isPresent()) {
+                yclients.get().setProjectId(projectId);
+                yclientsRepository.save(yclients.get());
+                return EditMessageText.builder()
+                        .chatId(chatId)
+                        .messageId(messageId)
+                        .text(MessageEnum.INPUT_TEST_MESSAGE.getMessage())
+                        .replyMarkup(yclientsTestKeyboard.getKeyboard(chatId, userState))
+                        .build();
+            }
 
             return EditMessageText.builder()
                     .chatId(chatId)

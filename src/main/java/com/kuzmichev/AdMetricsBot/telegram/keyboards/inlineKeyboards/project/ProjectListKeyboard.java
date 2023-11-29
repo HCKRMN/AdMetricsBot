@@ -28,6 +28,14 @@ public class ProjectListKeyboard implements InlineKeyboard {
     BackAndExitKeyboard backAndExitKeyboard;
 
     public InlineKeyboardMarkup getKeyboard(String chatId, String userState) {
+
+        return InlineKeyboardMarkup.builder()
+                .keyboard(getProjectListButtons(chatId))
+                .keyboardRow(backAndExitKeyboard.getButtons(userState))
+                .build();
+    }
+
+    public List<List<InlineKeyboardButton>> getProjectListButtons(String chatId) {
         String projectName;
         String projectCallback;
 
@@ -53,11 +61,7 @@ public class ProjectListKeyboard implements InlineKeyboard {
                             .build()));
         }
         rows.add(paginationButtons(currentPage, projectCount / projectsPerPage, projectCount));
-        rows.add(backAndExitKeyboard.getButtons(userState));
-
-        return InlineKeyboardMarkup.builder()
-                .keyboard(rows)
-                .build();
+        return rows;
     }
 
     private List<InlineKeyboardButton> paginationButtons(int currentPage, int totalPages, int projectCount) {

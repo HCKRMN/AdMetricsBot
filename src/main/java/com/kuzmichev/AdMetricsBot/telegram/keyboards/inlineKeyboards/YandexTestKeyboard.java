@@ -22,7 +22,7 @@ public class YandexTestKeyboard implements InlineKeyboard {
     public InlineKeyboardMarkup getKeyboard(String chatId, String userState) {
         String callBack;
         if (userState.contains(StateEnum.REGISTRATION.getStateName())) {
-            callBack = CallBackEnum.EDIT_TIMER_CALLBACK.getCallBackName();
+            callBack = CallBackEnum.EDIT_TIMEZONE_CALLBACK.getCallBackName();
         } else {
             callBack = CallBackEnum.SETTINGS_EXIT_CALLBACK.getCallBackName();
         }

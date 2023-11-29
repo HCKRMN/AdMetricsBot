@@ -4,6 +4,7 @@ import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Messages.MessageManagementService;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.ProjectsDataTempKeeper;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 public class ExitCallbackHandler implements CallbackHandler {
     UserStateKeeper userStateKeeper;
     MessageManagementService messageManagementService;
+    ProjectsDataTempKeeper projectsDataTempKeeper;
 
     @Override
     public boolean canHandle(String data) {
@@ -34,7 +36,7 @@ public class ExitCallbackHandler implements CallbackHandler {
 
         userStateKeeper.setState(chatId, StateEnum.WORKING_STATE.getStateName());
         messageManagementService.removeMessageFromQueue(chatId, messageId);
-
+        projectsDataTempKeeper.clearLastProjectId(chatId);
         return DeleteMessage.builder()
                 .chatId(chatId)
                 .messageId(messageId)

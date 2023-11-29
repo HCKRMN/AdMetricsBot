@@ -21,7 +21,7 @@ public class TimeZoneKeyboard implements InlineKeyboard {
     final BackAndExitKeyboard backAndExitKeyboard;
     @Value("${telegram.webhook-path}")
     String link;
-    public InlineKeyboardMarkup getKeyboard(String userState, String chatId ) {
+    public InlineKeyboardMarkup getKeyboard(String chatId, String userState) {
 
         String ipToTimeZoneLink = link + "/getip" +
                 "?chatId=" + chatId;

@@ -34,4 +34,7 @@ public class ProjectsDataTempKeeper {
     public String getLastProjectId(String chatId){
             return lastProjectId.get(chatId);
     }
+    public void clearLastProjectId(String chatId){
+        lastProjectId.remove(chatId);
+    }
 }

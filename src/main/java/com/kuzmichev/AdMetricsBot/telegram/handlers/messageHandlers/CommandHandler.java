@@ -4,10 +4,13 @@ import com.kuzmichev.AdMetricsBot.constants.CommandEnum;
 import com.kuzmichev.AdMetricsBot.constants.InputsEnum;
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
+import com.kuzmichev.AdMetricsBot.model.ProjectRepository;
+import com.kuzmichev.AdMetricsBot.model.UserRepository;
 import com.kuzmichev.AdMetricsBot.model.Yclients;
 import com.kuzmichev.AdMetricsBot.model.YclientsRepository;
 import com.kuzmichev.AdMetricsBot.service.MetricsMessageBuilder;
 import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.*;
+import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.project.ProjectCreateOrListKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Registration;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.ProjectsDataTempKeeper;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
@@ -28,13 +31,16 @@ public class CommandHandler {
     SettingsKeyboard settingsKeyboard;
     StartRegistrationKeyboard startRegistrationKeyboard;
     Registration registration;
-    TimeZoneKeyboard timeZoneKeyboard;
     MetricsMessageBuilder metricsMessageBuilder;
     UserStateKeeper userStateKeeper;
     CloseButtonKeyboard closeButtonKeyboard;
     YclientsRepository yclientsRepository;
     ProjectsDataTempKeeper projectsDataTempKeeper;
     YclientsTestKeyboard yclientsTestKeyboard;
+    BackAndExitKeyboard backAndExitKeyboard;
+    UserRepository userRepository;
+    ProjectRepository projectRepository;
+    ProjectCreateOrListKeyboard projectCreateOrListKeyboard;
 
     public BotApiMethod<?> handleUserCommand(Message message, String userState) {
         String chatId = message.getChatId().toString();
@@ -83,11 +89,10 @@ public class CommandHandler {
 
                 case REGISTER -> {
                     registration.registerUser(chatId, userName);
-                    userStateKeeper.setState(chatId, StateEnum.REGISTRATION_EDIT_TIMEZONE_STATE.getStateName());
+                    userStateKeeper.setState(chatId, StateEnum.REGISTRATION_PROJECT_CREATE_ASK_NAME_STATE.getStateName());
                     return SendMessage.builder()
                             .chatId(chatId)
-                            .text(MessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage())
-                            .replyMarkup(timeZoneKeyboard.getKeyboard(chatId, userState))
+                            .text(MessageEnum.PROJECT_CREATE_ASK_NAME_MESSAGE.getMessage())
                             .build();
                 }
 
@@ -101,17 +106,49 @@ public class CommandHandler {
                 }
 
                 case YCLIENTS -> {
-                    Yclients yclients = yclientsRepository.findYclientsByYclientsId(startData);
                     String projectId = projectsDataTempKeeper.getLastProjectId(chatId);
-                    yclients.setProjectId(projectId);
-                    yclients.setChatId(chatId);
-                    yclientsRepository.save(yclients);
+                    // Если у юзера создан проект и висит во временных данных
+                    if (projectId != null){
+                        Yclients yclients = yclientsRepository.findYclientsByYclientsId(startData);
+                        yclients.setProjectId(projectId);
+                        yclients.setChatId(chatId);
+                        yclientsRepository.save(yclients);
 
-                    return SendMessage.builder()
-                            .chatId(chatId)
-                            .text(MessageEnum.INPUT_TEST_MESSAGE.getMessage())
-                            .replyMarkup(yclientsTestKeyboard.getKeyboard(chatId, userState))
-                            .build();
+                        return SendMessage.builder()
+                                .chatId(chatId)
+                                .text(MessageEnum.INPUT_TEST_MESSAGE.getMessage())
+                                .replyMarkup(yclientsTestKeyboard.getKeyboard(chatId, userState))
+                                .build();
+                    } else { // Если у юзера не создан проект, значит он пришел из маркета yclients
+                        registration.registerUser(chatId, userName);
+
+                        Yclients yclients = yclientsRepository.findYclientsByYclientsId(startData);
+                        yclients.setChatId(chatId);
+                        yclientsRepository.save(yclients);
+
+                        int projectCount = projectRepository.findProjectsCountByChatId(chatId);
+
+                        // Если нет проектов, то пусть сразу вводит название и подключается
+                        if (projectCount == 0){
+                            if (userState.contains(StateEnum.REGISTRATION.getStateName())){
+                                userStateKeeper.setState(chatId, StateEnum.REGISTRATION_PROJECT_CREATE_ASK_NAME_STATE.getStateName());
+                            } else {
+                                userStateKeeper.setState(chatId, StateEnum.SETTINGS_PROJECT_CREATE_ASK_NAME_STATE.getStateName());
+                            }
+
+                            return SendMessage.builder()
+                                    .chatId(chatId)
+                                    .text(MessageEnum.PROJECT_CREATE_ASK_NAME_MESSAGE.getMessage())
+                                    .build();
+
+                        } else {
+                            return SendMessage.builder()
+                                    .chatId(chatId)
+                                    .text(MessageEnum.PROJECT_CREATE_OR_LIST_MESSAGE.getMessage())
+                                    .replyMarkup(projectCreateOrListKeyboard.getKeyboard(chatId, userState))
+                                    .build();
+                        }
+                    }
                 }
 
                 case ERROR -> {

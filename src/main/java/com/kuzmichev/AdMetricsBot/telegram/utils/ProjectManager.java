@@ -18,7 +18,7 @@ public class ProjectManager {
     ProjectRepository projectRepository;
     ProjectsDataTempKeeper projectsDataTempKeeper;
 
-    public void projectCreate(String chatId, String messageText) {
+    public void projectCreate(String chatId, String projectName) {
 
         long nextProjectNumber = projectRepository.findMaxProjectNumberByChatId(chatId) + 1;
 
@@ -26,7 +26,7 @@ public class ProjectManager {
         String projectId = UUID.randomUUID().toString();
 
         Project project = new Project();
-        project.setProjectName(messageText);
+        project.setProjectName(projectName);
         project.setChatId(chatId);
         project.setProjectId(projectId);
         project.setProjectNumber(nextProjectNumber);

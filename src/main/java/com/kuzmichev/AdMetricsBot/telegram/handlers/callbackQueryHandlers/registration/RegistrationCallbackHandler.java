@@ -4,7 +4,6 @@ import com.kuzmichev.AdMetricsBot.constants.CallBackEnum;
 import com.kuzmichev.AdMetricsBot.constants.MessageEnum;
 import com.kuzmichev.AdMetricsBot.constants.StateEnum;
 import com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.CallbackHandler;
-import com.kuzmichev.AdMetricsBot.telegram.keyboards.inlineKeyboards.TimeZoneKeyboard;
 import com.kuzmichev.AdMetricsBot.telegram.utils.Registration;
 import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
 import lombok.AccessLevel;
@@ -22,7 +21,6 @@ import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 @RequiredArgsConstructor
 public class RegistrationCallbackHandler implements CallbackHandler {
     Registration registration;
-    TimeZoneKeyboard timeZoneKeyboard;
     UserStateKeeper userStateKeeper;
 
     @Override
@@ -37,12 +35,11 @@ public class RegistrationCallbackHandler implements CallbackHandler {
         int messageId = buttonQuery.getMessage().getMessageId();
 
         registration.registerUser(chatId, userName);
-        userStateKeeper.setState(chatId, StateEnum.REGISTRATION_EDIT_TIMEZONE_STATE.getStateName());
+        userStateKeeper.setState(chatId, StateEnum.REGISTRATION_PROJECT_CREATE_ASK_NAME_STATE.getStateName());
         return EditMessageText.builder()
                 .chatId(chatId)
                 .messageId(messageId)
-                .text(MessageEnum.TIME_ZONE_DEFINITION_MESSAGE.getMessage())
-                .replyMarkup(timeZoneKeyboard.getKeyboard(chatId, userState))
+                .text(MessageEnum.PROJECT_CREATE_ASK_NAME_MESSAGE.getMessage())
                 .build();
     }
 }

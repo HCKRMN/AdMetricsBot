@@ -25,7 +25,7 @@ public class UserStateKeeper {
             log.info("Получаем состояние юзера {} : {}", chatId, userStateName);
             return userStateName;
         }
-        log.info("У юзера {} не нашлось состояния, возвращаем дефолтное", chatId);
-        return StateEnum.WORKING_STATE.getStateName();
+        log.info("У юзера {} не нашлось состояния, возвращаем регистрацию", chatId);
+        return StateEnum.REGISTRATION_STATE.getStateName();
     }
 }

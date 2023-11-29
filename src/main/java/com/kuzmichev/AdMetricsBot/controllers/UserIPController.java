@@ -57,11 +57,11 @@ public class UserIPController {
             String userState = userStateKeeper.getState(chatId);
 
             if (userState.contains(StateEnum.REGISTRATION.getStateName())) {
-                userStateKeeper.setState(chatId, StateEnum.REGISTRATION_EDIT_TIMEZONE_COMPLETE_STATE.getStateName());
+                userStateKeeper.setState(chatId, StateEnum.REGISTRATION_EDIT_TIMER_STATE.getStateName());
                 messageWithoutReturn.sendMessage(
                         chatId,
                         MessageEnum.REGISTRATION_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage(),
-                        projectCreateKeyboard.getKeyboard(chatId, userState)
+                        null
                 );
             } else {
                 userStateKeeper.setState(chatId, StateEnum.WORKING_STATE.getStateName());
