@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Сделал тестовую версию подключения yclients без указания номера телефона + сделал регистрацию через ссылку в маркете yclients">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterCanceledEntries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterCanceledEntries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterNewEntries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterNewEntries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsCounterSuccessEntries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsAnalyticsRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsMainRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/service/yclients/YclientsMainRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/ManualEditTimeZoneStateHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/messageHandlers/MessageStateHandler/ManualEditTimeZoneStateHandler.java" afterDir="false" />
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Переделал метод получения данных с yclients">
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMessageBuilderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kuzmichev/AdMetricsBot/service/yandex/YandexMessageBuilderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -420,14 +415,7 @@
       <workItem from="1701481550092" duration="8000" />
       <workItem from="1701482843744" duration="4221000" />
       <workItem from="1701589650584" duration="24000" />
-      <workItem from="1701948819710" duration="6435000" />
-    </task>
-    <task id="LOCAL-00059" summary="Настройка github actions">
-      <created>1697511610281</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1697511610281</updated>
+      <workItem from="1701948819710" duration="6862000" />
     </task>
     <task id="LOCAL-00060" summary="Настройка github actions">
       <created>1697512323956</created>
@@ -765,7 +753,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701266100290</updated>
     </task>
-    <option name="localTasksCounter" value="108" />
+    <task id="LOCAL-00108" summary="Переделал метод получения данных с yclients">
+      <created>1701955511047</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1701955511047</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -814,7 +809,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Добавил тесты для некоторых запросов, добавил класс который обновляет ссылку api telegram" />
     <MESSAGE value="Добавил тесты" />
     <MESSAGE value="Вынес все пароли в отдельные файлы" />
     <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v1" />
@@ -839,7 +833,8 @@
     <MESSAGE value="Добавил проброс ошибок при авторизации Yclients" />
     <MESSAGE value="Исправил косяк с getKeyboard" />
     <MESSAGE value="Сделал тестовую версию подключения yclients без указания номера телефона + сделал регистрацию через ссылку в маркете yclients" />
-    <option name="LAST_COMMIT_MESSAGE" value="Сделал тестовую версию подключения yclients без указания номера телефона + сделал регистрацию через ссылку в маркете yclients" />
+    <MESSAGE value="Переделал метод получения данных с yclients" />
+    <option name="LAST_COMMIT_MESSAGE" value="Переделал метод получения данных с yclients" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AdMetricsBot$AdMetricsBotApplication.ic" NAME="AdMetricsBotApplication Coverage Results" MODIFIED="1697630469417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
