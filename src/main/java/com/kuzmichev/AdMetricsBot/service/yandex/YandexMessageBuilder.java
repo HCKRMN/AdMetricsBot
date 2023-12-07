@@ -41,15 +41,16 @@ public class YandexMessageBuilder {
                     .append("<code>CPC:                  </code>").append(avgCpc).append("\n")
                     .append("<code>Конверсии:            </code>").append(conversions).append("\n")
                     .append("<code>CPA:                  </code>").append(costPerConversion).append("\n")
-                    .append("<code>Расход:               </code>").append(cost).append("\n");
+                    .append("<code>Расход:               </code>").append(cost).append("\n")
+                    .append("\n");
         } else if(requestStatus == 513) {
-            message.append(MessageEnum.YANDEX_ERROR_513_MESSAGE.getMessage()).append("\n");
+            message.append(MessageEnum.YANDEX_ERROR_513_MESSAGE.getMessage()).append("\n").append("\n");
 
         } else if(requestStatus == 53) {
-            message.append(MessageEnum.YANDEX_ERROR_53_MESSAGE.getMessage()).append("\n");
+            message.append(MessageEnum.YANDEX_ERROR_53_MESSAGE.getMessage()).append("\n").append("\n");
 
         } else {
-            message.append(MessageEnum.YANDEX_ERROR_UNKNOWN_MESSAGE.getMessage()).append("\n");
+            message.append(MessageEnum.YANDEX_ERROR_UNKNOWN_MESSAGE.getMessage()).append("\n").append("\n");
         }
 
         return message.toString();

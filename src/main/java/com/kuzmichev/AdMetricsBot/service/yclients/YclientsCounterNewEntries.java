@@ -36,8 +36,12 @@ public class YclientsCounterNewEntries {
         LocalDateTime now = LocalDateTime.now();
 
         //Фильтр записей по дате создания, выбираем вчерашний день
-        String cStartDate = now.minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String cEndDate = now.minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String cStartDate = now
+                .minusDays(1)
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String cEndDate = now
+                .minusDays(1)
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         //Фильтр записей по дате визита в салон, указываем +-год
         String startDate = now.minusYears(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));

@@ -32,13 +32,13 @@ public class BitrixMessageBuilder {
             message
                     .append("<code>Новых лидов:          </code>").append(newLeads).append("\n")
                     .append("<code>Успешные сделки:      </code>").append(successDeals).append("\n")
-                    .append("<code>Проваленные сделки:   </code>").append(failedDeals).append("\n");
+                    .append("<code>Проваленные сделки:   </code>").append(failedDeals).append("\n").append("\n");
         } else if (requestStatus == 402) {
             message
-                    .append("Чтобы получить данные от битрикс, необходимо продлить платный тариф в вашей срм").append("\n");
+                    .append("Чтобы получить данные от битрикс, необходимо продлить платный тариф в вашей срм").append("\n").append("\n");
         } else {
             message
-                    .append("Ошибка получения данных от битрикса").append("\n");
+                    .append("Ошибка получения данных от битрикса").append("\n").append("\n");
             log.error("У пользователя {} возникла ошибка при получении данных от битрикса", bitrixData.getChatId());
         }
 

@@ -44,7 +44,6 @@ public class ManualEditTimeZoneStateHandler implements StateHandler {
                 return SendMessage.builder()
                         .chatId(chatId)
                         .text(MessageEnum.REGISTRATION_TIME_ZONE_DEFINITION_COMPLETE_MESSAGE.getMessage())
-                        .replyMarkup(projectCreateKeyboard.getKeyboard(chatId, userState))
                         .build();
 
             } else {

@@ -44,9 +44,9 @@ public class MetricsMessageBuilder {
 
                 message.append(projectName).append(lineBreak).append(lineBreak);
 
-                message.append(yandexMessageBuilder.getMessage(projectId)).append(lineBreak);
-                message.append(bitrixMessageBuilder.getMessage(projectId)).append(lineBreak);
-                message.append(yclientsMessageBuilder.getMessage(projectId)).append(lineBreak);
+                message.append(yandexMessageBuilder.getMessage(projectId));
+                message.append(bitrixMessageBuilder.getMessage(projectId));
+                message.append(yclientsMessageBuilder.getMessage(projectId));
 
                 message
                         .append(lineBreak)

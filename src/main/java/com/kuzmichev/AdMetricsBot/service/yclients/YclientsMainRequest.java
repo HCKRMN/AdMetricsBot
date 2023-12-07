@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -16,8 +17,7 @@ import org.springframework.stereotype.Service;
 public class YclientsMainRequest {
     YclientsRepository yclientsRepository;
     YclientsCounterNewEntries yclientsCounterNewEntries;
-    YclientsCounterSuccessEntries yclientsCounterSuccessEntries;
-    YclientsCounterCanceledEntries yclientsCounterCanceledEntries;
+    YclientsAnalyticsRequest yclientsAnalyticsRequest;
     YclientsTestConnection yclientsTestConnection;
 
     public YclientsData yclientsMainRequest(String projectId){
@@ -33,12 +33,35 @@ public class YclientsMainRequest {
         YclientsData yclientsData = new YclientsData();
 
         if(testConnection.equals("200")){
+            int requestStatus = 200;
+            int successEntries = 0;
+            int canceledEntries = 0;
+            
+            String responseWithAnalyticsData = yclientsAnalyticsRequest.yclientsAnalyticsRequest(salonId);
+            
+            if (responseWithAnalyticsData.contains("success\":false")) {
+                requestStatus = -1;
+                JSONObject jsonResponse = new JSONObject(responseWithAnalyticsData);
+                yclientsData.setRequestErrorMessage(jsonResponse.getJSONObject("meta").getString("message"));
+            } else {
+                JSONObject responseWithAnalyticsDataJson = new JSONObject(responseWithAnalyticsData);
+                successEntries = responseWithAnalyticsDataJson
+                        .getJSONObject("data")
+                        .getJSONObject("record_stats")
+                        .getInt("current_completed_count");
+
+                canceledEntries = responseWithAnalyticsDataJson
+                        .getJSONObject("data")
+                        .getJSONObject("record_stats")
+                        .getInt("current_canceled_count");
+            }
+
             yclientsData.setChatId(chatId);
             yclientsData.setProjectId(projectId);
             yclientsData.setNewEntries(yclientsCounterNewEntries.yclientsCounterNewEntries(salonId));
-            yclientsData.setSuccessEntries(yclientsCounterSuccessEntries.yclientsCounterSuccessEntries(salonId));
-            yclientsData.setCanceledEntries(yclientsCounterCanceledEntries.yclientsCounterCanceledEntries(salonId));
-            yclientsData.setRequestStatus(200);
+            yclientsData.setSuccessEntries(successEntries);
+            yclientsData.setCanceledEntries(canceledEntries);
+            yclientsData.setRequestStatus(requestStatus);
         } else {
             yclientsData.setChatId(chatId);
             yclientsData.setProjectId(projectId);

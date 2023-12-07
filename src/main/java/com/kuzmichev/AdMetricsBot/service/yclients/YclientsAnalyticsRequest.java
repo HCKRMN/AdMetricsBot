@@ -11,7 +11,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -22,31 +21,28 @@ import java.time.format.DateTimeFormatter;
 @Component
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class YclientsCounterSuccessEntries {
+public class YclientsAnalyticsRequest {
     @Value("${bearer-authentication}")
     String bearerAuthentication;
     @Value("${user-token}")
     String userToken;
-    @Value("${yclientsRequestRecordsURL}")
-    String yclientsRequestURL;
 
     @SneakyThrows
-    public int yclientsCounterSuccessEntries(String salonId){
+    public String yclientsAnalyticsRequest(String salonId){
 
         LocalDateTime now = LocalDateTime.now();
 
-        //Фильтр записей по дате создания, выбираем вчерашний день
-        String cStartDate = now.minusYears(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String cEndDate = now.minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        //Выбираем отчет за вчерашний день
+        String dateFrom = now
+                .minusDays(1)
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String dateTo = now
+                .minusDays(1)
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-        //Фильтр записей по дате визита в салон, указываем +-год
-        String startDate = now.minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String endDate = now.minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
-        HttpGet request = new HttpGet(yclientsRequestURL + salonId +
-                "?c_start_date=" + cStartDate + "&c_end_date=" + cEndDate +
-                "&start_date=" + startDate + "&end_date=" + endDate +
-                "&status=1");
+        HttpGet request = new HttpGet("https://api.yclients.com/api/v1/company/"+ salonId +"/analytics/overall/" +
+                "?date_from=" + dateFrom + "&date_to=" + dateTo
+                );
 
         request.addHeader("Content-Type", "application/json");
         request.addHeader("Authorization", "Bearer " + bearerAuthentication + ", User " + userToken);
@@ -60,11 +56,9 @@ public class YclientsCounterSuccessEntries {
         String responseBody = EntityUtils.toString(entityResponse);
         int statusCode = response.getStatusLine().getStatusCode();
 
-        if (statusCode == 200) {
-            JSONObject jsonResponse = new JSONObject(responseBody);
-            return jsonResponse.getJSONObject("meta").getInt("total_count");
+        if (statusCode != 200) {
+            log.error("Ошибка при получении количества состоявшихся записей̆ Yclients в салоне {} : {}", salonId, responseBody);
         }
-        log.error("Ошибка при получении количества состоявшихся записей̆ Yclients в салоне {} : {}", salonId, responseBody);
-        return -1;
+        return responseBody;
     }
 }
