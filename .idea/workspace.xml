@@ -4,16 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Переделал метод получения данных с yclients, убрал тесты месседж билдера пока что, и пофиксил отступы">
+    <list default="true" id="96f5fee2-c7f0-4ebc-ad27-8e36275325e7" name="Changes" comment="Переделал метод удаления пользователя, чтобы очищался ещё и кеш состояния">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/233694db-7454-416f-84a9-349d57a4b679.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/233694db-7454-416f-84a9-349d57a4b679/storage_v2/_src_/database/postgres.edMnLQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/233694db-7454-416f-84a9-349d57a4b679/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/233694db-7454-416f-84a9-349d57a4b679/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/233694db-7454-416f-84a9-349d57a4b679/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/b80e60d1-1d42-449f-a18d-e880c5711859.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/b80e60d1-1d42-449f-a18d-e880c5711859/storage_v2/_src_/database/postgres.edMnLQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/b80e60d1-1d42-449f-a18d-e880c5711859/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/b80e60d1-1d42-449f-a18d-e880c5711859/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/b80e60d1-1d42-449f-a18d-e880c5711859/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/ghactions-toolbar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_10_2023_18_04_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_10_2023_18_04_[Changes]1/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_10_2023_18_04__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/CallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/CallbackHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/menu/deleteMenu/DeleteUserStepTwoCallbackHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/handlers/callbackQueryHandlers/menu/deleteMenu/DeleteUserStepTwoCallbackHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/DeleteUserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/DeleteUserData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/TempData/UserStateKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kuzmichev/AdMetricsBot/telegram/utils/TempData/UserStateKeeper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/AdMetricsBot-1.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +136,7 @@
       <recent name="com.kuzmichev.AdMetricsBot.telegram.handlers.callbackQueryHandlers.universal" />
     </key>
   </component>
-  <component name="RunManager" selected="Ngrok.Ngrok Run">
+  <component name="RunManager" selected="Spring Boot.AdMetricsBotApplication">
     <configuration name="CallBackEnumTest.testEnumNames" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="AdMetricsBot" />
       <extension name="coverage">
@@ -426,14 +439,7 @@
       <workItem from="1701948819710" duration="7506000" />
       <workItem from="1702276805763" duration="76000" />
       <workItem from="1702276890798" duration="36000" />
-      <workItem from="1702297477986" duration="2011000" />
-    </task>
-    <task id="LOCAL-00061" summary="Настройка github actions">
-      <created>1697512513180</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1697512513180</updated>
+      <workItem from="1702297477986" duration="3161000" />
     </task>
     <task id="LOCAL-00062" summary="Настройка github actions">
       <created>1697513224910</created>
@@ -771,7 +777,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701955783522</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="Переделал метод удаления пользователя, чтобы очищался ещё и кеш состояния">
+      <created>1702299577261</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1702299577261</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -820,7 +833,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Вынес все пароли в отдельные файлы" />
     <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v1" />
     <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v2" />
     <MESSAGE value="Вынес все пароли в отдельные файлы. Переделал и исправил воркфлоу v3" />
@@ -845,7 +857,8 @@
     <MESSAGE value="Сделал тестовую версию подключения yclients без указания номера телефона + сделал регистрацию через ссылку в маркете yclients" />
     <MESSAGE value="Переделал метод получения данных с yclients" />
     <MESSAGE value="Переделал метод получения данных с yclients, убрал тесты месседж билдера пока что, и пофиксил отступы" />
-    <option name="LAST_COMMIT_MESSAGE" value="Переделал метод получения данных с yclients, убрал тесты месседж билдера пока что, и пофиксил отступы" />
+    <MESSAGE value="Переделал метод удаления пользователя, чтобы очищался ещё и кеш состояния" />
+    <option name="LAST_COMMIT_MESSAGE" value="Переделал метод удаления пользователя, чтобы очищался ещё и кеш состояния" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AdMetricsBot$AdMetricsBotApplication.ic" NAME="AdMetricsBotApplication Coverage Results" MODIFIED="1697630469417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

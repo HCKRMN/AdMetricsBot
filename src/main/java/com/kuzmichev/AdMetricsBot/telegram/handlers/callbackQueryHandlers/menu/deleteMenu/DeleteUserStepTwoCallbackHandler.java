@@ -32,7 +32,7 @@ public class DeleteUserStepTwoCallbackHandler implements CallbackHandler {
     }
 
     @Override
-    public BotApiMethod<?> handleCallback(CallbackQuery buttonQuery, String userState) throws InterruptedException {
+    public BotApiMethod<?> handleCallback(CallbackQuery buttonQuery, String userState) {
         String chatId = buttonQuery.getMessage().getChatId().toString();
         int messageId = buttonQuery.getMessage().getMessageId();
 
@@ -50,7 +50,11 @@ public class DeleteUserStepTwoCallbackHandler implements CallbackHandler {
 
         deleteUserData.deleteUserData(chatId);
 
-        sleep(5000);
+        try {
+            sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
         return DeleteMessage.builder()
                 .chatId(chatId)
