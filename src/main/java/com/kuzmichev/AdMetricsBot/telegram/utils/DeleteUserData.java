@@ -1,6 +1,7 @@
 package com.kuzmichev.AdMetricsBot.telegram.utils;
 
 import com.kuzmichev.AdMetricsBot.model.*;
+import com.kuzmichev.AdMetricsBot.telegram.utils.TempData.UserStateKeeper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,6 +19,7 @@ public class DeleteUserData {
     YandexRepository yandexRepository;
     ProjectRepository projectRepository;
     YclientsRepository yclientsRepository;
+    UserStateKeeper userStateKeeper;
 
     public void deleteUserData(String chatId) {
         userRepository.removeUserByChatId(chatId);
@@ -29,6 +31,7 @@ public class DeleteUserData {
         yandexRepository.removeYandexByChatId(chatId);
         yclientsRepository.removeYclientsByChatId(chatId);
 
+        userStateKeeper.deleteState(chatId);
         log.info("Пользователь с id: {} удален", chatId);
     }
 }

@@ -40,6 +40,7 @@ com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\menu\ExitCall
 com\kuzmichev\AdMetricsBot\telegram\SetWebHookURL.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\menu\EditTimerCallbackHandler.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\AddInputsKeyboard.class
+com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\project\ProjectCreateOrListKeyboard.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\BackAndExitKeyboard.class
 com\kuzmichev\AdMetricsBot\telegram\utils\Messages\MessageEventHandler.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\InlineKeyboard.class
@@ -71,14 +72,13 @@ com\kuzmichev\AdMetricsBot\service\yclients\YclientsMainRequest.class
 com\kuzmichev\AdMetricsBot\service\yandex\YandexMainRequest.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\inputs\YandexCallbackHandler.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\menu\deleteMenu\NotDeleteUserCallbackHandler.class
-com\kuzmichev\AdMetricsBot\service\yclients\YclientsCounterCanceledEntries.class
 com\kuzmichev\AdMetricsBot\telegram\utils\TimeZoneDefinition.class
 com\kuzmichev\AdMetricsBot\constants\CallBackEnum.class
-com\kuzmichev\AdMetricsBot\service\yclients\YclientsCounterSuccessEntries.class
 com\kuzmichev\AdMetricsBot\telegram\utils\InputsManager$1.class
 com\kuzmichev\AdMetricsBot\service\bitrix\CrmTypeRequest.class
 com\kuzmichev\AdMetricsBot\controllers\PrivacyController.class
 com\kuzmichev\AdMetricsBot\telegram\utils\DeleteUserData.class
+com\kuzmichev\AdMetricsBot\service\yclients\YclientsAnalyticsRequest.class
 com\kuzmichev\AdMetricsBot\constants\MessageEnum.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\messageHandlers\MessageStateHandler\StateHandler.class
 com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\menu\MenuCallbackHandlersList.class

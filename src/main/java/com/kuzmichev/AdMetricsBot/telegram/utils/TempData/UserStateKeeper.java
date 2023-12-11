@@ -28,4 +28,8 @@ public class UserStateKeeper {
         log.info("У юзера {} не нашлось состояния, возвращаем регистрацию", chatId);
         return StateEnum.REGISTRATION_STATE.getStateName();
     }
+    public void deleteState(String chatId){
+        log.info("Удаляем состояние юзера {}", chatId);
+        userState.remove(chatId);
+    }
 }
