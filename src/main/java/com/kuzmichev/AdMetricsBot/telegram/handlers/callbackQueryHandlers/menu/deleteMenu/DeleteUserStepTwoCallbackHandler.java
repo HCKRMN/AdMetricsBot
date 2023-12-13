@@ -42,19 +42,19 @@ public class DeleteUserStepTwoCallbackHandler implements CallbackHandler {
 //                .text(MessageEnum.DELETE_USER_DATA_SUCCESS_MESSAGE.getMessage())
 //                .replyMarkup(doneButtonKeyboard.getKeyboard(chatId, userState))
 //                .build();
-        messageWithoutReturn.deleteMessage(chatId, messageId);
+        deleteUserData.deleteUserData(chatId);
 
         messageWithoutReturn.sendMessage(chatId, MessageEnum.DELETE_USER_DATA_SUCCESS_MESSAGE.getMessage());
 
-        messageId++;
-
-        deleteUserData.deleteUserData(chatId);
+        messageWithoutReturn.deleteMessage(chatId, messageId);
 
         try {
             sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+        messageId++;
 
         return DeleteMessage.builder()
                 .chatId(chatId)
