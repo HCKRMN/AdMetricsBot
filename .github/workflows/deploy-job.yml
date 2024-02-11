@@ -2,7 +2,7 @@ name: Deploy buy runner
 
 on:
   push:
-    branches: [ "WebHook" ]
+    branches: [ "Telegram-WebHook" ]
 
 jobs:
 
