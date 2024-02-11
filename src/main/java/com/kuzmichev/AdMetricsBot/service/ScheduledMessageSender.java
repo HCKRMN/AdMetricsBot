@@ -39,7 +39,7 @@ public class ScheduledMessageSender {
             Clock clock = Clock.system(ZoneId.of("Europe/Moscow"));
             LocalTime now = LocalTime.now(clock).truncatedTo(ChronoUnit.MINUTES);
 
-            List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTime(now);
+            List<ScheduledMessage> scheduledMessages = scheduledMessageRepository.findByTimeAndEnabled(now);
             int userCount = scheduledMessages.size();
 
             log.info("Время: " + now + " Количество пользователей̆ для отправки: " + userCount);

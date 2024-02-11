@@ -23,6 +23,7 @@ com\kuzmichev\AdMetricsBot\telegram\handlers\callbackQueryHandlers\projects\dele
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\YandexAddKeyboard.class
 com\kuzmichev\AdMetricsBot\telegram\TelegramApiClient.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\AddInputsKeyboard.class
+com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\project\ProjectCreateOrListKeyboard.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\BackAndExitKeyboard.class
 com\kuzmichev\AdMetricsBot\telegram\utils\Messages\MessageEventHandler.class
 com\kuzmichev\AdMetricsBot\telegram\keyboards\inlineKeyboards\InlineKeyboard.class

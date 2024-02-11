@@ -1,7 +1,6 @@
 package com.kuzmichev.AdMetricsBot.model;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
@@ -16,8 +15,8 @@ public interface ScheduledMessageRepository extends JpaRepository<ScheduledMessa
 
     Optional<ScheduledMessage> findByChatId(String chatId);
 
-    @Query("SELECT s FROM scheduledMessageTable s WHERE s.timerMessage = ?1")
-    List<ScheduledMessage> findByTime(LocalTime time);
+    @Query("SELECT s FROM scheduledMessageTable s WHERE s.timerMessage = :time AND s.enableSendingMessages = true")
+    List<ScheduledMessage> findByTimeAndEnabled(@Param("time") LocalTime time);
 
     @Query("SELECT s.enableSendingMessages FROM scheduledMessageTable s WHERE s.chatId = :chatId")
     boolean findEnableSendingMessagesByChatId(@Param("chatId") String chatId);
